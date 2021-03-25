@@ -1,8 +1,8 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const rtMain = require('./routers/rtMain')
 const rtAdmin = require('./routers/rtAdmin')
-
 //base de datos
 const conexion = require('./connection')
 conexion.on('error',console.error.bind(console,"Error de conexion mongo"))
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 app.use('/',rtMain)
 app.use('/admin',rtAdmin)
 
-app.listen(8081,(err)=>{
+app.listen(process.env.PORT_SERVER,(err)=>{
     if(err) console.log("Errores: ", err)
-    console.log("Servidor backend arrancado en 8081")
+    console.log(`Servidor backend arrancado en ${process.env.PORT_SERVER}`)
 })
