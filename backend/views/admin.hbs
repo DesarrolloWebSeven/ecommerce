@@ -1,0 +1,70 @@
+<div>
+    <ul class="nav nav-tabs justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link" href="#">Productos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Proyecto/About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Clientes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Pedidos</a>
+        </li>
+    </ul>
+</div>
+<br>
+<br>
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="#">Productos</a></li>
+            <li class="page-item"><a class="page-link" href="#">Proyecto/About</a></li>
+            <li class="page-item"><a class="page-link" href="#">Clientes</a></li>
+            <li class="page-item"><a class="page-link" href="#">Pedidos</a></li>
+        </ul>
+    </nav>
+</div>
+<br>
+<br>
+
+
+<body>
+
+<div class="container">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#home">Productos</a></li>
+    <li><a href="#menu1">Proyecto/About</a></li>
+    <li><a href="#menu2">Clientes</a></li>
+    <li><a href="#menu3">Pedidos</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>Productos</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Proyecto/About</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Clientes</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Pedidos</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function(){
+  $(".nav-tabs a").click(function(){
+    $(this).tab('show');
+  });
+});
+</script>
+
