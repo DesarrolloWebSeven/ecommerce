@@ -26,15 +26,7 @@
   </div>
 </nav>
 <router-view/>
-<footer class="footer bg-dark text-white text-center text-lg-start">  
 
- 
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-    © 2021 Copyfree:
-    <a class="text-white" href="https://github.com/Amparcabezas" target="_blank">GitHub Amparcabezas</a>
-  </div>
-  
-</footer>
 </div>
   
 </template>
