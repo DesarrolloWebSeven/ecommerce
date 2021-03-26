@@ -1,9 +1,6 @@
 <template>
 <div class="container section">
-<h1>Hackatoners</h1>
-
-
-<h3>El objetivo de esta página es ofrecer un recurso con el que  las personas con transtorno en el espectro autista puedan desenvolverse fácilmente con la sociedad y poder estructurar sus horarios.</h3>
+<h1>Estas en about</h1>
 </div>
   
 </template>
@@ -34,9 +31,6 @@ export default {
     
   
 }
-.section{
-  min-height: 80vh;
-  overflow: auto;
-}
+
 
 </style>
