@@ -14,7 +14,7 @@ app.engine('.hbs', exphbs({extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
 //middlewares
-app.use(express.static(__dirname+'../public'))
+app.use(express.static(__dirname+'/public'))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use((req, res, next) => {

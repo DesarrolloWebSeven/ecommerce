@@ -4,7 +4,8 @@ let uri= `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useFindAndModify: true
 })
 
 module.exports=mongoose.connection
