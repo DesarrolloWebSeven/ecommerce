@@ -1,21 +1,20 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <h1>Estás en la home</h1>
     
-    <Footer/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Footer from '@/components/Footer'
+
 
 
 export default {
   name: 'Home',
   components: {
     
-    Footer
+    
   }
 }
 </script>

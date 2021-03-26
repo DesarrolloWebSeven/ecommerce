@@ -1,16 +1,18 @@
 <template>
+<div class="container section">
+    <h1>Estás en login</h1>
+</div>
 
-<LoginBox />
   
 </template>
 
 <script>
-import LoginBox from '@/components/LoginBox'
+
 
 export default {
     name: 'Ejercicio3',
     components: {
-        LoginBox
+        
     }
 }
 </script>
