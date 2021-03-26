@@ -3,26 +3,29 @@
   <footer class="site-footer">
     <div class="container">
       <div class="row">
-        <div class="col-12 col-md-6">
-          <h6>Categories</h6>
+        <div class="col-12 col-md-4">
+          
           <ul class="footer-links">
-            <li>
-              <a href="#">Java</a>
+            <li><h6><a href="/contacto">Contacto</a></h6>
+              
+            </li>
+            <li><h6><a href="/proyecto">Proyecto</a></h6>
+              
             </li>
             <li>
-              <a href="#">Android</a>
-            </li>
-            <li>
-              <a href="#">Templates</a>
+              <h6><a href="/equipo">Equipo</a></h6>
             </li>
           </ul>
         </div>
+        <div class="col-12 col-md-4">
+          <img class="logoGeeky" src="@/assets/geeky.png" alt="">
+        </div>
 
-        <div class="col-12 col-md-6">
-          <h6>Quick Links</h6>
+        <div class="col-12 col-md-4">
+          
           <ul class="footer-links">
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact Us</a></li>
+            <li><h6><a href="/politica">Política de privacidad</a></h6></li>
+            <li><h6><a href="/cookies">Cookies</a></h6></li>
           </ul>
         </div>
       </div>
@@ -32,7 +35,7 @@
       <div class="row">
         <div class="col-md-8 col-sm-6 col-xs-12">
           <p class="copyright-text">
-            Copyfree &copy; 2021 All Rights Free by <a href="#">Geeky</a>.
+            Copyfree &copy; 2021 All Rights Free by <a href="/">Geeky</a>.
           </p>
         </div>
 
@@ -56,18 +59,21 @@ export default {
 
 <style lang="scss" scoped>
 .site-footer {
-  background-color: #26272b;
+  background-color:#0F606B;
   padding: 45px 0 20px;
   font-size: 15px;
   line-height: 24px;
-  color: #737373;
+  
 }
 .site-footer hr {
-  border-top-color: #bbb;
+  border-top-color: #fff;
   opacity: 0.5;
+  color: #fff;
 }
 .site-footer hr.small {
   margin: 20px 0;
+  border-top-color: #fff;
+  
 }
 .site-footer h6 {
   color: #fff;
@@ -77,10 +83,11 @@ export default {
   letter-spacing: 2px;
 }
 .site-footer a {
-  color: #737373;
+  color:#fff;
+  text-decoration: none;
 }
 .site-footer a:hover {
-  color: #3366cc;
+  color: #A7D2DD;
   text-decoration: none;
 }
 .footer-links {
@@ -91,12 +98,12 @@ export default {
   display: block;
 }
 .footer-links a {
-  color: #737373;
+  color: #fff;
 }
 .footer-links a:active,
 .footer-links a:focus,
 .footer-links a:hover {
-  color: #3366cc;
+  color: #A7D2DD;
   text-decoration: none;
 }
 .footer-links.inline li {
@@ -112,10 +119,12 @@ export default {
   margin-left: 6px;
   margin-right: 0;
   border-radius: 100%;
-  background-color: #33353d;
+  background-color: #A7D2DD
+  
 }
 .copyright-text {
   margin: 0;
+  color: #fff;
 }
 @media (max-width: 991px) {
   .site-footer [class^="col-"] {
@@ -166,7 +175,7 @@ export default {
 .social-icons a:focus,
 .social-icons a:hover {
   color: #fff;
-  background-color: #29aafe;
+  background-color: #707070;
 }
 .social-icons.size-sm a {
   line-height: 34px;
@@ -192,5 +201,8 @@ export default {
     margin-right: 0;
     font-weight: 600;
   }
+}
+.logoGeeky{
+width: 200px;
 }
 </style>
