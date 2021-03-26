@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-require ('dotenv').config()
-=======
 require('dotenv').config()
->>>>>>> add-products
 const express = require('express')
 const app = express()
 const rtMain = require('./routers/rtMain')
