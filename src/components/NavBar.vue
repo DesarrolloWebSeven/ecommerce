@@ -11,7 +11,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           
         <li class="nav-item">
-          <router-link to="/" class="nav-link">Camisetas</router-link>
+          <router-link to="/" class="nav-link">Camisetasssssssssss</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/about" class="nav-link">Accesorios</router-link>
