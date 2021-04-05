@@ -2,61 +2,67 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img class="icono" src="@/assets/geekySmall.png"></a>
+    
+        <div class="d-flex justify-content-between">
+        <router-link to="/inicio" class="nav-link"><img class="icono" src="@/assets/geekySmall.png"></router-link>
+
     
     <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+    
+    </div>
+    
+     <div d-flex align-items-end>
+      <ul class="navbar-nav ml-auto mb-2 mb-lg-0 d-flex flex-row">
+        
+        <li class="nav-item">
+          <router-link to="/login" class="nav-link"><i class="fas fa-user"></i></router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/idioma" class="nav-link"><i class="fas fa-language"></i></router-link>
+        </li> 
+        <li class="nav-item">
+          <router-link to="/carrito" class="nav-link"><i class="fas fa-shopping-cart"></i></router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/buscador" class="nav-link"><i class="fas fa-search"></i></router-link>
+        </li>
+     </ul>  
+  
+
+        </div>   
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
           
         <li class="nav-item">
-          <router-link to="/" class="nav-link">Camisetasssssssssss</router-link>
+          <router-link to="/productos/camisetas" class="nav-link">Camisetas</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/about" class="nav-link">Accesorios</router-link>
+          <router-link to="/productos/accesorios" class="nav-link">Accesorios</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/login" class="nav-link">Tazas</router-link>
+          <router-link to="/productos/tazas" class="nav-link">Tazas</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/login" class="nav-link">Juegos</router-link>
+          <router-link to="/productos/juegos" class="nav-link">Juegos</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/" class="nav-link">Destacados</router-link>
+          <router-link to="/productos/destacados" class="nav-link">Destacados</router-link>
         </li>
-        <li class="nav-item">
-          <router-link to="/" class="nav-link">Idioma</router-link>
-        </li>
-              
-               
-      </ul>
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          
-        <li class="nav-item">
-          <router-link to="/" class="nav-link"><i class="fab fa-accessible-icon"></i></router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/about" class="nav-link">Accesorios</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/login" class="nav-link">Tazas</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/login" class="nav-link">Juegos</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/" class="nav-link">Destacados</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/" class="nav-link">Idioma</router-link>
-        </li>
+        
               
                
       </ul>
       
+      
     </div>
+    
   </div>
+  
+  
 </nav>
 </template>
 
@@ -77,7 +83,7 @@ nav.navbar {
 }
 
 .icono{
-  height: 30px;
+  height: 45px;
   margin-right: 10px;
    
 }

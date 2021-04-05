@@ -1,6 +1,9 @@
 <template>
-  <div class="home">
-    <h1>Estás en la home</h1>
+  <div class="container section">
+    <div clas="row">
+        <img class="col-12 icono" src="@/assets/imgHome.png">
+    </div>
+    
     
   </div>
 </template>
@@ -18,3 +21,13 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.section{
+  max-width: 80%;
+ 
+  
+  
+   
+}
+
+</style>
