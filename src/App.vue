@@ -1,19 +1,25 @@
 <template>
 <div>
 <NavBar />
+
+
 <router-view/>
+<a href="https://wa.me/34692856097/?text=Hola%Geeky!!%¿Podemos%20ayudarte?"><ContactIcon /></a>
 <Footer/>
+
 </div>
   
 </template>
 <script>
+import ContactIcon from '@/components/ContactIcon'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 export default {
   name: 'App',
   components: { 
     NavBar,   
-    Footer
+    Footer,
+    ContactIcon
   }
 }
 
@@ -26,7 +32,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: white;
+  background-color: #3F3F3F;
+  
+  
   
 }
 
