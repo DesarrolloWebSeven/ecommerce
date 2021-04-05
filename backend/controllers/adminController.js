@@ -9,12 +9,14 @@ const products_index = (req,res)=>{
 }
 
 const products_save = (req,res)=>{
-    //console.log(req.body)
+    console.log(req.body)
     let product = new Product(req.body)
     product.save()
-        .then(data=>console.log(data))
+        .then(data=>{
+            console.log(data)
+            res.send("Ok")
+        })
         .catch(err=>console.log(err))
-    res.send("Ok")
 }
 const products_list = (req,res)=>{
         Product.find().then(data=>res.json(data))        
