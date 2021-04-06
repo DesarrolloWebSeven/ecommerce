@@ -9,7 +9,11 @@ const products_index = (req,res)=>{
 }
 
 const products_save = (req,res)=>{
-    console.log(req.body)
+    console.log(req.files)
+    let images=[]
+    req.files.forEach(i=>images.push('/images/'+i.filename))
+    console.log(images)
+    req.body.images = images
     let product = new Product(req.body)
     product.save()
         .then(data=>{

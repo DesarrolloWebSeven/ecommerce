@@ -5,7 +5,7 @@ const schemaProduct = new Schema({
     title:{type:String, required:true},
     description:{type:String, required:true},
     features:{type:String, required:true},
-    images:[{type:String, required:false}],
+    images:[],
     price:{type:Number, required:true},
     quantity:{type:Number, default:0, required:true},
     // creation:{type:Date, default:new Date()},
