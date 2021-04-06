@@ -1,8 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const rtMain = require('./routers/rtMain')
-const rtAdmin = require('./routers/rtAdmin')
+
 //base de datos
 const conexion = require('./connection')
 conexion.on('error',console.error.bind(console,"Error de conexion mongo"))
@@ -24,9 +23,11 @@ app.use((req, res, next) => {
     res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE')    
     next()
 })
+
 //enrutadores
-app.use('/',rtMain)
-app.use('/admin',rtAdmin)
+app.use('/', require('./routers/rtMain'))
+app.use('/admin', require('./routers/rtAdmin'))
+app.use('/usuario', require('./routers/rtUser'))
 
 app.listen(process.env.PORT_SERVER,(err)=>{
     if(err) console.log("Errores: ", err)
