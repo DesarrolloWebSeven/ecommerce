@@ -7,7 +7,8 @@ import Contact from '../views/Contact.vue'
 import PrivacyPolicy from '../views/PrivacyPolicy.vue'
 import Cookies from '../views/Cookies.vue'
 import Login from '../views/Login.vue'
-
+import Confirmation from '../views/Confirmation.vue'
+import NotFound from '../views/NotFound.vue'
 
 const routes = [
   {
@@ -50,8 +51,17 @@ const routes = [
     name: 'Login',
     component: Login
   },
-  
- 
+  {
+    path: '/usuario/registro/:id',
+    name: 'Confirmation',
+    component: Confirmation,
+    props: true,
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: NotFound
+  }
 ]
 
 const router = createRouter({
