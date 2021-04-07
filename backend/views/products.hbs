@@ -3,8 +3,9 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="titulo">Título</label>
-                <input type="text" class="form-control" name="title" placeholder="Titulo o nombre del producto">
+                <input type="text" class="form-control"  value="{{product.title}}" name="title" placeholder="Titulo o nombre del producto">
             </div>
+            <div>{{product.title}}</div>
             <div class="form-group col-md-6">
                 <label for="descripcion">Descripción</label>
                 <input type="text" class="form-control" name="description" placeholder="Descripción del producto">
@@ -49,6 +50,7 @@
         </div>
     </div>
 </form>
+<div> {{product}}</div>
 
 <div class="product-list">
 
