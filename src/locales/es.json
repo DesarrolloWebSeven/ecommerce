@@ -7,11 +7,26 @@
   "featured":"Destacados",
   "contact":"CONTACTO",
   "proyect":"PROYECTO",
-  "hello": "Bienvenido a tu App Vue.js",
-  "bye": "adios mundo",
-  "parrafo1": "Esto es el parrafo uno",
-  "about": "Esta es la página acerca de",
-  "menu-about":"Acerca de",
-  "menu-home": "Inicio",
+  "team":"EQUIPO",
+  "privacyPolicy":"POLÍTICA DE PRIVACIDAD",
+  "cookies":"COOKIES",
+  "footerRights": "Todos los Derechos Libres por",
+  "descriptionContactP1": "Si prefieres contactar con nosotros a traves de correo electrónico, puedes rellenar este formulario y te contestaremos lo más rápido posible.",
+  "name":"Nombre",
+  "plName":"Introduce tu nombre",
+  "lastName":"Apellidos",
+  "plLastName":"Introduce tus apellidos",
+  "email":"Correo",
+  "plEmail":"Introduce tu correo electrónico",
+  "type":"Tipo de consulta",
+  "select1":"Información general",
+  "select2":"Tallas",
+  "select3":"Envíos",
+  "select4":"Reclamaciones",
+  "sendForm":"Enviar",
+
+  
+  "descriptionQuery":"Describe tu consulta detalladamente",
+   
   "logo":"/images/logo_es.png"
 }   

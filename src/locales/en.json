@@ -1,16 +1,36 @@
-{
+{   "_navbar": "NAVBAR",
     "lang-label":"Choose language: ",
     "tshirts": "Tshirts",
     "accessories":"Accessories",
     "cups":"Cups",
     "games":"Games",
     "featured":"Featured",
+
+
+
+    "_footer": "FOOTER",
     "contact":"CONTACT",
     "proyect":"PROYECT",
-    "hello": "Welcome to Your Vue.js App",
-    "bye": "bye world",
-    "about":"This is an about page",
-    "menu-about":"About",
-    "menu-home": "Home",
+    "team":"TEAM",
+    "privacyPolicy":"PRIVACY POLICY",
+    "cookies":"COOKIES",
+    "footerRights": "All Rights Free by",
+
+    "_contact": "CONTACTUS",
+    "descriptionContactP1": "If you prefer to contact us by email, you can fill out this form and we will answer you as quickly as possible.",
+    "name":"Name",
+    "plName":"Enter your first name",
+    "lastName":"Last Name",
+    "plLastName":"Enter your last name",
+    "email":"E-mail",
+    "plEmail":"Enter your e-mail",
+    "type":"Type of query",
+    "select1":"General information",
+    "select2":"Sizes",
+    "select3":"Shipping",
+    "select4":"Complaints",
+    "descriptionQuery":"Describe your query in detail",
+    "sendForm":"Send",
+
     "logo":"/images/logo_en.png"
 }

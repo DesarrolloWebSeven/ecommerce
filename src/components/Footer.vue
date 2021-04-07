@@ -16,7 +16,7 @@
               
             </li>
             <li>
-              <h6><router-link to="/equipo" class="nav-link">Equipo</router-link></h6>
+              <h6><router-link to="/equipo" class="nav-link">{{lang["team"]}}</router-link></h6>
             </li>
           </ul>
         </div>
@@ -27,8 +27,8 @@
         <div class="col-12 col-md-4">
           
           <ul class="footer-links">
-            <li><h6><router-link to="/politicaPrivacidad" class="nav-link">Política de privacidad</router-link></h6></li>
-            <li><h6><router-link to="/cookies" class="nav-link">Cookies</router-link></h6></li>
+            <li><h6><router-link to="/politicaPrivacidad" class="nav-link">{{lang["privacyPolicy"]}}</router-link></h6></li>
+            <li><h6><router-link to="/cookies" class="nav-link">{{lang["cookies"]}}</router-link></h6></li>
           </ul>
           
         </div>
@@ -39,7 +39,7 @@
       <div class="row">
         <div class="col-md-8 col-sm-6 col-xs-12">
           <p class="copyright-text">
-            Copyfree &copy; 2021 All Rights Free by<router-link to="/inicio"> Geeky</router-link>.
+            Copyfree &copy; 2021 {{lang["footerRights"]}}<router-link to="/inicio"> Geeky</router-link>.
           </p>
           
         </div>
