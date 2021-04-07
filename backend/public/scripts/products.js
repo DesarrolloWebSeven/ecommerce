@@ -1,5 +1,3 @@
-console.log("Hola")
-
 window.onload=()=>{
     showProducts()
 }
@@ -22,5 +20,6 @@ function showProducts(){
             })
         })
 }
-  
+
+
   
