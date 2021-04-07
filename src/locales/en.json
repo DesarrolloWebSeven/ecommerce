@@ -1,0 +1,16 @@
+{
+    "lang-label":"Choose language: ",
+    "tshirts": "Tshirts",
+    "accessories":"Accessories",
+    "cups":"Cups",
+    "games":"Games",
+    "featured":"Featured",
+    "contact":"CONTACT",
+    "proyect":"PROYECT",
+    "hello": "Welcome to Your Vue.js App",
+    "bye": "bye world",
+    "about":"This is an about page",
+    "menu-about":"About",
+    "menu-home": "Home",
+    "logo":"/images/logo_en.png"
+}

@@ -80,12 +80,15 @@
 
 import TabsWrapper from '@/components/TabsWrapper.vue'
 import Tab from '@/components/Tab.vue'
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 export default {
   name: "Login",
   setup(){
-      return{
-         
-      }
+
+    return {
+      lang: computed(()=>useStore().getters.getLang)
+    }
   },
   components:{
       TabsWrapper,

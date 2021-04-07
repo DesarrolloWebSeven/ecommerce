@@ -6,10 +6,13 @@
         <div class="col-12 col-md-4">
           
           <ul class="footer-links">
-            <li><h6><router-link to="/contacto" class="nav-link">Contacto</router-link></h6>
+            
+            <li><h6><router-link to="/contacto" class="nav-link">{{lang["contact"]}}</router-link></h6>        
+           
+            
               
             </li>
-            <li><h6><router-link to="/proyecto" class="nav-link">Proyecto</router-link></h6>
+            <li><h6><router-link to="/proyecto" class="nav-link">{{lang["proyect"]}}</router-link></h6>
               
             </li>
             <li>
@@ -27,6 +30,7 @@
             <li><h6><router-link to="/politicaPrivacidad" class="nav-link">Política de privacidad</router-link></h6></li>
             <li><h6><router-link to="/cookies" class="nav-link">Cookies</router-link></h6></li>
           </ul>
+          
         </div>
       </div>
       <hr />
@@ -53,8 +57,18 @@
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { ref, reactive, computed } from "vue"; 
 export default {
   name: "Footer",
+  props: {},
+  setup(){
+
+    return {
+      lang: computed(()=>useStore().getters.getLang)
+    }
+  }
+  
 };
 </script>
 

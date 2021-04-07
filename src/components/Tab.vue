@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import i18next from "i18next";
 import {inject} from 'vue'
 export default {
 name:'Tab',

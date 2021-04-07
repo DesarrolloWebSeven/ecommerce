@@ -3,8 +3,16 @@
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 export default {
-    name:'Cookies'
+    name:'Cookies',
+    setup(){
+
+    return {
+      lang: computed(()=>useStore().getters.getLang)
+    }
+  }
 
 }
 </script>

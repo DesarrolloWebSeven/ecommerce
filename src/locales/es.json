@@ -1,0 +1,17 @@
+{
+  "lang-label":"Elige idioma: ",
+  "tshirts": "Camisetas",
+  "accessories":"Accessorios",
+  "cups":"Tazas",
+  "games":"Juegos",
+  "featured":"Destacados",
+  "contact":"CONTACTO",
+  "proyect":"PROYECTO",
+  "hello": "Bienvenido a tu App Vue.js",
+  "bye": "adios mundo",
+  "parrafo1": "Esto es el parrafo uno",
+  "about": "Esta es la página acerca de",
+  "menu-about":"Acerca de",
+  "menu-home": "Inicio",
+  "logo":"/images/logo_es.png"
+}   

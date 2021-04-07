@@ -59,9 +59,16 @@
 </template>
 
 <script>
-
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 export default {
   name: "HelpContact",
+  setup(){
+
+    return {
+      lang: computed(()=>useStore().getters.getLang)
+    }
+  }
   
 };
 </script>

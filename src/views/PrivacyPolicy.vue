@@ -4,8 +4,16 @@
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 export default {
-    name:'PrivacyPolicy'
+    name:'PrivacyPolicy',
+    setup(){
+
+    return {
+      lang: computed(()=>useStore().getters.getLang)
+    }
+  }
 
 }
 </script>
