@@ -1,6 +1,9 @@
 <form action="/admin/productos" method="POST" id="data" enctype="multipart/form-data">
     <div class="container">
         <div class="form-row">
+            <div class="form-hidden">
+                <input type="text" class="form-control" name="_id" value="{{product._id}}">
+            </div>
             <div class="form-group col-md-6">
                 <label for="titulo">Título</label>
                 <input type="text" class="form-control"  value="{{product.title}}" name="title" placeholder="Titulo o nombre del producto">
@@ -67,10 +70,11 @@ $(document).ready(function(){
   $("#update").click(function(){
         console.log(document.querySelector('input[name="featured"]').checked)
         let prueba = document.getElementsByClassName("form-control")
-        let product_update={}
+        let product_update={ _id:1, title, description, features, price, category, quantity, images, featured
+        }
         for (let i=0; i<prueba.length-1; i++){
             let temp = prueba[i].name
-            product_update.´$(prueba[i].name)´=prueba[i].value
+            //product_update.`$(prueba[i].name)`= prueba[i].value
             console.log(prueba[i].name+":"+prueba[i].value)
         }
         console.log(product_update)
