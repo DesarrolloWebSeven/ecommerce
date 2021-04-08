@@ -3,11 +3,9 @@ const Product = require('../models/Product')
 const login = (req,res)=>{
     res.render('admin')
 }
-
 const products_index = (req,res)=>{
     res.render('products', {src:'products.js'})
 }
-
 const products_save = (req,res)=>{
     //console.log(req.files)
     let images=[]
@@ -31,15 +29,21 @@ const products_delete = async (req,res)=>{
     res.send("Articulo Eliminado")
     console.log("Se ha borrado: " + product_delete)
 }
-
+const products_findById = (req,res)=>{
+    Product.findById(req.params.id).lean()
+    .then(product=>{
+        res.render('products', {product:product})
+    })
+}
 const products_update = async (req,res)=>{
-    console.log(req.params.id)
-    Product.findById(req.params.id)
+    console.log(req.body.id)
+    console.log(req.body)
+    Product.findById(req.params.id).lean()
+    const product_update = await Product.findByIdAndUpdate()
     .then(product=>{
         console.log(product)
         res.render('products', {product:product})
     })
-    //const product_update = await Product.findByIdAndUpdate()
 }
 
 
@@ -49,5 +53,6 @@ module.exports = {
     products_save,
     products_list,
     products_delete,
+    products_findById,
     products_update
 }

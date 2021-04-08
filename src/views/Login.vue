@@ -101,15 +101,14 @@ export default {
     let repeat_password = ref('')
     let errors = reactive({})
     let success = ref('')
-    //let regExpEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    //let regExpPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    let regExpEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    let regExpPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
 
     const check = () => {
-      //if(!regExpEmail.test(email.value)) errors.email = "Debes introducir un email válido"
-      //if(!regExpPassword.test(password.value)) errors.password = "Debes introducir un password válido"
-      //if(password.value !== repeat_password.value) errors.repeatpassword = "No coincide con el password"
-      //if(regExpEmail.test(email.value) && regExpPassword.test(password.value) && password.value === repeat_password.value)
-      if(password.value === repeat_password.value) {
+      if(!regExpEmail.test(email.value)) errors.email = "Debes introducir un email válido"
+      if(!regExpPassword.test(password.value)) errors.password = "Debes introducir un password válido"
+      if(password.value !== repeat_password.value) errors.repeatpassword = "No coincide con el password"
+      if(regExpEmail.test(email.value) && regExpPassword.test(password.value) && password.value === repeat_password.value) {
         fetch('http://localhost:8081/usuario/registro', {
           method: 'POST',
           body: JSON.stringify({ 
@@ -122,8 +121,9 @@ export default {
           .then(response => {
             errors.email = ''
             errors.password = ''
+            errors.repeatpassword = ''
             if(response._id) {
-              success.value = 'Usuario creado con éxito'
+              success.value = 'Usuario creado con éxito. Revisa tu email para activar tu cuenta.'
             }
             else if(response.code === 11000) errors.email = "El email ya existe"
             else if(response.message.includes('user validation failed')) {

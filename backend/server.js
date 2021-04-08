@@ -13,6 +13,7 @@ conexion.once('open',()=>console.log("Conexión mongo OK!!"))
 const exphbs = require('express-handlebars')
 app.engine('.hbs', exphbs({extname: '.hbs'}));
 app.set('view engine', '.hbs');
+
 //middleware multer y configuracion
 const storage = multer.diskStorage({//Ponemos el nombre a la imagen puede ser file.originalname
     destination: path.join(__dirname, '/public/images'),
@@ -52,6 +53,10 @@ app.use('/', require('./routers/rtMain'))
 app.use('/admin', require('./routers/rtAdmin'))
 app.use('/usuario', require('./routers/rtUser'))
 
+// Error handler
+app.use((req, res) => res.status(400).render('notfound'))
+
+// Server running
 app.listen(process.env.PORT_SERVER,(err)=>{
     if(err) console.log("Errores: ", err)
     console.log(`Servidor backend arrancado en ${process.env.PORT_SERVER}`)
