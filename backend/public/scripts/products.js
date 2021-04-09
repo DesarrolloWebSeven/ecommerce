@@ -1,5 +1,3 @@
-console.log("Hola")
-
 window.onload=()=>{
     showProducts()
 }
@@ -13,11 +11,15 @@ function showProducts(){
             while(productList.firstChild)
                 productList.firstChild.remove()
             products.forEach(product=>{
+                let img = document.createElement("img")
                 let p = document.createElement("p")
+                img.src=product.images[0]
                 p.textContent=product.title
+                productList.appendChild(img)
                 productList.appendChild(p)
             })
         })
 }
-  
+
+
   
