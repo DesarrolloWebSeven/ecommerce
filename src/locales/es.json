@@ -103,6 +103,7 @@
 
 
   "_cookies": "COOKIES",
+  "thisCookies":"Estas son nuestras Cookies",
   "titleCookies":"Cookies",
   "pCookies":"Nuestro sitio web usa cookies. Una cookie es un fichero que contiene un identificador (una cadena de letras y números) que se envía desde un servidor web a un navegador web y se almacena en el navegador. El identificador es enviado de vuelta al servidor cada vez que el navegador solicita una página del servidor. Las cookies pueden ser “persistentes” o de “sesión”. Una cookie persistente será almacenada por una navegador web y permanecerá válida hasta su fecha de caducidad, a menos que el usuario la elimine antes de la fecha de caducidad. Una cookie de sesión caducará al final de la sesión del usuario, cuando se cierre el navegador. Las cookies típicamente no contienen ninguna información que identifique personalmente al usuario sino información personal que almacenamos sobre usted que puede relacionarse con la información almacenada y obtenida de las cookies. Solo usamos cookies de sesión y persistentes en nuestro sitio web.",
   "li1":"Los nombres de las cookies que podemos usar en nuestro sitio web y los fines para las que son usadas, están especificadas a continuación:",
@@ -112,5 +113,5 @@
   "li5":"Eliminar las cookies tendrá un impacto negativo en la usabilidad de muchos sitios web.",
     
    
-  "logo":"/images/logo_es.png"
+  "flag":"/images/spainFlag.png"
 }   

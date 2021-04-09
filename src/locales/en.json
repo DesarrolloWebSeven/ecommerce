@@ -100,12 +100,22 @@
     "rightsP3": "In practice, you will usually explicitly agree in advance to our use of your personal information for marketing purposes, or we will give you the opportunity to decide that your personal information will not be used for marketing purposes.",
     "titleK": "Update information",
     "actualP1": "Please inform us if the personal information we have about you needs to be corrected or updated.",
+
     
+    "_cookies": "COOKIES",
+  "thisCookies": "These are our Cookies",
+  "titleCookies": "Cookies",
+  "pCookies": "Our website uses cookies. A cookie is a file containing an identifier (a string of letters and numbers) that is sent from a web server to a web browser and stored in the browser. The identifier is sent back to the server each time the browser requests a page from the server. Cookies can be persistent or session. A persistent cookie will be stored by a web browser and will remain valid until its expiration date, unless the user deletes it before the expiration date. A session cookie will expire at the end of the user's session, when the browser is closed. Cookies typically do not contain any information that personally identifies the user but rather personal information that we store about you that may relate to information stored and obtained from cookies. We only use session and persistent cookies on our website. ",
+  "li1": "The names of the cookies that we can use on our website and the purposes for which they are used, are specified below:",
+  "li2": "We use Google Analytics and Adwords on our website to recognize a computer when a user visits the website; monitor users while they browse the website; allow the use of a shopping cart on the website; improve the site usability; analyze website usage; administer the website; prevent fraud and improve website security; personalize the website for each user; personalize advertisements that are of particular interest to specific users. ",
+  "li3": "Most browsers allow you to refuse to accept cookies.",
+  "li4": "You can delete the cookies already stored on your computer.",
+  "li5": "Deleting cookies will have a negative impact on the usability of many websites.",
 
 
 
 
 
 
-    "logo":"/images/logo_en.png"
+  "flag":"/images/ukFlag.png"
 }

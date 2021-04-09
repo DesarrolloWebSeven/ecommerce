@@ -1,6 +1,6 @@
 <template>
   <div class="prueba">
-    <label>{{lang["lang-label"]}}</label>
+    <label><img alt="banderas" :src="lang.flag"></label>
     <select v-model="currentLang">
       <option v-for="(lang,i) in langs" :key="i">
         {{lang}}
