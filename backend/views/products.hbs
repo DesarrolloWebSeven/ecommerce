@@ -1,9 +1,9 @@
 <form action="/admin/productos" method="POST" id="data" enctype="multipart/form-data">
     <div class="container">
+        {{!-- Id de Usuario no se puede cambiar --}}
+        <input type="text" class="form-control hidden" id="id" value="{{product._id}}">
+
         <div class="form-row">
-            <div class="form-hidden">
-                <input type="text" class="form-control" name="_id" value="{{product._id}}">
-            </div>
             <div class="form-group col-md-6">
                 <label for="titulo">Título</label>
                 <input type="text" class="form-control"  value="{{product.title}}" name="title" placeholder="Titulo o nombre del producto">
@@ -20,7 +20,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="precio">Precio</label>
-                <input type="number" class="form-control" value="{{product.price}}" name="price" placeholder="Precio por unidad">
+                <input type="number" class="form-control" value="{{product.price}}" name="price" placeholder="Precio por unidad" step="0.01">
             </div>
         </div>
         <div class="form-row">
@@ -41,11 +41,14 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
+                <input type="button" class="form-control hidden" id="update_images" value="Cambiar imagenes">
+            </div>
+            <div class="form-group col-md-6">
                 <label for="imagenes">Archivos de imagenes</label>
                 <input type="file" class="form-control" name="images" value="{{product.images}}" multiple>
             </div>
             <div>
-                <label><input type="checkbox"class="form-control" name="featured" checked="{{product.featured}}"> Destacado</label><br>
+                <label><input type="checkbox"class="form-control" name="featured" value="true" checked="{{product.featured}}"> Destacado</label><br>
             </div>
   
             {{#if product}}
@@ -60,33 +63,53 @@
         </div>
     </div>
 </form>
-
-<div class="product-list">
+<div class="imagenes">
 
 </div>
+<div class="product-list"></div>
 
 <script>
 $(document).ready(function(){
-  $("#update").click(function(){
-        console.log(document.querySelector('input[name="featured"]').checked)
-        let prueba = document.getElementsByClassName("form-control")
-        let product_update={ _id:1, title, description, features, price, category, quantity, images, featured
+    if ($('input[name="title"')[0].value){
+        $("#update_images").removeClass('hidden')
+        let _id = $("#id")[0].value
+        console.log("Producto ya existe:" + _id)
+    }
+    let img = document.createElement("img")
+    let old = $('input[name="images"]')[0].defaultValue.split(",")
+    let images_old = $('input[name="images"]')[0].defaultValue.split(",")
+    images_old.forEach((image, ind)=>{
+        console.log(image)
+        let myClon=img.cloneNode(true) 
+        myClon.src=image[ind]
+        $('.imagenes')[0].appendChild(myClon)
+    })
+    console.log(old)
+    //console.log($('input[name="images"]')[0].value)
+    $("#update").click(function(){
+        let product_update={ 
+            _id:$('#id')[0].value, 
+            title:$('input[name="title"]')[0].value,
+            description:$('input[name="description"]')[0].value,
+            features:$('input[name="features"]')[0].value,
+            price:$('input[name="price"]')[0].value,
+            category:$('select[name="category"]')[0].value, 
+            quantity:$('input[name="quantity"]')[0].value,
+            images:$('input[name="images"]')[0].defaultValue,
+            featured:$('input[name="featured"]')[0].checked
         }
-        for (let i=0; i<prueba.length-1; i++){
-            let temp = prueba[i].name
-            //product_update.`$(prueba[i].name)`= prueba[i].value
-            console.log(prueba[i].name+":"+prueba[i].value)
-        }
-        console.log(product_update)
-        
-        /*
-        let form = $("#data")
-        console.log()
-      
-        $("#data").submit(function(event) {
-            event.preventDefault()
-            console.log(event)
-        })*/
-  })
+        fetch(`/admin/productos/$(_id)`,{
+            method:'PUT',
+            headers:{'Content-type':'Application/json'},
+            body:JSON.stringify(product_update)
+        })
+        console.log(product_update)    
+    })
+
+    $("#update_images").click(()=>{
+        console.log("vas a subir nuevas imagenes")
+        //$('input[name="images"]')[0].value=""
+    })
 })
+
 </script>

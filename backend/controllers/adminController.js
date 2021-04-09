@@ -7,10 +7,9 @@ const products_index = (req,res)=>{
     res.render('products', {src:'products.js'})
 }
 const products_save = (req,res)=>{
-    //console.log(req.files)
+    if(req.body.featured=="on") req.body.featured=true 
     let images=[]
     req.files.forEach(i=>images.push('/images/'+i.filename))
-    //console.log(images)
     req.body.images = images
     let product = new Product(req.body)
     product.save()
@@ -36,13 +35,12 @@ const products_findById = (req,res)=>{
     })
 }
 const products_update = async (req,res)=>{
-    console.log(req.body.id)
-    console.log(req.body)
-    Product.findById(req.params.id).lean()
-    const product_update = await Product.findByIdAndUpdate()
+    console.log(req.body._id)
+    const product_update =  await Product.findByIdAndUpdate(req.body._id)
     .then(product=>{
         console.log(product)
-        res.render('products', {product:product})
+        //console.log(product_update)
+        //res.json(product)
     })
 }
 
