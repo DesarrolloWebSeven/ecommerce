@@ -12,6 +12,9 @@ mailer.send = function send(user) {
       user: "aletha.rogahn10@ethereal.email", 
       pass: "R7zQVTfcBRRtQPnA17"
     },
+    tls: {
+      rejectUnauthorized: false
+    }
   });
 
   transporter.sendMail({

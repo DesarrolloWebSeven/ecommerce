@@ -1,21 +1,22 @@
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors')
 const multer = require('multer')
 const path = require('path')
 const app = express()
 
-//base de datos
+// Database settings
 const conexion = require('./connection')
 conexion.on('error',console.error.bind(console,"Error de conexion mongo"))
 conexion.once('open',()=>console.log("Conexión mongo OK!!"))
 
-//configuracion del motor de plantillas handlebars
+// Template engine settings
 const exphbs = require('express-handlebars')
 app.engine('.hbs', exphbs({extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
-//middleware multer y configuracion
-const storage = multer.diskStorage({//Ponemos el nombre a la imagen puede ser file.originalname
+// Multer settings
+const storage = multer.diskStorage({
     destination: path.join(__dirname, '/public/images'),
     filename:(req, file, cb)=>{
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
@@ -26,9 +27,9 @@ app.use(multer({
     storage:storage,//nombre
     limits: {fieldSize:10000000},
     fileFilter: (req, file, cb)=>{
-        const fileTypes = /jpeg|jpg|png|gif|svg|/ //creo una expresion regular para definir que tipos de archivo quiero recibir.
-        const mimetype = fileTypes.test(file.mimetype)//con esta linea lo que hago es verificar que el mimetype, que es una propiedad propia del archivo si concuerda: el original del archivo si concuerda con alguno de los establecidos en fileTypes
-        const extname = fileTypes.test(path.extname(file.originalname))//extraigo la extension del archivo con el metodo extname del path.
+        const fileTypes = /jpeg|jpg|png|gif|svg|/ 
+        const mimetype = fileTypes.test(file.mimetype)
+        const extname = fileTypes.test(path.extname(file.originalname))
         if (mimetype && extname){
             return cb(null, true)
         }
@@ -36,19 +37,13 @@ app.use(multer({
     }
 }).array('images'))
 
-//middlewares
+// Middlewares
+app.use(cors())
 app.use(express.static(__dirname+'/public'))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method')
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE')    
-    next()
-})
 
-//enrutadores
+// Routes
 app.use('/', require('./routers/rtMain'))
 app.use('/admin', require('./routers/rtAdmin'))
 app.use('/usuario', require('./routers/rtUser'))
@@ -57,7 +52,8 @@ app.use('/usuario', require('./routers/rtUser'))
 app.use((req, res) => res.status(400).render('notfound'))
 
 // Server running
-app.listen(process.env.PORT_SERVER,(err)=>{
-    if(err) console.log("Errores: ", err)
-    console.log(`Servidor backend arrancado en ${process.env.PORT_SERVER}`)
+app.set('port', process.env.PORT_SERVER || 3000)
+app.listen(app.get('port'),(err)=>{
+  if(err) console.log("Errores: ", err)
+  console.log("Servidor backend arrancado en", app.get('port'))
 })

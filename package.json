@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "bootstrap-icons": "^1.4.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "i18next": "^19.9.2",
     "validator": "^13.5.2",
