@@ -88,6 +88,8 @@
 
 import TabsWrapper from '@/components/TabsWrapper.vue'
 import Tab from '@/components/Tab.vue'
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 import { ref, reactive } from 'vue'
 export default {
   name: "Login",
@@ -102,7 +104,9 @@ export default {
     let errors = reactive({})
     let success = ref('')
     let regExpEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    let regExpPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    let regExpPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;   
+      
+    
 
     const check = () => {
       if(!regExpEmail.test(email.value)) errors.email = "Debes introducir un email válido"
@@ -132,9 +136,11 @@ export default {
             }
           })
       }
+      
     }
 
     return {
+      lang: computed(()=>useStore().getters.getLang),
       email,
       password,
       repeat_password,
