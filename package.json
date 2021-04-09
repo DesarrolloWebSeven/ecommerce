@@ -8,11 +8,11 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "axios": "^0.21.1",
     "bootstrap-icons": "^1.4.0",
     "dotenv": "^8.2.0",
     "i18n": "^0.13.2",
     "i18next": "^20.1.0",
+    "validator": "^13.5.2",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"

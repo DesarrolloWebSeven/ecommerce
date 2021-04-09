@@ -1,29 +1,30 @@
-<form action="/admin/productos" method="POST">
+<form action="/admin/productos" method="POST" id="data" enctype="multipart/form-data">
     <div class="container">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="titulo">Título</label>
-                <input type="text" class="form-control" name="title" placeholder="Titulo o nombre del producto">
+                <input type="text" class="form-control"  value="{{product.title}}" name="title" placeholder="Titulo o nombre del producto">
             </div>
             <div class="form-group col-md-6">
                 <label for="descripcion">Descripción</label>
-                <input type="text" class="form-control" name="description" placeholder="Descripción del producto">
+                <input type="text" class="form-control"  value="{{product.description}}" name="description" placeholder="Descripción del producto">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="detalles">Detalles técnicos</label>
-                <input type="text" class="form-control" name="features" placeholder="Detalles técnicos">
+                <input type="text" class="form-control" value="{{product.features}}" name="features" placeholder="Detalles técnicos">
             </div>
             <div class="form-group col-md-6">
                 <label for="precio">Precio</label>
-                <input type="number" class="form-control" name="price" placeholder="Precio por unidad">
+                <input type="number" class="form-control" value="{{product.price}}" name="price" placeholder="Precio por unidad">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="categoria">Categoría</label>
-                <select class="form-control" name="category">
+                <select class="form-control" name="category" value="{{product.category}}">
+                    <option>{{product.category}}</option>
                     <option>accesorios</option>
                     <option>camisetas</option>
                     <option>games</option>
@@ -32,20 +33,27 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="unidades">Unidades disponibles</label>
-                <input type="number" class="form-control" name="quantity" placeholder="Cantidad de unidades disponibles">
+                <input type="number" class="form-control" name="quantity" value="{{product.quantity}}" placeholder="Cantidad de unidades disponibles">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="imagenes">Archivos de imagenes</label>
-                <input type="file" class="form-control-file" name="images" >
+                <input type="file" class="form-control" name="images" value="{{product.images}}" multiple>
             </div>
             <div>
-                <label><input type="checkbox" name="featured" value="true"> Destacado</label><br>
+                <label><input type="checkbox"class="form-control" name="featured" checked="{{product.featured}}"> Destacado</label><br>
             </div>
-            <div class="form-group col-md-6">
-                <input type="submit" class="form-control"  value="Guardar">
-            </div>
+  
+            {{#if product}}
+                <div class="form-group col-md-6">
+                    <input type="button" id="update" class="form-control" value="Actualizar">
+                </div>
+            {{else}}
+                <div class="form-group col-md-6">
+                    <input type="submit" class="form-control" value="Guardar">
+                </div>
+            {{/if}}
         </div>
     </div>
 </form>
@@ -54,4 +62,27 @@
 
 </div>
 
-
+<script>
+$(document).ready(function(){
+  $("#update").click(function(){
+        console.log(document.querySelector('input[name="featured"]').checked)
+        let prueba = document.getElementsByClassName("form-control")
+        let product_update={}
+        for (let i=0; i<prueba.length-1; i++){
+            let temp = prueba[i].name
+            product_update.´$(prueba[i].name)´=prueba[i].value
+            console.log(prueba[i].name+":"+prueba[i].value)
+        }
+        console.log(product_update)
+        
+        /*
+        let form = $("#data")
+        console.log()
+      
+        $("#data").submit(function(event) {
+            event.preventDefault()
+            console.log(event)
+        })*/
+  })
+})
+</script>
