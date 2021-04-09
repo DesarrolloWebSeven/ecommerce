@@ -41,14 +41,23 @@
 </div>
 
 </div>
+<label>{{lang["lang-label"]}}</label>
 
 
   
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 export default {
-  name:'Team'
+  name:'Team',
+  setup(){
+
+    return {
+      lang: computed(()=>useStore().getters.getLang)
+    }
+  }
 
 }
 </script>

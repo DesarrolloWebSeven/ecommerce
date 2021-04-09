@@ -22,7 +22,8 @@
 <script>
 import Signup from '@/components/Signup.vue'
 import Signin from '@/components/Signin.vue'
-import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { ref, reactive, computed } from 'vue'
 export default {
   name: "Login",
   components:{
@@ -39,9 +40,10 @@ export default {
     return {
       user,
       register,
-      login
+      login,
+      lang: computed(()=>useStore().getters.getLang)
     }
-}
+  }
 }
 </script>
 
