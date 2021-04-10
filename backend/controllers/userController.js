@@ -5,9 +5,9 @@ const bcrypt = require('bcrypt')
 const registerUser = (req, res) => {
   let user = new User(req.body)
   user.save()
-    .then(user => {
+    .then(async user => {
+      await mailer.send(user.email, 'Hola', 'recover')
       res.json(user)
-      mailer.send(user)
     })
     .catch(err => res.json(err))
 }

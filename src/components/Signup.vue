@@ -69,7 +69,7 @@ export default {
           headers: { "Content-Type": "application/json" },
         })
           .then((res) => res.json())
-          .then((response) => {
+          .then((response) => { 
             errors.email = "";
             errors.password = "";
             errors.repeatpassword = "";
@@ -85,7 +85,7 @@ export default {
                 errors.password = response.errors.password.message;
             }
           })
-          .catch((err) => console.log(err));
+          .catch((err) => console.log(err.message));
       }
     };
 
