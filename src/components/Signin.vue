@@ -51,9 +51,10 @@ export default {
             .then(data => {
               errors.email = ''
               if(data.includes("no encontrado")) success.value = "El usuario no existe"
+              else if (data.includes("confirmado")) success.value = "Esta cuenta aún no ha sido confirmada"
               else success.value = "Accede a tu email para cambiar tu contraseña"
             })
-            .catch(err => console.log(err.message))
+            .catch(err => console.log(err))
         }
       } else {
         fetch("http://localhost:8081/usuario/login", {
