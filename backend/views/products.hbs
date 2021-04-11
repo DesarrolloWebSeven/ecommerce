@@ -41,12 +41,10 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <input type="button" class="form-control hidden" id="update_images" value="Cambiar imagenes">
-            </div>
-            <div class="form-group col-md-6">
                 <label for="imagenes">Archivos de imagenes</label>
                 <input type="file" class="form-control" name="images" value="{{product.images}}" multiple>
             </div>
+            <div class="images"></div>
             <div>
                 <label><input type="checkbox"class="form-control" name="featured" value="true" checked="{{product.featured}}"> Destacado</label><br>
             </div>
@@ -63,29 +61,49 @@
         </div>
     </div>
 </form>
-<div class="imagenes">
 
-</div>
 <div class="product-list"></div>
 
-<script>
+{{!-- <script>
 $(document).ready(function(){
+    //Asignacion de valores
     if ($('input[name="title"')[0].value){
-        $("#update_images").removeClass('hidden')
         let _id = $("#id")[0].value
-        console.log("Producto ya existe:" + _id)
+        var imagesOld = $('input[name="images"]')[0].defaultValue.split(',')
+        console.log(imagesOld)
+        showImages(imagesOld)
+    } 
+    //Carga de imagenes existentes
+    function showImages(imagesOld){
+        console.log(imagesOld)
+        //Preparando contenedores
+        $(".images")[0].innerHTML=""
+        let img = document.createElement('img')
+            img.className="images-old"
+        let btnImg = document.createElement('input')
+            btnImg.type='button'
+            btnImg.value='Eliminar'
+            btnImg.className='delete-img-old'
+        //Asignacion y carga
+        imagesOld.forEach((image, i)=>{
+            let myClon=img.cloneNode(true)
+                myClon.src=image
+                $('.images')[0].appendChild(myClon)
+            let clonBtnImg=btnImg.cloneNode(true)
+                clonBtnImg.name=image
+                clonBtnImg.id=i
+                $('.images')[0].appendChild(clonBtnImg)
+        })
     }
-    let img = document.createElement("img")
-    let old = $('input[name="images"]')[0].defaultValue.split(",")
-    let images_old = $('input[name="images"]')[0].defaultValue.split(",")
-    images_old.forEach((image, ind)=>{
-        console.log(image)
-        let myClon=img.cloneNode(true) 
-        myClon.src=image[ind]
-        $('.imagenes')[0].appendChild(myClon)
+
+    //Eliminacion de imagenes del array
+    $(".delete-img-old").click((e)=>{
+        imagesOld.splice(imagesOld.findIndex(i=>i==e.target.name), 1)
+        showImages(imagesOld)
     })
-    console.log(old)
-    //console.log($('input[name="images"]')[0].value)
+
+
+    //Peticion del producto actualizado
     $("#update").click(function(){
         let product_update={ 
             _id:$('#id')[0].value, 
@@ -105,11 +123,6 @@ $(document).ready(function(){
         })
         console.log(product_update)    
     })
-
-    $("#update_images").click(()=>{
-        console.log("vas a subir nuevas imagenes")
-        //$('input[name="images"]')[0].value=""
-    })
 })
 
-</script>
+</script> --}}

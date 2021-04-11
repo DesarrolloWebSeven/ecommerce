@@ -1,3 +1,8 @@
 .hidden {
   display: none;
 }
+
+.images-old {
+  height: 200px;
+  width: 200px;
+}

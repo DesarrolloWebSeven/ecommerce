@@ -1,4 +1,6 @@
 const Product = require('../models/Product')
+const fs = require('fs/promises')
+const path = require('path')
 
 const login = (req,res)=>{
     res.render('admin')
@@ -31,8 +33,16 @@ const products_delete = async (req,res)=>{
 const products_findById = (req,res)=>{
     Product.findById(req.params.id).lean()
     .then(product=>{
-        res.render('products', {product:product})
+        res.render('products', {product:product, src:'products_update.js'})
     })
+}
+const images_delete=(req,res)=>{
+    console.log(req.body)
+    let image = req.body.image    
+    fs.unlink(path.join(__dirname, '/../public', image))
+    .then(() => {console.log('File removed')})
+    .catch(err => {console.error('Something wrong happened removing the file', err)})
+
 }
 const products_update = async (req,res)=>{
     console.log(req.body._id)
@@ -45,6 +55,8 @@ const products_update = async (req,res)=>{
 }
 
 
+
+
 module.exports = {
     login,
     products_index,
@@ -52,5 +64,6 @@ module.exports = {
     products_list,
     products_delete,
     products_findById,
+    images_delete,
     products_update
 }
