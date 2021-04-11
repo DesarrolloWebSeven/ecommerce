@@ -9,7 +9,7 @@ const products_index = (req,res)=>{
     res.render('products', {src:'products.js'})
 }
 const products_save = (req,res)=>{
-    if(req.body.featured=="on") req.body.featured=true 
+    if(req.body.featured=="on") req.body.featured=true
     let images=[]
     req.files.forEach(i=>images.push('/images/'+i.filename))
     req.body.images = images

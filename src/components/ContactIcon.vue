@@ -6,8 +6,13 @@
 </template>
 
 <script>
+
+import { ref, reactive, computed } from "vue"; 
 export default {
-    name:'ContactIcon'
+    name:'ContactIcon',
+    props: {},
+  
+  
 
 }
 </script>

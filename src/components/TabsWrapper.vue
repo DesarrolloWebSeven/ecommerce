@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import i18next from "i18next";
 import { provide, ref } from 'vue'
 export default {
     name:'TabsWrapper',

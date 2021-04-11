@@ -1,101 +1,50 @@
 <template>
 <div class="container section">
-<TabsWrapper>
-    <Tab  class="login" title="LOGIN">
-        <h3>Bienvenidx</h3>
-        <form class="section row g-3">
-      <div class="col-12">
-        <label class="form-label">Correo</label>
-        <input
-          type="text"
-          name="email"
-          id="email"
-          class="form-control"
-          placeholder="Introduce tu correo"
-        />
-      </div>
-      <div class="col-12">
-        <label class="form-label">Contraseña</label>
-        <input
-          type="text"
-          name="password"
-          id="password"
-          class="form-control"
-          placeholder="Introduce tu contraseña"
-        />
-      </div>
-      <label><input type="checkbox" id="forgot_password" value="forgot_password">¿Has olvidado tu contraseña?</label>
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-      </div>
-        </form>
-    </Tab>
-    <Tab title="REGISTRO">
-        <h3>Únete a nosotrxs</h3>
-        <form class="section row g-3">
-      <div class="col-12">
-        <label class="form-label">Correo</label>
-        <input
-          type="text"
-          name="email"
-          id="email"
-          class="form-control"
-          placeholder="Introduce tu correo"
-        />
-      </div>
-      <div class="col-12">
-        <label class="form-label">Contraseña</label>
-        <input
-          type="text"
-          name="password"
-          id="password"
-          class="form-control"
-          placeholder="Introduce tu contraseña"
-        />
-      </div>
-      <div class="col-12">
-        <label class="form-label">Repite la contraseña</label>
-        <input
-          type="text"
-          name="repeat_password"
-          id="repeat_password"
-          class="form-control"
-          placeholder="Introduce de nuevo tu contraseña"
-        />
-      </div>
-      
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary">Guarda tus datos</button>
-      </div>
-        </form>
-    </Tab>
-    
-</TabsWrapper> 
-  
-</div>
-  
+  <div class="row">
+    <div @click="login" class="col-6 click">
+      <h2>Login</h2>
+    </div>
+    <div @click="register" class="col-6 click">
+      <h2>Registro</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div v-if="user" class="col">
+      <Signin />
+    </div>
+    <div v-else class="col">
+      <Signup />
+    </div>
+  </div>  
+</div>  
 </template>
 
 <script>
-
-import TabsWrapper from '@/components/TabsWrapper.vue'
-import Tab from '@/components/Tab.vue'
+import Signup from '@/components/Signup.vue'
+import Signin from '@/components/Signin.vue'
+import { useStore } from 'vuex'
+import { ref, reactive, computed } from 'vue'
 export default {
   name: "Login",
-  setup(){
-      return{
-         
-      }
-  },
   components:{
-      TabsWrapper,
-      Tab
+    Signup,
+    Signin
+  },
+  setup(){
+    let user = ref(true)
+    
+    const login = () => user.value = true
+
+    const register = () => user.value = false
+
+    return {
+      user,
+      register,
+      login,
+      lang: computed(()=>useStore().getters.getLang)
+    }
   }
-};
-
-
-
-
+}
 </script>
 
 <style lang="scss" scoped>
@@ -103,7 +52,8 @@ export default {
   max-width: 80%;
   margin: 0 auto;
   margin-top:20px;
-   
 }
-
+.click {
+  cursor: pointer;
+}
 </style>
