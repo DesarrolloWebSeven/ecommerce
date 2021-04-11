@@ -12,7 +12,7 @@
 
 <script>
 
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 export default {
   name: "Confirmation",
   props: {
@@ -21,11 +21,12 @@ export default {
   setup(props){
     let success = ref()
 
-    onMounted(() => {
+    const confirm = () => {
       fetch(`http://localhost:8081/usuario/registro/${props.id}`)
           .then(res => res.json())
           .then(response => success.value = true)
-    });
+    };
+    confirm()
 
     return { 
       success

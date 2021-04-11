@@ -9,12 +9,16 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
-
-
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 export default {
   name: 'Home',
+  setup(){
+
+    return {
+      lang: computed(()=>useStore().getters.getLang)
+    }
+  },
   components: {
     
     
