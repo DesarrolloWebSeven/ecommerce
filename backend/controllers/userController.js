@@ -6,7 +6,7 @@ const registerUser = (req, res) => {
   let user = new User(req.body)
   user.save()
     .then(async user => {
-      await mailer.send(user.email, 'Hola', 'recover')
+      await mailer.send(user, user._id, 'Bienvenido a Geeky', 'confirmationEmail')
       res.json(user)
     })
     .catch(err => res.json(err))
@@ -27,10 +27,15 @@ const forgotPassword = (req, res) => {
   User.find({ email: req.body.email })
     .then(user => {
       if(user.length) {
-        res.json(user)
-        mailer.send(user[0])
+        if(user[0].active === true) {
+          return new Promise((resolve, reject) => {
+            mailer.send(user[0], user[0]._id, 'Cambiar contraseña', 'changePassword')
+            resolve(res.json(user))
+          }) 
+        }
+        if(user[0].active !== true) res.json("Usuario no confirmado")
       } else res.json("Usuario no encontrado")
-    })
+      })
     .catch(err => res.json(err))
 }
 

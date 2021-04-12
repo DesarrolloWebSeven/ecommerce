@@ -48,10 +48,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+div {
+  color: gray;
+}
 .section{
   max-width: 80%;
   margin: 0 auto;
   margin-top:20px;
+  color: black;
 }
 .click {
   cursor: pointer;
