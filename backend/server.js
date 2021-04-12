@@ -2,7 +2,6 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const multer = require('multer')
-const path = require('path')
 const app = express()
 
 // Database settings
@@ -16,26 +15,8 @@ app.engine('.hbs', exphbs({extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
 // Multer settings
-const storage = multer.diskStorage({
-    destination: path.join(__dirname, '/public/images'),
-    filename:(req, file, cb)=>{
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-    }
-})
-
-app.use(multer({
-    storage:storage,//nombre
-    limits: {fieldSize:10000000},
-    fileFilter: (req, file, cb)=>{
-        const fileTypes = /jpeg|jpg|png|gif|svg|/ 
-        const mimetype = fileTypes.test(file.mimetype)
-        const extname = fileTypes.test(path.extname(file.originalname))
-        if (mimetype && extname){
-            return cb(null, true)
-        }
-        cb ("Error: No es un tipo de imagen valida")
-    }
-}).array('images'))
+const upload = require('./helpers/upload')
+app.use(multer(upload).array('images'))
 
 // Middlewares
 app.use(cors())
