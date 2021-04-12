@@ -2,24 +2,24 @@
   <div class="container section">
     <form class="section row g-3">
       <div class="col-12">
-        <label class="form-label">Correo</label>
-        <input type="text" v-model="email" class="form-control" placeholder="Introduce tu correo"
+        <label class="form-label">{{lang["emailSign"]}}</label>
+        <input type="text" v-model="email" class="form-control" :placeholder="lang['plPasslLogin']"
         />
       </div>
       <div class="col-12" v-if="errors.email">
         <p>{{ errors.email }}</p>
       </div>
       <div class="col-12">
-        <label class="form-label">Contraseña</label>
-        <input type="password" v-model="password" class="form-control" placeholder="Introduce tu contraseña"
+        <label class="form-label">{{lang["passSign"]}}</label>
+        <input type="password" v-model="password" class="form-control" :placeholder="lang['plPassSign']"
         />
       </div>
       <div class="col-12" v-if="errors.password">
         <p>{{ errors.password }}</p>
       </div>
       <div class="col-12">
-        <label class="form-label">Repite la contraseña</label>
-        <input type="password" v-model="repeat_password" class="form-control" placeholder="Introduce de nuevo tu contraseña"
+        <label class="form-label">{{lang["repeatPassSign"]}}</label>
+        <input type="password" v-model="repeat_password" class="form-control" :placeholder="lang['plrRepeatPassSign']"
         />
       </div>
       <div class="col-12" v-if="errors.repeatpassword">
@@ -29,13 +29,15 @@
         <p>{{ success }}</p>
       </div>
       <div class="col-12">
-        <div @click="register" class="btn btn-primary">Guarda tus datos</div>
+        <div @click="register" class="btn btn-primary">{{lang["buttonSave"]}}</div>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 import { ref, reactive } from "vue";
 export default {
   name: "Signup",
@@ -90,6 +92,7 @@ export default {
     };
 
     return {
+      lang: computed(()=>useStore().getters.getLang),
       email,
       password,
       repeat_password,
