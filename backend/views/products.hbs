@@ -2,6 +2,7 @@
     <div class="container">
         {{!-- Id de Usuario no se puede cambiar --}}
         <input type="text" class="form-control hidden" id="id" value="{{product._id}}">
+        <input type="file" class="form-control hidden" id="images" value="{{product.images}}" multiple>
 
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -46,11 +47,11 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="imagenes">Archivos de imagenes</label>
-                <input type="file" class="form-control" name="images" value="{{product.images}}" multiple>
+                <input type="file" class="form-control" name="images" multiple>
             </div>
             <div class="images"></div>
             <div>
-                <label><input type="checkbox"class="form-control" name="featured" value="true" checked="{{product.featured}}"> Destacado</label><br>
+                <label><input type="checkbox"class="form-control" name="featured" value="true"> Destacado</label><br>
             </div>
   
             {{#if product}}
@@ -67,66 +68,3 @@
 </form>
 
 <div class="product-list"></div>
-
-{{!-- <script>
-$(document).ready(function(){
-    //Asignacion de valores
-    if ($('input[name="title"')[0].value){
-        let _id = $("#id")[0].value
-        var imagesOld = $('input[name="images"]')[0].defaultValue.split(',')
-        console.log(imagesOld)
-        showImages(imagesOld)
-    } 
-    //Carga de imagenes existentes
-    function showImages(imagesOld){
-        console.log(imagesOld)
-        //Preparando contenedores
-        $(".images")[0].innerHTML=""
-        let img = document.createElement('img')
-            img.className="images-old"
-        let btnImg = document.createElement('input')
-            btnImg.type='button'
-            btnImg.value='Eliminar'
-            btnImg.className='delete-img-old'
-        //Asignacion y carga
-        imagesOld.forEach((image, i)=>{
-            let myClon=img.cloneNode(true)
-                myClon.src=image
-                $('.images')[0].appendChild(myClon)
-            let clonBtnImg=btnImg.cloneNode(true)
-                clonBtnImg.name=image
-                clonBtnImg.id=i
-                $('.images')[0].appendChild(clonBtnImg)
-        })
-    }
-
-    //Eliminacion de imagenes del array
-    $(".delete-img-old").click((e)=>{
-        imagesOld.splice(imagesOld.findIndex(i=>i==e.target.name), 1)
-        showImages(imagesOld)
-    })
-
-
-    //Peticion del producto actualizado
-    $("#update").click(function(){
-        let product_update={ 
-            _id:$('#id')[0].value, 
-            title:$('input[name="title"]')[0].value,
-            description:$('input[name="description"]')[0].value,
-            features:$('input[name="features"]')[0].value,
-            price:$('input[name="price"]')[0].value,
-            category:$('select[name="category"]')[0].value, 
-            quantity:$('input[name="quantity"]')[0].value,
-            images:$('input[name="images"]')[0].defaultValue,
-            featured:$('input[name="featured"]')[0].checked
-        }
-        fetch(`/admin/productos/$(_id)`,{
-            method:'PUT',
-            headers:{'Content-type':'Application/json'},
-            body:JSON.stringify(product_update)
-        })
-        console.log(product_update)    
-    })
-})
-
-</script> --}}

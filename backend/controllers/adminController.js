@@ -44,9 +44,25 @@ const images_delete=(req,res)=>{
     .catch(err => {console.error('Something wrong happened removing the file', err)})
 
 }
-const products_update = async (req,res)=>{
-    console.log(req.body._id)
-    const product_update =  await Product.findByIdAndUpdate(req.body._id)
+const products_update = (req,res)=>{
+    console.log(req.files)
+    let images=[]
+    req.files.forEach(i=>images.push('/images/'+i.filename))
+    req.body.images = images
+    Product.findByIdAndUpdate({_id : req.body._id},
+        {title : req.body.title,
+        description : req.body.description,
+        features : req.body.features,
+        price : req.body.price,
+        category : req.body.category,
+        quantity : req.body.quantity,
+        images : req.body.images,
+        featured : req.body.featured},
+        function(err, result) {
+            if (err) {res.send(err)} 
+            else {res.send(result)}
+        }
+    )
     .then(product=>{
         console.log(product)
         //console.log(product_update)
