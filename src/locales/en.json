@@ -16,6 +16,28 @@
     "cookies":"COOKIES",
     "footerRights": "All Rights Free by",
 
+  "_notfound": "NOTFOUND",
+  "titleNotFound":"This page doesn't exist",
+
+
+  "login": "LOGIN",
+  "welcome":"Welcome",
+  "emailLogin":"E-mail",
+  "plEmailLogin":"Enter your e-mail",
+  "passLogin":"Password",
+  "plPasslLogin":"Enter your password",
+  "forgotPassLogin":"Have you forgotten your password?",
+  "buttonLogin":"Log In",
+
+  "signup": "SIGN UP",
+  "joinus": "Join us",
+  "emailSign": "E-Mail",
+  "plSignLogin": "Enter your email",
+  "passSign": "Password",
+  "plPassSign": "Enter your password",
+  "repeatPassSign": " Repeat your Password",
+  "plrRepeatPassSign": "Repeat your password",
+  "buttonSave": "Save your data",
 
 
 

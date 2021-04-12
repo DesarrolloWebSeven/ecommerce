@@ -16,6 +16,33 @@
   "cookies":"COOKIES",
   "footerRights": "Todos los Derechos Libres por",
 
+  "_notfound": "NOTFOUND",
+  "titleNotFound":"Esta página no existe",
+
+  "login": "LOG IN",
+  "welcome":"Bienvenid@",
+  "emailLogin":"Correo",
+  "plEmailLogin":"Introduce tu correo",
+  "passLogin":"Contraseña",
+  "plPasslLogin":"Introduce tu contraseña",
+  "forgotPassLogin":"¿Has olvidado tu contraseña?",
+  "buttonLogin":"Iniciar sesión",
+
+  "signup": "SIGN UP",
+  "joinus":"Únete a nosotros",
+  "emailSign":"Correo",
+  "plSignLogin":"Introduce tu correo",
+  "passSign":"Contraseña",
+  "plPassSign":"Introduce tu contraseña",
+  "repeatPassSign":"Repite tu Contraseña",
+  "plrRepeatPassSign":"Repite tu contraseña",
+  "buttonSave":"Save your data",
+
+  "_confirmation":"CONFIRMATION",
+  "success":"Tu cuenta ha sido confirmada con éxito",
+  "waitingInfo":"Esperando información",
+
+
 
 
   "_contact": "CONTACTUS",

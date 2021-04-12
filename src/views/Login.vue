@@ -2,68 +2,68 @@
 <div class="container section">
 <TabsWrapper>
     <Tab  class="login" title="LOGIN">
-        <h3>Bienvenidx</h3>
+        <h3>{{lang["welcome"]}}</h3>
         <form class="section row g-3">
       <div class="col-12">
-        <label class="form-label">Correo</label>
+        <label class="form-label">{{lang["emailLogin"]}}</label>
         <input
           type="text"
           name="email"
           id="email"
           class="form-control"
-          placeholder="Introduce tu correo"
+          :placeholder="lang['plEmailLogin']"
         />
       </div>
       <div class="col-12">
-        <label class="form-label">Contraseña</label>
+        <label class="form-label">{{lang["passLogin"]}}</label>
         <input
           type="text"
           name="password"
           id="password"
           class="form-control"
-          placeholder="Introduce tu contraseña"
+          :placeholder="lang['plPasslLogin']"
         />
       </div>
-      <label><input type="checkbox" id="forgot_password" value="forgot_password">¿Has olvidado tu contraseña?</label>
+      <label><input type="checkbox" id="forgot_password" value="forgot_password">{{lang["forgotPassLogin"]}}</label>
       <div class="col-12">
-        <button class="btn btn-primary">Iniciar sesión</button>
+        <button class="btn btn-primary">{{lang["buttonLogin"]}}</button>
       </div>
         </form>
     </Tab>
-    <Tab title="REGISTRO">
-        <h3>Únete a nosotrxs</h3>
+    <Tab title="SIGN UP">
+        <h3>{{lang["joinus"]}}</h3>
         <form class="section row g-3">
       <div class="col-12">
-        <label class="form-label">Correo</label>
+        <label class="form-label">{{lang["emailSign"]}}</label>
         <input
           type="text"
           v-model="email"
           class="form-control"
-          placeholder="Introduce tu correo"
+          :placeholder="lang['plPasslLogin']"
         />
       </div>
       <div class="col-12" v-if="errors.email">
         <p>{{ errors.email }}</p>
       </div>
       <div class="col-12">
-        <label class="form-label">Contraseña</label>
+        <label class="form-label">{{lang["passSign"]}}</label>
         <input
           type="password"
           v-model="password"
           class="form-control"
-          placeholder="Introduce tu contraseña"
+          :placeholder="lang['plPassSign']"
         />
       </div>
       <div class="col-12" v-if="errors.password">
         <p>{{ errors.password }}</p>
       </div>
       <div class="col-12">
-        <label class="form-label">Repite la contraseña</label>
+        <label class="form-label">{{lang["repeatPassSign"]}}</label>
         <input
           type="password"
           v-model="repeat_password"
           class="form-control"
-          placeholder="Introduce de nuevo tu contraseña"
+          :placeholder="lang['plrRepeatPassSign']"
         />
       </div>
       <div class="col-12" v-if="errors.repeatpassword">
@@ -73,7 +73,7 @@
         <p>{{ success }}</p>
       </div>
       <div class="col-12">
-        <div @click="check" class="btn btn-primary">Guarda tus datos</div>
+        <div @click="check" class="btn btn-primary">{{lang["buttonSave"]}}</div>
       </div>
         </form>
     </Tab>

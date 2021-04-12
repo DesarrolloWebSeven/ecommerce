@@ -1,17 +1,18 @@
 <template>
 <div class="container section"> 
   <div v-if="success">
-  <p>Tu cuenta ha sido confirmada con éxito</p>
+  <p>{{lang["success"]}}</p>
   </div>
   <div v-else>
-    <p>Esperando información</p>
+    <p>{{lang["waitingInfo"]}}</p>
   </div>
 </div>
   
 </template>
 
 <script>
-
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 import { onMounted, ref } from 'vue'
 export default {
   name: "Confirmation",
@@ -28,6 +29,7 @@ export default {
     });
 
     return { 
+      lang: computed(()=>useStore().getters.getLang),
       success
     }
 }
