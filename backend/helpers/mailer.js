@@ -27,14 +27,14 @@ mailer.transporter.use('compile', hbs({
   extName: '.hbs'
 }))
 
-mailer.send = (email, subject, text) => {
-
+mailer.send = (user, id, subject, text) => {
   mailer.transporter.sendMail({
       from: 'Geeky', 
-      to: email, 
+      to: user.email, 
       subject: subject,
-      template: text
-    });
+      template: text,
+      context: { user, id }
+    })
 }
 
 module.exports = mailer
