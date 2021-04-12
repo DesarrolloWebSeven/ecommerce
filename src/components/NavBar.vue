@@ -4,7 +4,7 @@
   <div class="container-fluid">
     
         <div class="d-flex justify-content-between">
-        <router-link to="/inicio" class="nav-link"><img class="icono" src="@/assets/geekySmall.png"></router-link>
+        <router-link to="/" class="nav-link"><img class="icono" src="@/assets/geekySmall.png"></router-link>
 
     
     <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
