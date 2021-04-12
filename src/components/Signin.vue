@@ -2,32 +2,34 @@
   <div class="container section">
     <form class="section row g-3">
       <div class="col-12">
-        <label class="form-label">Correo</label>
-        <input type="text" v-model="email" class="form-control" placeholder="Introduce tu correo" />
+        <label class="form-label">{{lang["emailLogin"]}}</label>
+        <input type="text" v-model="email" class="form-control" :placeholder="lang['plEmailLogin']" />
       </div>
       <div class="col-12" v-if="errors.email">
         <p>{{ errors.email }}</p>
       </div>
       <div class="col-12">
-        <label class="form-label">Contraseña</label>
-        <input type="password" v-model="password" class="form-control" placeholder="Introduce tu contraseña" />
+        <label class="form-label">{{lang["passLogin"]}}</label>
+        <input type="password" v-model="password" class="form-control" :placeholder="lang['plPasslLogin']" />
       </div>
       <div class="col-12" v-if="errors.password">
         <p>{{ errors.password }}</p>
       </div>
       <label><input type="checkbox" v-model="forgotPassword"/>
-      ¿Has olvidado tu contraseña?</label>
+      {{lang["forgotPassLogin"]}}</label>
       <div class="col-12" v-if="success">
         <p>{{ success }}</p>
       </div>
       <div class="col-12">
-        <div class="btn btn-primary" @click="login">Iniciar sesión</div>
+        <div class="btn btn-primary" @click="login">{{lang["buttonLogin"]}}</div>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 import { ref, reactive } from 'vue';
 export default {
   name: "Signin",
@@ -74,6 +76,7 @@ export default {
     }
 
     return {
+      lang: computed(()=>useStore().getters.getLang),
       email,
       password,
       forgotPassword,
@@ -90,5 +93,6 @@ export default {
   max-width: 80%;
   margin: 0 auto;
   margin-top: 20px;
+  color: black;
 }
 </style>

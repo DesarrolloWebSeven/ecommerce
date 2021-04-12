@@ -55,6 +55,7 @@ div {
   max-width: 80%;
   margin: 0 auto;
   margin-top:20px;
+  color: black;
 }
 .click {
   cursor: pointer;
