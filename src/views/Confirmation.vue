@@ -22,11 +22,12 @@ export default {
   setup(props){
     let success = ref()
 
-    onMounted(() => {
+    const confirm = () => {
       fetch(`http://localhost:8081/usuario/registro/${props.id}`)
           .then(res => res.json())
           .then(response => success.value = true)
-    });
+    };
+    confirm()
 
     return { 
       lang: computed(()=>useStore().getters.getLang),

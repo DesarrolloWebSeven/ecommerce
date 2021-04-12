@@ -2,14 +2,14 @@ const multer = require('multer')
 const path = require('path')
 
 const storage = multer.diskStorage({//Ponemos el nombre a la imagen puede ser file.originalname
+    destination: path.join(__dirname, '/public/images'),
     filename:(req, file, cb)=>{
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
 })
 
-const loadImages = multer({
+app.use(multer({
     storage:storage,//nombre
-    dest: path.join(__dirname, '/public/uploads'),//ubicacion del archivo
     limits: {fieldSize:10000000},
     fileFilter: (req, file, cb)=>{
         const fileTypes = /jpeg|jpg|png|gif|svg|/ //creo una expresion regular para definir que tipos de archivo quiero recibir.
@@ -20,7 +20,7 @@ const loadImages = multer({
         }
         cb ("Error: No es un tipo de imagen valida")
     }
-}).array('foto')
+}).array('images'))
 
 module.exports = loadImages
 

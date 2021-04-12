@@ -3,7 +3,6 @@ window.onload=()=>{
 }
 
 function showProducts(){
-    console.log("entramos a la funcion")
     fetch('/admin/productos/listar')
         .then(res=>res.json())
         .then(products=>{
