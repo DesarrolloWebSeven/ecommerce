@@ -114,9 +114,10 @@ export default {
   margin: 0 auto;
   margin-top:20px;
   padding:20px;
-  background-color: #A7D2DD;
+  background-color: #707070;
   text-align: left;
-  
+  color:#fff;
+  border-radius:25px;  
   
 }
 </style>

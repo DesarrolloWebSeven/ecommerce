@@ -44,6 +44,9 @@ export default {
   text-align: center;
   color: white;
   background-color: white;
+  a{
+    text-decoration: none;
+  }
   
   
   
