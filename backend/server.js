@@ -26,7 +26,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 // Routes
-app.use('/', require('./routers/rtMain'))
+app.use('/productos', require('./routers/rtProduct'))
 app.use('/admin', require('./routers/rtAdmin'))
 app.use('/usuario', require('./routers/rtUser'))
 

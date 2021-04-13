@@ -1,6 +1,6 @@
 <template>
   <div class="section">
-    <h1>{{lang["descriptionContactP1"]}}</h1>
+    <h5>{{lang["descriptionContactP1"]}}</h5>
     <form class="row g-3">
       <div class="col-md-6">
         <label class="form-label">{{lang["name"]}}</label>
@@ -47,7 +47,7 @@
   <textarea class="form-control" id="texto" rows="3"></textarea>
 </div>
 
-      <div class="col-12">
+      <div class="col-12 d-flex justify-content-center">
         <button type="submit" class="btn btn-primary">{{lang["sendForm"]}}</button>
       </div>
     </form>
@@ -79,7 +79,19 @@ export default {
   margin: 0 auto;
   margin-top:20px;
   padding:20px;
-  background-color: #A7D2DD;
+  background-color: #fff;
+  text-align: left;
+  color:black;
+  border-radius:25px;  
+  h5{
+    margin-bottom: 20px;
+  }
+  button{
+    background-color: #0F606B;
+  }
+  button:hover{
+  background-color: #707070;
+  } 
   
   
 }

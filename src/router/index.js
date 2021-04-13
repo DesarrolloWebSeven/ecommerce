@@ -10,6 +10,7 @@ import Login from '../views/Login.vue'
 import Confirmation from '../views/Confirmation.vue'
 import NotFound from '../views/NotFound.vue'
 import PasswordForm from '../views/PasswordForm.vue'
+import Category from '../views/Category.vue'
 
 const routes = [
   {
@@ -62,7 +63,13 @@ const routes = [
     path: '/:catchAll(.*)',
     name: 'NotFound',
     component: NotFound
-  }
+  },
+  {
+    path: '/productos/:category',
+    name: 'Category',
+    component: Category,
+    props: true,
+  },
 ]
 
 const router = createRouter({

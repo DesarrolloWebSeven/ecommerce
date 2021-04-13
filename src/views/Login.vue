@@ -5,7 +5,7 @@
       <h2>Login</h2>
     </div>
     <div @click="register" class="col-6 click">
-      <h2>Registro</h2>
+      <h2>Sign In</h2>
     </div>
   </div>
   <div class="row">
