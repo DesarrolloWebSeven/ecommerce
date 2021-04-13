@@ -1,15 +1,22 @@
 <template>
 <div class="container section"> 
-  <p>Esta página no existe</p>
+  <label>{{lang["titleNotFound"]}}</label>
 </div>
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 
 export default {
-  name: "NotFound"
-}
+  name: "NotFound",
+  setup(){
 
+    return {
+      lang: computed(()=>useStore().getters.getLang)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -17,6 +24,6 @@ export default {
   max-width: 80%;
   margin: 0 auto;
   margin-top:20px;
+  color: black;
 }
-
 </style>

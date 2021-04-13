@@ -11,8 +11,9 @@ rtAdmin.get('/pedidos',adminController.orders)
 rtAdmin.get('/productos', adminController.products_index)
 rtAdmin.post('/productos', adminController.products_save)
 rtAdmin.get('/productos/listar', adminController.products_list)
-rtAdmin.delete('/productos/eliminar/:id', adminController.products_delete)
-rtAdmin.get('/productos/actualizar/:id', adminController.products_findById)
-rtAdmin.put('/productos/actualizar/:id', adminController.products_update)
+rtAdmin.delete('/productos/:id', adminController.products_delete)
+rtAdmin.get('/productos/:id', adminController.products_findById)
+rtAdmin.delete('/productos/imagenes/:id', adminController.images_delete)
+rtAdmin.put('/productos/:id', adminController.products_update)
     
 module.exports= rtAdmin

@@ -1,5 +1,6 @@
 <template>
 <div>
+
 <NavBar />
 
 
@@ -14,12 +15,21 @@
 import ContactIcon from '@/components/ContactIcon'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
+
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 export default {
   name: 'App',
   components: { 
     NavBar,   
     Footer,
     ContactIcon
+  },
+  setup(){
+
+    return {
+      lang: computed(()=>useStore().getters.getLang)
+    }
   }
 }
 
@@ -33,7 +43,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
-  background-color: #3F3F3F;
+  background-color: white;
   
   
   

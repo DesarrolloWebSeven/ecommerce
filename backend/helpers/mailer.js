@@ -1,30 +1,39 @@
-const nodemailer = require("nodemailer");
+const hbs = require('nodemailer-express-handlebars')
+const exphbs = require('express-handlebars');
+const path = require('path')
 
-const mailer = {};
+const mailer = {}
 
-mailer.send = function send(user) {
+mailer.transporter = nodemailer.createTransport({
+  host: "smtp.ethereal.email",
+  port: 587,
+  secure: false, 
+  auth: {
+    user: "aletha.rogahn10@ethereal.email", 
+    pass: "R7zQVTfcBRRtQPnA17"
+  },
+  tls: {
+    rejectUnauthorized: false
+  }
+});
 
-  let transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false, 
-    auth: {
-      user: "aletha.rogahn10@ethereal.email", 
-      pass: "R7zQVTfcBRRtQPnA17"
-    },
-  });
+mailer.transporter.use('compile', hbs({
+  viewEngine: exphbs.create({
+    partialsDir: 'partials/',
+    defaultLayout: false
+  }),
+  viewPath: path.resolve(__dirname, '../views'),
+  extName: '.hbs'
+}))
 
-  transporter.sendMail({
-    from: 'Geeky', 
-    to: user.email, 
-    subject: "Bienvenido a Geeky",
-    text: `Hola, ${user.email}`, 
-    html: `<main style="background-color: gray; text-align: center; padding: 50px 30px;">
-            <img src="http://localhost:3000/img/logo.png" width="200" />
-            <h1 style="color: white;">¡Bienvenido a Geeky!</h1>
-            <p style="width: 70%; margin: 10px auto; line-height: 20px;">Acabas de registrarte en nuestra página, pero aún necesitas confirmar tu email. Una vez lo hayas hecho, podrás comprar en nuestra tienda siempre que quieras. También podrás informarte sobre los nuevos artículos disponibles. Confirma tu email <a href="http://localhost:8080/usuario/registro/${user._id}" style="text-decoration: none; color: white; font-weight: bold;">aquí</a></p>`, 
-  });
-
+mailer.send = (user, id, subject, text) => {
+  mailer.transporter.sendMail({
+      from: 'Geeky', 
+      to: user.email, 
+      subject: subject,
+      template: text,
+      context: { user, id }
+    })
 }
 
 module.exports = mailer

@@ -5,7 +5,6 @@ window.onload=()=>{
 }
 
 function showProducts(){
-    console.log("entramos a la funcion listar")
     fetch('/admin/productos/listar')
         .then(res=>res.json())
         .then(products=>{

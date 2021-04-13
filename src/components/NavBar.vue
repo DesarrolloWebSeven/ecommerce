@@ -38,27 +38,30 @@
       <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
           
         <li class="nav-item">
-          <router-link to="/productos/camisetas" class="nav-link">Camisetas</router-link>
+          <router-link to="/productos/camisetas" class="nav-link">{{lang["tshirts"]}}</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/productos/accesorios" class="nav-link">Accesorios</router-link>
+          <router-link to="/productos/accesorios" class="nav-link">{{lang["accessories"]}}</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/productos/tazas" class="nav-link">Tazas</router-link>
+          <router-link to="/productos/tazas" class="nav-link">{{lang["cups"]}}</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/productos/juegos" class="nav-link">Juegos</router-link>
+          <router-link to="/productos/juegos" class="nav-link">{{lang["games"]}}</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/productos/destacados" class="nav-link">Destacados</router-link>
+          <router-link to="/productos/destacados" class="nav-link">{{lang["featured"]}}</router-link>
         </li>
         
               
                
       </ul>
+      <Lang />
       
       
     </div>
+    
+    
     
   </div>
   
@@ -67,8 +70,22 @@
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { computed } from 'vue'
+import Lang from '@/components/Lang'
+
 export default {
-    name:'NavBar'
+    name:'NavBar',
+  setup(){
+
+    return {
+      lang: computed(()=>useStore().getters.getLang)
+    }
+  },
+
+    components:{
+      Lang
+    }
 
 }
 </script>

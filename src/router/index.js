@@ -9,10 +9,11 @@ import Cookies from '../views/Cookies.vue'
 import Login from '../views/Login.vue'
 import Confirmation from '../views/Confirmation.vue'
 import NotFound from '../views/NotFound.vue'
+import PasswordForm from '../views/PasswordForm.vue'
 
 const routes = [
   {
-    path: '/inicio',
+    path: '/',
     name: 'Home',
     component: Home
   },

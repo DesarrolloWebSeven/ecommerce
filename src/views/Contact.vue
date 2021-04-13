@@ -1,54 +1,54 @@
 <template>
-  <div>
-    <h1>Si prefieres contactar con nosotrxs a través de correo...</h1>
-    <form class="section row g-3">
+  <div class="section">
+    <h1>{{lang["descriptionContactP1"]}}</h1>
+    <form class="row g-3">
       <div class="col-md-6">
-        <label class="form-label">Nombre</label>
+        <label class="form-label">{{lang["name"]}}</label>
         <input
           type="text"
           name="firstName"
           id="firsName"
           class="form-control"
-          placeholder="Introduce tu nombre"
+          :placeholder="lang['plLastName']"
         />
       </div>
       <div class="col-md-6">
-        <label class="form-label">Apellidos</label>
+        <label class="form-label">{{lang["lastName"]}}</label>
         <input
           type="text"
           name="lastName"
           id="lastName"
           class="form-control"
-          placeholder="Introduce tus apellidos"
+         :placeholder="lang['plName']"
         />
       </div>
       <div class="col-md-6">
-        <label class="form-label">Email</label>
+        <label class="form-label">{{lang["email"]}}</label>
         <input
           type="email"
           name="email"
           id="email"
           class="form-control"
-          placeholder="Introduce tu correo"
+          :placeholder="lang['plEmail']"
         />
       </div>
 
       <div class="col-md-6">
-        <label class="form-label">Tipo de consulta</label>
+        <label class="form-label">{{lang["type"]}}</label>
         <select type="consult" name="consult" id="consult" class="form-select">
-          <option selected>Información general</option>
-          <option>Tallas</option>
-          <option>Envíos</option>
-          <option>Reclamaciones</option>
+          <option selected>{{lang["select1"]}}</option>
+          <option>{{lang["select2"]}}</option>
+          <option>{{lang["select3"]}}</option>
+          <option>{{lang["select4"]}}</option>
         </select>
       </div>
       <div class="col">
-  <label class="form-label">Escribe tu consulta detalladamente</label>
+  <label class="form-label">{{lang["descriptionQuery"]}}</label>
   <textarea class="form-control" id="texto" rows="3"></textarea>
 </div>
 
       <div class="col-12">
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-primary">{{lang["sendForm"]}}</button>
       </div>
     </form>
     <div class="col-md-6">
@@ -59,9 +59,16 @@
 </template>
 
 <script>
-
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 export default {
   name: "HelpContact",
+  setup(){
+
+    return {
+      lang: computed(()=>useStore().getters.getLang)
+    }
+  }
   
 };
 </script>
