@@ -21,6 +21,7 @@ export default {
   },
   setup(props){
     let success = ref()
+
     const confirm = () => {
       fetch(`http://localhost:8081/usuario/registro/${props.id}`)
           .then(res => res.json())

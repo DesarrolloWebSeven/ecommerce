@@ -2,30 +2,9 @@ const Product = require('../models/Product')
 const fs = require('fs/promises')
 const path = require('path')
 
-const home = (req, res) => {
-    res.render("admin-home", ({
-      title: "Ecommerce Admin | Home",
-    }))
-}
-
 const login = (req,res)=>{
-    res.render('admin', ({
-      title: "Ecommerce Admin | Login"
-    }))
+    res.render('admin')
 }
-
-const team = (req,res)=>{
-    res.render('team', ({
-      title: "Ecommerce Admin | Equipo"
-    }))
-}
-
-const project = (req,res)=>{
-    res.render('project', ({
-      title: "Ecommerce Admin | Proyecto"
-    }))
-}
-
 const products_index = (req,res)=>{
     res.render('products', {src:'products.js'})
 }
@@ -91,30 +70,16 @@ const products_update = (req,res)=>{
     })
 }
 
-const clients = (req,res)=>{
-    res.render('clients', ({
-      title: "Ecommerce Admin | Clientes"
-    }))
-}
 
-const orders = (req,res)=>{
-    res.render('orders', ({
-      title: "Ecommerce Admin | Pedidos"
-    }))
-}
+
 
 module.exports = {
-    home,
     login,
-    team,
-    project,
     products_index,
     products_save,
     products_list,
     products_delete,
     products_findById,
     images_delete,
-    products_update,
-    clients,
-    orders,
+    products_update
 }
