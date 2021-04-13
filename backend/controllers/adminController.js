@@ -66,7 +66,7 @@ const images_delete=(req,res)=>{
 
 }
 const products_update = (req,res)=>{
-    console.log(req.files)
+    console.log(req.body)
     let images=[]
     req.files.forEach(i=>images.push('/images/'+i.filename))
     req.body.images = images

@@ -22,16 +22,16 @@
     <form action="/admin/productos" method="POST" id="data" enctype="multipart/form-data">
         <div class="container">
             <div class="form-row">
-                <div class="form-hidden">
-                    <input type="text" class="form-control" name="_id" value="{{product._id}}">
+                <input type="text" class="form-control hidden" id="id" value="{{product._id}}">
+                <input type="file" class="form-control hidden" id="images" multiple>
+
+                <div class="form-group col-md-6">
+                    <label for="titulo">Título</label>
+                    <input type="text" class="form-control"  value="{{product.title}}" name="title" placeholder="Titulo o nombre del producto">
                 </div>
                 <div class="form-group col-md-6">
-                <label for="titulo">Título</label>
-                <input type="text" class="form-control"  value="{{product.title}}" name="title" placeholder="Titulo o nombre del producto">
-                </div>
-                <div class="form-group col-md-6">
-                <label for="descripcion">Descripción</label>
-                <input type="text" class="form-control"  value="{{product.description}}" name="description" placeholder="Descripción del producto">
+                    <label for="descripcion">Descripción</label>
+                    <input type="text" class="form-control"  value="{{product.description}}" name="description" placeholder="Descripción del producto">
                 </div>
             </div>
             <div class="form-row">
@@ -84,47 +84,23 @@
     </form>
 </section>
 
-<section class="container search-console">
-    <div class="row">
-        <div class="col-12">
-            <form action="" class="search-form" id="search-console">
-                <div class="form-group has-feedback">
-            		<label for="search" class="sr-only">Buscar</label>
-            		<input type="text" class="form-control" name="search" id="search" placeholder="Buscar">
-              		<span class="glyphicon glyphicon-search form-control-feedback"></span>
-            	</div>
-            </form>
+    <section class="container search-console">
+        <div class="row">
+            <div class="col-12">
+                <form action="" class="search-form" id="search-console">
+                    <div class="form-group has-feedback">
+                        <label for="search" class="sr-only">Buscar</label>
+                        <input type="text" class="form-control" name="search" id="search" placeholder="Buscar">
+                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-</section>
-<section>
-<div class="product-list">
-</div>
-</section>
+    </section>
+
+    <section>
+        <div class="product-list"></div>
+    </section>
 </main>
 
-<script>
-$(document).ready(function(){
-  $("#update").click(function(){
-        console.log(document.querySelector('input[name="featured"]').checked)
-        let prueba = document.getElementsByClassName("form-control")
-        let product_update={ _id:1, title, description, features, price, category, quantity, images, featured
-        }
-        for (let i=0; i<prueba.length-1; i++){
-            let temp = prueba[i].name
-            //product_update.`$(prueba[i].name)`= prueba[i].value
-            console.log(prueba[i].name+":"+prueba[i].value)
-        }
-        console.log(product_update)
-        
-        /*
-        let form = $("#data")
-        console.log()
-      
-        $("#data").submit(function(event) {
-            event.preventDefault()
-            console.log(event)
-        })*/
-  })
-})
-</script>
+
