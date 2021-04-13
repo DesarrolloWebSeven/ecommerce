@@ -4,6 +4,10 @@ const adminController = require('../controllers/adminController')
 
 
 rtAdmin.get('/', adminController.login)
+rtAdmin.get('/equipo', adminController.team)
+rtAdmin.get('/proyecto', adminController.project)
+rtAdmin.get('/clientes', adminController.clients)
+rtAdmin.get('/pedidos',adminController.orders)
 rtAdmin.get('/productos', adminController.products_index)
 rtAdmin.post('/productos', adminController.products_save)
 rtAdmin.get('/productos/listar', adminController.products_list)

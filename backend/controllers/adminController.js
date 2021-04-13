@@ -1,8 +1,29 @@
 const Product = require('../models/Product')
 
-const login = (req,res)=>{
-    res.render('admin')
+const home = (req, res) => {
+    res.render("admin-home", ({
+      title: "Ecommerce Admin | Home",
+    }))
 }
+
+const login = (req,res)=>{
+    res.render('admin', ({
+      title: "Ecommerce Admin | Login"
+    }))
+}
+
+const team = (req,res)=>{
+    res.render('team', ({
+      title: "Ecommerce Admin | Equipo"
+    }))
+}
+
+const project = (req,res)=>{
+    res.render('project', ({
+      title: "Ecommerce Admin | Proyecto"
+    }))
+}
+
 const products_index = (req,res)=>{
     res.render('products', {src:'products.js'})
 }
@@ -46,13 +67,30 @@ const products_update = async (req,res)=>{
     })
 }
 
+const clients = (req,res)=>{
+    res.render('clients', ({
+      title: "Ecommerce Admin | Clientes"
+    }))
+}
+
+const orders = (req,res)=>{
+    res.render('orders', ({
+      title: "Ecommerce Admin | Pedidos"
+    }))
+}
+
 
 module.exports = {
+    home,
     login,
+    team,
+    project,
     products_index,
     products_save,
     products_list,
     products_delete,
     products_findById,
-    products_update
+    products_update,
+    clients,
+    orders,
 }

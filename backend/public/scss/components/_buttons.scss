@@ -1,0 +1,42 @@
+.btn {
+    width: 100%;
+    color: $color-light;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+
+.btn-edit{
+    background-color: $color-primary;
+    margin-right: 0.75rem;
+    
+}
+
+:hover.btn-edit{
+    color: $color-dark;
+    background-color: $color-secondary;
+    border: 2px solid $color-primary;
+    margin-right: 0.75rem;
+}
+
+.btn-delete{
+    background-color: $color-error;
+    margin-left: 0.75rem;
+}
+
+:hover.btn-delete{
+    border: 2px solid $color-error;
+    background-color: #c03939;
+    color: $color-light;
+    margin-left: 0.75rem;
+}
+
+.btn-search{
+    width: 50%;
+    color: $color-dark;
+    background-color: $color-warning;
+}
