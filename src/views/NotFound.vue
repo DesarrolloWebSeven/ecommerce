@@ -17,9 +17,7 @@ export default {
     }
   }
 }
-
 </script>
-
 
 <style lang="scss" scoped>
 .section{
@@ -28,5 +26,4 @@ export default {
   margin-top:20px;
   color: black;
 }
-
 </style>
