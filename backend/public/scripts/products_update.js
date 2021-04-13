@@ -2,6 +2,7 @@ $(document).ready(function(){
     //Asignacion de valores
     var _id = $("#id")[0].value
     var imagesOld = $("#images")[0].defaultValue.split(',')
+    var imagesNew
     console.log(imagesOld)
     //Preparando contenedores
     var img = document.createElement('img')
@@ -40,6 +41,9 @@ $(document).ready(function(){
         })
         showImages(imagesOld)
     })
+    $('input[name="images"]')[0].addEventListener('change', (e)=>{
+        imagesNew = e.target.files
+    })
 
     //Peticion del producto actualizado
     $("#update").click(function(){
@@ -56,8 +60,8 @@ $(document).ready(function(){
         }
         console.log(imagesOld.length)
         if (imagesOld.length==0){
-            console.log($('input[name="images"]')[0])
-            product_update.images= $('input[name="images"]')[0].value
+            console.log(imagesNew)
+            product_update.images=imagesNew
         }else{
             product_update.images=imagesOld
         }
