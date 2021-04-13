@@ -47,6 +47,8 @@ $(document).ready(function(){
 
     //Peticion del producto actualizado
     $("#update").click(function(){
+        let formData = new FromData()
+        formData.append('files', imagesNew)
         let product_update={ 
             _id:_id, 
             title:$('input[name="title"]')[0].value,
@@ -69,7 +71,7 @@ $(document).ready(function(){
         fetch('/admin/productos/_id',{
             method:'PUT',
             headers:{'Content-type':'Application/json'},
-            body:JSON.stringify(product_update)
+            body:JSON.stringify(product_update, formData)
         })
     })
 })
