@@ -43,7 +43,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
-  background-color: white;
+  background-color: #A7D2DD;
   a{
     text-decoration: none;
   }
