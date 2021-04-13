@@ -1,5 +1,5 @@
 <template>
-<div>Categoria</div>
+
 <div v-for="product in products" :key="product.index">
     <Product :product="product" />
 </div>
