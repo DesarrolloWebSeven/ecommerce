@@ -3,7 +3,8 @@ const rtAdmin = express.Router()
 const adminController = require('../controllers/adminController')
 
 
-rtAdmin.get('/', adminController.login)
+
+rtAdmin.get('/', adminController.home)
 rtAdmin.get('/equipo', adminController.team)
 rtAdmin.get('/proyecto', adminController.project)
 rtAdmin.get('/clientes', adminController.clients)
