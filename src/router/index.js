@@ -60,12 +60,6 @@ const routes = [
     props: true,
   },
   {
-    path: '/password/:id',
-    name: 'PasswordForm',
-    component: PasswordForm,
-    props: true,
-  },
-  {
     path: '/:catchAll(.*)',
     name: 'NotFound',
     component: NotFound

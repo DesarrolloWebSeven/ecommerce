@@ -2,9 +2,30 @@ const Product = require('../models/Product')
 const fs = require('fs/promises')
 const path = require('path')
 
-const login = (req,res)=>{
-    res.render('admin')
+const home = (req, res) => {
+    res.render("admin-home", ({
+      title: "Ecommerce Admin | Home",
+    }))
 }
+
+const login = (req,res)=>{
+    res.render('admin', ({
+      title: "Ecommerce Admin | Login"
+    }))
+}
+
+const team = (req,res)=>{
+    res.render('team', ({
+      title: "Ecommerce Admin | Equipo"
+    }))
+}
+
+const project = (req,res)=>{
+    res.render('project', ({
+      title: "Ecommerce Admin | Proyecto"
+    }))
+}
+
 const products_index = (req,res)=>{
     res.render('products', {src:'products.js'})
 }
@@ -44,9 +65,25 @@ const images_delete=(req,res)=>{
     .catch(err => {console.error('Something wrong happened removing the file', err)})
 
 }
-const products_update = async (req,res)=>{
-    console.log(req.body._id)
-    const product_update =  await Product.findByIdAndUpdate(req.body._id)
+const products_update = (req,res)=>{
+    console.log(req.body)
+    let images=[]
+    req.files.forEach(i=>images.push('/images/'+i.filename))
+    req.body.images = images
+    Product.findByIdAndUpdate({_id : req.body._id},
+        {title : req.body.title,
+        description : req.body.description,
+        features : req.body.features,
+        price : req.body.price,
+        category : req.body.category,
+        quantity : req.body.quantity,
+        images : req.body.images,
+        featured : req.body.featured},
+        function(err, result) {
+            if (err) {res.send(err)} 
+            else {res.send(result)}
+        }
+    )
     .then(product=>{
         console.log(product)
         //console.log(product_update)
@@ -54,16 +91,30 @@ const products_update = async (req,res)=>{
     })
 }
 
+const clients = (req,res)=>{
+    res.render('clients', ({
+      title: "Ecommerce Admin | Clientes"
+    }))
+}
 
-
+const orders = (req,res)=>{
+    res.render('orders', ({
+      title: "Ecommerce Admin | Pedidos"
+    }))
+}
 
 module.exports = {
+    home,
     login,
+    team,
+    project,
     products_index,
     products_save,
     products_list,
     products_delete,
     products_findById,
     images_delete,
-    products_update
+    products_update,
+    clients,
+    orders,
 }

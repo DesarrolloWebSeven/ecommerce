@@ -1,56 +1,73 @@
-<form action="/admin/productos" method="POST" id="data" enctype="multipart/form-data">
-    <div class="container">
-        {{!-- Id de Usuario no se puede cambiar --}}
-        <input type="text" class="form-control hidden" id="id" value="{{product._id}}">
+<header>
+    <nav class="nav">
+        <div style="margin-top:1.5rem; margin-left: 1rem; margin-bottom:1.5rem">
+            <img src="/images/logo/geeky.png" style="width:150px;" alt="Logo de Geeky">
+        </div>
+    </nav>
+    <nav class="container">
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a href="/admin/productos">Productos</a></li>
+            <li><a href="/admin/proyecto">Proyecto</a></li>
+            <li><a href="/admin/equipo">Equipo</a></li>
+            <li><a href="/admin/clientes">Clientes</a></li>
+            <li><a href="/admin/pedidos">Pedidos</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <section>
+        <div>
+            <h1 class="text-center">Productos</h1>
+        </div>
+    <form action="/admin/productos" method="POST" id="data" enctype="multipart/form-data">
+        <div class="container">
+            <div class="form-row">
+                <input type="text" class="form-control hidden" id="id" value="{{product._id}}">
+                <input type="file" class="form-control hidden" id="images" multiple>
 
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="titulo">Título</label>
-                <input type="text" class="form-control"  value="{{product.title}}" name="title" placeholder="Titulo o nombre del producto">
+                <div class="form-group col-md-6">
+                    <label for="titulo">Título</label>
+                    <input type="text" class="form-control"  value="{{product.title}}" name="title" placeholder="Titulo o nombre del producto">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="descripcion">Descripción</label>
+                    <input type="text" class="form-control"  value="{{product.description}}" name="description" placeholder="Descripción del producto">
+                </div>
             </div>
-            <div class="form-group col-md-6">
-                <label for="descripcion">Descripción</label>
-                <input type="text" class="form-control"  value="{{product.description}}" name="description" placeholder="Descripción del producto">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="detalles">Detalles técnicos</label>
+                    <input type="text" class="form-control" value="{{product.features}}" name="features" placeholder="Detalles técnicos">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="precio">Precio</label>
+                    <input type="number" step="0.05" class="form-control" value="{{product.price}}" name="price" placeholder="Precio por unidad">
+                </div>
             </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="detalles">Detalles técnicos</label>
-                <input type="text" class="form-control" value="{{product.features}}" name="features" placeholder="Detalles técnicos">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="precio">Precio</label>
-<<<<<<< HEAD
-                <input type="number" step="0.05" class="form-control" value="{{product.price}}" name="price" placeholder="Precio por unidad">
-=======
-                <input type="number"  step="0.05" class="form-control" value="{{product.price}}" name="price" placeholder="Precio por unidad">
->>>>>>> master
-            </div>
-        </div>
-        <div class="form-row">
+            <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="categoria">Categoría</label>
                 <select class="form-control" name="category" value="{{product.category}}">
                     <option>{{product.category}}</option>
-                    <option>accesorios</option>
-                    <option>camisetas</option>
-                    <option>games</option>
-                    <option>tazas</option>
+                    <option>Accesorios</option>
+                    <option>Camisetas</option>
+                    <option>Games</option>
+                    <option>Tazas</option>
                 </select>
             </div>
             <div class="form-group col-md-6">
                 <label for="unidades">Unidades disponibles</label>
                 <input type="number" class="form-control" name="quantity" value="{{product.quantity}}" placeholder="Cantidad de unidades disponibles">
             </div>
-        </div>
+            </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="imagenes">Archivos de imagenes</label>
-                <input type="file" class="form-control" name="images" value="{{product.images}}" multiple>
+                <input type="file" class="form-control" name="images" multiple>
             </div>
             <div class="images"></div>
             <div>
-                <label><input type="checkbox"class="form-control" name="featured" value="true" checked="{{product.featured}}"> Destacado</label><br>
+                <label><input type="checkbox"class="form-control" name="featured" value="true"> Destacado</label><br>
             </div>
   
             {{#if product}}
@@ -63,70 +80,27 @@
                 </div>
             {{/if}}
         </div>
-    </div>
-</form>
+        </div>
+    </form>
+</section>
 
-<div class="product-list"></div>
+    <section class="container search-console">
+        <div class="row">
+            <div class="col-12">
+                <form action="" class="search-form" id="search-console">
+                    <div class="form-group has-feedback">
+                        <label for="search" class="sr-only">Buscar</label>
+                        <input type="text" class="form-control" name="search" id="search" placeholder="Buscar">
+                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
 
-{{!-- <script>
-$(document).ready(function(){
-    //Asignacion de valores
-    if ($('input[name="title"')[0].value){
-        let _id = $("#id")[0].value
-        var imagesOld = $('input[name="images"]')[0].defaultValue.split(',')
-        console.log(imagesOld)
-        showImages(imagesOld)
-    } 
-    //Carga de imagenes existentes
-    function showImages(imagesOld){
-        console.log(imagesOld)
-        //Preparando contenedores
-        $(".images")[0].innerHTML=""
-        let img = document.createElement('img')
-            img.className="images-old"
-        let btnImg = document.createElement('input')
-            btnImg.type='button'
-            btnImg.value='Eliminar'
-            btnImg.className='delete-img-old'
-        //Asignacion y carga
-        imagesOld.forEach((image, i)=>{
-            let myClon=img.cloneNode(true)
-                myClon.src=image
-                $('.images')[0].appendChild(myClon)
-            let clonBtnImg=btnImg.cloneNode(true)
-                clonBtnImg.name=image
-                clonBtnImg.id=i
-                $('.images')[0].appendChild(clonBtnImg)
-        })
-    }
-
-    //Eliminacion de imagenes del array
-    $(".delete-img-old").click((e)=>{
-        imagesOld.splice(imagesOld.findIndex(i=>i==e.target.name), 1)
-        showImages(imagesOld)
-    })
+    <section>
+        <div class="product-list"></div>
+    </section>
+</main>
 
 
-    //Peticion del producto actualizado
-    $("#update").click(function(){
-        let product_update={ 
-            _id:$('#id')[0].value, 
-            title:$('input[name="title"]')[0].value,
-            description:$('input[name="description"]')[0].value,
-            features:$('input[name="features"]')[0].value,
-            price:$('input[name="price"]')[0].value,
-            category:$('select[name="category"]')[0].value, 
-            quantity:$('input[name="quantity"]')[0].value,
-            images:$('input[name="images"]')[0].defaultValue,
-            featured:$('input[name="featured"]')[0].checked
-        }
-        fetch(`/admin/productos/$(_id)`,{
-            method:'PUT',
-            headers:{'Content-type':'Application/json'},
-            body:JSON.stringify(product_update)
-        })
-        console.log(product_update)    
-    })
-})
-
-</script> --}}
