@@ -59,18 +59,21 @@ export default {
             .catch(err => console.log(err))
         }
       } else {
+        console.log("hola")
         fetch("http://localhost:8081/usuario/login", {
         method: "POST",
         body: JSON.stringify({
-        password: password.value,
-        email: email.value,
-        forgotpassword: forgotPassword.value
+          password: password.value,
+          email: email.value
         }),
         headers: { "Content-Type": "application/json" },
         })
-        .then(res => res.json())
-        .then(data => console.log(data))
-        .catch(err => console.log(err.message))
+        .then(response => {
+          if(response.redirected) window.location.href = response.url
+        })
+        .catch(err => console.info(err + " url: " + url))
+
+
       }
       
     }
