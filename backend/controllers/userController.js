@@ -19,8 +19,15 @@ const confirmationUser = (req, res) => {
 }
 
 const login = (req, res) => {
-  console.log("Login", req.body)
-  res.send(req.body)
+  User.findOne({ email: req.body.email })
+    .then(user => {
+      if(user) {
+        if(user.active !== true) res.json("Usuario no confirmado")
+        if(!user.matchPassword(req.body.password)) res.json("Password incorrecto")
+        if(user.matchPassword(req.body.password)) res.json(user)
+      } else res.json("Usuario no encontrado")
+      })
+    .catch(err => res.json(err))
 }
 
 const forgotPassword = (req, res) => {

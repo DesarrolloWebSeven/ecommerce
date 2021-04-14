@@ -17,6 +17,9 @@
       </div>
       <label><input type="checkbox" v-model="forgotPassword"/>
       {{lang["forgotPassLogin"]}}</label>
+      <div class="col-12" v-if="errors.login">
+        <p>{{ errors.login }}</p>
+      </div>
       <div class="col-12" v-if="success">
         <p>{{ success }}</p>
       </div>
@@ -28,12 +31,14 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { computed } from 'vue'
 import { ref, reactive } from 'vue';
 export default {
   name: "Signin",
   setup() {
+    let router = useRouter()
     let email = ref('')
     let password = ref('')
     let forgotPassword = ref(false)
@@ -58,21 +63,30 @@ export default {
             })
             .catch(err => console.log(err))
         }
-      } else {
-        console.log("hola")
-        fetch("http://localhost:8081/usuario/login", {
-        method: "POST",
-        body: JSON.stringify({
-          password: password.value,
-          email: email.value
-        }),
-        headers: { "Content-Type": "application/json" },
-        })
-        .then(response => {
-          if(response.redirected) window.location.href = response.url
-        })
-        .catch(err => console.info(err + " url: " + url))
+      } 
 
+      if(forgotPassword.value === false) {
+        if(!regExpEmail.test(email.value)) errors.login = "Debes introducir un email válido";
+        else {
+          errors.login = ''
+          fetch("http://localhost:8081/usuario/login", {
+          method: "POST",
+          body: JSON.stringify({
+            password: password.value,
+            email: email.value
+          }),
+          headers: { "Content-Type": "application/json" },
+          })
+          .then(res => res.json())
+          .then(response => {
+            if(typeof response === 'string') success.value = response
+            if(typeof response === 'object') {
+              localStorage.setItem('token', response.password)
+              router.push({ name: 'Home' })
+            }
+            })
+          .catch(err => console.log(err))
+        }
 
       }
       
