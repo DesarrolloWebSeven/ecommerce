@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid align-items-start ">
+    <div class="container-fluid align-items-start">
       <div class="d-flex justify-content-between">
         <div class="d-flex flex-column justify-content-center">
-           <button
+          <button
             class="navbar-toggler m-4"
             type="button"
             data-bs-toggle="collapse"
@@ -14,73 +14,73 @@
           >
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="d-flex d-xl-none ">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <router-link to="/productos/camisetas" class="nav-link">{{
-                lang["tshirts"]
-              }}</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/productos/accesorios" class="nav-link">{{
-                lang["accessories"]
-              }}</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/productos/tazas" class="nav-link">{{
-                lang["cups"]
-              }}</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/productos/juegos" class="nav-link">{{
-                lang["games"]
-              }}</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/productos/destacados" class="nav-link">{{
-                lang["featured"]
-              }}</router-link>
-            </li>
-          </ul>
-        </div>
-        </div>
+          <div class="d-flex d-xl-none">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <router-link to="/productos/camisetas" class="nav-link">{{
+                    lang["tshirts"]
+                  }}</router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link to="/productos/accesorios" class="nav-link">{{
+                    lang["accessories"]
+                  }}</router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link to="/productos/tazas" class="nav-link">{{
+                    lang["cups"]
+                  }}</router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link to="/productos/juegos" class="nav-link">{{
+                    lang["games"]
+                  }}</router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link to="/productos/destacados" class="nav-link">{{
+                    lang["featured"]
+                  }}</router-link>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <router-link to="/" class="nav-link logo"> GEEKY </router-link>
-<div class="d-none d-xl-flex flex-column justify-content-center">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <router-link to="/productos/camisetas" class="nav-link">{{
-                lang["tshirts"]
-              }}</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/productos/accesorios" class="nav-link">{{
-                lang["accessories"]
-              }}</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/productos/tazas" class="nav-link">{{
-                lang["cups"]
-              }}</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/productos/juegos" class="nav-link">{{
-                lang["games"]
-              }}</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/productos/destacados" class="nav-link">{{
-                lang["featured"]
-              }}</router-link>
-            </li>
-          </ul>
-        </div>
+        <div class="d-none d-xl-flex flex-column justify-content-center">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <router-link to="/productos/camisetas" class="nav-link">{{
+                  lang["tshirts"]
+                }}</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/productos/accesorios" class="nav-link">{{
+                  lang["accessories"]
+                }}</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/productos/tazas" class="nav-link">{{
+                  lang["cups"]
+                }}</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/productos/games" class="nav-link">{{
+                  lang["games"]
+                }}</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/productos/destacados" class="nav-link">{{
+                  lang["featured"]
+                }}</router-link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div d-flex align-items-end >
+      <div d-flex align-items-end>
         <ul
           class="navbar-nav ml-auto mb-2 mb-lg-0 d-flex flex-row align-items-center m-3"
         >
@@ -89,11 +89,7 @@
               ><i class="fas fa-user"></i
             ></router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/idioma" class="nav-link"
-              ><i class="fas fa-language"></i
-            ></router-link>
-          </li>
+
           <li class="nav-item">
             <router-link to="/carrito" class="nav-link"
               ><i class="fas fa-shopping-cart"></i
@@ -150,7 +146,6 @@ nav.navbar {
 .logo {
   margin-right: 10px;
   font-size: 40px;
-  
 }
 
 .bi::before {

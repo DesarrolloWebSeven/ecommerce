@@ -1,28 +1,103 @@
 <template>
   <div class="container section">
     <div class="row">
-      <h1 class="titleHome">Regalos para informaticxs</h1>
-      
-      <router-link to="/productos/camisetas" class="col-6 category">
-        <div class="inner">Camisetas <div><img class="logoGeeky" src="../../public/images/images-1618226795740.png" alt=""> <img class="logoGeeky" src="../../public/images/images-1618226285755.png" alt=""></div> </div>
+      <h1 class="titleHome">Regalos para informáticxs</h1>
+
+      <router-link to="/productos/camisetas" class="col-12 col-md-6 mt-3">
+        <div class="card">
+          <div class="card-horizontal">
+            <div class="card-body">
+              <h4 class="card-title">Camisetas</h4>
+            </div>
+            <div class="img-square-wrapper">
+              <div class="">
+                <img
+                  class="logoGeeky"
+                  src="../../public/images/images-1618226795740.png"
+                  alt=""
+                />
+                <img
+                  class="logoGeeky"
+                  src="../../public/images/images-1618226285755.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </router-link>
 
-      <router-link to="/productos/accesorios" class="col-6 category">
-        <div class="inner">Accesorios <div><img class="logoGeeky" src="../../public/images/images-1618228602474.png" alt=""> <img class="logoGeeky" src="../../public/images/images-1618227834601.png" alt=""></div> </div>
+      <router-link to="/productos/accesorios" class="col-12 col-md-6 mt-3">
+        <div class="card">
+          <div class="card-horizontal">
+            <div class="card-body">
+              <h4 class="card-title">Accesorios</h4>
+            </div>
+            <div class="img-square-wrapper">
+              <div>
+                <img
+                  class="logoGeeky"
+                  src="../../public/images/images-1618228602474.png"
+                  alt=""
+                />
+                <img
+                  class="logoGeeky"
+                  src="../../public/images/images-1618227834601.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </router-link>
 
-      <router-link to="/productos/tazas" class="col-6 category">
-        <div class="inner">Tazas <div><img class="logoGeeky" src="../../public/images/images-1617973995105.png" alt=""> <img class="logoGeeky" src="../../public/images/images-1618225574181.png" alt=""></div></div>
+      <router-link to="/productos/tazas" class="col-12 col-md-6 mt-3">
+        <div class="card">
+          <div class="card-horizontal">
+            <div class="card-body">
+              <h4 class="card-title">Tazas</h4>
+            </div>
+            <div class="img-square-wrapper">
+              <div>
+                <img
+                  class="logoGeeky"
+                  src="../../public/images/images-1617973995105.png"
+                  alt=""
+                />
+                <img
+                  class="logoGeeky"
+                  src="../../public/images/images-1618225574181.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </router-link>
 
-      <router-link to="/productos/games" class="col-6 category">
-        <div class="inner">Juegos <div><img class="logoGeeky" src="../../public/images/images-1618230322660.jpg" alt=""><img class="logoGeeky" src="../../public/images/images-1618229687036.jpg" alt=""></div></div>
+      <router-link to="/productos/games" class="col-12 col-md-6 mt-3">
+        <div class="card">
+          <div class="card-horizontal">
+            <div class="card-body">
+              <h4 class="card-title">Juegos</h4>
+            </div>
+            <div class="img-square-wrapper">
+              <div>
+                <img
+                  class="logoGeeky"
+                  src="../../public/images/images-1618230322660.jpg"
+                  alt=""
+                /><img
+                  class="logoGeeky"
+                  src="../../public/images/images-1618229687036.jpg"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </router-link>
-      
     </div>
-
-
-    
   </div>
 </template>
 
@@ -40,36 +115,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.section {  
+.section {
   background-color: #10555e1e;
   max-width: 80%;
   margin-top: 30px;
   color: black;
-  .row{
-    max-width: 95%;
-    margin:0 auto;
-  }
-  .category{
-    text-transform: uppercase;
-    color:white;
-    padding: 0 5px 0 5px;
-      
-  }
-  .category .inner {
-    border-left: 8px solid black;
-    border-bottom: 8px solid black;
-    color: black;
-    padding: 10px;
-    margin-bottom: 20px;
-    min-height: 100px;
-    font-size: 30px;
-    font-family: "Montserrat" !important;
-    font-weight: bold;
-    
-}
-  .titleHome{
-    font-family:"Game" !important;
-    font-size:50px;
+  .titleHome {
+    font-family: "Game" !important;
+    font-size: 50px;
     background-color: #0f606b;
     padding: 30px;
     border-top: 8px solid black;
@@ -77,12 +130,58 @@ export default {
     margin-bottom: 30px;
     margin-top: 30px;
   }
-  img{
-    width: 200px;
-    height: 200px;
-    background-color: white;
-    margin: 5px;
+  .row {
+    max-width: 95%;
+    margin: 0 auto;
   }
-  
+  .card {
+    border: none;
+    margin: 20px;
+    .card-horizontal {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      color: black;
+      border-left: 8px solid black;
+      border-bottom: 8px solid black;
+      .card-title {
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+
+      .card-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .price {
+          background-color: #0f606b;
+          padding: 5px;
+          color: white;
+        }
+      }
+      img {
+        width: 200px;
+        height: 200px;
+        background-color: white;
+        margin: 5px;
+      }
+      button {
+        color: #fff;
+        background-color: black;
+        padding: 10px;
+      }
+    }
+  }
+  @media (max-width: 600px) {
+    .titleHome {
+      font-size: 40px;
+    }
+  }
+
+  @media (max-width: 530px) {
+    .titleHome {
+      font-size: 25px;
+    }
+  }
 }
 </style>
