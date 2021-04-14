@@ -1,6 +1,6 @@
 <template>
   <div class="container section">
-    <form class="section row g-3">
+    <form class="section row g-3" @submit.prevent="login">
       <div class="col-12">
         <label class="form-label">{{lang["emailLogin"]}}</label>
         <input type="text" v-model="email" class="form-control" :placeholder="lang['plEmailLogin']" />
@@ -21,7 +21,7 @@
         <p>{{ success }}</p>
       </div>
       <div class="col-12">
-        <div class="btn btn-primary" @click="login">{{lang["buttonLogin"]}}</div>
+        <button class="btn btn-primary">{{lang["buttonLogin"]}}</button>
       </div>
     </form>
   </div>

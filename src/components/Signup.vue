@@ -1,6 +1,6 @@
 <template>
   <div class="container section">
-    <form class="section row g-3">
+    <form class="section row g-3" @submit.prevent="register">
       <div class="col-12">
         <label class="form-label">{{lang["emailSign"]}}</label>
         <input type="text" v-model="email" class="form-control" :placeholder="lang['plPasslLogin']"
@@ -29,7 +29,7 @@
         <p>{{ success }}</p>
       </div>
       <div class="col-12">
-        <div @click="register" class="btn btn-primary">{{lang["buttonSave"]}}</div>
+        <button class="btn btn-primary">{{lang["buttonSave"]}}</button>
       </div>
     </form>
   </div>
