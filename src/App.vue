@@ -1,10 +1,9 @@
 <template>
 <div>
-
 <NavBar />
 
-
 <router-view/>
+
 <a href="https://wa.me/34692856097/?text=Hola%Geeky!!%¿Podemos%20ayudarte?"><ContactIcon /></a>
 <Footer/>
 
@@ -37,15 +36,23 @@ export default {
 
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+@import "./assets/fonts/fonts.css";
+
+
+#app {  
+  
+  font-family: "Montserrat", "Game", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
-  background-color: #A7D2DD;
+  background-color: white;
   a{
     text-decoration: none;
+  }
+  h1{
+    font-family: "Montserrat";
+    color: black
   }
   
   

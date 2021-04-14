@@ -1,11 +1,11 @@
 <template>
-  <div class="prueba">
-    <label><img alt="banderas" :src="lang.flag"></label>
-    <select v-model="currentLang">
+  <div class="d-flex align-items-center">    
+    <select class="select" v-model="currentLang">
       <option v-for="(lang,i) in langs" :key="i">
         {{lang}}
       </option>
     </select>
+    <label><img alt="banderas" :src="lang.flag"></label>
   </div>
 </template>
 <script>
@@ -42,5 +42,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.select{
+  height: 30px;
+  margin: 5px;
+  
+  
+}
+img{
+    height: 40px;
+  }
 
 </style>

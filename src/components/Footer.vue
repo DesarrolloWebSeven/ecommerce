@@ -78,6 +78,7 @@ export default {
   padding: 45px 0 20px;
   font-size: 15px;
   line-height: 24px;
+  border-top: 8px solid black;
   
 }
 .site-footer hr {
@@ -198,18 +199,7 @@ export default {
   width: 34px;
   font-size: 14px;
 }
-.social-icons a.facebook:hover {
-  background-color: #3b5998;
-}
-.social-icons a.twitter:hover {
-  background-color: #00aced;
-}
-.social-icons a.linkedin:hover {
-  background-color: #007bb6;
-}
-.social-icons a.dribbble:hover {
-  background-color: #ea4c89;
-}
+
 @media (max-width: 767px) {
   .social-icons li.title {
     display: block;
