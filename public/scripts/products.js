@@ -19,21 +19,25 @@ function showProducts(){
                 let edit = document.createElement("button")
                     edit.className = "btn btn-edit"
                     edit.id=product._id
-                    edit.onclick=`location.href="https://localhost/admin/productos/${product._id}"`
+                    edit.onclick=()=>{
+                        location.href=`http://localhost:8081/admin/productos/${product._id}`
+                    }
                 let del = document.createElement("button")
+                    del.textContent="Borrar"
                 let cfooter = document.createElement("div")
-
+                let a = document.createElement("a") 
+                    a.href=`http://localhost:8081/admin/productos/${product._id}`
+                    a.method="DELETE"
+                    del.appendChild(a)
                 img.src=product.images[0]
                 h2.textContent=product.title
                 p.textContent=product.description
                 quantity.textContent="Stock: " + product.quantity + " unidades"
                 edit.textContent="Editar"
-                del.textContent="Borrar"
                 card.className = "card-product"
                 img.className = "card-img"
                 h2.className ="title"
                 cfooter.className = "card-footer"
-
                 del.className = "btn btn-delete"
                 quantity.className = "card-featured"
                 productList.appendChild(card)
