@@ -20,8 +20,11 @@ export default {
 <style lang="scss" scoped>
 i{
     margin: 10px;
-    /* color:#0F606B; */
-    color: #FFF952;
+      
+    color: #0F606B; 
+}
+i:hover{
+    color: #707070;
     
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="container section">
-    <form class="section row g-3">
+    <form class="section row g-3" @submit.prevent="login">
       <div class="col-12">
         <label class="form-label">{{lang["emailLogin"]}}</label>
         <input type="text" v-model="email" class="form-control" :placeholder="lang['plEmailLogin']" />
@@ -17,23 +17,28 @@
       </div>
       <label><input type="checkbox" v-model="forgotPassword"/>
       {{lang["forgotPassLogin"]}}</label>
+      <div class="col-12" v-if="errors.login">
+        <p>{{ errors.login }}</p>
+      </div>
       <div class="col-12" v-if="success">
         <p>{{ success }}</p>
       </div>
       <div class="col-12">
-        <div class="btn btn-primary" @click="login">{{lang["buttonLogin"]}}</div>
+        <button class="btn btn-primary">{{lang["buttonLogin"]}}</button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { computed } from 'vue'
 import { ref, reactive } from 'vue';
 export default {
   name: "Signin",
   setup() {
+    let router = useRouter()
     let email = ref('')
     let password = ref('')
     let forgotPassword = ref(false)
@@ -58,19 +63,31 @@ export default {
             })
             .catch(err => console.log(err))
         }
-      } else {
-        fetch("http://localhost:8081/usuario/login", {
-        method: "POST",
-        body: JSON.stringify({
-        password: password.value,
-        email: email.value,
-        forgotpassword: forgotPassword.value
-        }),
-        headers: { "Content-Type": "application/json" },
-        })
-        .then(res => res.json())
-        .then(data => console.log(data))
-        .catch(err => console.log(err.message))
+      } 
+
+      if(forgotPassword.value === false) {
+        if(!regExpEmail.test(email.value)) errors.login = "Debes introducir un email válido";
+        else {
+          errors.login = ''
+          fetch("http://localhost:8081/usuario/login", {
+          method: "POST",
+          body: JSON.stringify({
+            password: password.value,
+            email: email.value
+          }),
+          headers: { "Content-Type": "application/json" },
+          })
+          .then(res => res.json())
+          .then(response => {
+            if(typeof response === 'string') success.value = response
+            if(typeof response === 'object') {
+              localStorage.setItem('token', response.password)
+              router.push({ name: 'Home' })
+            }
+            })
+          .catch(err => console.log(err))
+        }
+
       }
       
     }

@@ -64,22 +64,20 @@ export default {
 
 
 <style lang="scss" scoped>
-.container{
+.section{
   max-width: 80%;
   margin: 0 auto;
-  margin-bottom: 100px;
-  color: black;
-    h1{
-      margin-top: 40px;
-      margin-bottom: 50px;
-      font-weight: bold;
+  margin-top:20px;
+  padding:20px;
+  background-color: #707070;
+  text-align: center;
+  color:#fff;
+  border-radius:25px;  
+
+    .card, img{
+      border-radius:25px; 
+      background-color: #707070; 
     }
-    h3{
-      text-align: left;
-      text-indent: 50px; 
-      margin-bottom: 50px;
-    }
-    
   
 }
 

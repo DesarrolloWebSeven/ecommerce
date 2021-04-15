@@ -1,5 +1,6 @@
 const express = require('express')
 const rtUser = express.Router()
+const passport = require('passport')
 const userController = require('../controllers/userController')
 
 rtUser.post('/registro', userController.registerUser)

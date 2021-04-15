@@ -4,6 +4,9 @@ const cors = require('cors')
 const multer = require('multer')
 const path = require('path')
 const app = express()
+const session = require('express-session')
+const flash = require('connect-flash');
+const passport = require('passport')
 
 // Database settings
 const conexion = require('./connection')
@@ -25,8 +28,28 @@ app.use(express.static(path.join(__dirname, '../public')))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
+// Express-session & connect-flash
+app.use(session({
+  secret: 'mysecret',
+  resave: false,
+  saveUninitialized: true
+}))
+app.use(flash())
+
+// Passport settings
+require('./helpers/passport')
+app.use(passport.initialize())
+app.use(passport.session())
+
+// Global Variables
+app.use((req, res, next) => {
+  res.locals.error = req.flash('error')
+  res.locals.user = req.user
+  next()
+}) 
+
 // Routes
-app.use('/', require('./routers/rtMain'))
+app.use('/productos', require('./routers/rtProduct'))
 app.use('/admin', require('./routers/rtAdmin'))
 app.use('/usuario', require('./routers/rtUser'))
 
@@ -34,8 +57,8 @@ app.use('/usuario', require('./routers/rtUser'))
 app.use((req, res) => res.status(400).render('notfound'))
 
 // Server running
-app.set('port', process.env.PORT_SERVER || 3000)
-app.listen(app.get('port'),(err)=>{
+let port = process.env.PORT_SERVER || 3000
+app.listen(port,(err)=>{
   if(err) console.log("Errores: ", err)
-  console.log("Servidor backend arrancado en", app.get('port'))
+  console.log(`Servidor backend arrancado en ${port}`)
 })

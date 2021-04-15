@@ -1,20 +1,12 @@
 const express = require('express')
 const fileUpload = require ('express-fileupload')
 const Product = require('../models/Product')
-const fs = require('fs/promises')
+const fs = require('fs').promises
 const path = require('path')
 const { Console } = require('console')
 
-const home = (req, res) => {
-    res.render("admin-home", ({
-      title: "Ecommerce Admin | Home",
-    }))
-}
-
 const login = (req,res)=>{
-    res.render('admin', ({
-      title: "Ecommerce Admin | Login"
-    }))
+    res.render('login')
 }
 
 const team = (req,res)=>{
@@ -121,7 +113,6 @@ const orders = (req,res)=>{
 }
 
 module.exports = {
-    home,
     login,
     team,
     project,    
