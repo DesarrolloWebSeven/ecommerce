@@ -33,7 +33,7 @@
                   }}</router-link>
                 </li>
                 <li class="nav-item">
-                  <router-link to="/productos/juegos" class="nav-link">{{
+                  <router-link to="/productos/games" class="nav-link">{{
                     lang["games"]
                   }}</router-link>
                 </li>
@@ -92,8 +92,8 @@
 
           <li class="nav-item">
             <router-link to="/carrito" class="nav-link"
-              ><i class="fas fa-shopping-cart"></i
-            ></router-link>
+              ><i class="fas fa-shopping-cart cart"></i
+            ><span id="cart_menu_num" data-action="cart-can" class="badge rounded-circle"><Total class="total" /></span></router-link>
           </li>
           <li class="nav-item">
             <router-link to="/buscador" class="nav-link"
@@ -110,6 +110,7 @@
 </template>
 
 <script>
+import Total from '@/components/Total'
 import { useStore } from "vuex";
 import { computed } from "vue";
 import Lang from "@/components/Lang";
@@ -124,6 +125,7 @@ export default {
 
   components: {
     Lang,
+    Total
   },
 };
 </script>
@@ -146,6 +148,25 @@ nav.navbar {
 .logo {
   margin-right: 10px;
   font-size: 40px;
+}
+
+.cart {
+  position: relative;
+}
+
+#cart_menu_num {
+  position: absolute;  
+  background: red;
+  height: 20px;     
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 2px;
+  
+}
+.total{
+  font-size: 10px;
 }
 
 .bi::before {

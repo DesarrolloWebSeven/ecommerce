@@ -11,7 +11,8 @@ import Confirmation from '../views/Confirmation.vue'
 import NotFound from '../views/NotFound.vue'
 import PasswordForm from '../views/PasswordForm.vue'
 import Category from '../views/Category.vue'
-import Payment from '../views/Payment.vue'
+import ProductCard from '../views/ProductCard.vue'
+import Cart from '../views/Cart.vue'
 
 
 const routes = [
@@ -71,18 +72,24 @@ const routes = [
     path: '/productos/:category',
     name: 'Category',
     component: Category,
-    props: true,
   },
   {
-    path: '/carrito/pago',
-    name: 'Payment',
-    component: Payment
+    path: '/producto/id/:id',
+    name: 'ProductCard',
+    component: ProductCard
+  },
+  {
+    path: '/carrito',
+    name: 'Cart',
+    component: Cart,
+    
   },
   {
     path: '/:catchAll(.*)',
     name: 'NotFound',
     component: NotFound
-  }
+  },
+
 ]
 
 const router = createRouter({

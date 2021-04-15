@@ -12,7 +12,10 @@
                         <h4 class="card-title">{{ product.title }}</h4>
                         <p class="card-text">Stock: {{ product.quantity }}</p>
                         <p class="card-text price">{{ product.price }} €</p>
-                        <p class="card-text"><button>COMPRAR</button></p>
+                        <div>
+                            <p class="card-text"><button @click="comprar(product._id)">COMPRAR</button></p>
+                            <router-link :to="'/producto/id/'+product._id" class="card-text"><button>VER</button></router-link>
+                        </div>
                     </div>
                 </div>
         
@@ -31,11 +34,13 @@ export default {
   props: {
     product: Object,
   },
-  setup(props) {
-    let product = reactive(props.product);
-    console.log(product);
-    return {
-      product,
+  setup() {
+    function comprar(id){
+console.log("hola compra");
+    }
+
+    return {           
+      comprar
     };
   },
 };
