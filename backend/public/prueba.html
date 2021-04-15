@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <script type="text/javascript">
+        var ventana;
+        console.log(document.forms[0])
+        function reenviar(x) {
+            x = document.forms[0];
+            x.action = "enviar1.html";
+            x.submit();
+            setTimeout("ventana.close()", 5000);
+        }
+
+        function enviar(x) {
+            ventana = window.open("", "enviando", "");
+            x.submit();
+            setTimeout("reenviar()", 5000);
+        }
+    </script>
+</head>
+
+<body>
+    <form action="enviar0.html" method="get" onsubmit="enviar(this)" target="enviando">
+        <input type="text" name="dato" value="prueba" />
+        <input type="submit" value="enviar" />
+    </form>
+</body>
+
+</html>

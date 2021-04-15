@@ -22,6 +22,6 @@ rtAdmin.get('/productos/listar', isAdmin, adminController.products_list)
 rtAdmin.delete('/productos/:id', isAdmin, adminController.products_delete)
 rtAdmin.get('/productos/:id', isAdmin, adminController.products_findById)
 rtAdmin.delete('/productos/imagenes/:id', isAdmin, adminController.images_delete)
-rtAdmin.put('/productos/:id', isAdmin, adminController.products_update)
+rtAdmin.post('/productos/update', isAdmin, adminController.products_update)
     
 module.exports= rtAdmin

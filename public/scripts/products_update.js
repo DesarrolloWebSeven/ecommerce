@@ -3,7 +3,7 @@ $(document).ready(function(){
     var _id = $("#id")[0].value
     var imagesOld = $("#images")[0].defaultValue.split(',')
     var imagesNew
-    console.log(imagesOld)
+
     //Preparando contenedores
     var img = document.createElement('img')
         img.className="images-old"
@@ -29,9 +29,9 @@ $(document).ready(function(){
     }
 
     //Eliminacion de imagenes del array
-    $(document).on('click','.delete-img-old',function(e){
+    $(document).on('click','.delete-img-old', (e)=>{
         imagesOld.splice(imagesOld.findIndex(i=>i==e.target.name), 1)
-        fetch(`/admin/productos/imagenes/$(_id)`,{
+        fetch(`/admin/productos/imagenes/${_id}`,{
             method:'DELETE',
             headers:{'Content-type':'Application/json'},
             body:JSON.stringify({
@@ -41,14 +41,31 @@ $(document).ready(function(){
         })
         showImages(imagesOld)
     })
-    $('input[name="images"]')[0].addEventListener('change', (e)=>{
-        imagesNew = e.target.files
-    })
+/*
+    //Subiendo nuevas imagenes
+    document.querySelector('#imagesNew').addEventListener('change', (e)=>{
+        console.log(e.target.files)
+        let prueba= Array.from(e.target.files)
+        console.log(prueba)
+        const data = new FormData()
+        //data.append('images', archivos)
 
-    //Peticion del producto actualizado
-    $("#update").click(function(){
-        let formData = new FromData()
-        formData.append('files', imagesNew)
+        fetch('/admin/productos/',{
+            method:'PUT',
+            files: JSON.stringify(prueba)
+        })
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('resultado').innerHTML = 'El archivo ' + data.path + ' se ha subido correctamente.'
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    })*/
+
+/*
+    $("#update").click((e)=>{
+        //Datos del formulario actualizado
         let product_update={ 
             _id:_id, 
             title:$('input[name="title"]')[0].value,
@@ -60,18 +77,14 @@ $(document).ready(function(){
             images:null,
             featured:$('input[name="featured"]')[0].checked
         }
-        console.log(imagesOld.length)
-        if (imagesOld.length==0){
-            console.log(imagesNew)
-            product_update.images=imagesNew
-        }else{
-            product_update.images=imagesOld
-        }
-        console.log(product_update)    
-        fetch('/admin/productos/_id',{
+
+        if (imagesOld.length==0)product_update.images=imagesNew
+        else product_update.images=imagesOld
+
+        fetch('/admin/productos',{
             method:'PUT',
             headers:{'Content-type':'Application/json'},
-            body:JSON.stringify(product_update, formData)
-        })
-    })
+            body:JSON.stringify(product_update)
+        }).then(res=>console.log("actualizado"))
+    })*/
 })

@@ -21,6 +21,7 @@ function showProducts(){
                     edit.id=product._id
                     edit.onclick=`location.href="https://localhost/admin/productos/${product._id}"`
                 let del = document.createElement("button")
+                    del.onclick
                 let cfooter = document.createElement("div")
 
                 img.src=product.images[0]
