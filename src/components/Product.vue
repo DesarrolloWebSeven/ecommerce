@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12 mt-3">
             <div class="card">
-                <div class="card-horizontal">
+                <div class="card-horizontal" >
                     <div class="img-square-wrapper">
                         <img :src="product.images[0]" />
                     </div>
