@@ -47,7 +47,7 @@ $(document).ready(function(){
 
     //Peticion del producto actualizado
     $("#update").click(function(){
-        let formData = new FromData()
+        let formData = new FormData()
         formData.append('files', imagesNew)
         let product_update={ 
             _id:_id, 
