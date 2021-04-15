@@ -1,10 +1,11 @@
 <template>
   <div class="container section">
+    <h1 class="titleHome">{{products.title}}</h1>
     <div class="row">
-      <h1 class="titleHome">Camisetas {{products.category}}</h1>
-      <div
-        v-for="product in products"
-        :key="product.index"
+      
+      <div 
+        v-for="(product, i) in products"
+        :key="i"
         class="col-12 col-md-6"
       >
         <Product :product="product" />
@@ -15,32 +16,48 @@
 
 <script>
 import Product from "@/components/Product";
-import { reactive, onMounted, onUnmounted } from "vue";
+import {useRoute} from 'vue-router'
+import { ref, reactive, onMounted, watch} from "vue";
 export default {
   name: "Category",
   components: {
     Product,
-  },
-  props: {
-    category: String,
-  },
-  setup(props) {
+  }, 
+ 
+  setup() {
+    const route= useRoute()
     let products = reactive([]);
     
-    onMounted(()=>{   
-      fetch(`http://localhost:8081/productos/${props.category}`)
+   
+    
+    watch(()=> route.params,
+      async newParams=> {
+        products.arr= await getProducts(newParams.category)
+        products.title= route.params.category.toUpperCase()
+      })
+
+    function getProducts(category) {      
+        products.splice(0)
+        fetch(`http://localhost:8081/productos/${category}`)
         .then((res) => res.json())
         .then((data) => data.forEach((item) => products.push(item)))
-        .catch((err) => console.log(err));        
+        .catch((err) => console.log(err));   
+        
+    }
+
+    onMounted(()=>{ 
+      getProducts(route.params.category)
+      products.title= route.params.category.toUpperCase()
     })
 
-    onUnmounted(()=>{
-      products.splice(0)      
-    })
+    
     
 
     return {
-      products,
+      products
+      
+     
+      
     };
   },
 };
