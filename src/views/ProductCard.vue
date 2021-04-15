@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12 mt-3">
         <div class="card">
-          <div class="card-horizontal">
+          <div class="card-horizontal" v-if="productDetail">
             <div
               id="carouselExampleIndicators"
               class="carousel slide m-4"
@@ -56,8 +56,9 @@
               <h4 class="card-title">{{ productDetail.title }}</h4>
               <p class="card-text"><b>Descripción: </b> {{ productDetail.description }}</p>
               <p class="card-text"><b>Características técnicas: </b> {{ productDetail.features }}</p>
-              <p class="card-text">Stock: {{ productDetail.quantity }}</p>
-              <p class="card-text price">{{ productDetail.price }} € <input type="number" name="cantidad" min="1" max="10"></p>
+              <p class="card-text"><b>Stock: </b> {{ productDetail.quantity }}</p>
+              <p class="card-text"><b>Precio unidad: </b> {{productDetail.price}}</p>
+              <p class="card-text price">{{ contador.valor }} € <input @change="updatePrice(productDetail.price, $event)" type="number" name="cantidad" min="1" max="10"></p>
               <div>
                 <p class="card-text"><button>COMPRAR</button></p>
               </div>
@@ -78,7 +79,12 @@ export default {
   setup() {
     //:src="productDetail.images[0]"
     const route= useRoute()
-    let productDetail = ref();
+    let productDetail = ref()
+    let contador=reactive({
+          titulo: 'Contador: ',
+          valor: 0
+      })
+    
     function getDetailProduct() {
      
       fetch(`http://localhost:8081/productos/id/${route.params.id}`)
@@ -86,12 +92,18 @@ export default {
         .then((data) => (productDetail.value = data))
         .catch((err) => console.log(err));
     }
-
     getDetailProduct();
     console.log(productDetail);
 
+    function updatePrice(price, event){
+      contador.valor= price*event.target.value
+    }
+
     return {
       productDetail,
+      updatePrice,
+      contador
+      
     };
   },
 };

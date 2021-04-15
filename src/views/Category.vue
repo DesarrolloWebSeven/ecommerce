@@ -1,5 +1,5 @@
 <template>
-  <div class="container section">
+  <div class="container section" v-if="products">
     <h1 class="titleHome">{{products.title}}</h1>
     <div class="row">
       
@@ -32,8 +32,9 @@ export default {
     
     watch(()=> route.params,
       async newParams=> {
+        
         products.arr= await getProducts(newParams.category)
-        products.title= route.params.category.toUpperCase()
+        products.title= route.params.category
       })
 
     function getProducts(category) {      

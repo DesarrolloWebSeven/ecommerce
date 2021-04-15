@@ -12,11 +12,15 @@ export default {
     props:{},
     setup(){
         const store= useStore()
-        let total=computed(()=>{
-            return store.getters.getTotal
-        })
-        console.log("TOTAL", total)
+        let total=ref(0)
+
         
+
+       /*  let total=computed(()=>{
+            return store.getters.getTotal
+            total+=5
+        }) */
+                
         return{
             total
         }
