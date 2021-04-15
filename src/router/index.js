@@ -57,12 +57,17 @@ const routes = [
     component: Login
   },
   {
+    path: '/password/:id',
+    name: 'PasswordForm',
+    component: PasswordForm,
+    props: true
+  },
+  {
     path: '/usuario/registro/:id',
     name: 'Confirmation',
     component: Confirmation,
     props: true,
   },
-  
   {
     path: '/productos/:category',
     name: 'Category',
