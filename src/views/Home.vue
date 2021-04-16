@@ -140,8 +140,7 @@ export default {
       flex-direction: column;
       flex: 1 1 auto;
       color: black;
-      border-left: 8px solid black;
-      border-bottom: 8px solid black;
+      
       .card-title {
         text-transform: uppercase;
         font-weight: bold;
