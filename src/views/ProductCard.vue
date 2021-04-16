@@ -96,7 +96,7 @@ export default {
     console.log(productDetail);
 
     function updatePrice(price, event){
-      contador.valor= price*event.target.value
+      contador.valor= (price*event.target.value).toFixed(2)
     }
 
     return {
