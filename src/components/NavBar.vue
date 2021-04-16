@@ -137,7 +137,7 @@ export default {
 }
 nav.navbar {
   background-color: #0f606b;
-  border-bottom: 8px solid black;
+  
 }
 .nav-link {
   font-family: "Game";
