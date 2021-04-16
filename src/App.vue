@@ -5,6 +5,7 @@
 <router-view/>
 
 <a href="https://wa.me/34692856097/?text=Hola%Geeky!!%¿Podemos%20ayudarte?"><ContactIcon /></a>
+<AlertCookies />
 <Footer/>
 
 </div>
@@ -14,6 +15,7 @@
 import ContactIcon from '@/components/ContactIcon'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
+import AlertCookies from '@/components/AlertCookies'
 
 import { useStore } from 'vuex'
 import { computed } from 'vue'
@@ -22,7 +24,8 @@ export default {
   components: { 
     NavBar,   
     Footer,
-    ContactIcon
+    ContactIcon,
+    AlertCookies
   },
   setup(){
 
