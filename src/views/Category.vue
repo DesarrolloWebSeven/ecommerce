@@ -6,7 +6,7 @@
       <div 
         v-for="(product, i) in products"
         :key="i"
-        class="col-12 col-md-6"
+        class="col-12 col-xl-6 col-lg-6"
       >
         <Product :product="product" />
       </div>
