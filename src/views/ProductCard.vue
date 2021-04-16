@@ -1,12 +1,12 @@
 <template>
   <div class="container section">
     <div class="row">
-      <div class="col-12 mt-3">
-        <div class="card">
-          <div class="card-horizontal" v-if="productDetail">
+      <div class="col-12 m-3">
+        <div class="card row">
+          <div class="card-horizontal row justify-content-center" v-if="productDetail">
             <div
               id="carouselExampleIndicators"
-              class="carousel slide m-4"
+              class="carousel slide col-12 col-lg-6 m-4"
               data-bs-ride="carousel"
             >
               
@@ -52,7 +52,7 @@
               </button>
             </div>
 
-            <div class="card-body">
+            <div class="card-body col-12 col-lg-6">
               <h4 class="card-title">{{ productDetail.title }}</h4>
               <p class="card-text"><b>Descripción: </b> {{ productDetail.description }}</p>
               <p class="card-text"><b>Características técnicas: </b> {{ productDetail.features }}</p>
@@ -149,8 +149,7 @@ export default {
     display: flex;
     flex: 1 1 auto;
     color: black;
-    border-left: 8px solid black;
-    border-bottom: 8px solid black;
+    
     .card-title {
       text-transform: uppercase;
       font-weight: bold;

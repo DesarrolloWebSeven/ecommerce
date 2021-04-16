@@ -91,7 +91,7 @@ export default {
     }
   }
 
-  @media (max-width: 530px) {
+  @media (max-width: 576px) {
     .titleHome {
       font-size: 25px;
     }
