@@ -3,7 +3,7 @@ const fileUpload = require ('express-fileupload')
 const Product = require('../models/Product')
 const fs = require('fs').promises
 const path = require('path')
-const { Console } = require('console')
+
 
 const login = (req,res)=>{
     res.render('login')
@@ -27,6 +27,7 @@ const products_index = (req,res)=>{
 
 const products_save = (req,res)=>{
     if(req.body.featured=="on") req.body.featured=true
+    console.log(req.body)
     let images=[]
     req.files.forEach(i=>images.push('/images/'+i.filename))
     req.body.images = images
@@ -51,6 +52,7 @@ const products_delete = async (req,res)=>{
 }
 
 const products_findById = (req,res)=>{
+    console.log(req.params)
     Product.findById(req.params.id).lean()
     .then(product=>{
         res.render('products', {product:product, src:'products_update.js'})
@@ -65,6 +67,7 @@ const images_delete = (req,res)=>{
 }
 
 const products_update = (req,res)=>{
+    console.log(req.body)
     if(req.body.featured==null) req.body.featured=false
     //Asociamos las rutas de imagen al producto
     let imagesOld = req.body.imagesOld.split(',')
@@ -78,7 +81,7 @@ const products_update = (req,res)=>{
         req.body.images = imagesOld
     }
     
-    Product.findByIdAndUpdate({_id : req.body._id},
+    Product.findByIdAndUpdate({_id : req.body.id},
         {
             title : req.body.title,
             description : req.body.description,
