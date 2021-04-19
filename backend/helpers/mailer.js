@@ -23,7 +23,7 @@ mailer.transporter.use('compile', hbs({
     partialsDir: 'partials/',
     defaultLayout: false
   }),
-  viewPath: path.resolve(__dirname, '../views'),
+  viewPath: path.resolve(__dirname, '../views/emails'),
   extName: '.hbs'
 }))
 
