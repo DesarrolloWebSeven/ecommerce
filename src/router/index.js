@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import store from '../store'
 import Home from '../views/Home.vue'
 import Team from '../views/Team.vue'
 import Proyect from '../views/Proyect.vue'
@@ -107,7 +106,10 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.name === 'Home' || localStorage.getItem('geeky')) next()
-  else next(false)
+  else {
+    alert("Para navegar debes aceptar la política de Cookies")
+    next(false)
+  }
 })
 
 export default router
