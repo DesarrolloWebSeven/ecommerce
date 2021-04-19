@@ -105,7 +105,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.name === 'Home' || localStorage.getItem('geeky')) next()
+  if ((to.name === 'Home'|| to.name == 'Payment') || localStorage.getItem('geeky')) next()
   else {
     alert("Para navegar debes aceptar la política de Cookies")
     next(false)
