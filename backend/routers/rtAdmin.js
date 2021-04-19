@@ -5,7 +5,7 @@ const { isAdmin, passLocal } = require('../helpers/auth')
 
 // Login routes
 rtAdmin.get('/login', adminController.login)
-rtAdmin.post('/login', passLocal)
+rtAdmin.post('/login', adminController.signin)
 
 // Project info routes
 rtAdmin.get('/equipo', isAdmin, adminController.team)
