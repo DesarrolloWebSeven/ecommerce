@@ -21,11 +21,11 @@ const project = (req,res)=>{
     }))
 }
 
-const products_index = (req,res)=>{
+const productsIndex = (req,res)=>{
     res.render('products', {src:'products.js'})
 }
 
-const products_save = (req,res)=>{
+const productsSave = (req,res)=>{
     if(req.body.featured=="on") req.body.featured=true
     console.log(req.body)
     let images=[]
@@ -40,18 +40,18 @@ const products_save = (req,res)=>{
         .catch(err=>console.log(err))
 }
 
-const products_list = (req,res)=>{
+const productsList = (req,res)=>{
         Product.find().then(data=>res.json(data))        
 }
 
-const products_delete = async (req,res)=>{
-    console.log(req.params.id)
+const productsDelete = async (req,res)=>{
+    console.log("vas a eliminar: ", req.params.id)
     const product_delete = await Product.findByIdAndDelete(req.params.id)
-    res.send("Articulo Eliminado")
     console.log("Se ha borrado: " + product_delete)
+    res.json({mensaje:"Articulo Eliminado"})
 }
 
-const products_findById = (req,res)=>{
+const productsFindById = (req,res)=>{
     console.log(req.params)
     Product.findById(req.params.id).lean()
     .then(product=>{
@@ -59,14 +59,14 @@ const products_findById = (req,res)=>{
     })
 }
 
-const images_delete = (req,res)=>{
+const imagesDelete = (req,res)=>{
     let image = req.body.image    
     fs.unlink(path.join(__dirname, '../../public', image))
     .then(() => {console.log('Imagen Borrada con exito!')})
     .catch(err => {console.error('A ocurrido un problema al intentar eliminar la imagen: ', err)})
 }
 
-const products_update = (req,res)=>{
+const productsUpdate = (req,res)=>{
     console.log(req.body)
     if(req.body.featured==null) req.body.featured=false
     //Asociamos las rutas de imagen al producto
@@ -97,10 +97,10 @@ const products_update = (req,res)=>{
             else console.log('Se actualizo: ' + result)
         }
     )
-    .then(product=>{
-        console.log('Producto actualizado correctamente: '+ product)
-        res.render('products', {src:'products.js'})
-    })
+        .then(product=>{
+            console.log('Producto actualizado correctamente: '+ product)
+            res.render('products', {src:'products.js'})
+        })
 }
 
 const clients = (req,res)=>{
@@ -121,11 +121,11 @@ module.exports = {
     project,    
     clients,
     orders,
-    products_index,
-    products_save,
-    products_list,
-    products_delete,
-    products_findById,
-    images_delete,
-    products_update,
+    productsIndex,
+    productsSave,
+    productsList,
+    productsDelete,
+    productsFindById,
+    imagesDelete,
+    productsUpdate,
 }

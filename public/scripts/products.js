@@ -6,12 +6,10 @@ function showProducts(){
     fetch('/admin/productos/listar')
         .then(res=>res.json())
         .then(products=>{
-            console.log(products)
             let productList = document.querySelector(".product-list")
             while(productList.firstChild)
                 productList.firstChild.remove()
             products.forEach((product, i)=>{
-                console.log(product ,i)
                 let card = document.createElement("div")
                 let img = document.createElement("img")
                 let h2 = document.createElement("h2")
@@ -29,7 +27,8 @@ function showProducts(){
                     del.textContent="Borrar"
                     del.id=product._id
                     del.onclick=()=>{
-                        location.href=`http://localhost:8081/admin/productos/${product._id}`
+                        deleteProduct(product)
+                        //location.href=`http://localhost:8081/admin/productos/${product._id}`
                     }
                 let cfooter = document.createElement("div")
                 // let a = document.createElement("a") 
@@ -54,7 +53,19 @@ function showProducts(){
                 cfooter.appendChild(edit)
                 cfooter.appendChild(del)
             })
-
+            function deleteProduct(product){
+                result = confirm("¿Seguro que desea eliminar el producto?")
+                if(result){
+                    fetch(`/admin/productos/${product._id}`,{
+                        method:'DELETE',
+                        headers: {'Content-type':'Application/json'}
+                    })
+                    .then(resp=>json(resp))
+                    .then(mensaje=>{
+                        console.log(mensaje)
+                    })
+                }
+            }
 
         })
 }
