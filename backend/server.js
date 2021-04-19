@@ -4,9 +4,6 @@ const cors = require('cors')
 const multer = require('multer')
 const path = require('path')
 const app = express()
-const session = require('express-session')
-const flash = require('connect-flash')
-const passport = require('passport')
 var cookieParser = require('cookie-parser')
 
 
@@ -17,7 +14,7 @@ conexion.once('open',()=>console.log("Conexión mongo OK!!"))
 
 // Template engine settings
 const exphbs = require('express-handlebars')
-app.engine('.hbs', exphbs({extname: '.hbs'}));
+app.engine('.hbs', exphbs({extname: '.hbs', partialsDir: 'views/partials/'}));
 app.set('view engine', '.hbs');
 
 // Multer settings
@@ -30,26 +27,6 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, '../public')))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-
-// Express-session & connect-flash
-app.use(session({
-  secret: 'mysecret',
-  resave: false,
-  saveUninitialized: true
-}))
-app.use(flash())
-
-// Passport settings
-require('./helpers/passport')
-app.use(passport.initialize())
-app.use(passport.session())
-
-// Global Variables
-app.use((req, res, next) => {
-  res.locals.error = req.flash('error')
-  res.locals.user = req.user
-  next()
-}) 
 
 // Routes
 app.use('/productos', require('./routers/rtProduct'))

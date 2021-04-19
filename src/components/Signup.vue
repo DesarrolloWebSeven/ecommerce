@@ -38,14 +38,14 @@
 <script>
 import { useStore } from 'vuex'
 import { computed } from 'vue'
-import { ref, reactive } from "vue";
+import { ref } from "vue";
 export default {
   name: "Signup",
   setup() {
     let email = ref("");
     let password = ref("");
     let repeat_password = ref("");
-    let errors = reactive({});
+    let errors = ref({});
     let success = ref("");
     let regExpEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     let regExpPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
@@ -72,20 +72,9 @@ export default {
         })
           .then((res) => res.json())
           .then((response) => { 
-            errors.email = "";
-            errors.password = "";
-            errors.repeatpassword = "";
-            if (response._id) {
-              success.value =
-                "Usuario creado con éxito. Revisa tu email para activar tu cuenta.";
-            } else if (response.code === 11000)
-              errors.email = "El email ya existe";
-            else if (response.message.includes("user validation failed")) {
-              if (response.errors.email)
-                errors.email = response.errors.email.message;
-              if (response.errors.password)
-                errors.password = response.errors.password.message;
-            }
+            errors.value = "";
+            if (response.user) success.value = "Usuario registrado. Revisa tu email para activar tu cuenta.";
+            else errors.value = response
           })
           .catch((err) => console.log(err.message));
       }

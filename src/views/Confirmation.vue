@@ -13,7 +13,7 @@
 <script>
 import { useStore } from 'vuex'
 import { computed } from 'vue'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 export default {
   name: "Confirmation",
   props: {

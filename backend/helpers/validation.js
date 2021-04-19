@@ -40,9 +40,9 @@ const requireAuth = (req, res, next) => {
   const token = req.cookies.jwt
   if(token) {
     jwt.verify(token, process.env.TOKEN, (err) => {
-      (err) ? res.redirect('/admin') : next()
+      (err) ? res.redirect('/admin/login') : next()
     })
-  } else res.redirect('/admin')
+  } else res.redirect('/admin/login')
 }
 
 const checkUser = (req, res, next) => {
