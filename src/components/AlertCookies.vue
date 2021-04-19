@@ -1,5 +1,5 @@
 <template>
-  <section class="cookies">
+  <section class="cookies" id="cookie">
     <h2 class="cookies__titulo">¿Aceptas nuestras Cookies?</h2> 
     <p class="cookies__texto">Usamos cookies para mejorar tu experiencia en la web.</p>
     <div class="cookies__botones">
@@ -18,6 +18,7 @@ export default {
 
     function setCookie(){
       localStorage.setItem("geeky", cookieName);
+      cookie.classList.add('hide')
     }
   
     function denyCookies(){
@@ -52,6 +53,10 @@ export default {
     color: white;
     width: 5rem;
     text-align: center;
+}
+
+.hide {
+  display: none;
 }
 
 </style>
