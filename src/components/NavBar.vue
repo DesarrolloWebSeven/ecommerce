@@ -90,8 +90,7 @@
             ></router-link>
           </li>
           <li v-if="user" class="nav-item">
-            <router-link to="/login" class="nav-link"
-              >Logout</router-link>
+            <div @click="logout" class="nav-link">Logout</div>
           </li>
 
           <li class="nav-item">
@@ -116,21 +115,26 @@
 <script>
 import Total from '@/components/Total'
 import { useStore } from "vuex";
-import { onUpdated, ref, computed } from "vue";
+import { computed } from "vue";
 import Lang from "@/components/Lang";
 
 export default {
   name: "NavBar",
   setup() {
-    let user = ref(false)
+    const store = useStore()
+    const user = computed(() => {
+      return store.getters.getToken;
+    });
 
-    onUpdated(() => {
-      user.value = localStorage.getItem('jwt')
-    })
+    const logout = () => {
+      localStorage.removeItem('jwt')
+      store.dispatch('setLogin', null)
+    }
 
-    computed 
+
     return {
       user,
+      logout,
       lang: computed(() => useStore().getters.getLang),
     };
   },
@@ -155,6 +159,10 @@ nav.navbar {
   font-family: "Game";
   color: black;
   margin-left: 10px;
+}
+
+.nav-item div {
+  cursor: pointer;
 }
 
 .logo {

@@ -17,6 +17,9 @@ export default createStore({
     },
     getTotal(state) {
       return state.total
+    },
+    getToken(state) {
+      return state.token
     }
   },
   mutations: {
