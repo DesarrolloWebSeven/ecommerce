@@ -3,7 +3,6 @@ import i18next from 'i18next'
 
 export default createStore({
   state: {
-    cookie: localStorage.getItem('geeky') || null,
     token: localStorage.getItem('jwt') || null,
     currentLang: i18next.language,
     lang: {},
@@ -21,9 +20,6 @@ export default createStore({
     },
     getToken(state) {
       return state.token
-    },
-    getCookie(state) {
-      return state.cookie
     }
   },
   mutations: {
