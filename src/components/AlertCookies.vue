@@ -21,11 +21,12 @@ export default {
         
         }
         function denyCookies(){
-
+            alert("Ops!Será mejor que aceptes las cookies...")
         }
 
         return{
-            acceptCookies
+            acceptCookies,
+            denyCookies
 
         }
     }
