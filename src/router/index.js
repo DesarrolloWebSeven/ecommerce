@@ -106,9 +106,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const blockRoutes = to.matched.some(item => item.meta.protected)
-  if(blockRoutes && store.state.token === null) next('/') 
-  else next()
+  if (to.name === 'Home' || localStorage.getItem('geeky')) next()
+  else next(false)
 })
 
 export default router

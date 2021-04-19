@@ -70,7 +70,6 @@ export default {
       if(forgotPassword.value === false) {
         
         try {
-
           const res = await axios.post("usuario/login", {
           password: password.value,
           email: email.value

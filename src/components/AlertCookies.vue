@@ -4,7 +4,7 @@
     <p class="cookies__texto">Usamos cookies para mejorar tu experiencia en la web.</p>
     <div class="cookies__botones">
         <button class="cookies__boton cookies__boton--no" @click="denyCookies">No</button>
-        <button class="cookies__boton cookies__boton--si" @click="acceptCookies">Si</button>
+        <button class="cookies__boton cookies__boton--si" @click="setCookie">Si</button>
     </div>
 </section>
 
@@ -12,27 +12,24 @@
 
 <script>
 export default {
-    name:'AlertCookies',
-    setup(){
+  name:'AlertCookies',
+  setup(){
+    const cookieName = new Date().getTime()
 
-        function acceptCookies(){
-            var el = document.querySelector(".cookies");
-            el.style.display="none"
-        
-        }
-        function denyCookies(){
-            alert("Ops!Será mejor que aceptes las cookies...")
-        }
-
-        return{
-            acceptCookies,
-            denyCookies
-
-        }
+    function setCookie(){
+      localStorage.setItem("geeky", cookieName);
     }
-}
-       
-    
+  
+    function denyCookies(){
+      alert("Ops!Será mejor que aceptes las cookies...")
+    }
+
+    return{
+      setCookie,
+      denyCookies
+    }
+  }
+}  
 </script>
 
 <style lang="scss" scoped>

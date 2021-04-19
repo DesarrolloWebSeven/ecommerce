@@ -18,7 +18,6 @@ export default {
         const res = await axios.get('usuario/permiso', {
           headers: { Authorization: "Bearer " + localStorage.getItem('jwt')}
         })
-        console.log(res)
         if(res.data.message === 'fail') router.push('/')
       } catch (err) {
         console.log(err)
