@@ -28,13 +28,8 @@ function showProducts(){
                     del.id=product._id
                     del.onclick=()=>{
                         deleteProduct(product)
-                        //location.href=`http://localhost:8081/admin/productos/${product._id}`
                     }
                 let cfooter = document.createElement("div")
-                // let a = document.createElement("a") 
-                //     a.href=`http://localhost:8081/admin/productos/${product._id}`
-                //     a.method="DELETE"
-                //     del.appendChild(a)
                 img.src=product.images[0]
                 h2.textContent=product.title
                 p.textContent=product.description
@@ -60,12 +55,8 @@ function showProducts(){
                         method:'DELETE',
                         headers: {'Content-type':'Application/json'}
                     })
-                    .then(resp=>json(resp))
-                    .then(mensaje=>{
-                        console.log(mensaje)
-                    })
+                    showProducts()
                 }
             }
-
         })
 }

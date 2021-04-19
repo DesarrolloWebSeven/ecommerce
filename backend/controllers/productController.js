@@ -1,4 +1,6 @@
 const Product = require('../models/Product')
+const fs = require('fs').promises
+const path = require('path')
 
 const productsIndex = (req,res)=>{
     res.render('products', {src:'products.js'})
@@ -25,9 +27,17 @@ const productsList = (req,res)=>{
 
 const productsDelete = async (req,res)=>{
     console.log("vas a eliminar: ", req.params.id)
+    Product.findById(req.params.id).lean()
+        .then(product=>{
+            product.images.forEach(image=>{
+                fs.unlink(path.join(__dirname, '../../public', image))
+                    .then(() => {console.log('Imagen Borrada con exito!')})
+                    .catch(err => {console.error('A ocurrido un problema al intentar eliminar la imagen: ', err)})
+            })
+        })
     const product_delete = await Product.findByIdAndDelete(req.params.id)
     console.log("Se ha borrado: " + product_delete)
-    res.json({mensaje:"Articulo Eliminado"})
+    res.render('products', {src:'products.js'})
 }
 
 const productsFindById = (req,res)=>{
@@ -46,7 +56,6 @@ const imagesDelete = (req,res)=>{
 }
 
 const productsUpdate = (req,res)=>{
-    console.log(req.body)
     if(req.body.featured==null) req.body.featured=false
     //Asociamos las rutas de imagen al producto
     let imagesOld = req.body.imagesOld.split(',')
@@ -54,11 +63,8 @@ const productsUpdate = (req,res)=>{
     req.files.forEach(i=>imagesNew.push('/images/'+i.filename))
     
     //Condiciona el almacenaje de la ruta dependiendo si se cargaron nuevas imagenes o se mantienen las imagenes anteriores
-    if(imagesNew.length>0){
-        req.body.images = imagesNew
-    }else{
-        req.body.images = imagesOld
-    }
+    if(imagesNew.length>0){req.body.images = imagesNew}
+    else{req.body.images = imagesOld}
     
     Product.findByIdAndUpdate({_id : req.body.id},
         {
@@ -90,7 +96,6 @@ const listProduct = (req,res)=>{
 }
 
 const showDetailProduct = (req,res) =>{
-    
     let idProduct=req.params.id
     Product.findById(idProduct)
         .then(data=>{
@@ -101,7 +106,6 @@ const showDetailProduct = (req,res) =>{
         .catch(err=>res.json(err))
 }
 
-
 module.exports = {
     productsIndex,
     productsSave,
@@ -111,6 +115,5 @@ module.exports = {
     imagesDelete,
     productsUpdate,
     listProduct,
-    showDetailProduct
-    
+    showDetailProduct 
 }

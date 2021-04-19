@@ -1,9 +1,5 @@
 const express = require('express')
-const fileUpload = require ('express-fileupload')
 const Product = require('../models/Product')
-const fs = require('fs').promises
-const path = require('path')
-
 
 const login = (req,res)=>{
     res.render('login')
