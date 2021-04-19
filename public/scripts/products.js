@@ -55,7 +55,7 @@ function showProducts(){
                         method:'DELETE',
                         headers: {'Content-type':'Application/json'}
                     })
-                    showProducts()
+                    showProducts()//Aqui termine
                 }
             }
         })
