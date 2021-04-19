@@ -1,16 +1,21 @@
 const User = require("../models/User");
 const mailer = require("../helpers/mailer");
 const bcrypt = require('bcrypt')
+const errorHandler = require('../helpers/validation')
 
 // User Sign Up
-const registerUser = (req, res) => {
-  let user = new User(req.body)
-  user.save()
-    .then(user => {
-      mailer.send(user, user._id, 'Bienvenido a Geeky', 'confirmationEmail')
-      res.json(user)
-    })
-    .catch(err => res.json(err))
+const registerUser = async (req, res) => {
+
+  try {
+    const user = await User.create(req.body)
+    mailer.send(user, user._id, 'Bienvenido a Geeky', 'confirmationEmail')
+    res.status(201).json({ user: user._id });
+  }
+  catch (err) {
+    const errors = errorHandler.signupValidation(err)
+    res.status(400).json(errors)
+  }
+
 }
 
 // Account confirmation

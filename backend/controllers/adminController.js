@@ -1,9 +1,9 @@
-//const express = require('express')
-//const fileUpload = require ('express-fileupload')
+const express = require('express')
+const fileUpload = require ('express-fileupload')
 const Product = require('../models/Product')
 const fs = require('fs').promises
 const path = require('path')
-//const { Console } = require('console')
+const { Console } = require('console')
 const User = require('../models/User')
 const { createToken } = require('../helpers/validation')
 
@@ -17,7 +17,6 @@ const signin = async (req, res) => {
 
   try {
     const user = await User.findOne({ email })
-    console.log(user)
     if (!user) res.render('login', { userError: 'Usuario no encontrado'})
     else {
       if(!user.admin) res.render('login', { userError: 'Usuario sin permisos'})
@@ -27,7 +26,7 @@ const signin = async (req, res) => {
         if(isValid) {
           const token = createToken(user._id)
           res.cookie('jwt', token, { httpOnly: true });
-          res.status(201).json({ user: user._id }); 
+          res.status(201).redirect('/admin/productos'); 
         }
       }
     }
@@ -35,6 +34,11 @@ const signin = async (req, res) => {
     res.status(400).json(err)
   }
 
+}
+
+const logout = (req, res) => {
+  res.cookie('jwt', ' ', { maxAge: 1 })
+  res.redirect('/admin/login')
 }
 
 const team = (req,res)=>{
@@ -143,6 +147,7 @@ const orders = (req,res)=>{
 module.exports = {
     login,
     signin,
+    logout,
     team,
     project,    
     clients,
