@@ -3,6 +3,7 @@ import i18next from 'i18next'
 
 export default createStore({
   state: {
+    token: localStorage.getItem('jwt') || null,
     currentLang: i18next.language,
     lang: {},
     total:0
@@ -19,6 +20,9 @@ export default createStore({
     }
   },
   mutations: {
+    setToken(state, payload) {
+      state.token = payload
+    },
     setLang(state,lang){
       state.lang=lang
     },
@@ -31,6 +35,9 @@ export default createStore({
     }
   },
   actions: {
+    setLogin(context, usuario) {
+      context.commit('setToken', usuario)
+    }
   },
   modules: {
   }

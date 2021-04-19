@@ -2,6 +2,7 @@ const User = require("../models/User");
 const mailer = require("../helpers/mailer");
 const bcrypt = require('bcrypt')
 const errorHandler = require('../helpers/validation')
+const jwt = require('jsonwebtoken')
 
 // User Sign Up
 const registerUser = async (req, res) => {
@@ -26,16 +27,28 @@ const confirmationUser = (req, res) => {
 }
 
 // User Sign In
-const login = (req, res) => {
-  User.findOne({ email: req.body.email })
-    .then(user => {
-      if(user) {
-        if(user.active !== true) res.json("Usuario no confirmado")
-        if(!user.matchPassword(req.body.password)) res.json("Password incorrecto")
-        if(user.matchPassword(req.body.password)) res.json(user)
-      } else res.json("Usuario no encontrado")
-      })
-    .catch(err => res.json(err))
+const login = async (req, res) => {
+  const { email, password } = req.body
+
+  try {
+    const user = await User.findOne({ email })
+    if (!user) res.json('Usuario no encontrado')
+    else {
+      if(!user.active) res.json('Usuario no activado')
+      else {
+        const isValid = user.matchPassword(password)
+        if(!isValid) res.json('Contraseña no válida')
+        if(isValid) {
+          const token = errorHandler.createToken(user._id)
+          const usuario = { _id: user._id , email: user.email , token }
+          res.status(201).json(usuario); 
+        }
+      }
+    }
+  } catch (err) {
+    res.status(400).json(err)
+  }
+
 }
 
 // Change password
@@ -71,11 +84,21 @@ const changePassword = async (req, res) => {
     .catch(err => res.json(err))
 }
 
+const auth = (req, res) => {
+  const token = req.headers.authorization.split('Bearer ')[1]
+  
+  jwt.verify(token, process.env.TOKEN, async (err, decodedToken) => {
+    (err) ? res.json({ message: 'fail', err }) : res.json({ message: 'success', decodedToken })
+  })
+
+}
+
 module.exports = {
   registerUser,
   confirmationUser,
   login,
   forgotPassword,
   getPassword,
-  changePassword
+  changePassword,
+  auth
 }

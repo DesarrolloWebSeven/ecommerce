@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '../store'
 import Home from '../views/Home.vue'
 import Team from '../views/Team.vue'
 import Proyect from '../views/Proyect.vue'
@@ -13,6 +14,7 @@ import PasswordForm from '../views/PasswordForm.vue'
 import Category from '../views/Category.vue'
 import ProductCard from '../views/ProductCard.vue'
 import Cart from '../views/Cart.vue'
+import Payment from '../views/Payment.vue'
 
 
 const routes = [
@@ -85,6 +87,12 @@ const routes = [
     
   },
   {
+    path: '/carrito/pago',
+    name: 'Payment',
+    component: Payment,
+    meta: { protected: true }
+  }, 
+  {
     path: '/:catchAll(.*)',
     name: 'NotFound',
     component: NotFound
@@ -95,6 +103,12 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const blockRoutes = to.matched.some(item => item.meta.protected)
+  if(blockRoutes && store.state.token === null) next('/') 
+  else next()
 })
 
 export default router

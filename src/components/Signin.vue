@@ -17,9 +17,7 @@
       </div>
       <label><input type="checkbox" v-model="forgotPassword"/>
       {{lang["forgotPassLogin"]}}</label>
-      <div class="col-12" v-if="errors.login">
-        <p>{{ errors.login }}</p>
-      </div>
+      <div v-if="errors" class="password error">{{ errors }}</div>
       <div class="col-12" v-if="success">
         <p>{{ success }}</p>
       </div>
@@ -31,63 +29,61 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import { computed } from 'vue'
-import { ref, reactive } from 'vue';
+import { useRouter } from 'vue-router'
+import axios from 'axios'
+import { ref, computed } from 'vue'
 export default {
   name: "Signin",
   setup() {
-    let router = useRouter()
+    const store = useStore()
+    const router = useRouter()
     let email = ref('')
     let password = ref('')
+    let errors = ref('');
+    let success = ref('');
     let forgotPassword = ref(false)
-    let errors = reactive({})
-    let success = ref("");
     let regExpEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-    const login = () => {
+    const login = async () => {
       if(forgotPassword.value === true) {
+        
         if(!regExpEmail.test(email.value)) errors.email = "Debes introducir un email válido";
         else {
-          fetch("http://localhost:8081/usuario/password", {
+
+          try {
+          const res = await axios.post("http://localhost:8081/usuario/password", {
             method: "POST",
             body: JSON.stringify({ email: email.value }),
-            headers: { "Content-Type": "application/json" } })
-            .then(res => res.json())
-            .then(data => {
-              errors.email = ''
-              if(data.includes("no encontrado")) success.value = "El usuario no existe"
-              else if (data.includes("confirmado")) success.value = "Esta cuenta aún no ha sido confirmada"
-              else success.value = "Accede a tu email para cambiar tu contraseña"
-            })
-            .catch(err => console.log(err))
-        }
-      } 
+            headers: { "Content-Type": "application/json" }
+          })
+          const data = await res.json()
+          errors.email = ''
+          if(data.includes("no encontrado")) success.value = "El usuario no existe"
+          else if (data.includes("confirmado")) success.value = "Esta cuenta aún no ha sido confirmada"
+          else success.value = "Accede a tu email para cambiar tu contraseña"
+          } catch (err) {
+            console.log(err)
+          }
+      }}
 
       if(forgotPassword.value === false) {
-        if(!regExpEmail.test(email.value)) errors.login = "Debes introducir un email válido";
-        else {
-          errors.login = ''
-          fetch("http://localhost:8081/usuario/login", {
-          method: "POST",
-          body: JSON.stringify({
-            password: password.value,
-            email: email.value
-          }),
-          headers: { "Content-Type": "application/json" },
-          })
-          .then(res => res.json())
-          .then(response => {
-            if(typeof response === 'string') success.value = response
-            if(typeof response === 'object') {
-              localStorage.setItem('token', response.password)
-              router.push({ name: 'Home' })
-            }
-            })
-          .catch(err => console.log(err))
-        }
+        
+        try {
 
+          const res = await axios.post("usuario/login", {
+          password: password.value,
+          email: email.value
+          })
+          if(typeof res.data == 'string') errors.value = res.data
+          else {
+            store.dispatch('setLogin', res.data.token)
+            localStorage.setItem('jwt', res.data.token)
+            router.push('/')
+          }
+        } catch (err) {
+        console.log(err)
+        }
       }
       
     }

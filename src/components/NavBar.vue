@@ -84,10 +84,14 @@
         <ul
           class="navbar-nav ml-auto mb-2 mb-lg-0 d-flex flex-row align-items-center m-3"
         >
-          <li class="nav-item">
+          <li v-if="!user" class="nav-item">
             <router-link to="/login" class="nav-link"
               ><i class="fas fa-user"></i
             ></router-link>
+          </li>
+          <li v-if="user" class="nav-item">
+            <router-link to="/login" class="nav-link"
+              >Logout</router-link>
           </li>
 
           <li class="nav-item">
@@ -112,13 +116,21 @@
 <script>
 import Total from '@/components/Total'
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { onUpdated, ref, computed } from "vue";
 import Lang from "@/components/Lang";
 
 export default {
   name: "NavBar",
   setup() {
+    let user = ref(false)
+
+    onUpdated(() => {
+      user.value = localStorage.getItem('jwt')
+    })
+
+    computed 
     return {
+      user,
       lang: computed(() => useStore().getters.getLang),
     };
   },

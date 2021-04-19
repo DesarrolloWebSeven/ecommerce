@@ -8,5 +8,6 @@ rtUser.post('/login', userController.login)
 rtUser.post('/password', userController.forgotPassword)
 rtUser.get('/password/:id', userController.getPassword)
 rtUser.put('/password/:id', userController.changePassword)
+rtUser.get('/permiso', userController.auth)
 
 module.exports= rtUser
