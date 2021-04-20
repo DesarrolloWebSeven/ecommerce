@@ -10,7 +10,7 @@ const registerUser = async (req, res) => {
 
   try {
     const user = await User.create(req.body)
-    mailer.send(user.email, user, 'Bienvenido a Geeky', 'confirmationEmail')
+    mailer.send(user.email, user._id, 'Bienvenido a Geeky', 'confirmationEmail')
     res.status(201).json({ user: user._id });
   }
   catch (err) {
@@ -56,14 +56,14 @@ const login = async (req, res) => {
 const forgotPassword = (req, res) => {
   User.findOne({ email: req.body.email })
     .then(user => {
-      if(user.length) {
-        if(user[0].active === true) {
+      if(user) {
+        if(user.active === true) {
           return new Promise((resolve, reject) => {
-            mailer.send(user.email, user, 'Cambiar contraseña', 'changePassword')
+            mailer.send(user.email, user._id, 'Cambiar contraseña', 'changePassword')
             resolve(res.json(user))
           }) 
         }
-        if(user[0].active !== true) res.json("Usuario no confirmado")
+        if(user.active !== true) res.json("Usuario no confirmado")
       } else res.json("Usuario no encontrado")
       })
     .catch(err => res.json(err))
