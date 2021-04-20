@@ -31,24 +31,27 @@
                   <b>Precio unidad: </b> {{ cart[id].price }}
                 </p>
                 <p class="card-text">
-                  <b>Cantidad en tu carrito: </b> {{ cart[id].quantity }}
+                  <b>Cantidad en tu carrito: </b> {{cart[id].items}}
                   <button
+                    :class="{disabledButton: cart[id].quantity==cart[id].items}"
                     class="btn"
                     style="background: none; color: black"
-                    @click="cart[id].quantity++"
+                    @click="cart[id].items<cart[id].quantity ?cart[id].items++ :null"
                   >
                     <i class="fas fa-plus-circle"></i></button
-                  ><button
-                    class="btn m-2"
+                  >
+                  <button
+                    :class="{disabledButton2: cart[id].items==0} "
+                    class="btn"
                     style="background: none; color: black"
-                    @click="cart[id].quantity--"
+                    @click="cart[id].items>0 ?cart[id].items-- :null"
                   >
                     <i class="fas fa-minus-circle"></i>
                   </button>
                 </p>
                 <p class="card-text">
                   <b>Subtotal producto: </b>
-                  {{ (cart[id].quantity * cart[id].price).toFixed(2) }}
+                  {{ (cart[id].items * cart[id].price).toFixed(2) }}
                 </p>
               </div>
               
@@ -78,6 +81,7 @@ export default {
   setup() {
     const store = useStore();
     const cart = computed(() => store.state.cart);
+   
 
     return {
       cart,
@@ -154,6 +158,20 @@ export default {
       color: #fff;
       background-color: black;
       padding: 10px;
+    }
+    .disabledButton{
+      pointer-events: none;
+      
+      i {
+        color:gray;
+      }
+    }
+    .disabledButton2{
+      pointer-events: none;
+      
+      i {
+        color:gray;
+      }
     }
   }
 }

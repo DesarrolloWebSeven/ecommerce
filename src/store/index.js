@@ -21,10 +21,10 @@ export default createStore({
       return state.token
     },
     totalQuantity(state) {
-      return Object.values(state.cart).reduce((acc, {quantity}) => acc + quantity, 0)
+      return Object.values(state.cart).reduce((acc, {items}) => acc + items, 0)
     },
     totalPrice(state) {
-      return Object.values(state.cart).reduce((acc, {quantity, price}) => acc + quantity * price, 0)
+      return Object.values(state.cart).reduce((acc, {items, price}) => acc + items * price, 0)
     }
   },
   mutations: {
@@ -66,8 +66,8 @@ export default createStore({
       
       console.log(5555,  state.cart.hasOwnProperty(product._id));
       state.cart.hasOwnProperty(product._id)
-        ? product.quantity = state.cart[product._id].quantity + product.quantity
-        : product.quantity = product.quantity
+        ? product.items = state.cart[product._id].items + product.items
+        : product.items = product.items
       commit('setCart', product)},
     setLogin(context, usuario) {
       context.commit('setToken', usuario)
