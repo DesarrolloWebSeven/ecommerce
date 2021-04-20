@@ -14,7 +14,7 @@
   
 </template>
 <script>
-import ContactIcon from '@/components/ContactIcon'
+
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import AlertCookies from '@/components/AlertCookies'
@@ -26,7 +26,6 @@ export default {
   components: { 
     NavBar,   
     Footer,
-    ContactIcon,
     AlertCookies
   },
   setup(){
