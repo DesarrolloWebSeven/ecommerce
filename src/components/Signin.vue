@@ -54,8 +54,8 @@ export default {
           try {
           const res = await axios.post("usuario/password", { email: email.value })
           errors.value = ''
-          if(res.data.includes("no encontrado")) success.value = "El usuario no existe"
-          else if (res.data.includes("confirmado")) success.value = "Esta cuenta aún no ha sido confirmada"
+          if(res.data == 'Usuario no encontrado') success.value = "El usuario no existe"
+          else if (res.data == 'Usuario no confirmado') success.value = "Esta cuenta aún no ha sido confirmada"
           else success.value = "Accede a tu email para cambiar tu contraseña"
           } catch (err) {
             console.log(err.message)
