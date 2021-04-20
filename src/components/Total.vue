@@ -1,6 +1,8 @@
 <template>
-
-  <h3 v-if="total=>0">TOTAL:{{total}}</h3>
+<div style="width:80%">
+    <h6 v-if="total=>0" class="d-flex justify-content-end">TOTAL:{{total}}</h6>
+</div>
+  
   
 </template>
 

@@ -58,9 +58,9 @@
               <p class="card-text"><b>Características técnicas: </b> {{ productDetail.features }}</p>
               <p class="card-text"><b>Stock: </b> {{ productDetail.quantity }}</p>
               <p class="card-text"><b>Precio unidad: </b> {{productDetail.price}}</p>
-              <p class="card-text price">{{ contador.valor }} € <input @change="updatePrice(productDetail.price, $event)" type="number" name="cantidad" min="1" max="10"></p>
+              <p class="card-text price">{{ (contador.uds*productDetail.price).toFixed(2) }} € <input :value=contador.uds @change="updatePrice(productDetail.price, $event)" type="number" name="cantidad"  min="1" :max=productDetail.quantity ></p>
               <div>
-                <p class="card-text"><button>COMPRAR</button></p>
+                <router-link to="/carrito"><p class="card-text"><button @click="addToCart(productDetail)">COMPRAR</button></p></router-link>
               </div>
             </div>
           </div>
@@ -73,36 +73,51 @@
 <script>
 import { reactive, ref } from "vue";
 import {useRoute} from 'vue-router'
+
+import {useStore} from 'vuex'
 export default {
   name: "ProductCard",
   
   setup() {
     //:src="productDetail.images[0]"
     const route= useRoute()
+    const store= useStore()
     let productDetail = ref()
     let contador=reactive({
           titulo: 'Contador: ',
-          valor: 0
+          valor: 1,
+          uds: 1
       })
     
-    function getDetailProduct() {
-     
+    function getDetailProduct() {     
       fetch(`http://localhost:8081/productos/id/${route.params.id}`)
         .then((res) => res.json())
         .then((data) => (productDetail.value = data))
         .catch((err) => console.log(err));
     }
+
     getDetailProduct();
     console.log(productDetail);
 
     function updatePrice(price, event){
+      console.log("event taget", event.target.value)
       contador.valor= (price*event.target.value).toFixed(2)
+      contador.uds=event.target.value
+    }
+
+    function addToCart(productDetail){
+      productDetail.quantity=parseInt(contador.uds)
+     
+      store.dispatch('addToCart', productDetail, parseInt(contador.uds))
+    
+
     }
 
     return {
       productDetail,
       updatePrice,
-      contador
+      contador,
+      addToCart
       
     };
   },
