@@ -113,6 +113,6 @@ router.beforeEach((to, from, next) => {
     alert("Para navegar debes aceptar la política de Cookies")
     next(false)
   }
-})
+}) 
 
 export default router
