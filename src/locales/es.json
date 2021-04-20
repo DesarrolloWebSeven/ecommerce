@@ -45,7 +45,7 @@
 
 
   "_contact": "CONTACTUS",
-  "descriptionContactP1": "Si prefieres contactar con nosotros a traves de correo electrónico, puedes rellenar este formulario y te contestaremos lo más rápido posible.",
+  "descriptionContactP1": "Contacto",
   "name":"Nombre",
   "plName":"Introduce tu nombre",
   "lastName":"Apellidos",
@@ -57,7 +57,7 @@
   "select2":"Tallas",
   "select3":"Envíos",
   "select4":"Reclamaciones",
-  "descriptionQuery":"Describe tu consulta detalladamente",
+  "descriptionQuery":"Mensaje",
   "sendForm":"Enviar",  
 
 
