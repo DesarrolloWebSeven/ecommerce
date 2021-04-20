@@ -7,15 +7,15 @@
         <label class="form-label">Email</label>
         <input type="text" name="email" class="form-control" placeholder="Email" />
       </div>
-      <div class="col-12" v-if="errors.email">
-        <p>{{ errors.email }}</p>
+      <div class="col-12" v-if="userError">
+        <p>{{ userError }}</p>
       </div>
       <div class="col-12">
         <label class="form-label">Password</label>
         <input type="password" name="password" class="form-control" placeholder="Password" />
       </div>
-      <div class="col-12" v-if="errors.password">
-        <p>{{ errors.password }}</p>
+      <div class="col-12" v-if="passError">
+        <p>{{ passError }}</p>
       </div>
       <label><input type="checkbox" v-model="forgotPassword"/> ¿Olvidaste tu contraseña?</label>
       <div class="col-12" v-if="success">

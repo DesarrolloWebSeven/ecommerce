@@ -13,6 +13,7 @@ import PasswordForm from '../views/PasswordForm.vue'
 import Category from '../views/Category.vue'
 import ProductCard from '../views/ProductCard.vue'
 import Cart from '../views/Cart.vue'
+import Payment from '../views/Payment.vue'
 
 
 const routes = [
@@ -85,6 +86,12 @@ const routes = [
     
   },
   {
+    path: '/carrito/pago',
+    name: 'Payment',
+    component: Payment,
+    meta: { protected: true }
+  }, 
+  {
     path: '/:catchAll(.*)',
     name: 'NotFound',
     component: NotFound
@@ -95,6 +102,14 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if ((to.name === 'Home'|| to.name == 'Payment') || localStorage.getItem('geeky')) next()
+  else {
+    alert("Para navegar debes aceptar la política de Cookies")
+    next(false)
+  }
 })
 
 export default router
