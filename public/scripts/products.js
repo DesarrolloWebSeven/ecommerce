@@ -6,7 +6,6 @@ function showProducts(){
     fetch('/admin/productos/listar')
         .then(res=>res.json())
         .then(products=>{
-            console.log(products)
             let productList = document.querySelector(".product-list")
             while(productList.firstChild)
                 productList.firstChild.remove()
@@ -18,27 +17,27 @@ function showProducts(){
                 let quantity = document.createElement("h5")
                 let edit = document.createElement("button")
                     edit.className = "btn btn-edit"
+                    edit.textContent="Editar"
                     edit.id=product._id
                     edit.onclick=()=>{
                         location.href=`http://localhost:8081/admin/productos/${product._id}`
                     }
                 let del = document.createElement("button")
+                    del.className = "btn btn-delete"
                     del.textContent="Borrar"
+                    del.id=product._id
+                    del.onclick=()=>{
+                        deleteProduct(product)
+                    }
                 let cfooter = document.createElement("div")
-                let a = document.createElement("a") 
-                    a.href=`http://localhost:8081/admin/productos/${product._id}`
-                    a.method="DELETE"
-                    del.appendChild(a)
                 img.src=product.images[0]
                 h2.textContent=product.title
                 p.textContent=product.description
                 quantity.textContent="Stock: " + product.quantity + " unidades"
-                edit.textContent="Editar"
                 card.className = "card-product"
                 img.className = "card-img"
                 h2.className ="title"
                 cfooter.className = "card-footer"
-                del.className = "btn btn-delete"
                 quantity.className = "card-featured"
                 productList.appendChild(card)
                 card.appendChild(img)
@@ -49,7 +48,15 @@ function showProducts(){
                 cfooter.appendChild(edit)
                 cfooter.appendChild(del)
             })
-
-
+            function deleteProduct(product){
+                result = confirm("¿Seguro que desea eliminar el producto?")
+                if(result){
+                    fetch(`/admin/productos/${product._id}`,{
+                        method:'DELETE',
+                        headers: {'Content-type':'Application/json'}
+                    })
+                    showProducts()//Aqui termine
+                }
+            }
         })
 }
