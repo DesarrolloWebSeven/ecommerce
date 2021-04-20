@@ -17,11 +17,14 @@ export default createStore({
     getCurrentLang(state){
       return state.currentLang
     },
-    getTotal(state) {
-      return state.total
-    },
     getToken(state) {
       return state.token
+    },
+    totalQuantity(state) {
+      return Object.values(state.cart).reduce((acc, {quantity}) => acc + quantity, 0)
+    },
+    totalPrice(state) {
+      return Object.values(state.cart).reduce((acc, {quantity, price}) => acc + quantity * price, 0)
     }
   },
   mutations: {
@@ -46,8 +49,8 @@ export default createStore({
       console.log(state.cart)
     },
     setVaciar(state) {
-      state.carrito = {}
-    },
+      state.cart = {}
+    }
   },
   actions: {
     async fetchData({commit}) {
