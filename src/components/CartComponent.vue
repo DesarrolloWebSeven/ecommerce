@@ -3,8 +3,7 @@
     {{cart}}
   </pre> -->
 
-  <div class="container section">
-    <div class="row">
+ 
       <div v-for="(id, i) in Object.keys(cart)" :key="i" class="col-12 m-3">
         <div class="card row">
           <div class="card-horizontal row justify-content-center">
@@ -63,8 +62,7 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+ 
 </template>
 
 <script>
