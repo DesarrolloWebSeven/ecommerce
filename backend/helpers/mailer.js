@@ -27,13 +27,13 @@ mailer.transporter.use('compile', hbs({
   extName: '.hbs'
 }))
 
-mailer.send = (user, id, subject, text) => {
+mailer.send = (email, user, subject, text) => {
   mailer.transporter.sendMail({
       from: 'Geeky', 
-      to: user.email, 
+      to: email, 
       subject: subject,
       template: text,
-      context: { user, id }
+      context: { user }
     })
 }
 

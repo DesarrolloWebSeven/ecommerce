@@ -42,7 +42,7 @@
 
 
     "_contact": "CONTACTUS",
-    "descriptionContactP1": "If you prefer to contact us by email, you can fill out this form and we will answer you as quickly as possible.",
+    "descriptionContactP1": "Contact",
     "name":"Name",
     "plName":"Enter your first name",
     "lastName":"Last Name",
@@ -54,7 +54,7 @@
     "select2":"Sizes",
     "select3":"Shipping",
     "select4":"Complaints",
-    "descriptionQuery":"Describe your query in detail",
+    "descriptionQuery":"Message",
     "sendForm":"Send",
 
 
