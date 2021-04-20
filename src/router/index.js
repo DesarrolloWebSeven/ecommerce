@@ -105,12 +105,16 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if ((to.name === 'Home'|| to.name == 'Payment') || localStorage.getItem('geeky')) next()
+  if ((to.name === 'Home'|| to.name == 'Payment') || localStorage.getItem('geeky')) {
+    if (localStorage.getItem('geeky')) cookie.classList.add('hide')
+    next()
+  }
   else {
     alert("Para navegar debes aceptar la política de Cookies")
     next(false)
   }
-})
+}) 
+
 
 export default router
                               

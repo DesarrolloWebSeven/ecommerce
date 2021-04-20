@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const mailer = require("../helpers/mailer");
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs');
 const errorHandler = require('../helpers/validation')
 const jwt = require('jsonwebtoken')
 
@@ -14,7 +14,7 @@ const registerUser = async (req, res) => {
   }
   catch (err) {
     const errors = errorHandler.signupValidation(err)
-    res.status(400).json(errors)
+    res.json(errors)
   }
 
 }
