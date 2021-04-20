@@ -1,32 +1,160 @@
 <template>
-  <div><Total /></div>
+  <!-- <pre>
+    {{cart}}
+  </pre> -->
+
+  <div class="container section">
+    <div class="row">
+      <div v-for="(id, i) in Object.keys(cart)" :key="i" class="col-12 m-3">
+        <div class="card row">
+          <div class="card-horizontal row justify-content-center">
+            <div
+              id="carouselExampleIndicators"
+              class="col-12 col-lg-6 m-4"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-inner">
+                <div class="">
+                  <img
+                    :src="cart[id].images[0]"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body col-12 col-lg-6">
+              <div class="d-flex flex-column align-items-start">
+                <h4 class="card-title">{{ cart[id].title }}</h4>
+                <p class="card-text">
+                  <b>Precio unidad: </b> {{ cart[id].price }}
+                </p>
+                <p class="card-text">
+                  <b>Cantidad en tu carrito: </b> {{ cart[id].quantity }}
+                  <button
+                    class="btn"
+                    style="background: none; color: black"
+                    @click="cart[id].quantity++"
+                  >
+                    <i class="fas fa-plus-circle"></i></button
+                  ><button
+                    class="btn m-2"
+                    style="background: none; color: black"
+                    @click="cart[id].quantity--"
+                  >
+                    <i class="fas fa-minus-circle"></i>
+                  </button>
+                </p>
+                <p class="card-text">
+                  <b>Subtotal producto: </b>
+                  {{ (cart[id].quantity * cart[id].price).toFixed(2) }}
+                </p>
+              </div>
+              
+              <!--<p class="card-text price">{{ (contador.uds*cart.price).toFixed(2) }} € <input :value=contador.uds @change="updatePrice(cart.price, $event)" type="number" name="cantidad"  min="1" :max=cart.quantity ></p>
+              
+                <router-link to="/carrito"><p class="card-text"><button @click="addToCart(productDetail)">COMPRAR</button></p></router-link> -->
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import Total from '@/components/Total'
-import { ref, reactive, computed} from "vue";
-import {useStore} from 'vuex'
+import Total from "@/components/Total";
+import { ref, reactive, computed } from "vue";
+import { useStore } from "vuex";
 
 export default {
   name: "CartComponent",
   props: {},
   components: {
-    Total
+    Total,
   },
   setup() {
-    let store=useStore()
-
-    
-
+    const store = useStore();
+    const cart = computed(() => store.state.cart);
 
     return {
-       
-
+      cart,
     };
   },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.section {
+  background-color: #10555e1e;
+  max-width: 80%;
+  margin-top: 30px;
+  color: black;
+  .row {
+    max-width: 95%;
+    margin: 0 auto;
+  }
+  .titleHome {
+    font-family: "Game" !important;
+    font-size: 50px;
+    background-color: #0f606b;
+    padding: 30px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+  }
 
+  @media (max-width: 600px) {
+    .titleHome {
+      font-size: 40px;
+    }
+  }
+
+  @media (max-width: 530px) {
+    .titleHome {
+      font-size: 25px;
+    }
+  }
+}
+.card {
+  border: none;
+  margin: 20px;
+  .card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+    color: black;
+
+    .card-title {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    #carouselExampleIndicators {
+      max-height: 200px !important;
+      max-width: 200px !important;
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .price {
+        background-color: #0f606b;
+        padding: 5px;
+        color: white;
+      }
+    }
+    img {
+      width: 200px;
+      height: 200px;
+      background-color: white;
+      margin: 5px;
+    }
+    button {
+      color: #fff;
+      background-color: black;
+      padding: 10px;
+    }
+  }
+}
 </style>
