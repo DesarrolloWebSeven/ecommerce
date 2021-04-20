@@ -105,7 +105,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if ((to.name === 'Home'|| to.name == 'Payment') || localStorage.getItem('geeky')) {
+  if ((to.name === 'Home'|| to.name == 'PasswordForm' || to.name == 'Confirmation' || to.name == 'Login' || to.name == 'Cookies') || localStorage.getItem('geeky')) {
     if (localStorage.getItem('geeky')) cookie.classList.add('hide')
     next()
   }
