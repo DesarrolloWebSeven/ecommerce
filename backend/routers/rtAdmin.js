@@ -2,6 +2,7 @@ const express = require('express')
 const rtAdmin = express.Router()
 const adminController = require('../controllers/adminController')
 const productController = require('../controllers/productController')
+const pageController = require('../controllers/staticPageController')
 const { checkUser, requireAuth } = require('../helpers/validation')
 
 
@@ -29,5 +30,9 @@ rtAdmin.delete('/productos/:id', requireAuth, productController.productsDelete)
 rtAdmin.get('/productos/:id', requireAuth, productController.productsFindById)
 rtAdmin.delete('/productos/imagenes/:id', requireAuth, productController.imagesDelete)
 rtAdmin.post('/productos/update', requireAuth, productController.productsUpdate)
-    
+
+//Content editor
+rtAdmin.post('/project', requireAuth, pageController.pageSave)
+rtAdmin.get('/pages/:title', pageController.pageList)
+
 module.exports= rtAdmin

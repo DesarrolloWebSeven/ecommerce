@@ -6,9 +6,7 @@ const login = (req,res)=>{
 }
 
 const signin = async (req, res) => {
-
   const { email, password } = req.body
-
   try {
     const user = await User.findOne({ email })
     if (!user) res.render('login', { userError: 'Usuario no encontrado'})
@@ -27,7 +25,6 @@ const signin = async (req, res) => {
   } catch (err) {
     res.status(400).json(err)
   }
-
 }
 
 const logout = (req, res) => {
@@ -37,13 +34,13 @@ const logout = (req, res) => {
 
 const team = (req,res)=>{
     res.render('team', ({
-      title: "Ecommerce Admin | Equipo"
+      title: "Ecommerce Admin | Equipo", src:'pages_static.js'
     }))
 }
 
 const project = (req,res)=>{
     res.render('project', ({
-      title: "Ecommerce Admin | Proyecto"
+      title: "Ecommerce Admin | Proyecto", src:'pages_static.js'
     }))
 }
 
