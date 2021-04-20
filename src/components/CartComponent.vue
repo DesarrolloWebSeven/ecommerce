@@ -1,12 +1,8 @@
 <template>
-  <!-- <pre>
-    {{cart}}
-  </pre> -->
-
- 
-      <div v-for="(id, i) in Object.keys(cart)" :key="i" class="col-12 m-3">
+       <div v-for="(id, i) in Object.keys(cart)" :key="i" class="col-12">
         <div class="card row">
           <div class="card-horizontal row justify-content-center">
+            
             <div
               id="carouselExampleIndicators"
               class="col-12 col-lg-6 m-4"
@@ -52,6 +48,7 @@
                   <b>Subtotal producto: </b>
                   {{ (cart[id].items * cart[id].price).toFixed(2) }}
                 </p>
+                <p @click="deleteProduct(id)" class="card-text"><i  class="fas fa-trash-alt"></i><span>Eliminar producto</span></p>
               </div>
               
               <!--<p class="card-text price">{{ (contador.uds*cart.price).toFixed(2) }} € <input :value=contador.uds @change="updatePrice(cart.price, $event)" type="number" name="cantidad"  min="1" :max=cart.quantity ></p>
@@ -79,10 +76,12 @@ export default {
   setup() {
     const store = useStore();
     const cart = computed(() => store.state.cart);
+    const deleteProduct = (_id) => {store.commit('setDeleteProduct', _id)}
    
 
     return {
       cart,
+      deleteProduct
     };
   },
 };
@@ -131,6 +130,9 @@ export default {
       i {
         color:gray;
       }
+    }
+    i{
+      cursor: pointer;
     }
   }
 }

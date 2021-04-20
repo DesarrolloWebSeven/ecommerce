@@ -1,34 +1,40 @@
 <template>
-<div class="container section">
-    <div class="row">
-        <CartComponent />
-        <Total />
+  <div class="container section">
+    <div v-if="Object.keys(cart).length" class="row">
+      <CartComponent />
+      <button class="btn btn-primary" @click="emptyCart">Vaciar carrito</button>
+      <Total />
+      
     </div>
-</div>
 
+    <div v-else class="row"><h2>Todavia no tienes nada en el carrito</h2></div>
+  </div>
 </template>
 
 <script>
-import {computed} from 'vue'
-import {useStore} from 'vuex'
+import { computed } from "vue";
+import { useStore } from "vuex";
 import CartComponent from "@/components/CartComponent.vue";
 import Total from "@/components/Total.vue";
-
 
 export default {
   name: "Cart",
   props: {},
   components: {
     CartComponent,
-    Total
+    Total,
   },
- 
-    setup(){
-    const store = useStore()
-    const cart = computed(() => store.state.cart)
-    
-  }
-  
+
+  setup() {
+    const store = useStore();
+    const cart = computed(() => store.state.cart);
+    const emptyCart = () => {store.commit('setEmptyCart')}
+
+    return { 
+      cart,
+      emptyCart
+    };
+  },
 };
 </script>
 
@@ -38,7 +44,7 @@ export default {
   max-width: 80%;
   margin-top: 30px;
   color: black;
-  
+
   .row {
     max-width: 95%;
     margin: 0 auto;
