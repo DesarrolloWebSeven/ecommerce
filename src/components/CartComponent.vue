@@ -41,7 +41,7 @@
                     <i class="fas fa-plus-circle"></i></button
                   >
                   <button
-                    :class="{disabledButton2: cart[id].items==0} "
+                    :class="{disabledButton2: cart[id].items==1} "
                     class="btn"
                     style="background: none; color: black"
                     @click="cart[id].items>0 ?cart[id].items-- :null"
@@ -91,36 +91,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.section {
-  background-color: #10555e1e;
-  max-width: 80%;
-  margin-top: 30px;
-  color: black;
-  .row {
-    max-width: 95%;
-    margin: 0 auto;
-  }
-  .titleHome {
-    font-family: "Game" !important;
-    font-size: 50px;
-    background-color: #0f606b;
-    padding: 30px;
-    margin-bottom: 30px;
-    margin-top: 30px;
-  }
-
-  @media (max-width: 600px) {
-    .titleHome {
-      font-size: 40px;
-    }
-  }
-
-  @media (max-width: 530px) {
-    .titleHome {
-      font-size: 25px;
-    }
-  }
-}
 .card {
   border: none;
   margin: 20px;
@@ -141,24 +111,15 @@ export default {
     .card-body {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      .price {
-        background-color: #0f606b;
-        padding: 5px;
-        color: white;
-      }
-    }
+      align-items: left;
+     }
     img {
       width: 200px;
       height: 200px;
       background-color: white;
       margin: 5px;
     }
-    button {
-      color: #fff;
-      background-color: black;
-      padding: 10px;
-    }
+    
     .disabledButton{
       pointer-events: none;
       
