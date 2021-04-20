@@ -1,5 +1,5 @@
 <div class="container section">
-    <form class="section row g-3" action="/admin/login" method="POST">
+    <form class="section row g-3" action="/admin" method="POST">
     {{#if error}}
     <h2>{{ error }}</h2>
     {{/if}}
@@ -17,7 +17,6 @@
       <div class="col-12" v-if="passError">
         <p>{{ passError }}</p>
       </div>
-      <label><input type="checkbox" v-model="forgotPassword"/> ¿Olvidaste tu contraseña?</label>
       <div class="col-12" v-if="success">
         <p>{{ success }}</p>
       </div>

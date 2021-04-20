@@ -14,7 +14,7 @@ const registerUser = async (req, res) => {
   }
   catch (err) {
     const errors = errorHandler.signupValidation(err)
-    res.status(400).json(errors)
+    res.json(errors)
   }
 
 }
