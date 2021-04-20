@@ -5,7 +5,7 @@
 <router-view/>
 
 <a href="https://wa.me/34692856097/?text=Hola%Geeky!!%¿Podemos%20ayudarte?"><ContactIcon /></a>
-<AlertCookies />
+<!-- <AlertCookies /> -->
 <Footer/>
 
 </div>

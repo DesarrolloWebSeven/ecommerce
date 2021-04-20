@@ -78,7 +78,7 @@ export default {
   padding: 45px 0 20px;
   font-size: 15px;
   line-height: 24px;
-  border-top: 8px solid black;
+  
   
 }
 .site-footer hr {
