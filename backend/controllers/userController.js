@@ -2,14 +2,15 @@ const User = require("../models/User");
 const mailer = require("../helpers/mailer");
 const bcrypt = require('bcryptjs');
 const errorHandler = require('../helpers/validation')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { getMaxListeners } = require("../database");
 
 // User Sign Up
 const registerUser = async (req, res) => {
 
   try {
     const user = await User.create(req.body)
-    mailer.send(user, user._id, 'Bienvenido a Geeky', 'confirmationEmail')
+    mailer.send(user.email, user, 'Bienvenido a Geeky', 'confirmationEmail')
     res.status(201).json({ user: user._id });
   }
   catch (err) {
@@ -53,12 +54,12 @@ const login = async (req, res) => {
 
 // Change password
 const forgotPassword = (req, res) => {
-  User.find({ email: req.body.email })
+  User.findOne({ email: req.body.email })
     .then(user => {
       if(user.length) {
         if(user[0].active === true) {
           return new Promise((resolve, reject) => {
-            mailer.send(user[0], user[0]._id, 'Cambiar contraseña', 'changePassword')
+            mailer.send(user.email, user, 'Cambiar contraseña', 'changePassword')
             resolve(res.json(user))
           }) 
         }
@@ -93,6 +94,19 @@ const auth = (req, res) => {
 
 }
 
+const contactMail = async (req, res) => {
+
+  const user = req.body
+  
+  try {
+    mailer.send('geeky@gmail.com', user, 'Consulta cliente', 'contactEmail')
+    res.json('Consulta ok')
+  } catch (err) {
+    res.json(err)
+  }
+
+}
+
 module.exports = {
   registerUser,
   confirmationUser,
@@ -100,5 +114,6 @@ module.exports = {
   forgotPassword,
   getPassword,
   changePassword,
-  auth
+  auth,
+  contactMail
 }

@@ -106,7 +106,7 @@ export default {
     }
 
     function addToCart(productDetail){
-      productDetail.quantity=parseInt(contador.uds)
+      productDetail.items=parseInt(contador.uds)
      
       store.dispatch('addToCart', productDetail, parseInt(contador.uds))
     
