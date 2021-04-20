@@ -1,6 +1,6 @@
 <template>
 <div style="width:80%">
-    <h6 v-if="total=>0" class="d-flex justify-content-end">TOTAL:{{total}}</h6>
+    <h6 v-if="total=>0" class="d-flex justify-content-end">TOTAL:{{(totalPrice).toFixed(2)}}</h6>
 </div>
   
   
@@ -14,17 +14,12 @@ export default {
     props:{},
     setup(){
         const store= useStore()
-        let total=ref(0)
+        const totalPrice = computed(() => store.getters.totalPrice)    
 
-        
-
-       /*  let total=computed(()=>{
-            return store.getters.getTotal
-            total+=5
-        }) */
+       
                 
         return{
-            total
+            totalPrice
         }
     }
 

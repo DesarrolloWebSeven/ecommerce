@@ -18,9 +18,6 @@ export default createStore({
     getCurrentLang(state){
       return state.currentLang
     },
-    getTotal(state) {
-      return state.total
-    },
     getToken(state) {
       return state.token
     },
@@ -57,15 +54,6 @@ export default createStore({
     },
     setVaciar(state) {
       state.cart = {}
-    },
-    plus(state, product) {
-      state.cart[product].quantity = state.cart[product].quantity + 1
-    },
-    minus(state, product) {
-      state.cart[product].quantity = state.cart[product].quantity - 1
-      if (state.cart[product].quantity === 0) {
-        delete state.cart[product]
-      }
     }
   },
   actions: {
