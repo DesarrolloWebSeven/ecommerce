@@ -48,8 +48,11 @@ export default createStore({
       state.cart[product._id] = { ...product }
       console.log(state.cart)
     },
-    setVaciar(state) {
+    setEmptyCart(state) {
       state.cart = {}
+    },
+    setDeleteProduct(state, _id) {
+      delete state.cart[_id]
     }
   },
   actions: {
