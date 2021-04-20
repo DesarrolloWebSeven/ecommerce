@@ -96,7 +96,7 @@
           <li class="nav-item">
             <router-link to="/carrito" class="nav-link"
               ><i class="fas fa-shopping-cart cart"></i
-            ><span id="cart_menu_num" data-action="cart-can" class="badge rounded-circle"><Total class="total" /></span></router-link>
+            ><span id="cart_menu_num" data-action="cart-can" class="badge rounded-circle total">{{totalQuantity}}</span></router-link>
           </li>
           <li class="nav-item">
             <router-link to="/buscador" class="nav-link"
@@ -113,7 +113,7 @@
 </template>
 
 <script>
-import Total from '@/components/Total'
+
 import { useStore } from "vuex";
 import { computed } from "vue";
 import Lang from "@/components/Lang";
@@ -130,18 +130,19 @@ export default {
       localStorage.removeItem('jwt')
       store.dispatch('setLogin', null)
     }
-
+    const totalQuantity = computed(() => store.getters.totalQuantity)
 
     return {
       user,
       logout,
+      totalQuantity,
       lang: computed(() => useStore().getters.getLang),
     };
   },
 
   components: {
     Lang,
-    Total
+    
   },
 };
 </script>

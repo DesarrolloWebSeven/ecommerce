@@ -26,6 +26,12 @@ export default createStore({
     },
     getCookie(state) {
       return state.cookie
+    },
+    totalQuantity(state) {
+      return Object.values(state.cart).reduce((acc, {quantity}) => acc + quantity, 0)
+    },
+    totalPrice(state) {
+      return Object.values(state.cart).reduce((acc, {quantity, price}) => acc + quantity * price, 0)
     }
   },
   mutations: {
@@ -50,8 +56,17 @@ export default createStore({
       console.log(state.cart)
     },
     setVaciar(state) {
-      state.carrito = {}
+      state.cart = {}
     },
+    plus(state, product) {
+      state.cart[product].quantity = state.cart[product].quantity + 1
+    },
+    minus(state, product) {
+      state.cart[product].quantity = state.cart[product].quantity - 1
+      if (state.cart[product].quantity === 0) {
+        delete state.cart[product]
+      }
+    }
   },
   actions: {
     async fetchData({commit}) {

@@ -35,7 +35,7 @@
                   <button
                     class="btn"
                     style="background: none; color: black"
-                    @click="cart[id].quantity++"
+                    @click="plus(item.id)"
                   >
                     <i class="fas fa-plus-circle"></i></button
                   ><button
@@ -78,9 +78,14 @@ export default {
   setup() {
     const store = useStore();
     const cart = computed(() => store.state.cart);
+    const plus = id => {store.commit('plus', id)}
+    const minus = id => {store.commit('minus', id)}
+    
 
     return {
       cart,
+      plus,
+      minus
     };
   },
 };
