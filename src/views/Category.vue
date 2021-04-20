@@ -1,12 +1,12 @@
 <template>
-  <div class="container section">
+  <div class="container section" v-if="products">
     <h1 class="titleHome">{{products.title}}</h1>
     <div class="row">
       
       <div 
         v-for="(product, i) in products"
         :key="i"
-        class="col-12 col-md-6"
+        class="col-12 col-xl-6 col-lg-6"
       >
         <Product :product="product" />
       </div>
@@ -32,8 +32,9 @@ export default {
     
     watch(()=> route.params,
       async newParams=> {
+        
         products.arr= await getProducts(newParams.category)
-        products.title= route.params.category.toUpperCase()
+        products.title= route.params.category
       })
 
     function getProducts(category) {      
@@ -90,7 +91,7 @@ export default {
     }
   }
 
-  @media (max-width: 530px) {
+  @media (max-width: 576px) {
     .titleHome {
       font-size: 25px;
     }

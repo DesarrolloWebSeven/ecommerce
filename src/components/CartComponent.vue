@@ -1,33 +1,26 @@
 <template>
-  <div>TOTAL: {{ calcTotal }}</div>
+  <div><Total /></div>
 </template>
 
 <script>
+import Total from '@/components/Total'
 import { ref, reactive, computed} from "vue";
 import {useStore} from 'vuex'
 
 export default {
   name: "CartComponent",
   props: {},
-  components: {},
+  components: {
+    Total
+  },
   setup() {
     let store=useStore()
 
-    const calcTotal = computed(() => {
-      let total=0  
-      /* datos.forEach(dato => {
-        
-        total+=dato.cantidad*dato.precio
-        store.commit('setTotal', total)
-      })  */  
-      
-      return total.toFixed(2)
-      
-    })
+    
 
 
     return {
-        calcTotal
+       
 
     };
   },

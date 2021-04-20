@@ -23,7 +23,7 @@
 import Signup from '@/components/Signup.vue'
 import Signin from '@/components/Signin.vue'
 import { useStore } from 'vuex'
-import { ref, reactive, computed } from 'vue'
+import { ref, computed } from 'vue'
 export default {
   name: "Login",
   components:{

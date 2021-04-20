@@ -125,8 +125,6 @@ export default {
     font-size: 50px;
     background-color: #0f606b;
     padding: 30px;
-    border-top: 8px solid black;
-    border-bottom: 8px solid black;
     margin-bottom: 30px;
     margin-top: 30px;
   }
@@ -142,8 +140,7 @@ export default {
       flex-direction: column;
       flex: 1 1 auto;
       color: black;
-      border-left: 8px solid black;
-      border-bottom: 8px solid black;
+      
       .card-title {
         text-transform: uppercase;
         font-weight: bold;

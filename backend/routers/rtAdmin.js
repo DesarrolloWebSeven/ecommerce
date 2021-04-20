@@ -3,18 +3,24 @@ const rtAdmin = express.Router()
 const adminController = require('../controllers/adminController')
 const productController = require('../controllers/productController')
 const { isAdmin, passLocal } = require('../helpers/auth')
+const { checkUser, requireAuth } = require('../helpers/validation')
+
+
+// Check User
+rtAdmin.get('*', checkUser)
 
 // Login routes
 rtAdmin.get('/login', adminController.login)
-rtAdmin.post('/login', passLocal)
+rtAdmin.post('/login', adminController.signin)
+rtAdmin.get('/logout', adminController.logout)
 
 // Project info routes
-rtAdmin.get('/equipo', isAdmin, adminController.team)
-rtAdmin.get('/proyecto', isAdmin, adminController.project)
+rtAdmin.get('/equipo', requireAuth, adminController.team)
+rtAdmin.get('/proyecto', requireAuth, adminController.project)
 
 // Client routes
-rtAdmin.get('/clientes', isAdmin, adminController.clients)
-rtAdmin.get('/pedidos', isAdmin, adminController.orders)
+rtAdmin.get('/clientes', requireAuth, adminController.clients)
+rtAdmin.get('/pedidos', requireAuth, adminController.orders)
 
 // Product routes
 rtAdmin.get('/productos', isAdmin, productController.productsIndex)

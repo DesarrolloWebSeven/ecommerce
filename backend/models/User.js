@@ -1,39 +1,25 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const bcrypt = require('bcrypt')
-const validator = require('validator');
+const { isEmail, isStrongPassword } = require('validator');
 
 const userSchema = new Schema({
   firstname: { type: String },
   lastname: { type: String },
   email: {
     type: String,
-    required: [ true, "Debes introducir un email"],
     unique: true,
-    validate: {
-      validator: function(v) {
-        return validator.isEmail(v);
-      },
-      message: "Introduce un email válido"
-    },
+    lowercase: true,
+    required: [ true, "Debes introducir un email"],
+    validate: [isEmail, "Introduce un email válido"]
   },
   password: { 
     type: String, 
     required: [ true, "Debes introducir una contraseña"], 
-    validate: {
-      validator: function(v) {
-        return validator.isStrongPassword(v, {
-          minLength: 8, minLowercase: 1,
-          minUppercase: 1, minNumbers: 1, minSymbols: 1
-        });
-      },
-      message: "Introduce un password válido"
-    },
+    validate: [isStrongPassword, "Introduce un password válido"],
   },
   active: { type: Boolean, default: false },
-  provider: { type: String },
   admin: { type: Boolean, default: false },
-  phone: { type: Number },
   avatar: { type: String, default: null },
 });
 

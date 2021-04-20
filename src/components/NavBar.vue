@@ -84,10 +84,13 @@
         <ul
           class="navbar-nav ml-auto mb-2 mb-lg-0 d-flex flex-row align-items-center m-3"
         >
-          <li class="nav-item">
+          <li v-if="!user" class="nav-item">
             <router-link to="/login" class="nav-link"
               ><i class="fas fa-user"></i
             ></router-link>
+          </li>
+          <li v-if="user" class="nav-item">
+            <div @click="logout" class="nav-link">Logout</div>
           </li>
 
           <li class="nav-item">
@@ -118,7 +121,20 @@ import Lang from "@/components/Lang";
 export default {
   name: "NavBar",
   setup() {
+    const store = useStore()
+    const user = computed(() => {
+      return store.getters.getToken;
+    });
+
+    const logout = () => {
+      localStorage.removeItem('jwt')
+      store.dispatch('setLogin', null)
+    }
+
+
     return {
+      user,
+      logout,
       lang: computed(() => useStore().getters.getLang),
     };
   },
@@ -137,12 +153,16 @@ export default {
 }
 nav.navbar {
   background-color: #0f606b;
-  border-bottom: 8px solid black;
+  
 }
 .nav-link {
   font-family: "Game";
   color: black;
   margin-left: 10px;
+}
+
+.nav-item div {
+  cursor: pointer;
 }
 
 .logo {
