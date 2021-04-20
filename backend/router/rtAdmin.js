@@ -9,8 +9,8 @@ const { checkUser, requireAuth } = require('../helpers/validation')
 rtAdmin.get('*', checkUser)
 
 // Login routes
-rtAdmin.get('/login', adminController.login)
-rtAdmin.post('/login', adminController.signin)
+rtAdmin.get('/', adminController.login)
+rtAdmin.post('/', adminController.signin)
 rtAdmin.get('/logout', adminController.logout)
 
 // Project info routes

@@ -32,7 +32,7 @@ const signin = async (req, res) => {
 
 const logout = (req, res) => {
   res.cookie('jwt', ' ', { maxAge: 1 })
-  res.redirect('/admin/login')
+  res.redirect('/admin')
 }
 
 const team = (req,res)=>{

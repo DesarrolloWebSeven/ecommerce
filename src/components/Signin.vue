@@ -48,22 +48,17 @@ export default {
     const login = async () => {
       if(forgotPassword.value === true) {
         
-        if(!regExpEmail.test(email.value)) errors.email = "Debes introducir un email válido";
+        if(!regExpEmail.test(email.value)) errors.value = "Debes introducir un email válido";
         else {
 
           try {
-          const res = await axios.post("http://localhost:8081/usuario/password", {
-            method: "POST",
-            body: JSON.stringify({ email: email.value }),
-            headers: { "Content-Type": "application/json" }
-          })
-          const data = await res.json()
-          errors.email = ''
-          if(data.includes("no encontrado")) success.value = "El usuario no existe"
-          else if (data.includes("confirmado")) success.value = "Esta cuenta aún no ha sido confirmada"
+          const res = await axios.post("usuario/password", { email: email.value })
+          errors.value = ''
+          if(res.data.includes("no encontrado")) success.value = "El usuario no existe"
+          else if (res.data.includes("confirmado")) success.value = "Esta cuenta aún no ha sido confirmada"
           else success.value = "Accede a tu email para cambiar tu contraseña"
           } catch (err) {
-            console.log(err)
+            console.log(err.message)
           }
       }}
 
@@ -81,7 +76,7 @@ export default {
             router.push('/')
           }
         } catch (err) {
-        console.log(err)
+          console.log(err.message)
         }
       }
       

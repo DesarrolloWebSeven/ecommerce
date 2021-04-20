@@ -8,7 +8,7 @@ var cookieParser = require('cookie-parser')
 
 
 // Database settings
-const conexion = require('./connection')
+const conexion = require('./database')
 conexion.on('error',console.error.bind(console,"Error de conexion mongo"))
 conexion.once('open',()=>console.log("Conexión mongo OK!!"))
 
@@ -29,9 +29,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 // Routes
-app.use('/productos', require('./routers/rtProduct'))
-app.use('/admin', require('./routers/rtAdmin'))
-app.use('/usuario', require('./routers/rtUser'))
+app.use('/productos', require('./router/rtProduct'))
+app.use('/admin', require('./router/rtAdmin'))
+app.use('/usuario', require('./router/rtUser'))
 
 // Error handler
 app.use((req, res) => res.status(400).render('notfound'))
