@@ -1,21 +1,16 @@
 <header>
-    <nav class="nav">
-        <div style="margin-top:1.5rem; margin-left: 1rem; margin-bottom:1.5rem">
-            <img src="/images/logo/geeky.png" style="width:150px;" alt="Logo de Geeky">
-        </div>
-        {{#if user}}
-        <div style="margin-top:1.5rem; margin-left: 1rem; margin-bottom:1.5rem">
-            <a href="/admin/logout">Logout</a>
-        </div>
-        {{/if}}
-    </nav>
-    <nav class="container">
-        <ul class="nav nav-tabs nav-justified">
-            <li><a href="/admin/productos">Productos</a></li>
-            <li><a href="/admin/proyecto">Proyecto</a></li>
-            <li><a href="/admin/equipo">Equipo</a></li>
-            <li class="active"><a href="/admin/clientes">Clientes</a></li>
-            <li><a href="/admin/pedidos">Pedidos</a></li>
-        </ul>
-    </nav>
+  <img src="/logo/logo-color.png" alt="Logotipo de Geeky">
+  <div class="user-menu">
+    <img src="/logo/user.png" alt="Usuario Administrador">
+    <a href="/admin/logout"><i class="fas fa-sign-out-alt"></i></a>
+  </div>
 </header>
+<nav class="mainnav">
+  <div>
+    <a href="/admin/productos" class="btn btn-success"><i class="fas fa-gift"></i><p>Productos</p></a>
+    <a href="/admin/proyecto" class="btn btn-danger"><i class="fas fa-store"></i><p>Proyecto</p></a>
+    <a href="/admin/equipo" class="btn btn-primary"><i class="fas fa-user-friends"></i><p>Equipo</p></a>
+    <a href="/admin/clientes" class="btn btn-warning"><i class="fas fa-address-card"></i><p>Clientes</p></a>
+    <a href="/admin/pedidos" class="btn btn-info"><i class="fas fa-shopping-basket"></i><p>Pedidos</p></a>
+  </div>
+</nav>
