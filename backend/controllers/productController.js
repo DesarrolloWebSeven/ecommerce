@@ -2,10 +2,6 @@ const Product = require('../models/Product')
 const fs = require('fs').promises
 const path = require('path')
 
-const productsIndex = (req,res)=>{
-    res.render('products', {src:'products.js', css: 'styles'})
-}
-
 const productsSave = (req,res)=>{
     if(req.body.featured=="on") req.body.featured=true
     console.log(req.body)
@@ -21,13 +17,24 @@ const productsSave = (req,res)=>{
         .catch(err=>console.log(err))
 }
 
-const productsList = (req,res)=>{
-        Product.find().then(data=>res.json(data))        
+const productsList = (req, res)=>{
+  Product.find().then( data => {
+    let products = []
+    data.forEach( item => {
+      let product = {}
+      product.title = item.title
+      product.description = item.description.slice(0, 70) + ' (...)'
+      product.image = item.images[0]
+      product.id = item._id
+      products.push(product)
+    })
+    res.render('products', { title: 'Admin | Productos', src: 'products.js', css: 'products', products})
+    })        
 }
 
 const productsDelete = async (req,res)=>{
     console.log("vas a eliminar: ", req.params.id)
-    Product.findById(req.params.id).lean()
+/*     Product.findById(req.params.id).lean()
         .then(product=>{
             product.images.forEach(image=>{
                 fs.unlink(path.join(__dirname, '../../public', image))
@@ -37,7 +44,7 @@ const productsDelete = async (req,res)=>{
         })
     const product_delete = await Product.findByIdAndDelete(req.params.id)
     console.log("Se ha borrado: " + product_delete)
-    res.render('products', {src:'products.js'})
+    res.render('products', {src:'products.js'}) */
 }
 
 const productsFindById = (req,res)=>{
@@ -107,7 +114,6 @@ const showDetailProduct = (req,res) =>{
 }
 
 module.exports = {
-    productsIndex,
     productsSave,
     productsList,
     productsDelete,

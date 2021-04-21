@@ -3,7 +3,6 @@ const mailer = require("../helpers/mailer");
 const bcrypt = require('bcryptjs');
 const errorHandler = require('../helpers/validation')
 const jwt = require('jsonwebtoken');
-const { getMaxListeners } = require("../database");
 
 // User Sign Up
 const registerUser = async (req, res) => {

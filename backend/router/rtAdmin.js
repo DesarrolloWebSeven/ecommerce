@@ -22,9 +22,8 @@ rtAdmin.get('/clientes', requireAuth, adminController.clients)
 rtAdmin.get('/pedidos', requireAuth, adminController.orders)
 
 // Product routes
-rtAdmin.get('/productos', requireAuth, productController.productsIndex)
+rtAdmin.get('/productos', requireAuth, productController.productsList)
 rtAdmin.post('/productos', requireAuth, productController.productsSave)
-rtAdmin.get('/productos/listar', requireAuth, productController.productsList)
 rtAdmin.delete('/productos/:id', requireAuth, productController.productsDelete)
 rtAdmin.get('/productos/:id', requireAuth, productController.productsFindById)
 rtAdmin.delete('/productos/imagenes/:id', requireAuth, productController.imagesDelete)

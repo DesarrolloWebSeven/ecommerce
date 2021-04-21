@@ -1,12 +1,12 @@
 const User = require('../models/User')
 const { createToken } = require('../helpers/validation')
 
-const login = (req,res)=>{
-    res.render('login', {
-      title: 'Admin | Login',
-      css: 'login'
-    })
-}
+const login = (req, res) => {
+  res.render('login', {
+    title: 'Admin | Login',
+    css: 'login'
+  })
+} 
 
 const signin = async (req, res) => {
 
@@ -41,32 +41,32 @@ const logout = (req, res) => {
   res.redirect('/admin')
 }
 
-const team = (req,res)=>{
-    res.render('team', ({
-      title: "Admin | Equipo",
-      css: 'styles'
-    }))
+const team = (req, res) => {
+  res.render('team', ({
+    title: "Admin | Equipo",
+    css: 'products'
+  }))
 }
 
-const project = (req,res)=>{
-    res.render('project', ({
-      title: "Admin | Proyecto",
-      css: 'styles'
-    }))
+const project = (req, res) => {
+  res.render('project', ({
+    title: "Admin | Proyecto",
+    css: 'products'
+  }))
 }
 
-const clients = (req,res)=>{
-    res.render('clients', ({
-      title: "Admin | Clientes",
-      css: 'styles'
-    }))
+const clients = (req, res) => {
+  res.render('clients', ({
+    title: "Admin | Clientes",
+    css: 'products'
+  }))
 }
 
-const orders = (req,res)=>{
-    res.render('orders', ({
-      title: "Admin | Pedidos",
-      css: 'styles'
-    }))
+const orders = (req, res) => {
+  res.render('orders', ({
+    title: "Admin | Pedidos",
+    css: 'products'
+  }))
 }
 
 module.exports = {

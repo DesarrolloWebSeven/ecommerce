@@ -43,11 +43,4 @@ const schemaProduct = new Schema({
 
 },{timestamps:true})
 
-class Product{
-    //constructor
-    //get y set
-    //private
-}
-
-schemaProduct.loadClass(Product)
 module.exports= mongoose.model('product',schemaProduct)
