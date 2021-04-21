@@ -51,7 +51,7 @@ const productsFindById = (req,res)=>{
     console.log(req.params)
     Product.findById(req.params.id).lean()
     .then(product=>{
-        res.render('products', {product:product, src:'products_update.js'})
+        res.render('products', {product:product, src:'products_update.js', css: 'products'})
     })
 }
 
