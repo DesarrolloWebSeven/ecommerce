@@ -3,7 +3,7 @@ const fs = require('fs').promises
 const path = require('path')
 
 const productsIndex = (req,res)=>{
-    res.render('products', {src:'products.js'})
+    res.render('products', {src:'products.js', css: 'styles'})
 }
 
 const productsSave = (req,res)=>{

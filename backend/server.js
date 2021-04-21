@@ -34,7 +34,7 @@ app.use('/admin', require('./router/rtAdmin'))
 app.use('/usuario', require('./router/rtUser'))
 
 // Error handler
-app.use((req, res) => res.status(400).render('notfound'))
+app.use((req, res) => res.status(400).render('notfound', { title: 'Admin | 404', css: '404'}))
 
 // Server running
 let port = process.env.PORT_SERVER || 3000
