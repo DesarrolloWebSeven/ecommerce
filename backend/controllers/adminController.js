@@ -2,7 +2,10 @@ const User = require('../models/User')
 const { createToken } = require('../helpers/validation')
 
 const login = (req,res)=>{
-    res.render('login')
+    res.render('login', {
+      title: 'Admin | Login',
+      css: 'login'
+    })
 }
 
 const signin = async (req, res) => {
@@ -11,12 +14,15 @@ const signin = async (req, res) => {
 
   try {
     const user = await User.findOne({ email })
-    if (!user) res.render('login', { userError: 'Usuario no encontrado'})
+    if (!user) res.render('login', { userError: 'Usuario no encontrado', title: 'Admin | Login',
+    css: 'login'})
     else {
-      if(!user.admin) res.render('login', { userError: 'Usuario sin permisos'})
+      if(!user.admin) res.render('login', { userError: 'Usuario sin permisos', title: 'Admin | Login',
+      css: 'login'})
       else {
         const isValid = user.matchPassword(password)
-        if(!isValid) res.render('login', { passError: 'Contraseña no válida'})
+        if(!isValid) res.render('login', { passError: 'Contraseña no válida', title: 'Admin | Login',
+        css: 'login'})
         if(isValid) {
           const token = createToken(user._id)
           res.cookie('jwt', token, { httpOnly: true });
@@ -37,25 +43,29 @@ const logout = (req, res) => {
 
 const team = (req,res)=>{
     res.render('team', ({
-      title: "Ecommerce Admin | Equipo"
+      title: "Admin | Equipo",
+      css: 'styles'
     }))
 }
 
 const project = (req,res)=>{
     res.render('project', ({
-      title: "Ecommerce Admin | Proyecto"
+      title: "Admin | Proyecto",
+      css: 'styles'
     }))
 }
 
 const clients = (req,res)=>{
     res.render('clients', ({
-      title: "Ecommerce Admin | Clientes"
+      title: "Admin | Clientes",
+      css: 'styles'
     }))
 }
 
 const orders = (req,res)=>{
     res.render('orders', ({
-      title: "Ecommerce Admin | Pedidos"
+      title: "Admin | Pedidos",
+      css: 'styles'
     }))
 }
 
