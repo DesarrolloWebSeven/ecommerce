@@ -4,13 +4,13 @@ const path = require('path')
 
 const pageSave = (req,res)=>{
     console.log(req.body)
-    console.log(req.route.path)
+    console.log(req.params.title)
     // let images=[]
     // req.files.forEach(i=>images.push('/images/'+i.filename))
     // req.body.images = images
-    let title = req.route.path.substr(1,req.route.path.length)
-    console.log(title)
-    req.body.title=title
+    //let title = req.route.path.substr(1,req.route.path.length)
+    //console.log(title)
+    req.body.title=req.params.title
     let page = new Page(req.body)
     page.save()
         .then(data=>{
@@ -28,7 +28,12 @@ const pageList = (req,res)=>{
         .catch(err=>res.json(err))
 }
 
+const pageLoad = (req,res)=>{
+
+}
+
 module.exports={
     pageSave,
-    pageList
+    pageList,
+    pageLoad
 }

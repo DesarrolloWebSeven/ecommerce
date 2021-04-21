@@ -32,7 +32,7 @@ rtAdmin.delete('/productos/imagenes/:id', requireAuth, productController.imagesD
 rtAdmin.post('/productos/update', requireAuth, productController.productsUpdate)
 
 //Content editor
-rtAdmin.post('/project', requireAuth, pageController.pageSave)
+rtAdmin.post('/pages/:title', requireAuth, pageController.pageSave)
 rtAdmin.get('/pages/:title', pageController.pageList)
 
 module.exports= rtAdmin
