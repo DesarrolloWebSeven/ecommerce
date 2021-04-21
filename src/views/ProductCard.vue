@@ -73,7 +73,6 @@
 <script>
 import { reactive, ref } from "vue";
 import {useRoute} from 'vue-router'
-
 import {useStore} from 'vuex'
 export default {
   name: "ProductCard",
@@ -109,8 +108,6 @@ export default {
       productDetail.items=parseInt(contador.uds)
      
       store.dispatch('addToCart', productDetail, parseInt(contador.uds))
-    
-
     }
 
     return {

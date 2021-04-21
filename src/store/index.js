@@ -65,13 +65,12 @@ export default createStore({
         console.log(error)
       }
     },
-    addToCart({ commit, state }, product) {
-      
-      console.log(5555,  state.cart.hasOwnProperty(product._id));
+    addToCart({ commit, state }, product) {      
       state.cart.hasOwnProperty(product._id)
         ? product.items = state.cart[product._id].items + product.items
         : product.items = product.items
       commit('setCart', product)},
+      
     setLogin(context, usuario) {
       context.commit('setToken', usuario)
     }

@@ -12,9 +12,11 @@
               <p class="card-text">Stock: {{ product.quantity }}</p>
               <p class="card-text price">{{ product.price }} €</p>
               <div>
-                <p class="card-text">
-                  <button @click="comprar(product._id)">COMPRAR</button>
-                </p>
+                <div>
+                  <router-link to="/carrito">
+                    <button @click="buy(product)">COMPRAR</button>
+                  </router-link>
+                </div>
                 <router-link
                   :to="'/producto/id/' + product._id"
                   class="card-text"
@@ -30,19 +32,29 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, ref, computed } from "vue";
+import { useStore } from "vuex";
 export default {
   name: "Product",
   props: {
     product: Object,
   },
   setup() {
-    function comprar(id) {
-      console.log("hola compra");
+    const store = useStore();
+    let product = ref();
+    let contador = reactive({
+      titulo: "Contador: ",
+      valor: 1,
+      uds: 1,
+    });
+
+    function buy(product) {
+      product.items = parseInt(contador.uds);
+      store.dispatch("addToCart", product, parseInt(contador.uds));
     }
 
     return {
-      comprar,
+      buy,
     };
   },
 };
@@ -57,7 +69,7 @@ export default {
     display: flex;
     flex: 1 1 auto;
     color: black;
-    
+
     .card-title {
       text-transform: uppercase;
       font-weight: bold;
@@ -79,20 +91,16 @@ export default {
       margin: 5px;
     }
     @media (max-width: 576px) {
-    img {
-      width: 150px;
-      height: 150px;
+      img {
+        width: 150px;
+        height: 150px;
+      }
     }
-       
-  }
     button {
       color: #fff;
       background-color: black;
       padding: 10px;
     }
   }
-  
 }
-
-  
 </style>
