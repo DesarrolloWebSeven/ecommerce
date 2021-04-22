@@ -1,10 +1,8 @@
 {{> header }}
 <main>
   <section>
+    <h1 class="text-center">Productos</h1>
     <p>{{mensaje}}</p>
-    <div>
-      <h1 class="text-center">Productos</h1>
-    </div>
     <form action="/admin/productos" method="POST" id="form" name="form" enctype="multipart/form-data">
       <div class="container">
         <input type="text" class="form-control hidden" id="id" name="id" value="{{product._id}}">
@@ -55,13 +53,13 @@
             <label for="imagenes">Archivos de imagenes</label>
             <input type="file" class="form-control" id="imagesNew" name="images" multiple>
           </div>
-          <div class="images"></div>
-          <div>
+{{!--           <div class="images"></div>
+ --}}     <div class="form-group col-md-1">
             <label><input type="checkbox" class="form-control" name="featured" value="true"> Destacado</label><br>
           </div>
 
           {{#if product}}
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-5">
             {{!-- onclick="document.form.action='/admin/productos' document.form.submit()" --}}
             <input type="submit" id="update" class="form-control" formaction="/admin/productos/update"
               value="Actualizar">
@@ -76,18 +74,8 @@
     </form>
   </section>
 
-  <section class="container search-console">
-    <div class="row">
-      <div class="col-12">
-        <form action="" class="search-form" id="search-console">
-          <div class="form-group has-feedback">
-            <label for="search" class="sr-only">Buscar</label>
-            <input type="text" class="form-control" name="search" id="search" placeholder="Buscar">
-            <span class="glyphicon glyphicon-search form-control-feedback"></span>
-          </div>
-        </form>
-      </div>
-    </div>
+  <section class="container">
+    <input type="text" class="form-control row search-console" name="search" id="search" placeholder="Buscar">
   </section>
 
   {{#if products}}
@@ -98,7 +86,7 @@
       <div class="card-body">
         <h5 class="card-title">{{this.title}}</h5>
         <p class="card-text">{{this.description}}</p>
-        <a class="delete btn btn-danger"><i data-id="{{this.id}}" class="fas fa-trash-alt"></i></a>
+        <a class="delete btn btn-danger" data-id="{{this.id}}"><i data-id="{{this.id}}" class="fas fa-trash-alt"></i></a>
         <a href="/admin/productos/{{this.id}}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
       </div>
     </div>

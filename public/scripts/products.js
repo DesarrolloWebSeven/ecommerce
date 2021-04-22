@@ -3,6 +3,9 @@ window.onload=()=>{
   button.forEach( item => {
     item.addEventListener('click', deleteProduct)
   })
+
+  let search = document.querySelector('#search')
+  search.addEventListener('keyup', searchItem)
 }
 
 function deleteProduct(e){
@@ -13,3 +16,13 @@ function deleteProduct(e){
       window.location.href = "/admin/productos"
     }
 } 
+
+function searchItem(e) {
+  const term = e.target.value.toLowerCase()
+  const products = document.querySelectorAll('.card')
+  products.forEach( product => {
+    let title = product.children[1].textContent.toLowerCase()
+    if(title.includes(term)) product.style.display = 'block'
+    else product.style.display = 'none' 
+  }) 
+}

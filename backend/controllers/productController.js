@@ -23,7 +23,7 @@ const productsList = (req, res)=>{
     data.forEach( item => {
       let product = {}
       product.title = item.title
-      product.description = item.description.slice(0, 70) + ' (...)'
+      product.description = item.description.slice(0, 55) + ' (...)'
       product.image = item.images[0]
       product.id = item._id
       products.push(product)
