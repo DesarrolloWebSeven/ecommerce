@@ -49,12 +49,9 @@
                   {{ (cart[id].items * cart[id].price).toFixed(2) }}
                 </p>
                 <p @click="deleteProduct(id)" class="card-text"><i  class="fas fa-trash-alt"></i><span>Eliminar producto</span></p>
-              </div>
+              </div>          
               
-              <!--<p class="card-text price">{{ (contador.uds*cart.price).toFixed(2) }} € <input :value=contador.uds @change="updatePrice(cart.price, $event)" type="number" name="cantidad"  min="1" :max=cart.quantity ></p>
               
-                <router-link to="/carrito"><p class="card-text"><button @click="addToCart(productDetail)">COMPRAR</button></p></router-link> -->
-              <div></div>
             </div>
           </div>
         </div>

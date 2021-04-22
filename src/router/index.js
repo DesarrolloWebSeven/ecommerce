@@ -13,7 +13,11 @@ import PasswordForm from '../views/PasswordForm.vue'
 import Category from '../views/Category.vue'
 import ProductCard from '../views/ProductCard.vue'
 import Cart from '../views/Cart.vue'
-import Payment from '../views/Payment.vue'
+/* import Payment from '../views/Payment.vue' */
+import Shipping from '../views/Shipping.vue'
+import Resume from '../views/Resume.vue'
+import Payment2 from '../views/Payment2.vue'
+import Final from '../views/Final.vue'
 
 
 const routes = [
@@ -86,11 +90,31 @@ const routes = [
     
   },
   {
+    path: '/carrito/envio',
+    name: 'Shipping',
+    component: Shipping,   
+  }, 
+  {
+    path: '/carrito/resumen',
+    name: 'Resume',
+    component: Resume,
+  }, 
+  /* {
     path: '/carrito/pago',
     name: 'Payment',
     component: Payment,
     meta: { protected: true }
-  }, 
+  }, */ 
+  {
+    path: '/carrito/pago',
+    name: 'Payment2',
+    component: Payment2,    
+  },
+  {
+    path: '/carrito/compraFinal',
+    name: 'Final',
+    component: Final,    
+  },
   {
     path: '/:catchAll(.*)',
     name: 'NotFound',

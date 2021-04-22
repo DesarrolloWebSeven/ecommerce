@@ -2,7 +2,8 @@
   <div class="container section">
     <div v-if="Object.keys(cart).length" class="row">
       <CartComponent />
-      <button class="btn btn-primary" @click="emptyCart">Vaciar carrito</button>
+      <span><button class="btn btn-danger m-2" @click="emptyCart">Vaciar carrito</button></span>
+      <router-link to="/carrito/envio"><p class="card-text"><button class="btn btn-success m-2">TRAMITAR PEDIDO</button></p></router-link>
       <Total />
       
     </div>
@@ -41,13 +42,16 @@ export default {
 <style lang="scss" scoped>
 .section {
   background-color: #10555e1e;
-  max-width: 80%;
+  max-width: 80%;  
   margin-top: 30px;
   color: black;
 
   .row {
-    max-width: 95%;
+    max-width: 95%;    
     margin: 0 auto;
+    margin-top:20x;
+    
+
   }
 }
 </style>

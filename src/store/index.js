@@ -46,7 +46,7 @@ export default createStore({
     },
     setCart(state, product) {
       state.cart[product._id] = { ...product }
-      console.log(state.cart)
+      
     },
     setEmptyCart(state) {
       state.cart = {}
