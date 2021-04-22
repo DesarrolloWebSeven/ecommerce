@@ -4,7 +4,8 @@ const cors = require('cors')
 const multer = require('multer')
 const path = require('path')
 const app = express()
-var cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser')
+const method = require('method-override')
 
 
 // Database settings
@@ -24,6 +25,7 @@ app.use(multer(upload).array('images'))
 // Middlewares
 app.use(cors())
 app.use(cookieParser())
+app.use(method('_method'))
 app.use(express.static(path.join(__dirname, '../public')))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
