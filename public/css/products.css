@@ -11,7 +11,7 @@
 h1, h2, h3 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 900;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   letter-spacing: 3px;
 }
 
@@ -112,6 +112,10 @@ header>img {
   padding: 0;
 }
 
+.mainnav .pedidos {
+  background-color: #3CA29A;
+}
+
 main {
   width: 85%;
   padding: 100px 50px;
@@ -124,10 +128,26 @@ main {
   align-items: center;
 }
 
+/*Form Product */
+.form-product {
+  width: 90%;
+  background-color: #c5c5c5;
+  padding: 30px 15px;
+  border-radius: 15px;
+}
+
+.form-product input[value='Guardar'], .form-product input[value='Actualizar'] {
+  color: white;
+  font-weight: bold;
+  letter-spacing: 3px;
+  background-color: #3CA29A;
+}
+
+
 /* Search Console */
 .search-console {
   width: 80%;
-  margin: 40px auto;
+  margin: 50px auto;
   border-radius: 30px;
   box-shadow: 3px 5px 10px rgb(196, 193, 193);
 }
