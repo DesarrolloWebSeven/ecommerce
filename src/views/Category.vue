@@ -32,7 +32,7 @@ export default {
     
     watch(()=> route.params,
       async newParams=> {
-        
+  
         products.arr= await getProducts(newParams.category)
         products.title= route.params.category
       })
