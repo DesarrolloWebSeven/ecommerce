@@ -11,7 +11,7 @@
             </div>
             <div class="img-square-wrapper">
               <div class="">
-                <img
+                <!-- <img
                   class="logoGeeky"
                   src="../../public/images/images-1618226795740.png"
                   alt=""
@@ -20,7 +20,7 @@
                   class="logoGeeky"
                   src="../../public/images/images-1618226285755.png"
                   alt=""
-                />
+                /> -->
               </div>
             </div>
           </div>
@@ -35,7 +35,7 @@
             </div>
             <div class="img-square-wrapper">
               <div>
-                <img
+               <!--  <img
                   class="logoGeeky"
                   src="../../public/images/images-1618228602474.png"
                   alt=""
@@ -44,7 +44,7 @@
                   class="logoGeeky"
                   src="../../public/images/images-1618227834601.png"
                   alt=""
-                />
+                /> -->
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@
             </div>
             <div class="img-square-wrapper">
               <div>
-                <img
+                <!-- <img
                   class="logoGeeky"
                   src="../../public/images/images-1617973995105.png"
                   alt=""
@@ -68,7 +68,7 @@
                   class="logoGeeky"
                   src="../../public/images/images-1618225574181.png"
                   alt=""
-                />
+                /> -->
               </div>
             </div>
           </div>
@@ -83,7 +83,7 @@
             </div>
             <div class="img-square-wrapper">
               <div>
-                <img
+                <!-- <img
                   class="logoGeeky"
                   src="../../public/images/images-1618230322660.jpg"
                   alt=""
@@ -91,7 +91,7 @@
                   class="logoGeeky"
                   src="../../public/images/images-1618229687036.jpg"
                   alt=""
-                />
+                /> -->
               </div>
             </div>
           </div>
