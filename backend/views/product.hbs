@@ -1,0 +1,74 @@
+{{> header }}
+<main>
+  <h1 class="text-center">Productos</h1>
+    <form action="/admin/productos/{{product._id}}?_method=PUT" class="container form-product" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="PUT">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="titulo">Título</label>
+          <input type="text" class="form-control" value="{{product.title}}" name="title" placeholder="Titulo o nombre del producto">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="descripcion">Descripción</label>
+          <input type="text" class="form-control" value="{{product.description}}" name="description" placeholder="Descripción del producto">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="detalles">Detalles técnicos</label>
+          <input type="text" class="form-control" value="{{product.features}}" name="features" placeholder="Detalles técnicos">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="precio">Precio</label>
+          <input type="number" step="0.05" class="form-control" value="{{product.price}}" name="price" placeholder="Precio por unidad">
+        </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="categoria">Categoría</label>
+          <select class="form-control" name="category" value="{{product.category}}">
+            <option>{{product.category}}</option>
+            <option>Accesorios</option>
+            <option>Camisetas</option>
+            <option>Games</option>
+            <option>Tazas</option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="unidades">Unidades disponibles</label>
+          <input type="number" class="form-control" name="quantity" value="{{product.quantity}}" placeholder="Cantidad de unidades disponibles">
+        </div>
+      </div>
+        <input type="text" class="form-control hidden" name="id" value="{{product._id}}">
+        <input type="text" class="form-control hidden" id="images" name="images" value="{{product.images}}">
+      <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="imagenes">Archivos de imagenes</label>
+            <input type="file" class="form-control" id="imagesNew" name="images" multiple>
+          </div>
+          {{#if product.image1}}
+          <div class="form-group photo col-md-1">
+            <i class="photo-icon btn-danger fas fa-trash-alt" data-id="{{product.image1}}"></i>
+            <img src="/images/{{product.image1}}" id="img1" alt="Imagen producto">
+          </div>
+          {{/if}}
+          {{#if product.image2}}
+          <div class="form-group photo col-md-1">
+            <i class="photo-icon btn-danger fas fa-trash-alt" data-id="{{product.image2}}"></i>
+            <img src="/images/{{product.image2}}" id="img2" alt="Imagen producto">
+          </div>
+        {{/if}}
+          <div class="form-check col-md-4">
+            <input class="form-check-input" type="checkbox" name="featured" value="true" id="check1">
+            <label class="form-check-label" for="check1">Producto destacado</label>
+          </div>
+          <div class="form-group col-md-12">
+            <input type="submit" class="form-control btn" id="update" data-id="{{product._id}}" value="Actualizar">
+          </div>
+      </div>
+      {{#if message}}
+      <div class="form-row">
+        <div class="col-md-12 alert alert-success text-center" role="alert">{{ message }}</div>
+      </div>
+      {{/if}}
+  </form>
+</main>

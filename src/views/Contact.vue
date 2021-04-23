@@ -6,13 +6,7 @@
         <div class="row">
         <div class="col-6">
         <label class="form-label">{{ lang["name"] }}</label>
-        <input
-          type="text"
-          v-model="firstName"
-          id="firsName"
-          class="form-control"
-          :placeholder="lang['plName']"
-        />
+        <input type="text" v-model="firstName" id="firsName" class="form-control" :placeholder="lang['plName']" required />
         </div>
         <div class="col-6">
         <label class="form-label">{{ lang["lastName"] }}</label>
@@ -22,6 +16,7 @@
           id="lastName"
           class="form-control"
           :placeholder="lang['plLastName']"
+          required
         />
         </div>
         </div>
@@ -32,16 +27,17 @@
           id="email"
           class="form-control"
           :placeholder="lang['plEmail']"
+          required
         />
         <label class="form-label">{{ lang["type"] }}</label>
-        <select v-model="subject" id="consult" class="form-select">
+        <select v-model="subject" id="consult" class="form-select" required>
           <option selected>{{ lang["select1"] }}</option>
           <option>{{ lang["select2"] }}</option>
           <option>{{ lang["select3"] }}</option>
           <option>{{ lang["select4"] }}</option>
         </select>
         <label class="form-label">{{ lang["descriptionQuery"] }}</label>
-        <textarea class="form-control" v-model="message" id="texto" rows="3"></textarea>
+        <textarea class="form-control" v-model="message" id="texto" rows="3" required></textarea>
         <div class="alert alert-success" role="alert" v-if="success">{{ success }}</div>
         <button class="d-flex flex-row btn btn-primary">
           {{ lang["sendForm"] }}
