@@ -26,13 +26,11 @@ export default {
  
   setup() {
     const route= useRoute()
-    let products = reactive([]);
-    
+    let products = reactive([]);   
    
     
     watch(()=> route.params,
-      async newParams=> {
-        
+      async newParams=> {        
         products.arr= await getProducts(newParams.category)
         products.title= route.params.category
       })
