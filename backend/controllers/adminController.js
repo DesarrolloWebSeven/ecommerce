@@ -34,13 +34,13 @@ const logout = (req, res) => {
 
 const team = (req,res)=>{
     res.render('team', ({
-      title: "Ecommerce Admin | Equipo", src:'pages_static.js'
+      title: "Ecommerce Admin | Equipo", src:'staticPages.js'
     }))
 }
 
 const project = (req,res)=>{
     res.render('project', ({
-      title: "Ecommerce Admin | Proyecto", src:'pages_static.js'
+      title: "Ecommerce Admin | Proyecto", src:'staticPages.js'
     }))
 }
 

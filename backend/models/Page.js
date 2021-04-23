@@ -10,11 +10,6 @@ const schemaPage = new Schema({
         type:String,
         required:[true,"Agregar la descripción del producto es obligatorio"]
     }
-    // images:{
-    //     type: new Array,
-    //     required:[true, "Debes agregar al menos una imagen del producto"] 
-    // },
-
 },{timestamps:true})
 
 class Page{
