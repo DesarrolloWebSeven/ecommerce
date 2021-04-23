@@ -106,6 +106,11 @@ const contactMail = async (req, res) => {
 
 }
 
+const getInfoUser =(req, res) => {
+  const user = req.body
+  console.log(user)
+}
+
 module.exports = {
   registerUser,
   confirmationUser,
@@ -114,5 +119,6 @@ module.exports = {
   getPassword,
   changePassword,
   auth,
-  contactMail
+  contactMail,
+  getInfoUser
 }

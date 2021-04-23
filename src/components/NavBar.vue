@@ -89,7 +89,10 @@
               ><i class="fas fa-user"></i
             ></router-link>
           </li>
-          <li v-if="user" class="nav-item">
+          <li v-if="user" class="nav-item d-flex align-items-center" >
+            <router-link to="/perfil" class="nav-link d-flex align-items-center"
+              ><i class="fas fa-user"></i
+            ></router-link>
             <div @click="logout" class="nav-link">Logout</div>
           </li>
 
