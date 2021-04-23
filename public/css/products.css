@@ -187,6 +187,7 @@ main {
   justify-content: flex-start;
   flex-wrap: wrap;
 }
+
 .card {
   border: 1px solid rgb(214, 214, 214);
   border-radius: 5px;

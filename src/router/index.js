@@ -7,6 +7,7 @@ import Contact from '../views/Contact.vue'
 import PrivacyPolicy from '../views/PrivacyPolicy.vue'
 import Cookies from '../views/Cookies.vue'
 import Login from '../views/Login.vue'
+import Profile from '../views/Profile.vue'
 import Confirmation from '../views/Confirmation.vue'
 import NotFound from '../views/NotFound.vue'
 import PasswordForm from '../views/PasswordForm.vue'
@@ -60,6 +61,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/perfil',
+    name: 'Profile',
+    component: Profile
   },
   {
     path: '/password/:id',

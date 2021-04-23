@@ -10,5 +10,6 @@ rtUser.get('/password/:id', userController.getPassword)
 rtUser.put('/password/:id', userController.changePassword)
 rtUser.get('/permiso', userController.auth)
 rtUser.post('/contacto', userController.contactMail)
+rtUser.get('/perfil/:id', userController.getInfoUser)
 
 module.exports= rtUser
