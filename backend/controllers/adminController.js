@@ -1,22 +1,26 @@
 const User = require('../models/User')
 const { createToken } = require('../helpers/validation')
 
-const login = (req,res)=>{
-    res.render('login')
-}
+const login = (req, res) => {
+  res.render('login', {
+    title: 'Admin | Login',
+    css: 'login'
+  })
+} 
 
 const signin = async (req, res) => {
-
   const { email, password } = req.body
-
   try {
     const user = await User.findOne({ email })
-    if (!user) res.render('login', { userError: 'Usuario no encontrado'})
+    if (!user) res.render('login', { userError: 'Usuario no encontrado', title: 'Admin | Login',
+    css: 'login'})
     else {
-      if(!user.admin) res.render('login', { userError: 'Usuario sin permisos'})
+      if(!user.admin) res.render('login', { userError: 'Usuario sin permisos', title: 'Admin | Login',
+      css: 'login'})
       else {
         const isValid = user.matchPassword(password)
-        if(!isValid) res.render('login', { passError: 'Contraseña no válida'})
+        if(!isValid) res.render('login', { passError: 'Contraseña no válida', title: 'Admin | Login',
+        css: 'login'})
         if(isValid) {
           const token = createToken(user._id)
           res.cookie('jwt', token, { httpOnly: true });
@@ -27,7 +31,6 @@ const signin = async (req, res) => {
   } catch (err) {
     res.status(400).json(err)
   }
-
 }
 
 const logout = (req, res) => {
@@ -35,28 +38,35 @@ const logout = (req, res) => {
   res.redirect('/admin')
 }
 
-const team = (req,res)=>{
-    res.render('team', ({
-      title: "Ecommerce Admin | Equipo"
-    }))
+
+const team = (req, res) => {
+  res.render('team', ({
+    title: "Admin | Equipo",
+    css: 'products',
+    src:'staticPages.js'
+  }))
 }
 
-const project = (req,res)=>{
-    res.render('project', ({
-      title: "Ecommerce Admin | Proyecto"
-    }))
+const project = (req, res) => {
+  res.render('project', ({
+    title: "Admin | Proyecto",
+    css: 'products',
+    src:'staticPages.js'
+  }))
 }
 
-const clients = (req,res)=>{
-    res.render('clients', ({
-      title: "Ecommerce Admin | Clientes"
-    }))
+const clients = (req, res) => {
+  res.render('clients', ({
+    title: "Admin | Clientes",
+    css: 'products'
+  }))
 }
 
-const orders = (req,res)=>{
-    res.render('orders', ({
-      title: "Ecommerce Admin | Pedidos"
-    }))
+const orders = (req, res) => {
+  res.render('orders', ({
+    title: "Admin | Pedidos",
+    css: 'products'
+  }))
 }
 
 module.exports = {

@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  position: relative;
+  width: 100%;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  box-shadow: 3px 5px 10px rgb(218, 216, 216);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 30px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+header>img {
+  max-width: 10%;
+}
+
+.user-menu {
+  width: 6%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-menu a, .user-menu img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color:white;
+  width: 45%;
+}
+
+.user-menu a {
+  border-radius: 50%;
+  background-color: #3CA29A;
+}
+
+.mainnav {
+  color: white;
+  width: 15%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgb(238, 231, 231);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainnav div {
+  color: white;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 50vh;
+}
+
+.mainnav a {
+  font-size: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+}
+
+.mainnav i {
+  margin-right: 10px;
+}
+
+.mainnav p {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  width: 85%;
+  padding: 100px 50px;
+  position: absolute;
+  top:0;
+  right: 0;
+}
+
+/* Product Card */
+.product-list {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.card {
+  border: 1px solid rgb(214, 214, 214);
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px;
+  width: 29%
+}
+
+.card-title {
+  font-weight: 700;
+}
