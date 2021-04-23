@@ -13,14 +13,14 @@
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <img
-                    :src="'/images'/+productDetail.images[0]"
+                    :src="'/images/'+productDetail.images[0]"
                     class="d-block w-100"
                     alt="..."
                   />
                 </div>
                 <div class="carousel-item">
                   <img
-                    :src="'/images'/+productDetail.images[1]"
+                    :src="'/images/'+productDetail.images[1]"
                     class="d-block w-100"
                     alt="..."
                   />
