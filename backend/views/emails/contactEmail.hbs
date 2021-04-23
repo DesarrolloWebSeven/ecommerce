@@ -66,7 +66,7 @@
         border-top: none;
         box-shadow: 3px 3px 5px rgb(226, 225, 225);
       }
-
+      
       .texto h1 {
         margin-top: 0;
         margin-bottom: 15px;
@@ -76,18 +76,28 @@
         font-family: 'Montserrat', sans-serif;
       }
 
-      button {
-        color: white;
-        padding: 5px 30px;
-        margin-top: 15px;
-        border-radius: 5px;
-        background-color: gray;
-        border: none;
+      .texto table {
+        width: 60%;
+        margin: 10px auto;
+        border: 1px solid gray;
+        border-collapse: collapse;
       }
 
-      button:hover {
-        background-color: rgb(68, 67, 67);
+      .texto th {
+        width: 30%;
+        color: white;
+        text-align: left;
+        background-color: #F9AF3C;
+        border: 1px solid gray;
+        padding: 5px 10px;
       }
+
+      .texto td {
+        text-align: left;
+        border: 1px solid gray;
+        padding: 5px 10px;
+      }
+
     </style>
 </head>
 <body>
@@ -96,9 +106,30 @@
     <section class="image">
     </section>
     <section class="texto">
-      <h1>¡Bienvenido a Geeky!</h1>
-      <p>¡Gracias por registrarte en nuestra página! Para poder comprar en nuestra tienda online aún necesitas confirmar tu email. Una vez lo hayas hecho, no solamente podrás ver nuestros artículos, sino que también podrás hacerte con los que más te gusten. Para confirmar tu email, basta con que pulses en el botón.</p>
-      <button><a href="http://localhost:8080/usuario/registro/{{user}}">Confirmar email</a></button>
+      <h1>Consulta de cliente:</h1>
+      <table>
+        <tr>
+          <th>Nombre</th>
+          <td>{{ user.firstName }}</td>
+        </tr>
+        <tr>
+          <th>Apellidos</th>
+          <td>{{ user.lastName }}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+          <th>Asunto</th>
+          <td>{{ user.subject }}</td>
+        </tr>
+        <tr>
+          <th>Mensaje</th>
+          <td>{{ user.message }}</td>
+        </tr>
+
+      </table>
     </section>
   </main>
 </body>

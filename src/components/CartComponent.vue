@@ -1,13 +1,8 @@
 <template>
-  <!-- <pre>
-    {{cart}}
-  </pre> -->
-
-  <div class="container section">
-    <div class="row">
-      <div v-for="(id, i) in Object.keys(cart)" :key="i" class="col-12 m-3">
+       <div v-for="(id, i) in Object.keys(cart)" :key="i" class="col-12">
         <div class="card row">
           <div class="card-horizontal row justify-content-center">
+            
             <div
               id="carouselExampleIndicators"
               class="col-12 col-lg-6 m-4"
@@ -31,25 +26,29 @@
                   <b>Precio unidad: </b> {{ cart[id].price }}
                 </p>
                 <p class="card-text">
-                  <b>Cantidad en tu carrito: </b> {{ cart[id].quantity }}
+                  <b>Cantidad en tu carrito: </b> {{cart[id].items}}
                   <button
+                    :class="{disabledButton: cart[id].quantity==cart[id].items}"
                     class="btn"
                     style="background: none; color: black"
-                    @click="cart[id].quantity++"
+                    @click="cart[id].items<cart[id].quantity ?cart[id].items++ :null"
                   >
                     <i class="fas fa-plus-circle"></i></button
-                  ><button
-                    class="btn m-2"
+                  >
+                  <button
+                    :class="{disabledButton2: cart[id].items==1} "
+                    class="btn"
                     style="background: none; color: black"
-                    @click="cart[id].quantity--"
+                    @click="cart[id].items>0 ?cart[id].items-- :null"
                   >
                     <i class="fas fa-minus-circle"></i>
                   </button>
                 </p>
                 <p class="card-text">
                   <b>Subtotal producto: </b>
-                  {{ (cart[id].quantity * cart[id].price).toFixed(2) }}
+                  {{ (cart[id].items * cart[id].price).toFixed(2) }}
                 </p>
+                <p @click="deleteProduct(id)" class="card-text"><i  class="fas fa-trash-alt"></i><span>Eliminar producto</span></p>
               </div>
               
               <!--<p class="card-text price">{{ (contador.uds*cart.price).toFixed(2) }} € <input :value=contador.uds @change="updatePrice(cart.price, $event)" type="number" name="cantidad"  min="1" :max=cart.quantity ></p>
@@ -60,8 +59,7 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+ 
 </template>
 
 <script>
@@ -78,45 +76,18 @@ export default {
   setup() {
     const store = useStore();
     const cart = computed(() => store.state.cart);
+    const deleteProduct = (_id) => {store.commit('setDeleteProduct', _id)}
+   
 
     return {
       cart,
+      deleteProduct
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.section {
-  background-color: #10555e1e;
-  max-width: 80%;
-  margin-top: 30px;
-  color: black;
-  .row {
-    max-width: 95%;
-    margin: 0 auto;
-  }
-  .titleHome {
-    font-family: "Game" !important;
-    font-size: 50px;
-    background-color: #0f606b;
-    padding: 30px;
-    margin-bottom: 30px;
-    margin-top: 30px;
-  }
-
-  @media (max-width: 600px) {
-    .titleHome {
-      font-size: 40px;
-    }
-  }
-
-  @media (max-width: 530px) {
-    .titleHome {
-      font-size: 25px;
-    }
-  }
-}
 .card {
   border: none;
   margin: 20px;
@@ -137,23 +108,31 @@ export default {
     .card-body {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      .price {
-        background-color: #0f606b;
-        padding: 5px;
-        color: white;
-      }
-    }
+      align-items: left;
+     }
     img {
       width: 200px;
       height: 200px;
       background-color: white;
       margin: 5px;
     }
-    button {
-      color: #fff;
-      background-color: black;
-      padding: 10px;
+    
+    .disabledButton{
+      pointer-events: none;
+      
+      i {
+        color:gray;
+      }
+    }
+    .disabledButton2{
+      pointer-events: none;
+      
+      i {
+        color:gray;
+      }
+    }
+    i{
+      cursor: pointer;
     }
   }
 }

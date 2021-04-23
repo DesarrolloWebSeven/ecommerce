@@ -3,7 +3,6 @@ import i18next from 'i18next'
 
 export default createStore({
   state: {
-    cookie: localStorage.getItem('geeky') || null,
     token: localStorage.getItem('jwt') || null,
     currentLang: i18next.language,
     lang: {},
@@ -18,14 +17,14 @@ export default createStore({
     getCurrentLang(state){
       return state.currentLang
     },
-    getTotal(state) {
-      return state.total
-    },
     getToken(state) {
       return state.token
     },
-    getCookie(state) {
-      return state.cookie
+    totalQuantity(state) {
+      return Object.values(state.cart).reduce((acc, {items}) => acc + items, 0)
+    },
+    totalPrice(state) {
+      return Object.values(state.cart).reduce((acc, {items, price}) => acc + items * price, 0)
     }
   },
   mutations: {
@@ -49,9 +48,12 @@ export default createStore({
       state.cart[product._id] = { ...product }
       console.log(state.cart)
     },
-    setVaciar(state) {
-      state.carrito = {}
+    setEmptyCart(state) {
+      state.cart = {}
     },
+    setDeleteProduct(state, _id) {
+      delete state.cart[_id]
+    }
   },
   actions: {
     async fetchData({commit}) {
@@ -67,8 +69,8 @@ export default createStore({
       
       console.log(5555,  state.cart.hasOwnProperty(product._id));
       state.cart.hasOwnProperty(product._id)
-        ? product.quantity = state.cart[product._id].quantity + product.quantity
-        : product.quantity = product.quantity
+        ? product.items = state.cart[product._id].items + product.items
+        : product.items = product.items
       commit('setCart', product)},
     setLogin(context, usuario) {
       context.commit('setToken', usuario)
