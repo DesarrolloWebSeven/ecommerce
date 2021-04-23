@@ -13,14 +13,14 @@
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <img
-                    :src="productDetail.images[0]"
+                    :src="'/images/'+productDetail.images[0]"
                     class="d-block w-100"
                     alt="..."
                   />
                 </div>
                 <div class="carousel-item">
                   <img
-                    :src="productDetail.images[1]"
+                    :src="'/images/'+productDetail.images[1]"
                     class="d-block w-100"
                     alt="..."
                   />
@@ -73,7 +73,6 @@
 <script>
 import { reactive, ref } from "vue";
 import {useRoute} from 'vue-router'
-
 import {useStore} from 'vuex'
 export default {
   name: "ProductCard",
@@ -109,8 +108,6 @@ export default {
       productDetail.items=parseInt(contador.uds)
      
       store.dispatch('addToCart', productDetail, parseInt(contador.uds))
-    
-
     }
 
     return {

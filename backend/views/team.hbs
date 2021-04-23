@@ -1,13 +1,10 @@
 {{> header}}
 
-<main>
-    <section class="container">
-        <div>
-            <h1 class="text-center">El equipo</h1>
-        </div>
-        <div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet optio necessitatibus blanditiis quasi unde aliquam, sint tempore enim nesciunt a assumenda adipisci eius magni quae quaerat repellat similique est qui?</h1>
-        </div>
-    </section>
+<script src="https://cdn.tiny.cloud/1/5b5739x2w4gobdoyn0jeaw9el0ny49ulnal4biswz6t4eyun/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <form method="POST" action="http://localhost:8081/admin/editor/equipo">
+        <textarea name="content" id="mytextarea"></textarea>
+        <input class="btn btn-primary save" type="submit" value="Guardar">
+    </form>
+    <div name="showContent" id="showContent"></div>
 
-</main>
+{{> tinyMCE}}

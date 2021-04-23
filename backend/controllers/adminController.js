@@ -9,9 +9,7 @@ const login = (req, res) => {
 } 
 
 const signin = async (req, res) => {
-
   const { email, password } = req.body
-
   try {
     const user = await User.findOne({ email })
     if (!user) res.render('login', { userError: 'Usuario no encontrado', title: 'Admin | Login',
@@ -33,7 +31,6 @@ const signin = async (req, res) => {
   } catch (err) {
     res.status(400).json(err)
   }
-
 }
 
 const logout = (req, res) => {
@@ -41,17 +38,20 @@ const logout = (req, res) => {
   res.redirect('/admin')
 }
 
+
 const team = (req, res) => {
   res.render('team', ({
     title: "Admin | Equipo",
-    css: 'products'
+    css: 'products',
+    src:'staticPages.js'
   }))
 }
 
 const project = (req, res) => {
   res.render('project', ({
     title: "Admin | Proyecto",
-    css: 'products'
+    css: 'products',
+    src:'staticPages.js'
   }))
 }
 
