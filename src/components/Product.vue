@@ -5,7 +5,7 @@
         <div class="card">
           <div class="card-horizontal justify-content-center row">
             <div class="img-square-wrapper col-12 col-lg-6 m-4">
-              <img :src="product.images[0]" />
+              <img :src="'/images/'+product.images[0]" />
             </div>
             <div class="card-body col-12 col-lg-6">
               <h4 class="card-title">{{ product.title }}</h4>

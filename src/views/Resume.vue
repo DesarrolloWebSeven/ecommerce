@@ -24,7 +24,7 @@
               <div class="carousel-inner">
                 <div class="">
                   <img
-                    :src="cart[id].images[0]"
+                    :src="'/images/'+cart[id].images[0]"
                     class="d-block w-100"
                     alt="..."
                   />
