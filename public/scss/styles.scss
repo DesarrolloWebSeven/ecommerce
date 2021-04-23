@@ -37,3 +37,11 @@ input[type=number]{
     height: 200px;
     width: 200px;
 }
+
+body > #standalone-container {
+    margin: 50px auto;
+    max-width: 720px;
+}
+#editor {
+    height: 350px;
+}

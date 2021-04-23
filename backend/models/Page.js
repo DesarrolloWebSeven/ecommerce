@@ -10,20 +10,6 @@ const schemaPage = new Schema({
         type:String,
         required:[true,"Agregar la descripción del producto es obligatorio"]
     }
-    // images:{
-    //     type: new Array,
-    //     required:[true, "Debes agregar al menos una imagen del producto"] 
-    // },
-    // rating:[{
-    //     user_id:{type:Schema.Types.ObjectId, ref:'user'},
-    //     stars:Number,
-    //     review:String
-    // }],
-    // featured:{
-    //     type:Boolean, 
-    //     default:false
-    // },
-
 },{timestamps:true})
 
 class Page{
@@ -32,5 +18,5 @@ class Page{
     //private
 }
 
-schemaProduct.loadClass(Page)
+schemaPage.loadClass(Page)
 module.exports= mongoose.model('page',schemaPage)
