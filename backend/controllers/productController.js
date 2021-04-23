@@ -9,7 +9,8 @@ const productsList = (req, res)=>{
       let product = {}
       product.title = item.title
       product.quantity = item.quantity
-      product.image = item.images[0]
+      product.image1 = item.images[0]
+      product.image2 = item.images[1]
       product.id = item._id
       products.push(product)
     })
