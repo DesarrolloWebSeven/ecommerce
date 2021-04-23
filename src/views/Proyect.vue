@@ -1,29 +1,27 @@
 <template>
-  <h1>Esta es la página de  descripción del proyecto</h1>
-  <label>{{lang["lang-label"]}}</label>
+  <div>
+    <label>{{lang["lang-label"]}}</label>
+    <div class="color" v-html='miHtml'></div>
+  </div>
 </template>
 
 <script>
 import { useStore } from 'vuex'
-import { computed, reactive } from 'vue'
+import { computed, ref } from 'vue'
 export default {
     name:'Proyect',
     setup(){
-      // console.log("Ya cargo mi pagina")
-      //   let content=reactive({
-      //     title:null,
-      //     content:""
-      //   })
-      //   window.onload=()=>{
-      //     fetch(`http://localhost:8081/admin/project`)
-      //       .then((res) => res.json())
-      //       .then((data) =>{
-      //         console.log(data)
-      //       })
-      //       .catch((err) => console.log(err))
-      //   }
+      let miHtml = ref('')
 
+        fetch(`http://localhost:8081/admin/editor/proyecto`)
+          .then((res) => res.json())
+          .then((data) =>{
+            miHtml.value=data[0].content
+          })
+          .catch((err) => console.log(err))
+        
     return {
+      miHtml,
       lang: computed(()=>useStore().getters.getLang)
     }
   }
@@ -32,5 +30,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.color{
+  background-color: aquamarine;
+}
 </style>
