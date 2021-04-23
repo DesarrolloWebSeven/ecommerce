@@ -63,7 +63,6 @@ const imagesDelete = (req, res) => {
 }
 
 const productsUpdate = (req, res) => {
-  console.log(req.body.images)
   let newImages = req.body.images.split(',')
   newImages.forEach( image => {
     if (image === '') newImages.splice(newImages.indexOf(image), 1)
