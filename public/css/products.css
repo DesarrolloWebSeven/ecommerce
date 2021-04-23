@@ -136,20 +136,48 @@ main {
   border-radius: 15px;
 }
 
-.form-product input[value='Guardar'], .form-product input[value='Actualizar'] {
+.form-product input[value='Nuevo Producto'], .form-product input[value='Actualizar'] {
   color: white;
   font-weight: bold;
   letter-spacing: 3px;
   background-color: #3CA29A;
 }
 
+.photo {
+  position: relative;
+}
+
+.photo-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  position: absolute;
+  top: 5px;
+  right: 20px;
+}
 
 /* Search Console */
-.search-console {
+.search-box {
   width: 80%;
   margin: 50px auto;
+  padding: 5px 20px;
+  border: 1px solid rgb(185, 185, 185);
   border-radius: 30px;
   box-shadow: 3px 5px 10px rgb(196, 193, 193);
+}
+
+.search-console {
+  width: 90%;
+  border: none;
+  margin-left: 10px;
+}
+
+.search-console:focus {
+  outline: none;
 }
 
 /* Product Card */

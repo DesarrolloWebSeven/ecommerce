@@ -8,7 +8,7 @@ const productsList = (req, res)=>{
     data.forEach( item => {
       let product = {}
       product.title = item.title
-      product.description = item.description.slice(0, 55) + ' (...)'
+      product.quantity = item.quantity
       product.image = item.images[0]
       product.id = item._id
       products.push(product)
@@ -52,7 +52,7 @@ const productsFindById = (req, res) => {
     .then(product => {
       product.image1 = product.images[0]
       product.image2 = product.images[1]
-      res.render('products', {product, title: 'Admin | Productos', src:'productId.js', css: 'products'})})
+      res.render('product', {product, title: 'Admin | Productos', src:'product.js', css: 'products'})})
     .catch(err => console.log(err.message))
 }
 
@@ -63,11 +63,13 @@ const imagesDelete = (req, res) => {
 }
 
 const productsUpdate = (req, res) => {
+  console.log(req.body.images)
   let newImages = req.body.images.split(',')
   newImages.forEach( image => {
     if (image === '') newImages.splice(newImages.indexOf(image), 1)
   }) 
   req.files.forEach(i => newImages.push(i.filename))
+  console.log(newImages)
     
   Product.findByIdAndUpdate({_id : req.body.id}, {
     title : req.body.title,
@@ -82,7 +84,7 @@ const productsUpdate = (req, res) => {
     .then(product => res.render('products', {
       title: 'Admin | Productos', 
       css: 'products', 
-      src:'productId.js',
+      src:'product.js',
       message: 'Producto actualizado correctamente'})) 
     .catch(err => console.log(err.message))
 } 
