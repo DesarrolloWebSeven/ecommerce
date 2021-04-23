@@ -1,10 +1,12 @@
 {{> header}}
-
-<script src="https://cdn.tiny.cloud/1/5b5739x2w4gobdoyn0jeaw9el0ny49ulnal4biswz6t4eyun/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <form method="POST" action="http://localhost:8081/admin/editor/proyecto">
-        <textarea name="content" id="mytextarea"></textarea>
-        <input class="btn btn-primary save" type="submit" value="Guardar">
-    </form>
-    <div name="showContent" id="showContent"></div>
+<main>
+  <h1 class="text-center">Proyecto</h1>
+  <script src="https://cdn.tiny.cloud/1/5b5739x2w4gobdoyn0jeaw9el0ny49ulnal4biswz6t4eyun/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <form method="POST" class="container" action="http://localhost:8081/admin/editor/proyecto">
+    <textarea name="content" id="mytextarea"></textarea>
+    <input class="btn btn-primary save" type="submit" value="Guardar">
+  </form>
+  <div name="showContent" id="showContent"></div>
 
 {{> tinyMCE}}
+</main>
