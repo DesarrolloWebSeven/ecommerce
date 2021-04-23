@@ -14,9 +14,7 @@ export default {
     props:{},
     setup(){
         const store= useStore()
-        const totalPrice = computed(() => store.getters.totalPrice)    
-
-       
+        const totalPrice = computed(() => store.getters.totalPrice)        
                 
         return{
             totalPrice

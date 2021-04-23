@@ -1,104 +1,79 @@
 {{> header }}
 <main>
-  <section>
-    <p>{{mensaje}}</p>
-    <div>
-      <h1 class="text-center">Productos</h1>
-    </div>
-    <form action="/admin/productos" method="POST" id="form" name="form" enctype="multipart/form-data">
-      <div class="container">
-        <input type="text" class="form-control hidden" id="id" name="id" value="{{product._id}}">
-        <input type="text" class="form-control hidden" id="images" name="imagesOld" value="{{product.images}}" multiple>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="titulo">Título</label>
-            <input type="text" class="form-control" value="{{product.title}}" name="title"
-              placeholder="Titulo o nombre del producto">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="descripcion">Descripción</label>
-            <input type="text" class="form-control" value="{{product.description}}" name="description"
-              placeholder="Descripción del producto">
-          </div>
+  <h1 class="text-center">Productos</h1>
+    <form action="/admin/productos" class="container form-product" method="POST" enctype="multipart/form-data">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="titulo">Título</label>
+          <input type="text" class="form-control" name="title" placeholder="Titulo o nombre del producto">
         </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="detalles">Detalles técnicos</label>
-            <input type="text" class="form-control" value="{{product.features}}" name="features"
-              placeholder="Detalles técnicos">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="precio">Precio</label>
-            <input type="number" step="0.05" class="form-control" value="{{product.price}}" name="price"
+        <div class="form-group col-md-6">
+          <label for="descripcion">Descripción</label>
+          <input type="text" class="form-control" name="description" placeholder="Descripción del producto">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="detalles">Detalles técnicos</label>
+          <input type="text" class="form-control" name="features" placeholder="Detalles técnicos">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="precio">Precio</label>
+          <input type="number" step="0.05" class="form-control" name="price"
               placeholder="Precio por unidad">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="categoria">Categoría</label>
-            <select class="form-control" name="category" value="{{product.category}}">
-              <option>{{product.category}}</option>
-              <option>Accesorios</option>
-              <option>Camisetas</option>
-              <option>Games</option>
-              <option>Tazas</option>
-            </select>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="unidades">Unidades disponibles</label>
-            <input type="number" class="form-control" name="quantity" value="{{product.quantity}}"
-              placeholder="Cantidad de unidades disponibles">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="imagenes">Archivos de imagenes</label>
-            <input type="file" class="form-control" id="imagesNew" name="images" multiple>
-          </div>
-          <div class="images"></div>
-          <div>
-            <label><input type="checkbox" class="form-control" name="featured" value="true"> Destacado</label><br>
-          </div>
-
-          {{#if product}}
-          <div class="form-group col-md-6">
-            {{!-- onclick="document.form.action='/admin/productos' document.form.submit()" --}}
-            <input type="submit" id="update" class="form-control" formaction="/admin/productos/update"
-              value="Actualizar">
-          </div>
-          {{else}}
-          <div class="form-group col-md-6">
-            <input type="submit" class="form-control" value="Guardar">
-          </div>
-          {{/if}}
         </div>
       </div>
-    </form>
-  </section>
-
-  <section class="container search-console">
-    <div class="row">
-      <div class="col-12">
-        <form action="" class="search-form" id="search-console">
-          <div class="form-group has-feedback">
-            <label for="search" class="sr-only">Buscar</label>
-            <input type="text" class="form-control" name="search" id="search" placeholder="Buscar">
-            <span class="glyphicon glyphicon-search form-control-feedback"></span>
-          </div>
-        </form>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="categoria">Categoría</label>
+          <select class="form-control" name="category">
+            <option>{{product.category}}</option>
+            <option>Accesorios</option>
+            <option>Camisetas</option>
+            <option>Games</option>
+            <option>Tazas</option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="unidades">Unidades disponibles</label>
+          <input type="number" class="form-control" name="quantity" placeholder="Cantidad de unidades disponibles">
+        </div>
       </div>
-    </div>
-  </section>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="imagenes">Archivos de imagenes</label>
+          <input type="file" class="form-control" id="imagesNew" name="images" multiple>
+        </div>
+        
+        <div class="form-check col-md-6">
+          <input class="form-check-input" type="checkbox" name="featured" value="true" id="check1">
+          <label class="form-check-label" for="check1">Producto destacado</label>
+        </div>
+        <div class="form-group col-md-6">
+          <input type="submit" class="form-control" value="Nuevo Producto">
+        </div>
+      </div>
+      {{#if message}}
+      <div class="form-row">
+        <div class="col-md-12 alert alert-success text-center" role="alert">{{ message }}</div>
+      </div>
+      {{/if}}
+  </form>
 
   {{#if products}}
+  <section class="search-box">
+    <i class="fas fa-search"></i>
+    <input type="text" class="search-console" id="search" placeholder="Buscar" autocomplete="off">
+  </section>
+
   <section class="product-list">
     {{#each products}}
     <div class="card">
-      <img class="card-img-top" src="{{this.image}}" alt="Card image cap">
+      <img class="card-img-top" src="/images/{{this.image}}" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">{{this.title}}</h5>
-        <p class="card-text">{{this.description}}</p>
-        <a class="delete btn btn-danger"><i data-id="{{this.id}}" class="fas fa-trash-alt"></i></a>
+        <p class="card-text">Unidades disponibles: {{this.quantity}}</p>
+        <a class="delete btn btn-danger" data-id="{{this.id}}"><i data-id="{{this.id}}" class="fas fa-trash-alt"></i></a>
         <a href="/admin/productos/{{this.id}}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
       </div>
     </div>

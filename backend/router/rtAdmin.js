@@ -27,8 +27,8 @@ rtAdmin.get('/productos', requireAuth, productController.productsList)
 rtAdmin.post('/productos', requireAuth, productController.productsSave)
 rtAdmin.delete('/productos/:id', requireAuth, productController.productsDelete)
 rtAdmin.get('/productos/:id', requireAuth, productController.productsFindById)
-rtAdmin.delete('/productos/imagenes/:id', requireAuth, productController.imagesDelete)
-rtAdmin.post('/productos/update', requireAuth, productController.productsUpdate)
+rtAdmin.delete('/:img', requireAuth, productController.imagesDelete)
+rtAdmin.put('/productos/:id', requireAuth, productController.productsUpdate)
 
 //Content editor
 rtAdmin.post('/editor/:title', requireAuth, pageController.pageUpdate)
