@@ -1,18 +1,13 @@
 <template>
-<div>
 <NavBar />
 
-<router-view/>
-<div class="d-flex justify-content-end">
+<router-view />
+<div class="contact">
+  <a href="#top-page"><i class="far fa-arrow-alt-circle-up"></i></a>
   <a href="https://wa.me/34692856097/?text=Hola%Geeky!!%¿Podemos%20ayudarte?"><i class="fab fa-whatsapp fa-3x"></i></a>
 </div>
-
-<a href="https://wa.me/34692856097/?text=Hola%Geeky!!%¿Podemos%20ayudarte?"><ContactIcon /></a>
 <AlertCookies />
-<Footer/>
-
-</div>
-  
+<Footer/>  
 </template>
 <script>
 
@@ -40,35 +35,83 @@ export default {
 
 
 <style lang="scss">
-@import "./assets/fonts/fonts.css";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 
 #app {  
   
-  font-family: "Montserrat", "Game", Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
   background-color: white;
-  a{
+
+  .router-link-active, .router-link-exact-active {
+    margin: 0;
+    padding: 0;
+  }
+
+
+  a {
     text-decoration: none;
   }
-  h1{
-    font-family: "Montserrat";
+
+  h1 {
+    font-family: 'Montserrat', sans-serif;
     color: black
   }
-  .fa-whatsapp{
-    margin: 10px;
+
+  @media (max-width: 1050px) {
+
+    .contact {
+    width: 100%;
+    padding: 0 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 200px;
+    left: 0;
+
+    i {
+    font-size: 2rem;
     color: #0f606b;
-  }
-  .fa-whatsapp:hover{
+    }
+
+    i:hover{
     color: #707070;
+    } 
+    }
+
   }
-  
-  
-  
-  
+
+  @media (min-width: 1050px){
+
+  .contact {
+    width: 100%;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 70px;
+    left: 0;
+
+    i {
+    font-size: 3rem;
+    color: #0f606b;
+    }
+
+    i:hover{
+    color: #707070;
+    } 
+
+  }
+
+  }
+
 }
 
 </style>

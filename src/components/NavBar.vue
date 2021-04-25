@@ -1,124 +1,52 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid align-items-start">
-      <div class="d-flex justify-content-between">
-        <div class="d-flex flex-column justify-content-center">
-          <button
-            class="navbar-toggler m-4"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="d-flex d-xl-none">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <router-link to="/productos/camisetas" class="nav-link">{{
-                    lang["tshirts"]
-                  }}</router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link to="/productos/accesorios" class="nav-link">{{
-                    lang["accessories"]
-                  }}</router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link to="/productos/tazas" class="nav-link">{{
-                    lang["cups"]
-                  }}</router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link to="/productos/games" class="nav-link">{{
-                    lang["games"]
-                  }}</router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link to="/productos/destacados" class="nav-link">{{
-                    lang["featured"]
-                  }}</router-link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <router-link to="/" class="nav-link logo"> GEEKY </router-link>
-        <div class="d-none d-xl-flex flex-column justify-content-center">
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <router-link to="/productos/camisetas" class="nav-link">{{
-                  lang["tshirts"]
-                }}</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/productos/accesorios" class="nav-link">{{
-                  lang["accessories"]
-                }}</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/productos/tazas" class="nav-link">{{
-                  lang["cups"]
-                }}</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/productos/games" class="nav-link">{{
-                  lang["games"]
-                }}</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/productos/destacados" class="nav-link">{{
-                  lang["featured"]
-                }}</router-link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div d-flex align-items-end>
-        <ul
-          class="navbar-nav ml-auto mb-2 mb-lg-0 d-flex flex-row align-items-center m-3"
-        >
-          <li v-if="!user" class="nav-item">
-            <router-link to="/login" class="nav-link"
-              ><i class="fas fa-user"></i
-            ></router-link>
-          </li>
-          <li v-if="user" class="nav-item d-flex align-items-center" >
-            <router-link to="/perfil" class="nav-link d-flex align-items-center"
-              ><i class="fas fa-user"></i
-            ></router-link>
-            <div @click="logout" class="nav-link">Logout</div>
-          </li>
-
-          <li class="nav-item">
-            <router-link to="/carrito" class="nav-link"
-              ><i class="fas fa-shopping-cart cart"></i
-            ><span id="cart_menu_num" data-action="cart-can" class="badge rounded-circle total">{{totalQuantity}}</span></router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/buscador" class="nav-link"
-              ><i class="fas fa-search"></i
-            ></router-link>
-          </li>
-          <li class="nav-item">
-            <Lang class="" />
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<header id="top-page">
+  <nav class="header">
+    <div id="button" @click="type = false"><i class="fas fa-bars"></i></div>
+    <router-link to="/" class="logo"><img src="/logo/logo-color.png" alt="Logotipo Geeky"></router-link>
+    <ul class="menu">
+      <li><router-link to="/productos/camisetas" class="links">{{lang["tshirts"]}}</router-link></li>
+      <li><router-link to="/productos/accesorios" class="links">{{lang["accessories"]}}</router-link></li>
+      <li><router-link to="/productos/tazas" class="links">{{lang["cups"]}}</router-link></li>
+      <li><router-link to="/productos/games" class="links">{{lang["games"]}}</router-link></li>
+    </ul>
+    <ul class="menu-icons">
+      <li>
+        <router-link to="/carrito" class="cart"><i class="fas fa-shopping-cart cart"></i>
+        <span id="cart_menu_num" data-action="cart-can"><p>{{totalQuantity}}</p></span>
+        </router-link>
+      </li>
+      <li v-if="!user">
+        <router-link to="/login" class="item"><i class="fas fa-user"></i></router-link>
+      </li>
+      <li v-if="user" >
+        <router-link to="/perfil" class="item"><i class="fas fa-user"></i></router-link>
+      </li>
+      <li v-if="user" >
+        <i @click="logout" class="fas fa-user-slash"></i>
+      </li>
+      <li v-if="!{ name : 'Home' }">
+        <router-link to="/buscador" class="item"><i class="fas fa-search"></i></router-link>
+      </li>
+      <li class="item">
+        <Lang class="" />
+      </li>
+    </ul>
+</nav>
+</header>
+<nav id="menu-hamburger" :class="{ show: type }">
+  <ul class="menu2" @click="type = true" @mouseleave="type = true">
+      <li><router-link to="/productos/camisetas" class="links">{{lang["tshirts"]}}</router-link></li>
+      <li><router-link to="/productos/accesorios" class="links">{{lang["accessories"]}}</router-link></li>
+      <li><router-link to="/productos/tazas" class="links">{{lang["cups"]}}</router-link></li>
+      <li><router-link to="/productos/games" class="links">{{lang["games"]}}</router-link></li>
+    </ul>
+</nav>
 </template>
 
 <script>
 import { useRouter } from 'vue-router'
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, ref } from "vue"
 import Lang from "@/components/Lang";
 
 export default {
@@ -126,6 +54,7 @@ export default {
   setup() {
     const store = useStore()
     const router = useRouter()
+    const type = ref(true)
     const user = computed(() => {
       return store.getters.getToken;
     });
@@ -138,6 +67,7 @@ export default {
     const totalQuantity = computed(() => store.getters.totalQuantity)
 
     return {
+      type,
       user,
       logout,
       totalQuantity,
@@ -153,56 +83,186 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.navbar-dark .navbar-nav .nav-link {
-  color: white;
-  font-size: 20px;
-}
-nav.navbar {
-  background-color: #0f606b;
-  
-}
-.nav-link {
-  font-family: "Game";
-  color: black;
-  margin-left: 10px;
+header {
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 3px 3px 3px rgb(248, 246, 246);
+  position: fixed;
+  top: 0;
+  z-index: 10;
 }
 
-.nav-item div {
-  cursor: pointer;
+.header {
+  width: 80%;
+  margin: 0 auto;
+  padding: 25px 0;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  #button {
+    display: none;
+  }
+
+  .logo {
+    margin: 0;
+    padding: 0;
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      max-width: 100%;
+    }
+  }
 }
 
-.logo {
-  margin-right: 10px;
-  font-size: 40px;
-}
-
-.cart {
-  position: relative;
-}
-
-#cart_menu_num {
-  position: absolute;  
-  background: red;
-  height: 20px;     
+.header .menu {
+  margin: 0;
+  padding: 0;
+  width: 75%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
-  padding: 2px;
-  
-}
-.total{
-  font-size: 10px;
+  list-style: none;
+
+  li {
+  padding: 0 20px;
+  text-decoration: none;
+
+    .links {
+      font-family: 'Montserrat', sans-serif;
+      color: gray;
+      font-weight: 500;
+      letter-spacing: 2px;
+    }
+
+    .links:hover {
+      color: black;
+    }
+  }
 }
 
-.bi::before {
-  display: inline-block;
-  content: "";
-  vertical-align: -0.125em;
-  background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z' clip-rule='evenodd'/></svg>");
-  background-repeat: no-repeat;
-  background-size: 1rem 1rem;
+.header .menu-icons {
+  margin: 0;
+  padding: 0;
+  width: 15%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style: none;
+
+  li {
+    padding: 0 5px;
+  }
+
+  .cart {
+    position: relative;
+  }
+
+  #cart_menu_num {
+    position: absolute;
+    bottom: -30%;
+    left: -30%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.8rem;
+    border-radius: 50%;
+    color: white;
+    background-color: #ff5e52;
+    line-height: 20px;
+  }
+
+  i {
+    color: #616161;
+    font-size: 1.3rem;
+  }
 }
-</style>>
+
+.header .button:hover {
+  background-color: #f4f4f4;
+}
+
+.show {
+  display: none;
+}
+
+#menu-hamburger {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  background-color: rgb(216, 213, 213);
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    li {
+      padding: 10px 0;
+
+      .links {
+        color: #fff
+      }
+
+      .links:hover {
+        color: gray;
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+
+  .header {
+    #button {
+      display: block;
+      margin: 0;
+      padding: 0;
+      text-align: left;
+      width: 5%;
+      cursor: pointer;
+
+      i {
+        color: #616161;
+      }
+    }
+
+    .logo {
+      width: 55%;
+
+      img {
+        margin-left: 5px;
+        margin-right: auto;
+        width: 40%;
+      }
+    }
+
+    .menu {
+      display: none;
+    }
+
+    .menu-icons {
+      width: 40%;
+
+      li {
+        padding: 0 2px;
+      }
+
+      i {
+        font-size: 1.2rem;
+      }
+    }
+  }
+  
+}
+
+</style>
 
 
