@@ -1,5 +1,5 @@
 <template>
-<header id="top-page">
+<header>
   <nav class="header">
     <div id="button" @click="type = false"><i class="fas fa-bars"></i></div>
     <router-link to="/" class="logo"><img src="/logo/logo-color.png" alt="Logotipo Geeky"></router-link>
@@ -7,7 +7,7 @@
       <li><router-link to="/productos/camisetas" class="links">{{lang["tshirts"]}}</router-link></li>
       <li><router-link to="/productos/accesorios" class="links">{{lang["accessories"]}}</router-link></li>
       <li><router-link to="/productos/tazas" class="links">{{lang["cups"]}}</router-link></li>
-      <li><router-link to="/productos/games" class="links">{{lang["games"]}}</router-link></li>
+      <li><router-link to="/productos/juegos" class="links">{{lang["games"]}}</router-link></li>
     </ul>
     <ul class="menu-icons">
       <li>
@@ -38,7 +38,7 @@
       <li><router-link to="/productos/camisetas" class="links">{{lang["tshirts"]}}</router-link></li>
       <li><router-link to="/productos/accesorios" class="links">{{lang["accessories"]}}</router-link></li>
       <li><router-link to="/productos/tazas" class="links">{{lang["cups"]}}</router-link></li>
-      <li><router-link to="/productos/games" class="links">{{lang["games"]}}</router-link></li>
+      <li><router-link to="/productos/juegos" class="links">{{lang["games"]}}</router-link></li>
     </ul>
 </nav>
 </template>
@@ -190,7 +190,7 @@ header {
 }
 
 #menu-hamburger {
-  position: absolute;
+  position: fixed;
   top: 50px;
   left: 0;
   z-index: 5;

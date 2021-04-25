@@ -90,10 +90,10 @@ const productsUpdate = (req, res) => {
 } 
 
 const listProduct = (req, res) => {
-    let productsCategory = req.params.category
-    Product.find({ category: productsCategory })
-        .then(data => res.json(data))
-        .catch(err => res.json(err))
+  let category = req.params.category
+  Product.find({ category: category })
+    .then(data => res.json(data))
+    .catch(err => res.json(err))
 }
 
 const showDetailProduct = (req, res) => {
