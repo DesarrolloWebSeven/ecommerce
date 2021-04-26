@@ -1,39 +1,26 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 mt-3">
-        <div class="card">
-          <div class="card-horizontal justify-content-center row">
-            <div class="img-square-wrapper col-12 col-lg-6 m-4">
-              <img :src="'/images/'+product.images[0]" />
-            </div>
-            <div class="card-body col-12 col-lg-6">
-              <h4 class="card-title">{{ product.title }}</h4>
-              <p class="card-text">Stock: {{ product.quantity }}</p>
-              <p class="card-text price">{{ product.price }} €</p>
-              <div>
-                <div>
-                  <router-link to="/carrito">
-                    <button @click="buy(product)">COMPRAR</button>
-                  </router-link>
-                </div>
-                <router-link
-                  :to="'/producto/id/' + product._id"
-                  class="card-text"
-                  ><button>VER</button></router-link
-                >
-              </div>
-            </div>
-          </div>
-        </div>
+  <main class="product-card">
+    <div class="product-img">
+      <img :src="'/images/' + product.images[0]" />
+    </div>
+    <div class="product-info">
+      <div class="product-title">
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.price }} €</p>
+      </div>
+      <div class="product-icons">
+        <div @click="buy(product)" class="icon"><i class="fas fa-shopping-basket"></i></div>
+        <router-link :to="'/producto/id/' + product._id" class="icon">
+          <i class="fas fa-search"></i>
+        </router-link>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
-import { reactive, ref, computed } from "vue";
-import { useStore } from "vuex";
+import { reactive } from 'vue'
+import { useStore } from 'vuex'
 export default {
   name: "Product",
   props: {
@@ -41,66 +28,91 @@ export default {
   },
   setup() {
     const store = useStore();
-    let product = ref();
     let contador = reactive({
       titulo: "Contador: ",
       valor: 1,
       uds: 1,
     });
 
-    function buy(product) {
+    const buy = (product) => {
       product.items = parseInt(contador.uds);
       store.dispatch("addToCart", product, parseInt(contador.uds));
     }
 
     return {
-      buy,
+      buy
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.card {
-  border: none;
-  margin: 20px;
-  min-height: 600px;
-  .card-horizontal {
-    display: flex;
-    flex: 1 1 auto;
-    color: black;
+.product-card {
+  box-sizing: border-box;
+  width: 30%;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid rgb(235, 232, 232);
+  box-shadow: 2px 2px 10px rgb(235, 233, 233);
 
-    .card-title {
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-    .card-body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .price {
-        background-color: #0f606b;
-        padding: 5px;
-        color: white;
-      }
-    }
     img {
-      width: 200px;
-      height: 200px;
-      background-color: white;
-      margin: 5px;
+      max-width: 90%;
     }
-    @media (max-width: 576px) {
-      img {
-        width: 150px;
-        height: 150px;
+
+    .product-info {
+      margin: 15px 20px 10px;
+      padding-bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      color: rgb(99, 98, 98);
+      text-align: left;
+
+      .product-title {
+
+        h2 {
+          font-size: 0.7rem;
+          font-weight: 600;
+          margin-bottom: 3px;
+        }
+
+        p {
+          margin: 0; 
+          padding: 0;
+          font-size: 1.1rem;
+          font-weight: bold;
+          color: black;
+        }
+
       }
+
     }
-    button {
+
+  .product-icons {
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: start;
+
+    .icon {
+      cursor: pointer;
+      width: 35px;
+      height: 35px;
+      border-radius: 5px;
       color: #fff;
-      background-color: black;
-      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .icon:first-child {
+      background-color: #FFC61A;
+      margin-right: 5px;
+    }
+
+    .icon:nth-child(2) {
+      background-color: #65BAF7;
     }
   }
 }
+
 </style>
