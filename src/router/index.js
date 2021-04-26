@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Team from '../views/Team.vue'
-import Proyect from '../views/Proyect.vue'
-import HelpContact from '../views/HelpContact.vue'
+import Project from '../views/Project.vue'
 import Contact from '../views/Contact.vue'
 import PrivacyPolicy from '../views/PrivacyPolicy.vue'
 import Cookies from '../views/Cookies.vue'
@@ -14,12 +13,8 @@ import PasswordForm from '../views/PasswordForm.vue'
 import Category from '../views/Category.vue'
 import ProductCard from '../views/ProductCard.vue'
 import Cart from '../views/Cart.vue'
-/* import Payment from '../views/Payment.vue' */
 import Shipping from '../views/Shipping.vue'
-import Resume from '../views/Resume.vue'
-import Payment2 from '../views/Payment2.vue'
-import Final from '../views/Final.vue'
-
+import Payment from '../views/Payment.vue'
 
 const routes = [
   {
@@ -34,13 +29,8 @@ const routes = [
   },
   {
     path: '/proyecto',
-    name: 'Proyect',
-    component: Proyect
-  },
-  {
-    path: '/ayuda',
-    name: 'HelpContact',
-    component: HelpContact
+    name: 'Project',
+    component: Project
   },
   {
     path: '/contacto',
@@ -71,13 +61,11 @@ const routes = [
     path: '/password/:id',
     name: 'PasswordForm',
     component: PasswordForm,
-    props: true
   },
   {
     path: '/usuario/registro/:id',
     name: 'Confirmation',
     component: Confirmation,
-    props: true,
   },
   {
     path: '/productos/:category',
@@ -93,7 +81,6 @@ const routes = [
     path: '/carrito',
     name: 'Cart',
     component: Cart,
-    
   },
   {
     path: '/carrito/envio',
@@ -101,25 +88,9 @@ const routes = [
     component: Shipping,   
   }, 
   {
-    path: '/carrito/resumen',
-    name: 'Resume',
-    component: Resume,
-  }, 
-  /* {
     path: '/carrito/pago',
     name: 'Payment',
-    component: Payment,
-    meta: { protected: true }
-  }, */ 
-  {
-    path: '/carrito/pago',
-    name: 'Payment2',
-    component: Payment2,    
-  },
-  {
-    path: '/carrito/compraFinal',
-    name: 'Final',
-    component: Final,    
+    component: Payment,    
   },
   {
     path: '/:catchAll(.*)',
@@ -131,7 +102,10 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    return { top: 0 }
+  },
 })
 
 router.beforeEach((to, from, next) => {
@@ -144,6 +118,7 @@ router.beforeEach((to, from, next) => {
     next(false)
   }
 }) 
+
 
 
 export default router

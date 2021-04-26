@@ -1,11 +1,11 @@
 <template>
-<main>
-  <div class="main-banner">
+<main class="category-page">
+  <div class="category-banner">
     <img :src="'/logo/' + category + '.png'" alt="">
   </div>
-  <div v-if="products">
+  <div class="category-main" v-if="products">
     <div v-for="(product, i) in products" :key="i">
-    <Product :product="product" />
+    <Product class="category-product" :product="product" />
     </div>
   </div>
 </main>
@@ -48,15 +48,58 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-main {
-  padding-top: 90px;
-}
-.main-banner {
+.category-page {
   width: 80%;
   margin: 0 auto;
+  padding-top: 90px;
 
-  img {
-    max-width: 100%;
+  .category-banner {
+    width: 100%;
+    margin-bottom: 20px;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .category-main {
+    margin: 40px 0 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    grid-gap: 30px;
+
+    .category-product {
+      width: 100%;
+    }
+
+  }
+
+  @media (max-width: 1000px) {
+
+    .category-main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+
+    .category-product {
+      width: 100%;
+    }
+    }
+  }
+
+  @media (max-width: 700px) {
+
+    .category-main {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(6, 1fr);
+
+    .category-product {
+      width: 100%;
+    }
+    }
   }
 }
+
 </style>
