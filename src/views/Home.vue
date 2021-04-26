@@ -1,104 +1,23 @@
 <template>
-  <div class="container section">
-    <div class="row">
-      <h1 class="titleHome">Regalos para informáticxs</h1>
-
-      <router-link to="/productos/camisetas" class="col-12 col-md-6 mt-3">
-        <div class="card">
-          <div class="card-horizontal">
-            <div class="card-body">
-              <h4 class="card-title">Camisetas</h4>
-            </div>
-            <div class="img-square-wrapper">
-              <div class="">
-                <!-- <img
-                  class="logoGeeky"
-                  src="../../public/images/images-1618226795740.png"
-                  alt=""
-                />
-                <img
-                  class="logoGeeky"
-                  src="../../public/images/images-1618226285755.png"
-                  alt=""
-                /> -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </router-link>
-
-      <router-link to="/productos/accesorios" class="col-12 col-md-6 mt-3">
-        <div class="card">
-          <div class="card-horizontal">
-            <div class="card-body">
-              <h4 class="card-title">Accesorios</h4>
-            </div>
-            <div class="img-square-wrapper">
-              <div>
-               <!--  <img
-                  class="logoGeeky"
-                  src="../../public/images/images-1618228602474.png"
-                  alt=""
-                />
-                <img
-                  class="logoGeeky"
-                  src="../../public/images/images-1618227834601.png"
-                  alt=""
-                /> -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </router-link>
-
-      <router-link to="/productos/tazas" class="col-12 col-md-6 mt-3">
-        <div class="card">
-          <div class="card-horizontal">
-            <div class="card-body">
-              <h4 class="card-title">Tazas</h4>
-            </div>
-            <div class="img-square-wrapper">
-              <div>
-                <!-- <img
-                  class="logoGeeky"
-                  src="../../public/images/images-1617973995105.png"
-                  alt=""
-                />
-                <img
-                  class="logoGeeky"
-                  src="../../public/images/images-1618225574181.png"
-                  alt=""
-                /> -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </router-link>
-
-      <router-link to="/productos/games" class="col-12 col-md-6 mt-3">
-        <div class="card">
-          <div class="card-horizontal">
-            <div class="card-body">
-              <h4 class="card-title">Juegos</h4>
-            </div>
-            <div class="img-square-wrapper">
-              <div>
-                <!-- <img
-                  class="logoGeeky"
-                  src="../../public/images/images-1618230322660.jpg"
-                  alt=""
-                /><img
-                  class="logoGeeky"
-                  src="../../public/images/images-1618229687036.jpg"
-                  alt=""
-                /> -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </router-link>
+  <main class="home">
+    <div class="home-banner">
+      <img src="/logo/banner.png" alt="">
     </div>
-  </div>
+    <div class="home-section">
+      <div class="links">
+        <router-link to="/productos/camisetas"><img src="/logo/shirts.jpg" alt=""></router-link>
+      </div>
+      <div class="links">
+        <router-link to="/productos/tazas"><img src="/logo/mugs.jpg" alt=""></router-link>
+      </div>
+      <div class="links">
+        <router-link to="/productos/juegos"><img src="/logo/games.jpg" alt=""></router-link>
+      </div>
+      <div class="links">
+        <router-link to="/productos/accesorios"><img src="/logo/accesories.jpg" alt=""></router-link>
+      </div>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -115,70 +34,54 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.section {
-  background-color: #10555e1e;
-  max-width: 80%;
-  margin-top: 30px;
-  color: black;
-  .titleHome {
-    font-family: "Game" !important;
-    font-size: 50px;
-    background-color: #0f606b;
-    padding: 30px;
-    margin-bottom: 30px;
-    margin-top: 30px;
+.home {
+  margin: 80px auto 100px;
+  width: 80%;
+  
+  .home-banner img {
+    max-width: 100%;
   }
-  .row {
-    max-width: 95%;
-    margin: 0 auto;
-  }
-  .card {
-    border: none;
-    margin: 20px;
-    .card-horizontal {
-      display: flex;
-      flex-direction: column;
-      flex: 1 1 auto;
-      color: black;
-      
-      .card-title {
-        text-transform: uppercase;
-        font-weight: bold;
-      }
 
-      .card-body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        .price {
-          background-color: #0f606b;
-          padding: 5px;
-          color: white;
-        }
-      }
+  .home-section {
+    margin: 30px 0;
+    width: 100%;
+
+    .links {
+
       img {
-        width: 200px;
-        height: 200px;
-        background-color: white;
-        margin: 5px;
+        width: 100%;
+        max-width: 100%;
       }
-      button {
-        color: #fff;
-        background-color: black;
-        padding: 10px;
+
+      img:hover {
+        filter: opacity(60%);
       }
     }
+  
   }
-  @media (max-width: 600px) {
-    .titleHome {
-      font-size: 40px;
-    }
+    
+
+  @media (max-width: 1050px) {
+
+  .home-section {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(4, 1fr);
+    grid-row-gap: 10px;
   }
 
-  @media (max-width: 530px) {
-    .titleHome {
-      font-size: 25px;
-    }
+  }
+
+  @media (min-width: 1050px) {
+
+  .home-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 15px;
+
+  }
   }
 }
+
 </style>

@@ -199,3 +199,8 @@ main {
 .card-title {
   font-weight: 700;
 }
+
+/* Content Form */
+.content-form {
+  width: 90%;
+}

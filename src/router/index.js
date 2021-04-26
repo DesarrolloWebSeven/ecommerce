@@ -48,7 +48,7 @@ const routes = [
     component: Contact
   },
   {
-    path: '/politicaPrivacidad',
+    path: '/politicaprivacidad',
     name: 'PrivacyPolicy',
     component: PrivacyPolicy
   },

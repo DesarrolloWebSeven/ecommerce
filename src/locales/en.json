@@ -9,11 +9,11 @@
 
 
     "_footer": "FOOTER",
-    "contact":"CONTACT",
-    "proyect":"PROYECT",
-    "team":"TEAM",
-    "privacyPolicy":"PRIVACY POLICY",
-    "cookies":"COOKIES",
+    "contact":"Contact",
+    "proyect":"Project",
+    "team":"Team",
+    "privacyPolicy":"Privacy Policy",
+    "cookies":"Cookies Policy",
     "footerRights": "All Rights Free by",
 
   "_notfound": "NOTFOUND",

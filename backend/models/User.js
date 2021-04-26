@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const { Schema } = mongoose;
+const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const { Schema } = mongoose;
 const { isEmail, isStrongPassword } = require('validator');
 
 const userSchema = new Schema({
@@ -15,7 +15,7 @@ const userSchema = new Schema({
   },
   password: { 
     type: String, 
-    required: [ true, "Debes introducir una contraseña"], 
+    required: [true, "Debes introducir una contraseña"], 
     validate: [isStrongPassword, "Introduce un password válido"],
   },
   active: { type: Boolean, default: false },
@@ -33,4 +33,4 @@ userSchema.methods.matchPassword = function(password) {
   return bcrypt.compareSync(password, this.password);
 };
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model('user', userSchema);
