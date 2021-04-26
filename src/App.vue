@@ -54,7 +54,6 @@ export default {
 
   h1, h2 {
     font-family: 'Montserrat', sans-serif;
-    color: black
   }
 
   @media (max-width: 1050px) {

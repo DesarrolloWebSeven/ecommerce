@@ -35,10 +35,14 @@ export default {
   color: rgb(99, 98, 98);
   text-align: left;
 
+  h1, h2 {
+    color: black;
+  }
+
   h2 {
     margin-bottom: 20px;
   }
-  
+
   li {
     margin-bottom: 10px;
   }

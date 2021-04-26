@@ -112,6 +112,10 @@ export default {
   color: rgb(99, 98, 98);
   text-align: left;
 
+  h1, h2 {
+    color: black;
+  }
+
   h2 {
     margin-bottom: 20px;
     font-size: 1.5rem;

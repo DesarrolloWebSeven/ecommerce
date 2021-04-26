@@ -46,6 +46,10 @@ export default {
   padding: 30px 70px;
 }
 
+h2.cookies-titulo {
+  color: white;
+}
+
 .cookies-botones {
   width: 80%;
   margin: 10px auto 0;
