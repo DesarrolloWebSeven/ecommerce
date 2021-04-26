@@ -1,4 +1,5 @@
 const Product = require('../models/Product')
+const Order = require('../models/Order')
 const fs = require('fs').promises
 const path = require('path')
 
@@ -103,6 +104,27 @@ const showDetailProduct = (req, res) => {
         .catch(err => res.json(err))
 }
 
+const saveOrder = async (req, res) => {
+  let order = new Order({
+    userId: req.body.userId,
+    firstName: req.body.user.firstName,
+    lastName: req.body.user.lastName,
+    email: req.body.user.email,
+    tel: req.body.user.tel,
+    address: req.body.user.address,
+    flat: req.body.user.flat,
+    postalCode:req.body.user.postalCode,
+    city:req.body.user.city,
+    province:req.body.user.province,
+    country:req.body.user.country,
+    totalProducts: req.body.totalProducts,
+    totalPrice: (req.body.totalPrice).toFixed(2),
+    cart: req.body.cart
+  })
+  let orderInfo = await order.save()
+  res.send(orderInfo)
+}
+
 module.exports = {
     productsList,
     productsSave,
@@ -111,5 +133,6 @@ module.exports = {
     imagesDelete,
     productsUpdate,
     listProduct,
-    showDetailProduct 
+    showDetailProduct,
+    saveOrder 
 }

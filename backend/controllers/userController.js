@@ -88,7 +88,7 @@ const auth = (req, res) => {
   const token = req.headers.authorization.split('Bearer ')[1]
   
   jwt.verify(token, process.env.TOKEN, async (err, decodedToken) => {
-    (err) ? res.json({ message: 'fail', err }) : res.json({ message: 'success', decodedToken })
+    (err) ? res.json({ message: 'fail', err }) : res.json({ message: 'success', decodedToken: decodedToken.id })
   })
 
 }
@@ -111,6 +111,7 @@ const getInfoUser =(req, res) => {
   console.log(user)
 }
 
+
 module.exports = {
   registerUser,
   confirmationUser,
@@ -120,5 +121,5 @@ module.exports = {
   changePassword,
   auth,
   contactMail,
-  getInfoUser
+  getInfoUser,
 }
