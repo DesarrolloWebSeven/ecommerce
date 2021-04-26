@@ -48,12 +48,6 @@ export default {
   color: white;
   background-color: white;
 
-  .router-link-active, .router-link-exact-active {
-    margin: 0;
-    padding: 0;
-  }
-
-
   a {
     text-decoration: none;
   }

@@ -7,7 +7,6 @@ const app = express()
 const cookieParser = require('cookie-parser')
 const method = require('method-override')
 
-
 // Database settings
 const conexion = require('./database')
 conexion.on('error',console.error.bind(console,"Error de conexion mongo"))
