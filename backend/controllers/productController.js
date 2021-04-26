@@ -2,6 +2,7 @@ const Product = require('../models/Product')
 const fs = require('fs').promises
 const path = require('path')
 
+// Show a list with all the products
 const productsList = (req, res)=>{
   Product.find().then( data => {
     let products = []
@@ -18,6 +19,7 @@ const productsList = (req, res)=>{
     })        
 }
 
+// Create and save a new product
 const productsSave = (req, res) => {
   let images=[]
   req.files.forEach( i => images.push(i.filename))
@@ -33,14 +35,13 @@ const productsSave = (req, res) => {
     .catch( err => console.log(err))
 }
 
-const productsDelete = async (req,res)=>{
+const productsDelete = async (req, res) => {
     console.log("vas a eliminar: ", req.params.id)
-/*     Product.findById(req.params.id).lean()
-        .then(product=>{
-            product.images.forEach(image=>{
-                fs.unlink(path.join(__dirname, '../../public', image))
-                    .then(() => {console.log('Imagen Borrada con exito!')})
-                    .catch(err => {console.error('A ocurrido un problema al intentar eliminar la imagen: ', err)})
+/*  Product.findById(req.params.id).lean()
+      .then(product => {
+        product.images.forEach(image => fs.unlink(path.join(__dirname, '../../public/images/', image))
+      .then(() => console.log('¡Imagen Borrada con exito!'))
+      .catch(err => console.error('Problema al eliminar la imagen: ', err))
             })
         })
     const product_delete = await Product.findByIdAndDelete(req.params.id)
@@ -48,6 +49,7 @@ const productsDelete = async (req,res)=>{
     res.render('products', {src:'products.js'}) */
 }
 
+// Show info of a specific product
 const productsFindById = (req, res) => {
   Product.findById(req.params.id).lean()
     .then(product => {
@@ -57,19 +59,20 @@ const productsFindById = (req, res) => {
     .catch(err => console.log(err.message))
 }
 
+// Delete images from the folder
 const imagesDelete = (req, res) => {  
     fs.unlink(path.join(__dirname, '../../public/images/', req.params.img))
-    .then(() => console.log('Imagen Borrada con exito!'))
+    .then(() => console.log('¡Imagen Borrada con exito!'))
     .catch(err => console.error(err.message))
 }
 
+// Update the product's info on the database
 const productsUpdate = (req, res) => {
   let newImages = req.body.images.split(',')
   newImages.forEach( image => {
     if (image === '') newImages.splice(newImages.indexOf(image), 1)
   }) 
   req.files.forEach(i => newImages.push(i.filename))
-  console.log(newImages)
     
   Product.findByIdAndUpdate({_id : req.body.id}, {
     title : req.body.title,
@@ -89,6 +92,7 @@ const productsUpdate = (req, res) => {
     .catch(err => console.log(err.message))
 } 
 
+// Show products by category for the User
 const listProduct = (req, res) => {
   let category = req.params.category
   Product.find({ category: category })
@@ -96,6 +100,7 @@ const listProduct = (req, res) => {
     .catch(err => res.json(err))
 }
 
+// Show a specific product for the User
 const showDetailProduct = (req, res) => {
     let idProduct = req.params.id
     Product.findById(idProduct)
