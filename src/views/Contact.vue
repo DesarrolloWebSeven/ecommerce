@@ -1,8 +1,8 @@
 <template>
   <main class="contact-page">
+    <h1 class="text-center">{{ lang["descriptionContactP1"] }}</h1>
     <div class="container">
       <section class="row section">
-        <h1 class="text-center">{{ lang["descriptionContactP1"] }}</h1>
         <form class="col-12 col-lg-6 mb-md-3" @submit.prevent="contactMail">
           <div class="row">
             <div class="col-6">
@@ -119,9 +119,21 @@ export default {
 
 <style lang="scss" scoped>
 .contact-page {
-  margin: 120px auto;
+  margin: 100px auto;
   width: 80%;
   color: rgb(99, 98, 98);
+
+  h1 {
+    color: black;
+    margin-bottom: 20px
+  }
+}
+
+.container {
+  background-color: rgb(248, 246, 246);
+  padding: 1px 0;
+  border-radius: 15px;
+  box-shadow: 3px 3px 5px rgb(192, 192, 192);
 }
 
 section {
