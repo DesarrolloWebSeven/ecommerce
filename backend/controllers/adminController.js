@@ -38,15 +38,6 @@ const logout = (req, res) => {
   res.redirect('/admin')
 }
 
-
-const team = (req, res) => {
-  res.render('team', ({
-    title: "Admin | Equipo",
-    css: 'products',
-    src:'staticPages.js'
-  }))
-}
-
 const project = (req, res) => {
   res.render('project', ({
     title: "Admin | Proyecto",
@@ -73,7 +64,6 @@ module.exports = {
     login,
     signin,
     logout,
-    team,
     project,    
     clients,
     orders,
