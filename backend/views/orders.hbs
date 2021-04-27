@@ -1,17 +1,27 @@
 {{> header}}
 <main>
-  <h1 class="text-center">Pedidos</h1>
-  <section class="container">
-        <div>
-            
-        </div>
-        <div class="orders-list">
-        </div>
-  </section>
-  
+  <h1 class="text-center">Pedidos</h1>  
   <!-- Search Input -->
   <section class="search-box">
     <i class="fas fa-search"></i>
     <input type="text" class="search-console" id="search" placeholder="Buscar" autocomplete="off">
+  </section>
+  <section id="orders" class="order-list">
+    {{#if orders}}
+    {{#each orders}}
+      <div class="order-detail {{ this.state }}">
+        <ol class="order-info">
+          <li><b>Pedido:</b> {{ this._id }}</li>
+          <li><b>Cliente:</b> {{ this.firstName }} {{ this.lastName }}</li>
+          <li><b>Estado:</b> {{ this.state }}</li>
+        </ol>
+        <div class="order-icons">
+          <div id="orderInfo" class="icon"><i class="fas fa-eye"></i></div>
+          <div id="orderUpdate" class="icon"><i class="fas fa-pen"></i></div>
+          <div id="orderDelete" class="icon"><i class="fas fa-trash-alt"></i></div>
+        </div>
+      </div>
+    {{/each}}
+    {{/if}}
   </section>
 </main>
