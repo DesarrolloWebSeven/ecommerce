@@ -215,9 +215,9 @@ export default {
 
     const saveOrder = async () => {
 
-      if(store.getters.) {
+/*      if(stor) {
         console.log('Hola')
-/*         try {
+         try {
           const res = await axios.post("productos/pedido", {
             userId: userId.value,
             user: user,
@@ -231,9 +231,9 @@ export default {
           }
         } catch (err) {
           console.log(err.message);
-        } */
+        } 
       }
-      else error.value = "Tu carrito está vacío"
+      else error.value = "Tu carrito está vacío"*/
 
     };
 
