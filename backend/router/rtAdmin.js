@@ -29,8 +29,8 @@ rtAdmin.get('/productos/:id', requireAuth, productController.productsFindById)
 rtAdmin.delete('/:img', requireAuth, productController.imagesDelete)
 rtAdmin.put('/productos/:id', requireAuth, productController.productsUpdate)
 
-//Content editor
+// Content editor
 rtAdmin.post('/editor/:title', requireAuth, pageController.pageUpdate)
-rtAdmin.get('/editor/:title', pageController.pageList)
+rtAdmin.get('/editor/:title', requireAuth, pageController.pageList)
 
 module.exports= rtAdmin

@@ -1,22 +1,16 @@
 <template>
-<div class="section">
-  <h1>{{lang["thisCookies"]}}</h1>
-  <p><strong>{{lang["titleCookies"]}}</strong></p>
-<p>{{lang["pCookies"]}}</p>
-<ol>
-<li>{{lang["li1"]}}
-<ol>
-<li>{{lang["li2"]}}</li>
-</ol>
-</li>
-<li>{{lang["li3"]}} </li>
-
-<li>{{lang["li4"]}}
-
-</li>
-<li>{{lang["li5"]}}</li>
-</ol>
-</div>
+<main class="cookies-page">
+  <h1>{{ lang["thisCookies"] }}</h1>
+  <h2>{{ lang["titleCookies"] }}</h2>
+  <p>{{ lang["pCookies"] }}</p>
+  <ol>
+    <li>{{ lang["li1"] }}</li>
+    <li>{{ lang["li2"] }}</li>
+    <li>{{ lang["li3"] }}</li>
+    <li>{{ lang["li4"] }}</li>
+    <li>{{ lang["li5"] }}</li>
+  </ol>
+</main>
 </template>
 
 <script>
@@ -35,17 +29,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.section{
-  max-width: 80%;
-  margin: 0 auto;
-  margin-top:20px;
-  padding:20px;
-  background-color: #3F3F3F;
+.cookies-page {
+  margin: 120px auto 90px;
+  width: 80%;
+  color: rgb(99, 98, 98);
   text-align: left;
-  color:white;
-  border-radius:10px;
-  
-  
-  
+
+  h1, h2 {
+    color: black;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  li {
+    margin-bottom: 10px;
+  }
 }
 </style>
