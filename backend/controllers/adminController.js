@@ -23,6 +23,7 @@ const signin = async (req, res) => {
         css: 'login'})
         if(isValid) {
           const token = createToken(user._id)
+          console.log(token)
           res.cookie('jwt', token, { httpOnly: true });
           res.status(201).redirect('/admin/productos'); 
         }
@@ -36,15 +37,6 @@ const signin = async (req, res) => {
 const logout = (req, res) => {
   res.cookie('jwt', ' ', { maxAge: 1 })
   res.redirect('/admin')
-}
-
-
-const team = (req, res) => {
-  res.render('team', ({
-    title: "Admin | Equipo",
-    css: 'products',
-    src:'staticPages.js'
-  }))
 }
 
 const project = (req, res) => {
@@ -73,7 +65,6 @@ module.exports = {
     login,
     signin,
     logout,
-    team,
     project,    
     clients,
     orders,

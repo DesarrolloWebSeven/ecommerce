@@ -29,7 +29,7 @@ export default {
   setup() {
     const store = useStore();
     const cart = computed(() => store.state.cart);
-    const emptyCart = () => {store.commit('setEmptyCart')}
+    const emptyCart = () => store.commit('setEmptyCart')
 
     return { 
       cart,

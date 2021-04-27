@@ -3,21 +3,20 @@
     <div class="row d-flex justify-content-center">
       <ol id="progress-bar">
         <li class="step-active">Envío</li>
-        <li class="step-todo">Resumen</li>
         <li class="step-todo">Pago</li>
       </ol>
     </div>
     <div>
-      <form class="section row g-3">
+      <form class="section row g-3" @submit.prevent="saveOrder">
         <div class="col-md-6">
           <label class="form-label">Nombre</label>
           <input
             type="text"
             v-model="user.firstName"
-            name="firstName"
             id="firstName"
             class="form-control"
             placeholder="Introduce tu nombre"
+            required
           />
         </div>
         <div class="col-md-6">
@@ -25,21 +24,21 @@
           <input
             type="text"
             v-model="user.lastName"
-            name="lastName"
             id="lastName"
             class="form-control"
             placeholder="Introduce tus apellidos"
+            required
           />
         </div>
         <div class="col-md-6">
           <label class="form-label">Direción y número</label>
           <input
             type="text"
-            v-model="user.adress"
-            name="adress"
+            v-model="user.address"
             id="adress"
             class="form-control"
             placeholder="Introduce tu dirección y número"
+            required
           />
         </div>
         <div class="col-md-6">
@@ -47,10 +46,10 @@
           <input
             type="text"
             v-model="user.flat"
-            name="flat"
             id="flat"
             class="form-control"
             placeholder="Introduce tu piso, puerta, escalera"
+            required
           />
         </div>
         <div class="col-md-6">
@@ -58,10 +57,10 @@
           <input
             type="text"
             v-model="user.postalCode"
-            name="postalCode"
             id="postalCode"
             class="form-control"
             placeholder="Introduce tu piso, puerta, escalera"
+            required
           />
         </div>
         <div class="col-md-6">
@@ -69,10 +68,10 @@
           <input
             type="text"
             v-model="user.city"
-            name="city"
             id="city"
             class="form-control"
             placeholder="Introduce tu piso, puerta, escalera"
+            required
           />
         </div>
         <div class="col-md-6">
@@ -80,10 +79,10 @@
           <input
             type="text"
             v-model="user.province"
-            name="province"
             id="province"
             class="form-control"
             placeholder="Introduce tu piso, puerta, escalera"
+            required
           />
         </div>
         <div class="col-md-6">
@@ -91,10 +90,10 @@
           <input
             type="text"
             v-model="user.country"
-            name="country"
             id="country"
             class="form-control"
             placeholder="Introduce tu piso, puerta, escalera"
+            required
           />
         </div>
         <div class="col-md-6">
@@ -102,10 +101,10 @@
           <input
             type="tel"
             v-model="user.tel"
-            name="tel"
             id="tel"
             class="form-control"
             placeholder="Introduce tu correo"
+            required
           />
         </div>
         <div class="col-md-6">
@@ -113,19 +112,56 @@
           <input
             type="email"
             v-model="user.email"
-            name="email"
             id="email"
             class="form-control"
             placeholder="Introduce tu correo"
+            required
           />
         </div>
+        <div class="col-12 col-md-8">
+          <div v-for="(id, i) in Object.keys(cart)" :key="i" class="col-12">
+            <div class="card row">
+              <div class="card-horizontal row justify-content-center">
+                <div
+                  id="carouselExampleIndicators"
+                  class="col-12 col-lg-6 m-4"
+                  data-bs-ride="carousel"
+                >
+                  <div class="carousel-inner">
+                    <div class="">
+                      <img
+                        :src="'/images/' + cart[id].images[0]"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                  </div>
+                </div>
 
+                <div class="card-body col-12 col-lg-6">
+                  <div class="d-flex flex-column align-items-start">
+                    <h4 class="card-title">{{ cart[id].title }}</h4>
+                    <p class="card-text">
+                      <b>Precio unidad: </b> {{ cart[id].price }}
+                    </p>
+                    <p class="card-text">
+                      <b>Cantidad en tu carrito: </b> {{ cart[id].items }}
+                    </p>
+                    <p class="card-text">
+                      <b>Subtotal producto: </b>
+                      {{ (cart[id].items * cart[id].price).toFixed(2) }}
+                    </p>
+                  </div>
+                </div>
+                <Total />
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="col-12">
-          <router-link to="/carrito/resumen"
-            ><p class="card-text">
-              <button @click="saveUser" class="btn btn-success continuar m-2">Continuar</button>
-            </p></router-link
-          >
+          <p class="card-text">
+            <button class="btn btn-success m-2">Continuar</button>
+          </p>
         </div>
       </form>
     </div>
@@ -133,37 +169,68 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
-
+import Total from "@/components/Total";
+import { ref, reactive, computed } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from 'vue-router'
+import axios from "axios";
 export default {
   name: "Shipping",
   props: {},
+  components: {
+    Total,
+  },
   setup() {
+    const router = useRouter()
+    const store = useStore();
+    const cart = computed(() => store.state.cart);
+    const userId = ref("");
     let user = reactive({
-      firstName:"",
-      lastName:"",
-      adress:"",
-      flat:"",
-      postalCode:"",
-      city:"",
-      province:"",
-      country:"",
-      tel:"",
-      email:""
-    })
-    
-    const saveUser = () => {      
-    localStorage.setItem('UserInfo', JSON.stringify(user))      
+      firstName: '',
+      lastName: '',
+      address: '',
+      tel: '',
+      country: '',
+      province: '',
+      city: '',
+      email: '',
+      flat: '',
+      postalCode: ''
+    });
+    const userAuth = async () => {
+      try {
+        const res = await axios.get("usuario/permiso", {
+          headers: { Authorization: "Bearer " + localStorage.getItem("jwt") },
+        });
+        if (res.data.message === "fail") router.push("/");
+        userId.value = res.data.decodedToken.id;
+      } catch (err) {
+        console.log(err);
+      }
     };
-
-    
-
-    
-    
-
-    return {      
-      saveUser,
-      user
+    userAuth();
+    const saveOrder = async () => {
+      console.log('Hola')
+      try {
+        const res = await axios.post("productos/pedido", {
+          userId: userId.value,
+          user: user,
+          totalPrice: store.getters.totalPrice,
+          totalProducts: store.getters.totalQuantity,
+          cart: store.state.cart,
+        });
+        if(res.data) {
+          localStorage.setItem('order', JSON.stringify(res.data._id))
+          router.push('/carrito/pago')
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    return {
+      user,
+      cart,
+      saveOrder
     };
   },
 };
@@ -176,7 +243,6 @@ export default {
   max-width: 80%;
   margin-top: 30px;
   color: black;
-
   .row {
     max-width: 95%;
     margin: 0 auto;
@@ -186,12 +252,10 @@ export default {
       justify-content: center;
     }
   }
-
   // Colors
   $default: #212121;
   $grey: #efefef;
   $main-color: #ff0000;
-
   // Progress bar
   #progress-bar {
     display: table;
