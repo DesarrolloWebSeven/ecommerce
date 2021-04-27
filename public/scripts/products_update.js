@@ -2,7 +2,6 @@ $(document).ready(function(){
     //Asignacion de valores
     var _id = $("#id")[0].value
     var imagesOld = $("#images")[0].defaultValue.split(',')
-    var imagesNew
 
     //Preparando contenedores
     var img = document.createElement('img')

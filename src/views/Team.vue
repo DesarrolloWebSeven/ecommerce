@@ -42,12 +42,6 @@
   </div>
 
   </div>
-
-  <div>
-    <label>{{lang["lang-label"]}}</label>
-    <div class="color" v-html='miHtml'></div>
-  </div>
-
 </div>  
 </template>
 
@@ -57,17 +51,8 @@ import { computed, ref } from 'vue'
 export default {
   name:'Team',
   setup(){
-    let miHtml = ref('')
-
-    fetch(`http://localhost:8081/admin/editor/equipo`)
-      .then((res) => res.json())
-      .then((data) =>{
-        miHtml.value=data[0].content
-      })
-      .catch((err) => console.log(err))
      
     return {
-      miHtml,
       lang: computed(()=>useStore().getters.getLang)
     }
   }

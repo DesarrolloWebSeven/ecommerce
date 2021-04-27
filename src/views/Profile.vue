@@ -9,7 +9,12 @@
         <p>direction</p>
         <p>codigo porstal, ciudad, provincia</p>
 
-        <!-- <button class="btn btn-danger">Editar</button> -->
+        <p><button class="btn btn-warning">Modificar datos</button></p>
+        <p><button class="btn btn-danger">Darme de baja</button></p>
+        <p><button class="btn btn-info">Gestionar pedidos</button></p>
+        <p><button class="btn btn-dark">Cambiar mi Pass</button></p>
+
+
       </div>
       <div class="col-md-8">
         <div>
@@ -141,42 +146,50 @@
         </div>
       </div>
     </div>
+    <div>{{usuario}}</div>
   </div>
 </template>
 
 <script>
 import { useRoute } from 'vue-router'
-import { reactive, watch, onMounted } from 'vue'
+import { useStore} from 'vuex'
+import { reactive, watch, onMounted, computed } from 'vue'
 export default {
   name: "Profile",
   props: {},
   setup() {
-    const route= useRoute()
+    const store = useStore() 
+    const route = useRoute()
     let user = reactive({});
-
-/*
+    let usuario = computed(()=>{
+        return store.getters.token
+    })
     watch(()=> route.params,
       async newParams=> {        
         user.arr= await getUser(newParams.id)
        
       })
-
-    function getUser(id) {      
        
-        fetch(`http://localhost:8081/perfil/${id}`)
+        fetch(`http://localhost:8081/perfil/1`)//${id}`)
         .then((res) => res.json())
-        .then((data) => data.forEach((item) => user.push(item)))
+        .then(user=>(console.log(user)))
         .catch((err) => console.log(err));   
+        //.then((data) => data.forEach((item) => user.push(item)))
         
-    }
 
-    onMounted(()=>{ 
-      getUser(route.params.id)      
-    }) */
+
+    // onMounted(()=>{ 
+    //   getUser(route.params.id)      
+    // }) 
+    function saveUser(e){
+      let user = localStorage.getItem('jwt')
+      console.log(user)
+      console.log('que hizo: '+ e)
+    }
 
 
     return {
-        user
+        user, saveUser, usuario
     };
   },
 };

@@ -20,12 +20,12 @@ const schemaProduct = new Schema({
     },
     price:{
         type:Number,
-        required:[true, "Agrega el precio del producto"]
+        required:[true, "No puede haber un producto sin precio"]
     },
     quantity:{
         type:Number,
         default:0, 
-        required:[true, "Selecciona la cantidad de unidades disponibles"]
+        required:[true, "Unidades disponibles debe ser mayor a 0"]
     },
     category:{
         type:String,
