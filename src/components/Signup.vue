@@ -66,7 +66,7 @@ export default {
       if (!regExpEmail.test(email.value))
         errors.value.email = "Debes introducir un email válido";
       if (!regExpPassword.test(password.value))
-        errors.value.password = "Debes introducir un password válido";
+        errors.value.password = "Debes introducir un password válido, que contenga al menos una mayúscula y un símbolo";
       if (password.value !== repeat_password.value)
         errors.value.repeatpassword = "No coincide con el password";
       if (

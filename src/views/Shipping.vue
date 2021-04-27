@@ -18,7 +18,11 @@
             placeholder="Introduce tu nombre"
             required
           />
+          <div class="col-12" v-if="errors.firstName">
+            <p>{{ errors.firstName }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">Apellidos</label>
           <input
@@ -29,7 +33,11 @@
             placeholder="Introduce tus apellidos"
             required
           />
+          <div class="col-12" v-if="errors.lastName">
+            <p>{{ errors.lastName }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">Direción y número</label>
           <input
@@ -40,7 +48,11 @@
             placeholder="Introduce tu dirección y número"
             required
           />
+          <div class="col-12" v-if="errors.address">
+              <p>{{ errors.address }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">Piso, puerta, escalera</label>
           <input
@@ -51,7 +63,11 @@
             placeholder="Introduce tu piso, puerta, escalera"
             required
           />
+          <div class="col-12" v-if="errors.flat">
+            <p>{{ errors.flat }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">Código Postal</label>
           <input
@@ -62,7 +78,11 @@
             placeholder="Introduce tu piso, puerta, escalera"
             required
           />
+          <div class="col-12" v-if="errors.postalCode">
+            <p>{{ errors.postalCode }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">Ciudad</label>
           <input
@@ -73,7 +93,11 @@
             placeholder="Introduce tu piso, puerta, escalera"
             required
           />
+          <div class="col-12" v-if="errors.city">
+            <p>{{ errors.city }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">Provincia</label>
           <input
@@ -84,7 +108,11 @@
             placeholder="Introduce tu piso, puerta, escalera"
             required
           />
+          <div class="col-12" v-if="errors.province">
+            <p>{{ errors.province }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">País</label>
           <input
@@ -95,7 +123,11 @@
             placeholder="Introduce tu piso, puerta, escalera"
             required
           />
+          <div class="col-12" v-if="errors.country">
+            <p>{{ errors.country }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">Teléfono</label>
           <input
@@ -106,7 +138,11 @@
             placeholder="Introduce tu correo"
             required
           />
+          <div class="col-12" v-if="errors.tel">
+            <p>{{ errors.tel }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">Email</label>
           <input
@@ -117,7 +153,11 @@
             placeholder="Introduce tu correo"
             required
           />
+          <div class="col-12" v-if="errors.email">
+        <p>{{ errors.email }}</p>
+      </div>
         </div>
+        
         <div class="col-12 col-md-8">
           <div v-for="(id, i) in Object.keys(cart)" :key="i" class="col-12">
             <div class="card row">
@@ -185,6 +225,12 @@ export default {
     const store = useStore();
     const cart = computed(() => store.state.cart);
     const userId = ref("");
+    let errors = ref({});
+    let regExpText = /^[^]+$/;
+    let regExpEmail = /^[a-zA-Z0-9.!#$%&"*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    let regExpPostalCode = /^(?:0?[1-9]|[1-4]\d|5[0-2])\d{3}$/;  
+    let regExpTel = /(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}/;  
+    
     let user = reactive({
       firstName: '',
       lastName: '',
@@ -198,6 +244,7 @@ export default {
       postalCode: ''
     });
     const userAuth = async () => {
+      
       try {
         const res = await axios.get("usuario/permiso", {
           headers: { Authorization: "Bearer " + localStorage.getItem("jwt") },
@@ -207,10 +254,45 @@ export default {
       } catch (err) {
         console.log(err);
       }
+      
     };
     userAuth();
     const saveOrder = async () => {
-      console.log('Hola')
+            
+        if (!regExpText.test(user.firstName))
+        errors.value.firstName = "Debes introducir un nombre válido";
+        if (!regExpText.test(user.lastName))
+        errors.value.lastName = "Debes introducir apellidos válidos";
+        if (!regExpText.test(user.address))
+        errors.value.address = "Debes introducir una dirección válida";
+        if (!regExpText.test(user.flat))
+        errors.value.flat = "Debes introducir una piso,puerta o escalera válida";
+        if (!regExpPostalCode.test(user.postalCode))
+        errors.value.postalCode = "Debes introducir un código postal válido";
+        if (!regExpText.test(user.city))
+        errors.value.city = "Debes introducir una ciudad válida";        
+        if (!regExpText.test(user.province))
+        errors.value.province = "Debes introducir una provincia válida";
+        if (!regExpText.test(user.country))
+        errors.value.country = "Debes introducir un país válido";
+        if (!regExpTel.test(user.tel))
+        errors.value.tel = "Debes introducir un número de teléfono válido";
+        if (!regExpEmail.test(user.email))
+        errors.value.email = "Debes introducir un email válido";
+        
+      if (
+        regExpText.test(user.firstName) && 
+        regExpText.test(user.lastName) && 
+        regExpText.test(user.address) && 
+        regExpTel.test(user.tel) && 
+        regExpText.test(user.country) && 
+        regExpText.test(user.province) && 
+        regExpText.test(user.city) && 
+        regExpEmail.test(user.email) && 
+        regExpText.test(user.flat) && 
+        regExpPostalCode.test(user.postalCode) 
+      ) {
+      
       try {
         const res = await axios.post("productos/pedido", {
           userId: userId.value,
@@ -226,11 +308,19 @@ export default {
       } catch (err) {
         console.log(err.message);
       }
+      }
     };
     return {
       user,
       cart,
-      saveOrder
+      saveOrder,
+      errors,
+      regExpText,
+      regExpEmail,
+      regExpPostalCode,
+      regExpTel
+
+
     };
   },
 };
