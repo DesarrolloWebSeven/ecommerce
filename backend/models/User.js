@@ -21,6 +21,8 @@ const userSchema = new Schema({
   active: { type: Boolean, default: false },
   admin: { type: Boolean, default: false },
   avatar: { type: String, default: null },
+}, {
+  timestamps: true
 });
 
 userSchema.pre('save', async function(next) {

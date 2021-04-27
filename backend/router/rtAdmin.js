@@ -15,7 +15,6 @@ rtAdmin.post('/', adminController.signin)
 rtAdmin.get('/logout', adminController.logout)
 
 // Project info routes
-rtAdmin.get('/equipo', requireAuth, adminController.team)
 rtAdmin.get('/proyecto', requireAuth, adminController.project)
 
 // Client routes
