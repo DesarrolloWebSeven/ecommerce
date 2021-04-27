@@ -7,7 +7,7 @@
       </ol>
     </div>
     <div>
-      <form class="section row g-3">
+      <form class="section row g-3" @submit.prevent="emptyCart">
         <div class="col-md-8">
           <label class="form-label">Titular de la cuenta</label>
           <input
@@ -16,6 +16,7 @@
             id="accountOwner"
             class="form-control"
             placeholder="Introduce el titular de la cuenta"
+            required
           />
           <label class="form-label">Número de tarjeta</label>
           <input
@@ -24,6 +25,7 @@
             id="cardNumber"
             class="form-control"
             placeholder="Introduce el número de tarjeta"
+            required
           />
           <label class="form-label">Fecha de vencimiento</label>
           <input
@@ -32,6 +34,7 @@
             id="expiry"
             class="form-control"
             placeholder="Introduce la fecha de vencimiento"
+            required
           />
           <label class="form-label">Código de seguridad</label>
           <input
@@ -40,17 +43,16 @@
             id="securityCode"
             class="form-control"
             placeholder="Introduce el código de seguridad"
+            required
           />
         </div>
+        <div v-if="success"> {{ success }}</div>
         <div class="col-md-4">
           <img class="payment" src="@/assets/payment.jpg" alt="" />
         </div>
 
         <div class="col-12">
-          <router-link to="/carrito/compraFinal">
-              <button class="btn btn-success m-2" @click="emptyCart">Realizar pago</button>
-          </router-link
-          >
+          <button class="btn btn-success m-2">Realizar pago</button>
         </div>
       </form>
     </div>
@@ -58,15 +60,33 @@
 </template>
 
 <script>
+import axios from 'axios'
+import { useRouter } from 'vue-router'
 import { useStore } from "vuex";
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 export default {
   name: "Payment2",
   props: {},
   setup() {
+    const router = useRouter()
     const store = useStore();
+    const success = ref('')
     const cart = computed(() => store.state.cart);
-    const emptyCart = () => store.commit("setEmptyCart");
+    
+    
+    const emptyCart = async () => {
+      store.commit("setEmptyCart");
+      
+      try {
+        const res = await axios.put('/productos/pago', {
+          orderId : JSON.parse(localStorage.getItem('order'))
+        })
+        console.log(res.data)
+        if(res.data) success.value = 'Tu pedido se ha realizado con éxito'
+      } catch (err) {
+        console.log(err.message)
+      }
+    }
 
     const userAuth = async () => {
 
@@ -84,6 +104,7 @@ export default {
 
     return {
       cart,
+      success,
       emptyCart,
     };
   },

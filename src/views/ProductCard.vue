@@ -1,196 +1,172 @@
 <template>
-  <div class="container section">
-    <div class="row">
-      <div class="col-12 m-3">
-        <div class="card row">
-          <div class="card-horizontal row justify-content-center" v-if="productDetail">
-            <div
-              id="carouselExampleIndicators"
-              class="carousel slide col-12 col-lg-6 m-4"
-              data-bs-ride="carousel"
-            >
-              
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img
-                    :src="'/images/'+productDetail.images[0]"
-                    class="d-block w-100"
-                    alt="..."
-                  />
-                </div>
-                <div class="carousel-item">
-                  <img
-                    :src="'/images/'+productDetail.images[1]"
-                    class="d-block w-100"
-                    alt="..."
-                  />
-                </div>
-              </div>
-              <button
-                class="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev"
-              >
-                <span
-                  class="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button
-                class="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next"
-              >
-                <span
-                  class="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-            </div>
-
-            <div class="card-body col-12 col-lg-6">
-              <h4 class="card-title">{{ productDetail.title }}</h4>
-              <p class="card-text"><b>Descripción: </b> {{ productDetail.description }}</p>
-              <p class="card-text"><b>Características técnicas: </b> {{ productDetail.features }}</p>
-              <p class="card-text"><b>Stock: </b> {{ productDetail.quantity }}</p>
-              <p class="card-text"><b>Precio unidad: </b> {{productDetail.price}}</p>
-              <p class="card-text price">{{ (contador.uds*productDetail.price).toFixed(2) }} € <input :value=contador.uds @change="updatePrice(productDetail.price, $event)" type="number" name="cantidad"  min="1" :max=productDetail.quantity ></p>
-              <div>
-                <router-link to="/carrito"><p class="card-text"><button @click="addToCart(productDetail)">COMPRAR</button></p></router-link>
-              </div>
-            </div>
+  <main class="product-page">
+    <div class="product-card" v-if="productDetail">
+      <div id="carousel" class="carousel slide product-photo" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img :src="'/images/' + productDetail.images[0]" class="d-block w-100" />
           </div>
+          <div class="carousel-item">
+            <img :src="'/images/' + productDetail.images[1]" class="d-block w-100" />
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev" >
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      <div class="product-description">
+        <h1>{{ productDetail.title }}</h1>
+        <p id="price">{{ productDetail.price }} €</p>
+        <p>{{ productDetail.description }}</p>
+        <ul>
+          <li>{{ productDetail.features[0] }}</li>
+          <li>{{ productDetail.features[1] }}</li>
+          <li>{{ productDetail.features[2] }}</li>
+        </ul>
+        <div class="product-buy">
+          <input v-model="contador" type="number" min="1" :max=productDetail.quantity >
+          <button @click="addToCart(productDetail)"><i class="fas fa-shopping-basket"></i></button>
         </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
-import { reactive, ref } from "vue";
-import {useRoute} from 'vue-router'
-import {useStore} from 'vuex'
+import { reactive, ref } from 'vue';
+import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 export default {
   name: "ProductCard",
   
   setup() {
-    //:src="productDetail.images[0]"
-    const route= useRoute()
-    const store= useStore()
+    const route = useRoute()
+    const store = useStore()
     let productDetail = ref()
-    let contador=reactive({
-          titulo: 'Contador: ',
-          valor: 1,
-          uds: 1
-      })
+    let contador = ref('1')
     
-    function getDetailProduct() {     
+    const getDetailProduct = () => {     
       fetch(`http://localhost:8081/productos/id/${route.params.id}`)
-        .then((res) => res.json())
-        .then((data) => (productDetail.value = data))
-        .catch((err) => console.log(err));
+        .then(res => res.json())
+        .then(data => {
+          productDetail.value = data
+          productDetail.value.features = productDetail.value.features.split('/')
+        })
+        .catch(err => console.log(err));
     }
-
     getDetailProduct();
-    console.log(productDetail);
 
-    function updatePrice(price, event){
-      console.log("event taget", event.target.value)
-      contador.valor= (price*event.target.value).toFixed(2)
-      contador.uds=event.target.value
-    }
-
-    function addToCart(productDetail){
-      productDetail.items=parseInt(contador.uds)
-     
-      store.dispatch('addToCart', productDetail, parseInt(contador.uds))
+    const addToCart = (productDetail) => {
+      productDetail.items = parseInt(contador.value)
+      store.dispatch('addToCart', productDetail)
     }
 
     return {
       productDetail,
-      updatePrice,
       contador,
       addToCart
-      
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.section {
-  background-color: #10555e1e;
-  max-width: 80%;
-  margin-top: 30px;
-  color: black;
-  .row {
-    max-width: 95%;
-    margin: 0 auto;
-  }
-  .titleHome {
-    font-family: "Game" !important;
-    font-size: 50px;
-    background-color: #0f606b;
-    padding: 30px;
-    margin-bottom: 30px;
-    margin-top: 30px;
-  }
+.product-page {
+  width: 80%;
+  max-width: 900px;
+  margin: 160px auto 130px;
 
-  @media (max-width: 600px) {
-    .titleHome {
-      font-size: 40px;
-    }
-  }
-
-  @media (max-width: 530px) {
-    .titleHome {
-      font-size: 25px;
-    }
-  }
-}
-.card {
-  border: none;
-  margin: 20px;
-  .card-horizontal {
+  .product-card {
+    width: 100%;
     display: flex;
-    flex: 1 1 auto;
-    color: black;
-    
-    .card-title {
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-    #carouselExampleIndicators{
-        max-height: 200px !important;
-        max-width: 200px !important;
-    }
-    .carousel-control-prev, .carousel-control-next{
-        height: 30px;
-    }
-    .card-body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .price {
-        background-color: #0f606b;
-        padding: 5px;
-        color: white;
+    justify-content: space-between;
+
+    .product-photo {
+      padding: 15px;
+      width: 325px;
+      height: 325px;
+      border: 1px solid rgb(168, 168, 168);
+      border-radius: 5px;
+
+        i {
+          position: relative;
+          z-index: 10;
+          color: black;
+          font-size: 2rem;
+        }
+
+      .carousel-control-prev,{
+        border: none;
+        height: 50px;
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        transform: translateY(-50%);
+        background-color: rgb(255, 255, 255);
+      }
+
+      .carousel-control-next {
+        border: none;
+        height: 65px;
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        transform: translateY(-50%);
+        background-color: rgb(255, 255, 255);
       }
     }
-    img {
-      width: 200px;
-      height: 200px;
-      background-color: white;
-      margin: 5px;
-    }
-    button {
-      color: #fff;
-      background-color: black;
-      padding: 10px;
+
+    .product-description {
+      width: 60%;
+      color: black;
+      text-align: left;
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 900;
+      }
+
+      #price {
+        color: rgb(104, 104, 104);
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      p, li {
+        font-size: 0.9rem;
+      }
+
+      .product-buy {
+        display: flex;
+
+      input[type=number]::-webkit-inner-spin-button {
+        opacity: 1;
+      }
+
+      input {
+        width: 30%;
+        margin-right: 10px;
+        border-radius: 10px;
+        text-align: center;
+        border: none;
+        border: 1px solid gray;
+      }
+
+      button {
+        width: 10%;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: gray;
+        color: white;
+        border: none;
+      }
+      }
+    
     }
   }
 }
