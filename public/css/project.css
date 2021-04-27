@@ -96,7 +96,6 @@ header>img {
 }
 
 .mainnav a {
-  font-size: 1.8rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -107,7 +106,8 @@ header>img {
   margin-right: 10px;
 }
 
-.mainnav p {
+.mainnav-p {
+  font-size: 1.8rem;
   margin: 0;
   padding: 0;
 }
@@ -128,85 +128,14 @@ main {
   align-items: center;
 }
 
-/*Form Product */
-.form-product {
-  width: 90%;
-  background-color: #c5c5c5;
-  padding: 30px 15px;
-  border-radius: 15px;
-}
-
-.form-product input[value='Nuevo Producto'], .form-product input[value='Actualizar'] {
-  color: white;
-  font-weight: bold;
-  letter-spacing: 3px;
-  background-color: #3CA29A;
-}
-
-.photo {
-  position: relative;
-}
-
-.photo-icon {
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  position: absolute;
-  top: 5px;
-  right: 20px;
-}
-
-/* Search Console */
-.search-box {
-  width: 80%;
-  margin: 50px auto;
-  padding: 5px 20px;
-  border: 1px solid rgb(185, 185, 185);
-  border-radius: 30px;
-  box-shadow: 3px 5px 10px rgb(196, 193, 193);
-}
-
-.search-console {
-  width: 90%;
-  border: none;
-  margin-left: 10px;
-}
-
-.search-console:focus {
-  outline: none;
-}
-
-/* Product Card */
-.product-list {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
-
-.card {
-  border: 1px solid rgb(214, 214, 214);
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-  width: 23%
-}
-
-.card-title {
-  font-weight: 700;
-}
-
-/* Content Form */
-.content-form {
+.form-project {
   width: 90%;
 }
 
-/*Validacion forms*/
-
-.error {
-  color: red;
+.content-project {
+  width: 90%;
+  margin: 30px 0;
+  padding: 50px 30px;
+  background-color: rgb(247, 245, 245);
+  border-radius: 10px;
 }

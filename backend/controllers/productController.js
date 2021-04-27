@@ -1,6 +1,4 @@
-const Order = require('../models/Order')
 const Product = require('../models/Product')
-const mailer = require('../helpers/mailer')
 const fs = require('fs').promises
 const path = require('path')
 
@@ -43,9 +41,10 @@ const productsSave = (req, res) => {
     }))
 }
 
+// Delete a product on the database
 const productsDelete = async (req, res) => {
-    console.log("vas a eliminar: ", req.params.id)
-/*  Product.findById(req.params.id).lean()
+
+  /*  Product.findById(req.params.id).lean()
       .then(product => {
         product.images.forEach(image => fs.unlink(path.join(__dirname, '../../public/images/', image))
       .then(() => console.log('¡Imagen Borrada con exito!'))
@@ -116,39 +115,6 @@ const showDetailProduct = (req, res) => {
         .catch(err => res.json(err))
 }
 
-const saveOrder = async (req, res) => {
-  let order = new Order({
-    userId: req.body.userId,
-    firstName: req.body.user.firstName,
-    lastName: req.body.user.lastName,
-    email: req.body.user.email,
-    tel: req.body.user.tel,
-    address: req.body.user.address,
-    flat: req.body.user.flat,
-    postalCode:req.body.user.postalCode,
-    city:req.body.user.city,
-    province:req.body.user.province,
-    country:req.body.user.country,
-    totalProducts: req.body.totalProducts,
-    totalPrice: (req.body.totalPrice).toFixed(2),
-    cart: req.body.cart
-  })
-  let orderInfo = await order.save()
-  res.send(orderInfo)
-}
-
-const payment = (req, res) => {
-  let id = req.body.orderId
-  Order.updateOne({_id: id}, {$set: { state: 'confirmado'}})
-    .then(async data => {
-      let order = await Order.findById(id).lean()
-      mailer.send(order.email, order, 'Pedido Geeky', 'orderEmail')
-      res.json(order)
-    })
-    .catch(err => console.log(err.message))
-
-}
-
 module.exports = {
     productsList,
     productsSave,
@@ -157,7 +123,5 @@ module.exports = {
     imagesDelete,
     productsUpdate,
     listProduct,
-    showDetailProduct,
-    saveOrder,
-    payment
+    showDetailProduct
 }

@@ -6,30 +6,25 @@ const pageUpdate = (req, res) => {
   Page.find({ title: req.body.title }).lean()
     .then(data => updateContent(data))
     .catch(err => res.json(err))
+}
 
 // Search and update the content
 const updateContent = (data) => {
-  console.log("Esto fue lo que encontro: ", data[0]._id)
+
   Page.findByIdAndUpdate({_id : data[0]._id}, {
     title : req.body.title,
     content : req.body.content,
     images : req.body.images,
-  }, (err, result) => {
-                if (err) console.log('No se pudo actualizar: ' + err) 
-                else console.log('Se actualizo: ' + result)
-            }
-        ).lean()
-        .then(page=>{
-            console.log('Producto actualizado correctamente: ' + page)
-            res.render('project', ({
-                title: "Admin | Proyecto",
-                css: 'products',
-                src:'staticPages.js'
-              }))
-        })
-    }
+  }).lean()
+    .then(page => {
+      console.log('Producto actualizado correctamente: ' + page)
+      res.render('project', ({ title: "Admin | Proyecto", css: 'project', src:'staticPages.js'}))
+    })
+    .catch(err => console.log(err.message))
+
 }
 
+// Show content in the Front End
 const pageList = (req, res) => {
   let page = req.params.title
   Page.find({ title: page })

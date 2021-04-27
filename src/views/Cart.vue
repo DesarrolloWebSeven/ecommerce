@@ -2,7 +2,7 @@
   <div class="container section">
     <div v-if="Object.keys(cart).length" class="row">
       <CartComponent />
-      <span><button class="btn btn-danger m-2" @click="emptyCart">Vaciar carrito</button></span>
+      <button class="btn btn-danger m-2" @click="emptyCart">Vaciar carrito</button>
       <router-link to="/carrito/envio"><p class="card-text"><button class="btn btn-success m-2">TRAMITAR PEDIDO</button></p></router-link>
       <Total />
       
@@ -29,7 +29,10 @@ export default {
   setup() {
     const store = useStore();
     const cart = computed(() => store.state.cart);
-    const emptyCart = () => store.commit('setEmptyCart')
+    const emptyCart = () => {
+      store.commit('setEmptyCart')
+      localStorage.removeItem('cart')
+    }
 
     return { 
       cart,

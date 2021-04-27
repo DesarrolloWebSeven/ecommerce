@@ -65,7 +65,7 @@ export default {
       justify-content: space-between;
       align-items: center;
       position: fixed;
-      bottom: 200px;
+      bottom: 210px;
       left: 0;
 
       i {

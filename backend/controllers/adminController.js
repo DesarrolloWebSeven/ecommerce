@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const { createToken } = require('../helpers/validation')
 
+// Show the login page
 const login = (req, res) => {
   res.render('login', {
     title: 'Admin | Login',
@@ -8,6 +9,7 @@ const login = (req, res) => {
   })
 } 
 
+// Admin Sign In 
 const signin = async (req, res) => {
   const { email, password } = req.body
   try {
@@ -33,19 +35,22 @@ const signin = async (req, res) => {
   }
 }
 
+// Admin Log Out
 const logout = (req, res) => {
   res.cookie('jwt', ' ', { maxAge: 1 })
   res.redirect('/admin')
 }
 
+// Show the project page
 const project = (req, res) => {
   res.render('project', ({
     title: "Admin | Proyecto",
-    css: 'products',
+    css: 'project',
     src:'staticPages.js'
   }))
 }
 
+// Show the clients page
 const clients = (req, res) => {
   res.render('clients', ({
     title: "Admin | Clientes",
@@ -53,6 +58,7 @@ const clients = (req, res) => {
   }))
 }
 
+// Show the orders page
 const orders = (req, res) => {
   res.render('orders', ({
     title: "Admin | Pedidos",
