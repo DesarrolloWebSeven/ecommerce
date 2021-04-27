@@ -203,13 +203,14 @@ export default {
           headers: { Authorization: "Bearer " + localStorage.getItem("jwt") },
         });
         if (res.data.message === "fail") router.push("/");
-        userId.value = res.data.decodedToken;
+        userId.value = res.data.decodedToken.id;
       } catch (err) {
         console.log(err);
       }
     };
     userAuth();
     const saveOrder = async () => {
+      console.log('Hola')
       try {
         const res = await axios.post("productos/pedido", {
           userId: userId.value,
@@ -218,7 +219,10 @@ export default {
           totalProducts: store.getters.totalQuantity,
           cart: store.state.cart,
         });
-        if(res.data) router.push('/carrito/pago')
+        if(res.data) {
+          localStorage.setItem('order', JSON.stringify(res.data._id))
+          router.push('/carrito/pago')
+        }
       } catch (err) {
         console.log(err.message);
       }

@@ -1,17 +1,24 @@
-const mongoose = required('mongoose')
+const mongoose = require('mongoose')
 const { Schema } = mongoose
 
 const schemaOrder = new Schema({
-    creation: { type: Date, default: new Date() },
-    state: { type: String, required: true, default: "Recibido" },
-    user: { type: Schema.Types.ObjectId, ref: 'user' },
-    street: { type: String, required: true },
-    location: { type: String, required: true },
-    postalcode: { type: Number, required: true },
-    city: { type: String, required: true },
-    total: { type: Number, required: true },
-    total_products: { type: Number, required: true },
-    products: { type: Schema.Types.ObjectId, ref: 'product' }
+    state: { type:String, required:true, default:"pendiente" },
+    userId: { type: String, required: true },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    email: { type: String, required: true },
+    tel: { type: String, required: true },
+    address: { type:String, required:true },
+    flat: { type:String, required:true },
+    postalCode: { type:Number, required:true },
+    city: { type:String, required:true },
+    province: { type:String, required:true },
+    country: { type:String, required:true },
+    totalProducts: { type:Number, required:true },
+    totalPrice: { type:Number, required:true },
+    cart: { type:Object, required:true }
+}, {
+  timestamps: true
 })
 
 module.exports= mongoose.model('order', schemaOrder)
