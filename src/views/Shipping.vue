@@ -200,7 +200,7 @@
         </div>
         <div class="col-12">
           <p class="card-text">
-            <button class="btn btn-success m-2">Continuar</button>
+            <button class="btn btn-success m-2">Continuar al pago</button>
           </p>
         </div>
       </form>
