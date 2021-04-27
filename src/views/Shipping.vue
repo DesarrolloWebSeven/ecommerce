@@ -16,7 +16,7 @@
             id="firstName"
             class="form-control"
             placeholder="Introduce tu nombre"
-            required
+            
           />
         </div>
         <div class="col-md-6">
@@ -27,7 +27,7 @@
             id="lastName"
             class="form-control"
             placeholder="Introduce tus apellidos"
-            required
+            
           />
         </div>
         <div class="col-md-6">
@@ -38,7 +38,7 @@
             id="adress"
             class="form-control"
             placeholder="Introduce tu dirección y número"
-            required
+            
           />
         </div>
         <div class="col-md-6">
@@ -49,7 +49,7 @@
             id="flat"
             class="form-control"
             placeholder="Introduce tu piso, puerta, escalera"
-            required
+            
           />
         </div>
         <div class="col-md-6">
@@ -60,7 +60,7 @@
             id="postalCode"
             class="form-control"
             placeholder="Introduce tu piso, puerta, escalera"
-            required
+            
           />
         </div>
         <div class="col-md-6">
@@ -71,7 +71,7 @@
             id="city"
             class="form-control"
             placeholder="Introduce tu piso, puerta, escalera"
-            required
+            
           />
         </div>
         <div class="col-md-6">
@@ -82,7 +82,7 @@
             id="province"
             class="form-control"
             placeholder="Introduce tu piso, puerta, escalera"
-            required
+            
           />
         </div>
         <div class="col-md-6">
@@ -93,7 +93,7 @@
             id="country"
             class="form-control"
             placeholder="Introduce tu piso, puerta, escalera"
-            required
+            
           />
         </div>
         <div class="col-md-6">
@@ -104,7 +104,7 @@
             id="tel"
             class="form-control"
             placeholder="Introduce tu correo"
-            required
+            
           />
         </div>
         <div class="col-md-6">
@@ -115,10 +115,10 @@
             id="email"
             class="form-control"
             placeholder="Introduce tu correo"
-            required
+            
           />
         </div>
-        <div class="col-12 col-md-8">
+        <div v-if="cart" class="col-12 col-md-8">
           <div v-for="(id, i) in Object.keys(cart)" :key="i" class="col-12">
             <div class="card row">
               <div class="card-horizontal row justify-content-center">
@@ -158,9 +158,10 @@
             </div>
           </div>
         </div>
+        <div v-if="error"> {{ error }}</div>
         <div class="col-12">
           <p class="card-text">
-            <button class="btn btn-success m-2">Continuar</button>
+            <button class="btn btn-success">Continuar</button>
           </p>
         </div>
       </form>
@@ -184,6 +185,7 @@ export default {
     const router = useRouter()
     const store = useStore();
     const cart = computed(() => store.state.cart);
+    const error = ref('')
     const userId = ref("");
     let user = reactive({
       firstName: '',
@@ -198,6 +200,7 @@ export default {
       postalCode: ''
     });
     const userAuth = async () => {
+
       try {
         const res = await axios.get("usuario/permiso", {
           headers: { Authorization: "Bearer " + localStorage.getItem("jwt") },
@@ -209,27 +212,35 @@ export default {
       }
     };
     userAuth();
+
     const saveOrder = async () => {
-      console.log('Hola')
-      try {
-        const res = await axios.post("productos/pedido", {
-          userId: userId.value,
-          user: user,
-          totalPrice: store.getters.totalPrice,
-          totalProducts: store.getters.totalQuantity,
-          cart: store.state.cart,
-        });
-        if(res.data) {
-          localStorage.setItem('order', JSON.stringify(res.data._id))
-          router.push('/carrito/pago')
-        }
-      } catch (err) {
-        console.log(err.message);
+
+      if(store.getters.) {
+        console.log('Hola')
+/*         try {
+          const res = await axios.post("productos/pedido", {
+            userId: userId.value,
+            user: user,
+            totalPrice: store.getters.totalPrice,
+            totalProducts: store.getters.totalQuantity,
+            cart: store.state.cart,
+          });
+          if(res.data) {
+            localStorage.setItem('order', JSON.stringify(res.data._id))
+            router.push('/carrito/pago')
+          }
+        } catch (err) {
+          console.log(err.message);
+        } */
       }
+      else error.value = "Tu carrito está vacío"
+
     };
+
     return {
       user,
       cart,
+      error,
       saveOrder
     };
   },
@@ -324,5 +335,9 @@ export default {
       }
     }
   }
+}
+
+button {
+  margin-bottom: 200px;
 }
 </style>

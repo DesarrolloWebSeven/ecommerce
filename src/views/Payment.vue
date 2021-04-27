@@ -81,8 +81,10 @@ export default {
         const res = await axios.put('/productos/pago', {
           orderId : JSON.parse(localStorage.getItem('order'))
         })
-        console.log(res.data)
-        if(res.data) success.value = 'Tu pedido se ha realizado con éxito'
+        if(res.data) {
+          success.value = 'Tu pedido se ha realizado con éxito'
+          localStorage.removeItem('order')
+        }
       } catch (err) {
         console.log(err.message)
       }

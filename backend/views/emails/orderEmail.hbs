@@ -100,7 +100,9 @@
       <p>¡Gracias por realizar tu pedido con Geeky! Aquí tienes un resumen:</p>
       {{#each user.cart}}
       <div>
-        <p>{{ this.images }}</p>
+        {{#each this.images}}
+        <p>{{ this }}</p>
+        {{/each}}
         <p>{{ this.title }} - {{ this.items }}</p>
       </div>
       {{/each}}
