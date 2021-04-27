@@ -42,7 +42,7 @@ const logout = (req, res) => {
 const project = (req, res) => {
   res.render('project', ({
     title: "Admin | Proyecto",
-    css: 'products',
+    css: 'project',
     src:'staticPages.js'
   }))
 }

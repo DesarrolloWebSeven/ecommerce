@@ -1,18 +1,11 @@
 {{> header}}
 <main>
   <h1 class="text-center">Proyecto</h1>
-  <form method="POST" class="container content-form" action="http://localhost:8081/admin/editor/proyecto">
-    <div class="form-row">
-      <div class="form-group col-md-12">
-        <textarea name="content" id="mytextarea"></textarea>
-        <input class="btn btn-primary save" type="submit" value="Guardar">
-      </div>
-    </div>
+  <form method="POST" class="form-project" action="http://localhost:8081/admin/editor/proyecto">
+    <textarea name="content" id="mytextarea"></textarea>
+    <input class="btn btn-primary save" type="submit" value="Guardar">
   </form>
-  <div class="container content-form">
-    <div class="row">
-      <div name="showContent" class="col-md-12" id="showContent"></div>
-    </div>
+  <div class="content-project" name="showContent" id="showContent">
   </div>
 {{> tinyMCE}}
 </main>

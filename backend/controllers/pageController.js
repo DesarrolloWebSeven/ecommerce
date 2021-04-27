@@ -30,8 +30,8 @@ const updateContent = (data) => {
     }
 }
 
+// Show content in Front End
 const pageList = (req, res) => {
-  console.log("peticion recibida: ", req.params.title)
   let page = req.params.title
   Page.find({ title: page })
     .then(data => res.json(data))

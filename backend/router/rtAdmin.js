@@ -2,7 +2,7 @@ const express = require('express')
 const rtAdmin = express.Router()
 const adminController = require('../controllers/adminController')
 const productController = require('../controllers/productController')
-const pageController = require('../controllers/pagesController')
+const pageController = require('../controllers/pageController')
 const { checkUser, requireAuth } = require('../helpers/validation')
 
 
@@ -31,6 +31,6 @@ rtAdmin.put('/productos/:id', requireAuth, productController.productsUpdate)
 
 // Content editor
 rtAdmin.post('/editor/:title', requireAuth, pageController.pageUpdate)
-rtAdmin.get('/editor/:title', requireAuth, pageController.pageList)
+rtAdmin.get('/editor/:title', pageController.pageList)
 
 module.exports= rtAdmin
