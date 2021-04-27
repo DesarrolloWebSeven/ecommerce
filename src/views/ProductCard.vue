@@ -98,7 +98,7 @@ export default {
           font-size: 2rem;
         }
 
-      .carousel-control-prev,{
+      .carousel-control-prev {
         border: none;
         height: 50px;
         position: absolute;
