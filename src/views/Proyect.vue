@@ -1,7 +1,7 @@
 <template>
   <div>
     <label>{{lang["lang-label"]}}</label>
-    <div class="color" v-html='miHtml'></div>
+    <div class="content" v-html='miHtml'></div>
   </div>
 </template>
 
@@ -30,7 +30,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.color{
-  background-color: aquamarine;
+.content{
+  color: #000;
+  text-align: left;
+  font-family: "Montserrat", "Game", Helvetica, Arial, sans-serif;
+  margin-block: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 </style>
