@@ -84,6 +84,7 @@ const changePassword = async (req, res) => {
     .catch(err => res.json(err))
 }
 
+// Authenticate the token
 const auth = (req, res) => {
   const token = req.headers.authorization.split('Bearer ')[1]
   
@@ -93,6 +94,7 @@ const auth = (req, res) => {
 
 }
 
+// Send a contact email asking information
 const contactMail = async (req, res) => {
 
   const user = req.body
@@ -106,6 +108,7 @@ const contactMail = async (req, res) => {
 
 }
 
+// Show the user profile
 const getInfoUser =(req, res) => {
   const user = req.body
   console.log(user)

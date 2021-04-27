@@ -45,6 +45,7 @@ const requireAuth = (req, res, next) => {
   } else res.redirect('/admin')
 }
 
+// Check if User has already signed in
 const checkUser = (req, res, next) => {
   const token = req.cookies.jwt
   if(token) {

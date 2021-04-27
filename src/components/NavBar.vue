@@ -176,6 +176,7 @@ header {
   }
 
   i {
+    cursor: pointer;
     color: #616161;
     font-size: 1.3rem;
   }

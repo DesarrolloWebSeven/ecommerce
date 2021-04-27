@@ -41,9 +41,10 @@ const productsSave = (req, res) => {
     }))
 }
 
+// Delete a product on the database
 const productsDelete = async (req, res) => {
-    console.log("vas a eliminar: ", req.params.id)
-/*  Product.findById(req.params.id).lean()
+
+  /*  Product.findById(req.params.id).lean()
       .then(product => {
         product.images.forEach(image => fs.unlink(path.join(__dirname, '../../public/images/', image))
       .then(() => console.log('¡Imagen Borrada con exito!'))

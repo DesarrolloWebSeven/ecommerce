@@ -2,6 +2,7 @@ const Order = require('../models/Order')
 const Product = require('../models/Product')
 const mailer = require('../helpers/mailer')
 
+// Save new order as pending
 const saveOrder = async (req, res) => {
   let order = new Order({
     userId: req.body.userId,
@@ -23,6 +24,7 @@ const saveOrder = async (req, res) => {
   res.send(orderInfo)
 }
 
+// Pay and confirm the order
 const payment = (req, res) => {
   let id = req.body.orderId
   Order.updateOne({_id: id}, {$set: { state: 'confirmado'}})
@@ -36,6 +38,7 @@ const payment = (req, res) => {
 
 }
 
+// Update the products quantity on the database
 const updateProductQuantity = (order) => {
   
   Object.values(order).forEach( item => {

@@ -48,10 +48,6 @@
         </div>
         <div v-if="error">{{ error }}</div>
         <div v-if="success"> {{ success }}</div>
-        <div class="col-md-4">
-          <img class="payment" src="@/assets/payment.jpg" alt="" />
-        </div>
-
         <div class="col-12">
           <button class="btn btn-success m-2">Realizar pago</button>
         </div>
