@@ -12,7 +12,7 @@
           <label class="form-label">Titular de la cuenta</label>
           <input
             type="text"
-            v-model="accountOwner"
+            name="accountOwner"
             id="accountOwner"
             class="form-control"
             placeholder="Introduce el titular de la cuenta"
@@ -21,7 +21,7 @@
           <label class="form-label">Número de tarjeta</label>
           <input
             type="text"
-            v-model="cardNumber"
+            name="cardNumber"
             id="cardNumber"
             class="form-control"
             placeholder="Introduce el número de tarjeta"
@@ -30,7 +30,7 @@
           <label class="form-label">Fecha de vencimiento</label>
           <input
             type="text"
-            v-model="expiry"
+            name="expiry"
             id="expiry"
             class="form-control"
             placeholder="Introduce la fecha de vencimiento"
@@ -39,7 +39,7 @@
           <label class="form-label">Código de seguridad</label>
           <input
             type="text"
-            v-model="securityCode"
+            name="securityCode"
             id="securityCode"
             class="form-control"
             placeholder="Introduce el código de seguridad"
@@ -72,15 +72,11 @@ export default {
     const store = useStore();
     const success = ref('')
     const cart = computed(() => store.state.cart);
-    let infoPayment = reactive({
-      
-    })
     
     
     const emptyCart = async () => {
       store.commit("setEmptyCart");
-      let errors = ref({});
-      let regExpText = /^[^]+$/;
+      
       try {
         const res = await axios.put('/productos/pago', {
           orderId : JSON.parse(localStorage.getItem('order'))
