@@ -4,28 +4,28 @@
     <form action="/admin/productos" id="productsForm" class="container form-product" method="POST" enctype="multipart/form-data">
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="titulo">Título</label>
+          <label for="titulo">Título</label> <p class="error"> {{err.title}} </p>
           <input type="text" class="form-control" name="title" minlength="5" maxlength="30" required placeholder="Titulo o nombre del producto">
         </div>
         <div class="form-group col-md-6">
-          <label for="descripcion">Descripción</label>
+          <label for="descripcion">Descripción</label> <p class="error"> {{err.description}} </p>
           <input type="text" class="form-control" name="description" minlength="30" maxlength="500" required placeholder="Descripción del producto">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="detalles">Detalles técnicos</label>
+          <label for="detalles">Detalles técnicos</label> <p class="error"> {{err.features}} </p>
           <input type="text" class="form-control" name="features" minlength="30" maxlength="200" required placeholder="Detalles técnicos">
         </div>
         <div class="form-group col-md-6">
-          <label for="precio">Precio</label>
+          <label for="precio">Precio</label> <p class="error"> {{err.price}} </p>
           <input type="number" step="0.05" class="form-control" minlength="1" maxlength="6" required name="price"
               placeholder="Precio por unidad">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="categoria">Categoría</label>
+          <label for="categoria">Categoría</label> <p class="error"> {{err.category}} </p>
           <select class="form-control" name="category" required>
             <option>{{product.category}}</option>
             <option>Accesorios</option>
@@ -35,13 +35,13 @@
           </select>
         </div>
         <div class="form-group col-md-6">
-          <label for="unidades">Unidades disponibles</label>
+          <label for="unidades">Unidades disponibles</label> <p class="error"> {{err.quantity}} </p>
           <input type="number" class="form-control" name="quantity" minlength="1" maxlength="5" required placeholder="Cantidad de unidades disponibles">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="imagenes">Archivos de imagenes</label>
+          <label for="imagenes">Archivos de imagenes</label> <p class="error"> {{err.images}} </p>
           <input type="file" class="form-control" id="imagesNew" required name="images" multiple>
         </div>
         
@@ -82,10 +82,3 @@
   {{/if}}
 </main>
 
-<script>
-$(document).ready(function(){
-  $('input[name="category"]').empty()=>{
-    console.log("Este campo no puede estar vacio")
-  }
-})
-</script>
