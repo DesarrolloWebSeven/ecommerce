@@ -42,7 +42,6 @@ export default {
   width: 80%;
   color: rgb(99, 98, 98);
   text-align: left;
-<<<<<<< HEAD
 
   h1, h2 {
     margin-bottom: 20px;
@@ -53,12 +52,6 @@ export default {
     color: black;
   }
 
-=======
-  font-family: "Montserrat", "Game", Helvetica, Arial, sans-serif;
-  margin-top: 45px;
-  padding-left: 30px;
-  padding-right: 30px;
->>>>>>> master
 }
 
 </style>
