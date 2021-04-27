@@ -117,7 +117,6 @@ const showDetailProduct = (req, res) => {
 }
 
 const saveOrder = async (req, res) => {
-  console.log('Back')
   let order = new Order({
     userId: req.body.userId,
     firstName: req.body.user.firstName,

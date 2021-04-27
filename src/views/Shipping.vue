@@ -16,7 +16,7 @@
             id="firstName"
             class="form-control"
             placeholder="Introduce tu nombre"
-            
+            required
           />
         </div>
         <div class="col-md-6">
@@ -27,7 +27,7 @@
             id="lastName"
             class="form-control"
             placeholder="Introduce tus apellidos"
-            
+            required
           />
         </div>
         <div class="col-md-6">
@@ -38,7 +38,7 @@
             id="adress"
             class="form-control"
             placeholder="Introduce tu dirección y número"
-            
+            required
           />
         </div>
         <div class="col-md-6">
@@ -49,7 +49,7 @@
             id="flat"
             class="form-control"
             placeholder="Introduce tu piso, puerta, escalera"
-            
+            required
           />
         </div>
         <div class="col-md-6">
@@ -60,7 +60,7 @@
             id="postalCode"
             class="form-control"
             placeholder="Introduce tu piso, puerta, escalera"
-            
+            required
           />
         </div>
         <div class="col-md-6">
@@ -71,7 +71,7 @@
             id="city"
             class="form-control"
             placeholder="Introduce tu piso, puerta, escalera"
-            
+            required
           />
         </div>
         <div class="col-md-6">
@@ -82,7 +82,7 @@
             id="province"
             class="form-control"
             placeholder="Introduce tu piso, puerta, escalera"
-            
+            required
           />
         </div>
         <div class="col-md-6">
@@ -93,7 +93,7 @@
             id="country"
             class="form-control"
             placeholder="Introduce tu piso, puerta, escalera"
-            
+            required
           />
         </div>
         <div class="col-md-6">
@@ -104,7 +104,7 @@
             id="tel"
             class="form-control"
             placeholder="Introduce tu correo"
-            
+            required
           />
         </div>
         <div class="col-md-6">
@@ -115,7 +115,7 @@
             id="email"
             class="form-control"
             placeholder="Introduce tu correo"
-            
+            required
           />
         </div>
         <div v-if="cart" class="col-12 col-md-8">
@@ -215,9 +215,9 @@ export default {
 
     const saveOrder = async () => {
 
-/*      if(stor) {
-        console.log('Hola')
-         try {
+      if(localStorage.getItem('cart')) {
+        
+        try {
           const res = await axios.post("productos/pedido", {
             userId: userId.value,
             user: user,
@@ -231,9 +231,9 @@ export default {
           }
         } catch (err) {
           console.log(err.message);
-        } 
+        }
       }
-      else error.value = "Tu carrito está vacío"*/
+      else error.value = "Tu carrito está vacío"
 
     };
 
