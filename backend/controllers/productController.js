@@ -34,7 +34,13 @@ const productsSave = (req, res) => {
       title: 'Admin | Productos', 
       message:"Producto guardado correctamente"
     }))
-    .catch( err => console.log(err))
+    .catch( err => res.render('products', {
+      src:'products.js', 
+      css: 'products', 
+      title: 'Admin | Productos', 
+      message:"Revise los campos, e intentelo nuevamente",
+      err: err.errors
+    }))
 }
 
 const productsDelete = async (req, res) => {

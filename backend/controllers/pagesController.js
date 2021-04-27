@@ -21,7 +21,11 @@ const updateContent = (data) => {
         ).lean()
         .then(page=>{
             console.log('Producto actualizado correctamente: ' + page)
-            res.render('team', {src:'staticPages.js'})
+            res.render('project', ({
+                title: "Admin | Proyecto",
+                css: 'products',
+                src:'staticPages.js'
+              }))
         })
     }
 }

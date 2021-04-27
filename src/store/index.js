@@ -8,7 +8,7 @@ export default createStore({
     lang: {},
     total:0,
     products: [],
-    cart: {}
+    cart: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {}
   },
   getters: {
     getLang(state){
@@ -69,12 +69,23 @@ export default createStore({
       state.cart.hasOwnProperty(product._id)
         ? product.items = state.cart[product._id].items + product.items
         : product.items = product.items
-      commit('setCart', product)},
+      commit('setCart', product),      
+      localStorage.setItem('cart', JSON.stringify(state.cart))
+    },
       
     setLogin(context, usuario) {
       context.commit('setToken', usuario)
     }
   },
+  /* created: function(){
+    let infoCart= JSON.parse(localStorage.getItem('cart'))
+    if(infoCart === null){
+      this.items = []
+    } else{
+      this.items = infoDB
+    }
+    console.log(infoCart)
+  }, */
   
   modules: {
   }

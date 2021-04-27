@@ -28,3 +28,6 @@ const deleteProduct = (e) => {
     }) 
   }
 
+  $(document).ready(function(){
+    $("#producsForm").validate();
+  })
