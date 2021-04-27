@@ -23,7 +23,6 @@ const signin = async (req, res) => {
         css: 'login'})
         if(isValid) {
           const token = createToken(user._id)
-          console.log(token)
           res.cookie('jwt', token, { httpOnly: true });
           res.status(201).redirect('/admin/productos'); 
         }

@@ -15,10 +15,10 @@ export default {
 
         fetch(`http://localhost:8081/admin/editor/proyecto`)
           .then((res) => res.json())
-          .then((data) =>{
+          .then((data) => {
             miHtml.value=data[0].content
           })
-          .catch((err) => console.log(err))
+          .catch(err=>console.log(err))
         
     return {
       miHtml,
@@ -34,7 +34,7 @@ export default {
   color: #000;
   text-align: left;
   font-family: "Montserrat", "Game", Helvetica, Arial, sans-serif;
-  margin-block: 15px;
+  margin-top: 45px;
   padding-left: 30px;
   padding-right: 30px;
 }

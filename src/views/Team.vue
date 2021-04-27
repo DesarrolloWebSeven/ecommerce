@@ -40,7 +40,6 @@
     </div>
   </div>
   </div>
-
   </div>
 </div>  
 </template>
@@ -51,7 +50,7 @@ import { computed, ref } from 'vue'
 export default {
   name:'Team',
   setup(){
-     
+
     return {
       lang: computed(()=>useStore().getters.getLang)
     }

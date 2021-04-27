@@ -31,6 +31,6 @@ rtAdmin.put('/productos/:id', requireAuth, productController.productsUpdate)
 
 // Content editor
 rtAdmin.post('/editor/:title', requireAuth, pageController.pageUpdate)
-rtAdmin.get('/editor/:title', requireAuth, pageController.pageList)
+rtAdmin.get('/editor/:title', pageController.pageList)
 
 module.exports= rtAdmin
