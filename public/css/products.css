@@ -204,3 +204,9 @@ main {
 .content-form {
   width: 90%;
 }
+
+/*Validacion forms*/
+
+.error{
+  color: red;
+}
