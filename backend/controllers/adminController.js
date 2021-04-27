@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const Order = require('../models/Order')
 const { createToken } = require('../helpers/validation')
 
 // Show the login page
@@ -59,11 +60,16 @@ const clients = (req, res) => {
 }
 
 // Show the orders page
-const orders = (req, res) => {
+const orders = async (req, res) => {
+
+  const orders = await Order.find().lean()
   res.render('orders', ({
+    orders,
     title: "Admin | Pedidos",
-    css: 'products'
+    css: 'orders',
+    src: 'orders.js'
   }))
+
 }
 
 module.exports = {
