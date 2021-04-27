@@ -164,11 +164,11 @@ export default {
     let usuario = computed(()=>{
         return store.getters.token
     })
-    watch(()=> route.params,
-      async newParams=> {        
-        user.arr= await getUser(newParams.id)
+      // watch(()=> route.params,
+      // async newParams=> {        
+      //   user.arr= await getUser(newParams.id)
        
-      })
+      // })
        
         fetch(`http://localhost:8081/perfil/1`)//${id}`)
         .then((res) => res.json())
