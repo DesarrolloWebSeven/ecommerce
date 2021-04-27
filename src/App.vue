@@ -38,7 +38,6 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
-
 #app {  
   
   font-family: 'Open Sans', sans-serif;
@@ -59,52 +58,49 @@ export default {
   @media (max-width: 1050px) {
 
     .contact {
-    width: 100%;
-    padding: 0 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    bottom: 200px;
-    left: 0;
+      height: 0;
+      width: 100%;
+      padding: 0 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      bottom: 200px;
+      left: 0;
 
-    i {
-    font-size: 2rem;
-    color: #0f606b;
+      i {
+        font-size: 2rem;
+        color: #0f606b;
+      }
+      
+      i:hover{
+        color: #707070;
+      } 
     }
-
-    i:hover{
-    color: #707070;
-    } 
-    }
-
   }
 
   @media (min-width: 1050px){
 
-  .contact {
-    width: 100%;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    bottom: 70px;
-    left: 0;
+    .contact {
+      height: 0;
+      width: 100%;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      bottom: 90px;
 
-    i {
-    font-size: 3rem;
-    color: #0f606b;
+      i {
+        font-size: 3rem;
+        color: #0f606b;
+      }
+
+      i:hover{
+        color: #707070;
+      } 
+      
     }
-
-    i:hover{
-    color: #707070;
-    } 
-
   }
-
-  }
-
 }
-
 </style>
