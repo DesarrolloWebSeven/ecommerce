@@ -46,7 +46,6 @@
             required
           />
         </div>
-        <div v-if="error">{{ error }}</div>
         <div v-if="success"> {{ success }}</div>
         <div class="col-12">
           <button class="btn btn-success m-2">Realizar pago</button>
@@ -68,30 +67,20 @@ export default {
     const router = useRouter()
     const store = useStore();
     const success = ref('')
-    const error = ref('')
     const cart = computed(() => store.state.cart);
     
     
     const emptyCart = async () => {
-      
-      if(localStorage.getItem('order')) {
-      localStorage.removeItem('cart')
       store.commit("setEmptyCart");
       
-        try {
-          const res = await axios.put('/productos/pago', {
-            orderId : JSON.parse(localStorage.getItem('order'))
-          })
-          if(res.data) {
-            success.value = 'Tu pedido se ha realizado con éxito'
-            localStorage.removeItem('order')
-          }
-        } catch (err) {
-          console.log(err.message)
-        }
-      } else {
-        success.value = ''
-        error.value = "No tienes ningún pedido pendiente"
+      try {
+        const res = await axios.put('/productos/pago', {
+          orderId : JSON.parse(localStorage.getItem('order'))
+        })
+        console.log(res.data)
+        if(res.data) success.value = 'Tu pedido se ha realizado con éxito'
+      } catch (err) {
+        console.log(err.message)
       }
     }
 
@@ -112,7 +101,6 @@ export default {
     return {
       cart,
       success,
-      error,
       emptyCart,
     };
   },

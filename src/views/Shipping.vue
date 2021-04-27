@@ -18,7 +18,11 @@
             placeholder="Introduce tu nombre"
             required
           />
+          <div class="col-12" v-if="errors.firstName">
+            <p>{{ errors.firstName }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">Apellidos</label>
           <input
@@ -29,7 +33,11 @@
             placeholder="Introduce tus apellidos"
             required
           />
+          <div class="col-12" v-if="errors.lastName">
+            <p>{{ errors.lastName }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">Direción y número</label>
           <input
@@ -40,7 +48,11 @@
             placeholder="Introduce tu dirección y número"
             required
           />
+          <div class="col-12" v-if="errors.address">
+              <p>{{ errors.address }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">Piso, puerta, escalera</label>
           <input
@@ -51,7 +63,11 @@
             placeholder="Introduce tu piso, puerta, escalera"
             required
           />
+          <div class="col-12" v-if="errors.flat">
+            <p>{{ errors.flat }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">Código Postal</label>
           <input
@@ -62,7 +78,11 @@
             placeholder="Introduce tu piso, puerta, escalera"
             required
           />
+          <div class="col-12" v-if="errors.postalCode">
+            <p>{{ errors.postalCode }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">Ciudad</label>
           <input
@@ -73,7 +93,11 @@
             placeholder="Introduce tu piso, puerta, escalera"
             required
           />
+          <div class="col-12" v-if="errors.city">
+            <p>{{ errors.city }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">Provincia</label>
           <input
@@ -84,7 +108,11 @@
             placeholder="Introduce tu piso, puerta, escalera"
             required
           />
+          <div class="col-12" v-if="errors.province">
+            <p>{{ errors.province }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">País</label>
           <input
@@ -95,7 +123,11 @@
             placeholder="Introduce tu piso, puerta, escalera"
             required
           />
+          <div class="col-12" v-if="errors.country">
+            <p>{{ errors.country }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">Teléfono</label>
           <input
@@ -106,7 +138,11 @@
             placeholder="Introduce tu correo"
             required
           />
+          <div class="col-12" v-if="errors.tel">
+            <p>{{ errors.tel }}</p>
+          </div>
         </div>
+        
         <div class="col-md-6">
           <label class="form-label">Email</label>
           <input
@@ -117,8 +153,12 @@
             placeholder="Introduce tu correo"
             required
           />
+          <div class="col-12" v-if="errors.email">
+        <p>{{ errors.email }}</p>
+      </div>
         </div>
-        <div v-if="cart" class="col-12 col-md-8">
+        
+        <div class="col-12 col-md-8">
           <div v-for="(id, i) in Object.keys(cart)" :key="i" class="col-12">
             <div class="card row">
               <div class="card-horizontal row justify-content-center">
@@ -158,10 +198,9 @@
             </div>
           </div>
         </div>
-        <div v-if="error"> {{ error }}</div>
         <div class="col-12">
           <p class="card-text">
-            <button class="btn btn-success">Continuar</button>
+            <button class="btn btn-success m-2">Continuar al pago</button>
           </p>
         </div>
       </form>
@@ -185,8 +224,13 @@ export default {
     const router = useRouter()
     const store = useStore();
     const cart = computed(() => store.state.cart);
-    const error = ref('')
     const userId = ref("");
+    let errors = ref({});
+    let regExpText = /^[^]+$/;
+    let regExpEmail = /^[a-zA-Z0-9.!#$%&"*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    let regExpPostalCode = /^(?:0?[1-9]|[1-4]\d|5[0-2])\d{3}$/;  
+    let regExpTel = /(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}/;  
+    
     let user = reactive({
       firstName: '',
       lastName: '',
@@ -200,7 +244,7 @@ export default {
       postalCode: ''
     });
     const userAuth = async () => {
-
+      
       try {
         const res = await axios.get("usuario/permiso", {
           headers: { Authorization: "Bearer " + localStorage.getItem("jwt") },
@@ -210,38 +254,73 @@ export default {
       } catch (err) {
         console.log(err);
       }
+      
     };
     userAuth();
-
     const saveOrder = async () => {
-
-      if(localStorage.getItem('cart')) {
+            
+        if (!regExpText.test(user.firstName))
+        errors.value.firstName = "Debes introducir un nombre válido";
+        if (!regExpText.test(user.lastName))
+        errors.value.lastName = "Debes introducir apellidos válidos";
+        if (!regExpText.test(user.address))
+        errors.value.address = "Debes introducir una dirección válida";
+        if (!regExpText.test(user.flat))
+        errors.value.flat = "Debes introducir una piso,puerta o escalera válida";
+        if (!regExpPostalCode.test(user.postalCode))
+        errors.value.postalCode = "Debes introducir un código postal válido";
+        if (!regExpText.test(user.city))
+        errors.value.city = "Debes introducir una ciudad válida";        
+        if (!regExpText.test(user.province))
+        errors.value.province = "Debes introducir una provincia válida";
+        if (!regExpText.test(user.country))
+        errors.value.country = "Debes introducir un país válido";
+        if (!regExpTel.test(user.tel))
+        errors.value.tel = "Debes introducir un número de teléfono válido";
+        if (!regExpEmail.test(user.email))
+        errors.value.email = "Debes introducir un email válido";
         
-        try {
-          const res = await axios.post("productos/pedido", {
-            userId: userId.value,
-            user: user,
-            totalPrice: store.getters.totalPrice,
-            totalProducts: store.getters.totalQuantity,
-            cart: store.state.cart,
-          });
-          if(res.data) {
-            localStorage.setItem('order', JSON.stringify(res.data._id))
-            router.push('/carrito/pago')
-          }
-        } catch (err) {
-          console.log(err.message);
+      if (
+        regExpText.test(user.firstName) && 
+        regExpText.test(user.lastName) && 
+        regExpText.test(user.address) && 
+        regExpTel.test(user.tel) && 
+        regExpText.test(user.country) && 
+        regExpText.test(user.province) && 
+        regExpText.test(user.city) && 
+        regExpEmail.test(user.email) && 
+        regExpText.test(user.flat) && 
+        regExpPostalCode.test(user.postalCode) 
+      ) {
+      
+      try {
+        const res = await axios.post("productos/pedido", {
+          userId: userId.value,
+          user: user,
+          totalPrice: store.getters.totalPrice,
+          totalProducts: store.getters.totalQuantity,
+          cart: store.state.cart,
+        });
+        if(res.data) {
+          localStorage.setItem('order', JSON.stringify(res.data._id))
+          router.push('/carrito/pago')
         }
+      } catch (err) {
+        console.log(err.message);
       }
-      else error.value = "Tu carrito está vacío"
-
+      }
     };
-
     return {
       user,
       cart,
-      error,
-      saveOrder
+      saveOrder,
+      errors,
+      regExpText,
+      regExpEmail,
+      regExpPostalCode,
+      regExpTel
+
+
     };
   },
 };
@@ -335,9 +414,5 @@ export default {
       }
     }
   }
-}
-
-button {
-  margin-bottom: 200px;
 }
 </style>
