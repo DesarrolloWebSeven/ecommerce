@@ -198,6 +198,7 @@
             </div>
           </div>
         </div>
+        <div v-if="error"> {{ error }}</div>
         <div class="col-12">
           <p class="card-text">
             <button class="btn btn-success m-2">Continuar al pago</button>
@@ -224,7 +225,8 @@ export default {
     const router = useRouter()
     const store = useStore();
     const cart = computed(() => store.state.cart);
-    const userId = ref("");
+    const userId = ref("")
+    const error = ref('')
     let errors = ref({});
     let regExpText = /^[^]+$/;
     let regExpEmail = /^[a-zA-Z0-9.!#$%&"*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -290,7 +292,8 @@ export default {
         regExpText.test(user.city) && 
         regExpEmail.test(user.email) && 
         regExpText.test(user.flat) && 
-        regExpPostalCode.test(user.postalCode) 
+        regExpPostalCode.test(user.postalCode) &&
+        localStorage.getItem('cart')
       ) {
       
       try {
@@ -308,9 +311,10 @@ export default {
       } catch (err) {
         console.log(err.message);
       }
-      }
+      } else error.value = "Tu carrito está vacío"
     };
     return {
+      error,
       user,
       cart,
       saveOrder,
