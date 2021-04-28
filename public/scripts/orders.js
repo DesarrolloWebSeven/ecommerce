@@ -1,24 +1,23 @@
 window.onload=()=>{
-/*   let button = document.querySelectorAll('.delete')
-  button.forEach( item => {
-    item.addEventListener('click', deleteProduct)
-  }) */
+  let buttonDelete = document.querySelectorAll('.orderDelete')
+  buttonDelete.forEach( button => button.addEventListener('click', deleteOrder))
+
+  function deleteOrder (e) {
+    let id = e.target.dataset.id
+    result = confirm("¿Seguro que desea eliminar este pedido?")
+    
+    if(result){
+      fetch(`/admin/pedidos/${id}`,{ method:'DELETE' })
+      .then(() => location.reload())
+      .catch(err => console.log(err.message))
+    }
+  }
+
 
   let search = document.querySelector('#search')
   search.addEventListener('keyup', searchItem)
 
-}
-
-/* const deleteProduct = (e) => {
-    let id = e.target.dataset.id
-    result = confirm("¿Seguro que desea eliminar el producto?")
-      if(result){
-        fetch(`/admin/productos/${id}`,{ method:'DELETE' })
-        window.location.href = "/admin/productos"
-      }
-  }  */
-  
-  const searchItem = (e) => {
+  function searchItem (e) {
     const term = e.target.value.toLowerCase()
     const orders = document.querySelectorAll('.order-detail')
     orders.forEach( order => {
@@ -27,3 +26,5 @@ window.onload=()=>{
       else order.style.display = 'none' 
     }) 
   }
+  
+}
