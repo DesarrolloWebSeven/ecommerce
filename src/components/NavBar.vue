@@ -61,7 +61,9 @@ export default {
 
     const logout = () => {
       localStorage.removeItem('jwt')
+      localStorage.removeItem('cart')
       store.dispatch('setLogin', null)
+      store.commit("setEmptyCart");
       router.push('/')
     }
     const totalQuantity = computed(() => store.getters.totalQuantity)
