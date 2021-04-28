@@ -4,6 +4,7 @@ const adminController = require('../controllers/adminController')
 const orderController = require('../controllers/orderController')
 const productController = require('../controllers/productController')
 const pageController = require('../controllers/pageController')
+const clientController=require('../controllers/clientController')
 const { checkUser, requireAuth } = require('../helpers/validation')
 
 
@@ -19,7 +20,9 @@ rtAdmin.get('/logout', adminController.logout)
 rtAdmin.get('/proyecto', requireAuth, adminController.project)
 
 // Client routes
-rtAdmin.get('/clientes', requireAuth, adminController.clients)
+rtAdmin.get('/clientes', requireAuth, clientController.clientsList)
+rtAdmin.get('/clientes/:id', requireAuth, clientController.clientsFindById)
+rtAdmin.put('/clientes/:id', requireAuth, clientController.clientsUpdate)
 
 // Product routes
 rtAdmin.get('/productos', requireAuth, productController.productsList)
