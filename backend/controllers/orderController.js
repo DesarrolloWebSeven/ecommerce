@@ -19,7 +19,9 @@ const showOrders = async (req, res) => {
 const deleteOrders = async (req, res) => {
 
   let id = req.params.id
-  const order = await Order.deleteOne({ _id: id })
+  const orderInfo = await Order.findById(id)
+  increaseProductQuantity(orderInfo.cart)
+  const order = await Order.deleteOne({ _id: id }).lean()
   res.json(order)
 
 }
@@ -41,14 +43,53 @@ const showOrderDetail = async (req, res) => {
 // Delete product from an order
 const deleteProduct = async (req, res) => {
 
-  let id = req.params.id
+  let idOrder = req.params.id
   let product = req.body.product
-  const order = await Order.updateOne(
-    { _id: id },
-    { $unset: { cart: { product } }})
-  console.log(order) 
-  res.send(order)
 
+  // Search for the order and update its info
+  let order = await Order.findById(idOrder)
+  order.totalProducts = order.totalProducts - order.cart[product].items
+  order.totalPrice = order.totalPrice - order.cart[product].price
+  
+  // Update the product quantity available on the database
+  let updateProductQuantity = await Product.findById(product)
+  await Product.updateOne({ _id: product }, { 
+    quantity : updateProductQuantity.quantity + order.cart[product].items}).lean()
+  
+  // Delete the product from the order and update the info
+  delete order.cart[product]
+  Order.updateOne({ _id: idOrder }, { 
+    cart: order.cart, 
+    totalProducts: order.totalProducts,
+    totalPrice: order.totalPrice
+  });
+  res.json('Success')
+
+}
+
+// Update the order information
+const updateOrder = async (req, res) => {
+  let id = req.params.id
+  let orderUpdate = await Order.updateOne({_id: id}, {$set: {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    tel: req.body.tel,
+    address: req.body.address,
+    flat: req.body.flat,
+    postalCode: req.body.postalCode,
+    city: req.body.city,
+    province: req.body.province,
+    country: req.body.country,
+  }})
+  let order = await Order.findById({_id: id}).lean()
+  res.render('order', { 
+    order,
+    message: 'Pedido actualizado con éxito',
+    title: 'Admin | Pedido',
+    css: 'orders',
+    src: 'order.js'
+  })
 }
 
 // Save new order as pending
@@ -87,14 +128,29 @@ const payment = (req, res) => {
 
 }
 
-// Update the products quantity on the database
-const updateProductQuantity = (order) => {
+// Decrease the products quantity on the database
+const decreaseProductQuantity = (order) => {
   
-  Object.values(order).forEach( item => {
+  Object.values(order).forEach( async item => {
 
     let id = item._id
-    item.quantity = item.quantity - item.items
-    Product.updateOne({_id: id}, {$set: { quantity: item.quantity}})
+    let product = await Product.findById(id)
+    Product.updateOne({_id: id}, {$set: { quantity: product.quantity - item.items}})
+      .then(data => console.log(data))
+      .catch(err => console.log(err.message))
+      
+  })
+
+}
+
+// Increase the products quantity on the database
+const increaseProductQuantity = (order) => {
+  
+  Object.values(order).forEach( async item => {
+
+    let id = item._id
+    let product = await Product.findById(id)
+    Product.updateOne({_id: id}, {$set: { quantity: product.quantity + item.items}})
       .then(data => console.log(data))
       .catch(err => console.log(err.message))
       
@@ -107,6 +163,7 @@ module.exports = {
   deleteOrders,
   showOrderDetail,
   deleteProduct,
+  updateOrder,
   saveOrder,
   payment
 }

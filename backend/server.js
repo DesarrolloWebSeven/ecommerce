@@ -14,7 +14,10 @@ conexion.once('open',()=>console.log("Conexión mongo OK!!"))
 
 // Template engine settings
 const exphbs = require('express-handlebars')
-app.engine('.hbs', exphbs({extname: '.hbs', partialsDir: 'views/partials/'}));
+app.engine('.hbs', exphbs({extname: '.hbs', 
+  partialsDir: 'views/partials/',
+  helpers: { json: function (context) { return JSON.stringify(context) }} 		
+}));
 app.set('view engine', '.hbs');
 
 // Multer settings

@@ -8,7 +8,7 @@ window.onload=()=>{
     
     if(result){
       fetch(`/admin/pedidos/${id}`,{ method:'DELETE' })
-      .then(() => window.location.href = "/admin/pedidos")
+      .then(() => location.reload())
       .catch(err => console.log(err.message))
     }
   }

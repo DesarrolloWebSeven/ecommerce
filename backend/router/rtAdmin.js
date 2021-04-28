@@ -37,6 +37,7 @@ rtAdmin.get('/pedidos', requireAuth, orderController.showOrders)
 rtAdmin.delete('/pedidos/:id', requireAuth, orderController.deleteOrders)
 rtAdmin.get('/pedidos/:id', requireAuth, orderController.showOrderDetail)
 rtAdmin.delete('/borrado/:id', requireAuth, orderController.deleteProduct)
+rtAdmin.put('/pedidos/:id', orderController.updateOrder)
 
 // Content editor
 rtAdmin.post('/editor/:title', requireAuth, pageController.pageUpdate)
