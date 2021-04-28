@@ -55,7 +55,8 @@ const project = (req, res) => {
 const clients = (req, res) => {
   res.render('clients', ({
     title: "Admin | Clientes",
-    css: 'products'
+    css: 'products',
+    script: 'clients.js'
   }))
 }
 
