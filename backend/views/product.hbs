@@ -6,7 +6,7 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="titulo">Título</label>
-          <input type="text" class="form-control" value="{{product.title}}" name="title" placeholder="Titulo o nombre del producto">
+          <input type="text" class="form-control" value="{{product.title}}" name="title" placeholder="Título o nombre del producto">
         </div>
         <div class="form-group col-md-6">
           <label for="descripcion">Descripción</label>
@@ -42,19 +42,19 @@
         <input type="text" class="form-control hidden" id="images" name="images" value="{{product.images}}">
       <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="imagenes">Archivos de imagenes</label>
+            <label for="imagenes">Archivos de imágenes</label>
             <input type="file" class="form-control" id="imagesNew" name="images" multiple>
           </div>
           {{#if product.image1}}
           <div class="form-group photo col-md-1">
             <i class="photo-icon btn-danger fas fa-trash-alt" data-id="{{product.image1}}"></i>
-            <img src="/images/{{product.image1}}" id="img1" alt="Imagen producto">
+            <img src="/images/{{product.image1}}" id="img1" alt="Imagen {{product.title}}" title="Imagen {{product.title}}">
           </div>
           {{/if}}
           {{#if product.image2}}
           <div class="form-group photo col-md-1">
             <i class="photo-icon btn-danger fas fa-trash-alt" data-id="{{product.image2}}"></i>
-            <img src="/images/{{product.image2}}" id="img2" alt="Imagen producto">
+            <img src="/images/{{product.image2}}" id="img2" alt="Imagen {{product.title}}" title="Imagen {{product.title}}">
           </div>
         {{/if}}
           <div class="form-check col-md-4">
