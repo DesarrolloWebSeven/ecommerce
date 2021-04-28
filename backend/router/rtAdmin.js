@@ -1,6 +1,7 @@
 const express = require('express')
 const rtAdmin = express.Router()
 const adminController = require('../controllers/adminController')
+const orderController = require('../controllers/orderController')
 const productController = require('../controllers/productController')
 const pageController = require('../controllers/pageController')
 const { checkUser, requireAuth } = require('../helpers/validation')
@@ -19,7 +20,6 @@ rtAdmin.get('/proyecto', requireAuth, adminController.project)
 
 // Client routes
 rtAdmin.get('/clientes', requireAuth, adminController.clients)
-rtAdmin.get('/pedidos', requireAuth, adminController.orders)
 
 // Product routes
 rtAdmin.get('/productos', requireAuth, productController.productsList)
@@ -28,6 +28,12 @@ rtAdmin.delete('/productos/:id', requireAuth, productController.productsDelete)
 rtAdmin.get('/productos/:id', requireAuth, productController.productsFindById)
 rtAdmin.delete('/:img', requireAuth, productController.imagesDelete)
 rtAdmin.put('/productos/:id', requireAuth, productController.productsUpdate)
+
+// Order routes
+rtAdmin.get('/pedidos', requireAuth, orderController.showOrders)
+rtAdmin.delete('/pedidos/:id', requireAuth, orderController.deleteOrders)
+rtAdmin.get('/pedidos/:id', requireAuth, orderController.showOrderDetail)
+rtAdmin.delete('/borrado/:id', requireAuth, orderController.deleteProduct)
 
 // Content editor
 rtAdmin.post('/editor/:title', requireAuth, pageController.pageUpdate)

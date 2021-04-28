@@ -1,0 +1,148 @@
+{{> header}}
+<main>
+  <h1 class="text-center">Pedido</h1>
+  <form action="/admin/pedidos/{{order._id}}?_method=PUT" class="container form-order" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="PUT">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="state">Estado</label>
+          <input type="text" class="form-control" id="state" name="state" minlength="5" maxlength="15" placeholder="{{ order.state }}" required>
+          <!-- {{#if err.title}}
+          <p class="error"> {{ err.title }}</p>
+          {{/if}} -->
+        </div>
+        <div class="form-group col-md-6">
+          <label>ID usuario</label>
+          <input type="text" class="form-control" name="userId" minlength="30" placeholder="{{ order.userId }}" readonly>
+          <!-- {{#if err.description}}
+          <p class="error"> {{ err.description }} </p>
+          {{/if}}-->
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="firstName">Nombre</label>
+          <input type="text" class="form-control" id="firstName" name="firstName" minlength="3" maxlength="15" placeholder="{{ order.firstName }}" required >
+          <!-- {{#if err.features}}
+          <p class="error"> {{ err.features }} </p>
+          {{/if}} -->
+        </div>
+        <div class="form-group col-md-6">
+          <label for="lastName">Apellido</label>
+          <input type="text" class="form-control" id="lastName" name="lastName" minlength="3" placeholder="{{ order.lastName }}" required>
+          <!-- {{#if err.price}}
+          <p class="error"> {{ err.price }} </p>
+          {{/if}} -->
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="email">Correo electrónico</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="{{ order.email }}" required >
+          <!-- {{#if err.features}}
+          <p class="error"> {{ err.features }} </p>
+          {{/if}} -->
+        </div>
+        <div class="form-group col-md-6">
+          <label for="tel">Teléfono</label>
+          <input type="phone" class="form-control" id="tel" name="tel" placeholder="{{ order.tel }}" required>
+          <!--{{#if err.price}}
+          <p class="error"> {{ err.price }} </p>
+          {{/if}} -->
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="address">Dirección</label>
+          <input type="text" class="form-control" id="address" name="address" placeholder="{{ order.address }}" required >
+          <!-- {{#if err.features}}
+          <p class="error"> {{ err.features }} </p>
+          {{/if}} -->
+        </div>
+        <div class="form-group col-md-6">
+          <label for="flat">Piso, Portal, Puerta</label>
+          <input type="text" class="form-control" id="flat" name="flat" placeholder="{{ order.flat }}" required>
+          <!--{{#if err.price}}
+          <p class="error"> {{ err.price }} </p>
+          {{/if}} -->
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="postal">Código Postal</label>
+          <input type="text" class="form-control" id="postal" name="postalCode" minlength="5" maxlength="5" placeholder="{{ order.postalCode }}" required >
+          <!-- {{#if err.features}}
+          <p class="error"> {{ err.features }} </p>
+          {{/if}} -->
+        </div>
+        <div class="form-group col-md-6">
+          <label for="city">Ciudad</label>
+          <input type="text" class="form-control" id="city" name="city" placeholder="{{ order.city }}" required>
+          <!--{{#if err.price}}
+          <p class="error"> {{ err.price }} </p>
+          {{/if}} -->
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="province">Provincia</label>
+          <input type="text" class="form-control" id="province" name="province" minlength="5" maxlength="15" placeholder="{{ order.province }}" required >
+          <!-- {{#if err.features}}
+          <p class="error"> {{ err.features }} </p>
+          {{/if}} -->
+        </div>
+        <div class="form-group col-md-6">
+          <label for="country">País</label>
+          <input type="text" class="form-control" id="country" name="country" placeholder="{{ order.country }}" required>
+          <!--{{#if err.price}}
+          <p class="error"> {{ err.price }} </p>
+          {{/if}} -->
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="products">Cantidad de Productos</label>
+          <input type="number" class="form-control" id="products" name="totalProducts" placeholder="{{ order.totalProducts }}" required >
+          <!-- {{#if err.features}}
+          <p class="error"> {{ err.features }} </p>
+          {{/if}} -->
+        </div>
+        <div class="form-group col-md-6">
+          <label for="price">Precio Total</label>
+          <input type="number" class="form-control" id="price" name="totalPrice" placeholder="{{ order.totalPrice }}" required>
+          <!--{{#if err.price}}
+          <p class="error"> {{ err.price }} </p>
+          {{/if}} -->
+        </div>
+      </div>
+      {{#if order.cart}}
+      <div id="items" data-id="{{ order._id }}">
+        {{#each order.cart}}
+        <div class="order-article">
+          <i data-product="{{ this._id }}" class="fas fa-times-circle"></i>
+          <div class="images">
+            {{#each this.images}}
+            <img src="http://localhost:8080/images/{{ this }}">
+            {{/each}}
+          </div>
+          <p><strong>{{ this.title }} ( {{ this.items }} artículos )</strong></p>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <input type="text" class="form-control" placeholder="Fecha: {{ order.createdAt }}" readonly>
+        </div>
+        <div class="form-group col-md-6">
+          <input type="submit" class="form-control btn" value="Actualizar">
+        </div>
+      </div>
+      {{#if message}}
+      <div class="form-row">
+        <div class="col-md-12 alert alert-success text-center" role="alert">{{ message }}</div>
+      </div>
+      {{/if}}
+  </form>
+
+</main>

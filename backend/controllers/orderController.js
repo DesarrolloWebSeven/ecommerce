@@ -2,6 +2,55 @@ const Order = require('../models/Order')
 const Product = require('../models/Product')
 const mailer = require('../helpers/mailer')
 
+// Show the orders page
+const showOrders = async (req, res) => {
+
+  const orders = await Order.find().lean()
+  res.render('orders', ({
+    orders,
+    title: "Admin | Pedidos",
+    css: 'orders',
+    src: 'orders.js'
+  }))
+
+}
+
+// Delete orders on the database
+const deleteOrders = async (req, res) => {
+
+  let id = req.params.id
+  const order = await Order.deleteOne({ _id: id })
+  res.json(order)
+
+}
+
+// Show an specific order
+const showOrderDetail = async (req, res) => {
+
+  let id = req.params.id
+  const order = await Order.findById(id).lean()
+  res.render('order', { 
+    order,
+    title: 'Admin | Pedido',
+    css: 'orders',
+    src: 'order.js'
+  })
+
+}
+
+// Delete product from an order
+const deleteProduct = async (req, res) => {
+
+  let id = req.params.id
+  let product = req.body.product
+  const order = await Order.updateOne(
+    { _id: id },
+    { $unset: { cart: { product } }})
+  console.log(order) 
+  res.send(order)
+
+}
+
 // Save new order as pending
 const saveOrder = async (req, res) => {
   let order = new Order({
@@ -54,6 +103,10 @@ const updateProductQuantity = (order) => {
 }
 
 module.exports = {
+  showOrders,
+  deleteOrders,
+  showOrderDetail,
+  deleteProduct,
   saveOrder,
   payment
 }
