@@ -1,58 +1,41 @@
 <template>
-  <div class="container section">
-    <div class="row d-flex justify-content-center">
-      <ol id="progress-bar">
-        <li class="step-done">Envío</li>
-        <li class="step-active">Pago</li>
-      </ol>
-    </div>
-    <div>
-      <form class="section row g-3" @submit.prevent="emptyCart">
-        <div class="col-md-8">
-          <label class="form-label">Titular de la cuenta</label>
-          <input
-            type="text"
-            name="accountOwner"
-            id="accountOwner"
-            class="form-control"
-            placeholder="Introduce el titular de la cuenta"
-            required
-          />
-          <label class="form-label">Número de tarjeta</label>
-          <input
-            type="text"
-            name="cardNumber"
-            id="cardNumber"
-            class="form-control"
-            placeholder="Introduce el número de tarjeta"
-            required
-          />
-          <label class="form-label">Fecha de vencimiento</label>
-          <input
-            type="text"
-            name="expiry"
-            id="expiry"
-            class="form-control"
-            placeholder="Introduce la fecha de vencimiento"
-            required
-          />
-          <label class="form-label">Código de seguridad</label>
-          <input
-            type="text"
-            name="securityCode"
-            id="securityCode"
-            class="form-control"
-            placeholder="Introduce el código de seguridad"
-            required
-          />
+  <main class="payment-page">
+    <section class="payment-info">
+      <div class="payment-titles">
+        <h2>Datos</h2>
+        <h2>Pago</h2>
+        <h2>Envío</h2>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" :style="width" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">{{ progress }}</div>
+      </div>
+    </section>
+    <form @submit.prevent="emptyCart">
+      <div class="payment-methods">
+        <i class="fab fa-cc-visa"></i>
+        <i class="fab fa-cc-mastercard"></i>
+        <i class="fab fa-cc-amex"></i>
+        <i class="fab fa-cc-paypal"></i>
+      </div>
+      <label for="owner">Titular de la cuenta</label>
+      <input type="text" id="owner" placeholder="Introduce el titular de la cuenta" required />
+      <label for="cardNumber">Número de tarjeta</label>
+      <input type="text" id="cardNumber" minlenght="12" maxlenght="12" placeholder="Introduce el número de tarjeta" required />
+      <div class="cardinfo">
+        <div class="card-date">
+          <label for="expiry">Fecha de vencimiento</label>
+          <input type="date" id="expiry" placeholder="Introduce la fecha de vencimiento" required />
         </div>
-        <div v-if="success"> {{ success }}</div>
-        <div class="col-12">
-          <button class="btn btn-success m-2">Realizar pago</button>
+        <div class="card-code">
+          <label for="securityCode">Código de seguridad</label>
+          <input type="number" id="securityCode" minlenght="3" maxlenght="3" placeholder="Introduce el código de seguridad" required/>
         </div>
+      </div>
+      <div v-if="success" class="alert alert-success text-center" role="alert"> {{ success }} </div>
+      <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
+      <button type="submit">Realizar pago</button>
       </form>
-    </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -67,6 +50,9 @@ export default {
     const router = useRouter()
     const store = useStore();
     const success = ref('')
+    const error = ref('')
+    const width= ref('width: 50%;')
+    const progress = ref('50%')
     const cart = computed(() => store.state.cart);
     
     
@@ -77,8 +63,12 @@ export default {
         const res = await axios.put('/productos/pago', {
           orderId : JSON.parse(localStorage.getItem('order'))
         })
-        console.log(res.data)
-        if(res.data) success.value = 'Tu pedido se ha realizado con éxito'
+        if(res.data) {
+          success.value = 'Tu pedido se ha realizado con éxito'
+          width.value = 'width: 100%'
+          progress.value = '100%'
+        }
+        else error.value = "Ha habido un problema, inténtalo más tarde"
       } catch (err) {
         console.log(err.message)
       }
@@ -99,8 +89,11 @@ export default {
     userAuth()
 
     return {
+      width,
+      progress,
       cart,
       success,
+      error,
       emptyCart,
     };
   },
@@ -109,97 +102,91 @@ export default {
 
 
 <style lang="scss" scoped>
-.section {
-  background-color: #10555e1e;
-  max-width: 80%;
-  margin-top: 30px;
+.payment-page {
+  width: 80%;
+  max-height: 100vh;
+  margin: 100px auto;
   color: black;
 
-  .row {
-    max-width: 95%;
+  .payment-info {
+    width: 100%;
+    max-width: 700px;
     margin: 0 auto;
-    background-color: white;
-    #progress-bar {
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    .payment-titles {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .progress-bar {
+      background-color: #22B573;
+    }
+  }
+
+  form {
+    width: 100%;
+    max-width: 700px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 25px;
+    border-radius: 5px;
+    background-color: rgb(241, 241, 241);
+
+    .payment-methods {
+      width: 100%;
       display: flex;
       justify-content: center;
+      margin: 0 auto 25px;
+
+      i {
+        margin: 0 25px;
+        font-size: 3rem;
+        color: rgb(78, 78, 78);
+      }
     }
-    .payment {
-      width: 300px;
+
+    input, label {
+      margin-bottom: 10px;
+    }
+
+    input {
+      padding-left: 10px;
+    }
+
+    .cardinfo {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 15px;
+
+      div {
+        width: 49%;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    button {
+      border: none;
+      width: 50%;
+      padding: 5px 0;
+      border-radius: 5px;
+      background-color: #22B573;
+      color: white;
+      font-weight: 500;
+      align-self: center;
+    }
+
+    button:hover {
+      background-color: #12643f;
     }
   }
 
-  // Colors
-  $default: #212121;
-  $grey: #efefef;
-  $main-color: #ff0000;
-
-  // Progress bar
-  #progress-bar {
-    display: table;
-    width: 100%;
-    margin: 0;
-    padding: 15px 15px 0;
-    table-layout: fixed;
-    width: 100%;
-    counter-reset: step;
-    li {
-      list-style-type: none;
-      display: table-cell;
-      width: 20%;
-      float: left;
-      font-size: 16px;
-      position: relative;
-      text-align: center;
-      &:before {
-        width: 50px;
-        height: 50px;
-        color: $default;
-        content: counter(step);
-        counter-increment: step;
-        line-height: 50px;
-        font-size: 18px;
-        border: 1px solid $grey;
-        display: block;
-        text-align: center;
-        margin: 0 auto 10px auto;
-        border-radius: 50%;
-        background-color: #fff;
-      }
-      &:after {
-        width: 100%;
-        height: 10px;
-        content: "";
-        position: absolute;
-        background-color: #fff;
-        top: 25px;
-        left: -50%;
-        z-index: -1;
-      }
-      &:first-child:after {
-        content: none;
-      }
-      &.step-done {
-        color: $main-color;
-        &:before {
-          border-color: $main-color;
-          background-color: $main-color;
-          color: #fff;
-          content: "\f00c";
-          font-family: "FontAwesome";
-        }
-        & + li:after {
-          background-color: $main-color;
-        }
-      }
-      &.step-active {
-        color: $main-color;
-        &:before {
-          border-color: $main-color;
-          color: $main-color;
-          font-weight: 700;
-        }
-      }
-    }
-  }
 }
 </style>

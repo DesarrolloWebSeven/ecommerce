@@ -120,8 +120,8 @@ const payment = (req, res) => {
   Order.updateOne({_id: id}, {$set: { state: 'confirmado'}})
     .then(async data => {
       let order = await Order.findById(id).lean()
+      decreaseProductQuantity(order.cart)
       mailer.send(order.email, order, 'Pedido Geeky', 'orderEmail')
-      updateProductQuantity(order.cart)
       res.json(order)
     })
     .catch(err => console.log(err.message))
