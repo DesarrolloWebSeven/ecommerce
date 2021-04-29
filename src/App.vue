@@ -25,8 +25,10 @@ export default {
     AlertCookies
   },
   setup(){
+    
     return {
       lang: computed(()=>useStore().getters.getLang)
+      
     }
   }
 }
