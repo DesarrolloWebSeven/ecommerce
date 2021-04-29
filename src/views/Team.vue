@@ -3,7 +3,7 @@
     <h1>Equipo</h1>
     <div class="container">
       <div class="row profile_cards d-flex justify-content-between">
-        <div class="col-3" >
+        <div class="col-12 col-md-6 col-lg-3" >
           <div class="card">
           <img src="@/assets/ampa.jpeg" class="card-img-top" alt="..." />
           <div class="card-body">

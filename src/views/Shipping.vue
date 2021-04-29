@@ -296,21 +296,21 @@ export default {
         localStorage.getItem('cart')
       ) {
       
-      try {
-        const res = await axios.post("productos/pedido", {
-          userId: userId.value,
-          user: user,
-          totalPrice: store.getters.totalPrice,
-          totalProducts: store.getters.totalQuantity,
-          cart: store.state.cart,
-        });
-        if(res.data) {
-          localStorage.setItem('order', JSON.stringify(res.data._id))
-          router.push('/carrito/pago')
+        try {
+          const res = await axios.post("productos/pedido", {
+            userId: userId.value,
+            user: user,
+            totalPrice: store.getters.totalPrice,
+            totalProducts: store.getters.totalQuantity,
+            cart: store.state.cart,
+          });
+          if(res.data) {
+            localStorage.setItem('order', JSON.stringify(res.data._id))
+            router.push('/carrito/pago')
+          }
+        } catch (err) {
+          console.log(err.message);
         }
-      } catch (err) {
-        console.log(err.message);
-      }
       } else error.value = "Tu carrito está vacío"
     };
     return {
