@@ -88,8 +88,8 @@
 </template>
 
 <script>
-import { useStore } from "vuex";
-import { computed, ref } from "vue";
+import { useStore } from 'vuex'
+import { computed, ref } from 'vue'
 export default {
   name: "Team",
   setup() {

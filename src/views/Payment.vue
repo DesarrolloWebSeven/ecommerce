@@ -41,8 +41,8 @@
 <script>
 import axios from 'axios'
 import { useRouter } from 'vue-router'
-import { useStore } from "vuex";
-import { computed, ref } from 'vue';
+import { useStore } from 'vuex'
+import { computed, ref } from 'vue'
 export default {
   name: "Payment2",
   props: {},
@@ -187,7 +187,7 @@ export default {
     }
 
     button:hover {
-      background-color: #12643f;
+      opacity: 60%;
     }
   }
 
