@@ -4,7 +4,7 @@
       <h1>Perfil</h1>
       <div class="col-md-4">
         <img class="avatar" src="@/assets/avatar.png" alt="" />
-
+        <p>{{usuario}}</p>
         <p>nombre</p>
         <p>direction</p>
         <p>codigo porstal, ciudad, provincia</p>
@@ -158,12 +158,21 @@ export default {
   name: "Profile",
   props: {},
   setup() {
+    const atob = require('atob')
+    var jwt = require('jsonwebtoken');
     const store = useStore() 
     const route = useRoute()
     let user = reactive({});
     let usuario = computed(()=>{
-        return store.getters.token
+        return store.getters.getToken
     })
+    //jwt.verify(getToken)
+    console.log(usuario)
+    var b64 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'
+    //.eyJpZCI6IjYwNzk2MTNlMzM0YzIyMjUzMDcwY2E5NiIsImlhdCI6MTYxOTUyNTE0OCwiZXhwIjoxNjE5Nzg0MzQ4fQ.DUqEdu9u7lH5N80Hsej5wt-ywa8vlHSI-k8nubS0doA';
+    var bin = atob(b64);
+    console.log(bin); 
+
       // watch(()=> route.params,
       // async newParams=> {        
       //   user.arr= await getUser(newParams.id)
@@ -175,8 +184,6 @@ export default {
         .then(user=>(console.log(user)))
         .catch((err) => console.log(err));   
         //.then((data) => data.forEach((item) => user.push(item)))
-        
-
 
     // onMounted(()=>{ 
     //   getUser(route.params.id)      
@@ -186,7 +193,6 @@ export default {
       console.log(user)
       console.log('que hizo: '+ e)
     }
-
 
     return {
         user, saveUser, usuario
