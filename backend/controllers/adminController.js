@@ -55,21 +55,9 @@ const project = (req, res) => {
 const clients = (req, res) => {
   res.render('clients', ({
     title: "Admin | Clientes",
-    css: 'products'
+    css: 'products',
+    script: 'clients.js'
   }))
-}
-
-// Show the orders page
-const orders = async (req, res) => {
-
-  const orders = await Order.find().lean()
-  res.render('orders', ({
-    orders,
-    title: "Admin | Pedidos",
-    css: 'orders',
-    src: 'orders.js'
-  }))
-
 }
 
 module.exports = {
@@ -77,6 +65,5 @@ module.exports = {
     signin,
     logout,
     project,    
-    clients,
-    orders,
+    clients
 }

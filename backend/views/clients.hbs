@@ -1,14 +1,39 @@
 {{> header }}
 <main>
   <h1 class="text-center">Clientes</h1>
-  <section class="container">
-    <div class="clients-list">
-    </div>
-  </section>
 
   <!-- Search Input -->
   <section class="search-box">
     <i class="fas fa-search"></i>
     <input type="text" class="search-console" id="search" placeholder="Buscar" autocomplete="off">
   </section>
+
+  {{#if clients}}
+  <section class="product-list">
+    {{#each clients}}
+        <div class="card">
+        <img class="card-img-top center-block" src="/logo/user.png" alt="Avatar {{this.firstname}} {{this.lastname}}" title="Avatar {{this.firstname}} {{this.lastname}}">
+        <div class="card-body">
+          {{#if this.firstname}}
+            <h5 class="card-title">{{this.firstname}} {{this.lastname}}</h5>
+          {{else}}
+            <h5 class="card-title">Cliente</h5>
+          {{/if}}
+            <p class="card-text">{{this.email}}</p>
+              {{#if active}}
+                <h5 class="title text-success"><i class="fa fa-check"></i> Activo</h5>
+                <button class="btn btn-primary"><a href="/admin/clientes/{{this.id}}"><i class="fas fa-info"></i></a></button>
+                <button class="btn btn-danger"><i class="fas fa-truck"></i></button>
+                <button class="btn btn-warning"><i class="fas fa-archive"></i></button>
+              {{else}}
+                <h5 class="title text-danger"><i class="bi bi-x-square"></i><i class="fa fa-times"></i> No activo</h5>
+                <button class="btn btn-primary"><a href="/admin/clientes/{{this.id}}"><i class="fas fa-info"></a></i></button>
+                <button class="btn btn-danger" disabled><i class="fas fa-truck"></i></button>
+                <button class="btn btn-warning" disabled><i class="fas fa-archive"></i></button>
+              {{/if}}
+        </div>
+        </div>
+    {{/each}}
+  </section>
+  {{/if}}
 </main>

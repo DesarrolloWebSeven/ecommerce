@@ -5,7 +5,7 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="titulo">Título</label>
-          <input type="text" class="form-control" name="title" minlength="5" maxlength="30" required placeholder="Titulo o nombre del producto">
+          <input type="text" class="form-control" name="title" minlength="5" maxlength="30" required placeholder="Título o nombre del producto">
           {{#if err.title}}
           <p class="error"> {{ err.title }}</p>
           {{/if}}
@@ -59,7 +59,7 @@
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="imagenes">Archivos de imagenes</label> 
+          <label for="imagenes">Archivos de imágenes</label> 
           <input type="file" class="form-control" id="imagesNew" required name="images" multiple>
           {{#if err.images}}
           <p class="error"> {{ err.images }} </p>
@@ -89,7 +89,7 @@
   <section class="product-list">
     {{#each products}}
     <div class="card">
-      <img class="card-img-top" src="/images/{{this.image1}}" alt="Card image cap">
+      <img class="card-img-top" src="/images/{{this.image1}}" alt="Imagen {{this.title}}" title="Imagen {{this.title}}">
       <div class="card-body">
         <h5 class="card-title">{{this.title}}</h5>
         <p class="card-text">Unidades disponibles: {{this.quantity}}</p>

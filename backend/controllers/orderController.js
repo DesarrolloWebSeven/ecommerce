@@ -2,6 +2,96 @@ const Order = require('../models/Order')
 const Product = require('../models/Product')
 const mailer = require('../helpers/mailer')
 
+// Show the orders page
+const showOrders = async (req, res) => {
+
+  const orders = await Order.find().lean()
+  res.render('orders', ({
+    orders,
+    title: "Admin | Pedidos",
+    css: 'orders',
+    src: 'orders.js'
+  }))
+
+}
+
+// Delete orders on the database
+const deleteOrders = async (req, res) => {
+
+  let id = req.params.id
+  const orderInfo = await Order.findById(id)
+  increaseProductQuantity(orderInfo.cart)
+  const order = await Order.deleteOne({ _id: id }).lean()
+  res.json(order)
+
+}
+
+// Show an specific order
+const showOrderDetail = async (req, res) => {
+
+  let id = req.params.id
+  const order = await Order.findById(id).lean()
+  res.render('order', { 
+    order,
+    title: 'Admin | Pedido',
+    css: 'orders',
+    src: 'order.js'
+  })
+
+}
+
+// Delete product from an order
+const deleteProduct = async (req, res) => {
+
+  let idOrder = req.params.id
+  let product = req.body.product
+
+  // Search for the order and update its info
+  let order = await Order.findById(idOrder)
+  order.totalProducts = order.totalProducts - order.cart[product].items
+  order.totalPrice = order.totalPrice - order.cart[product].price
+  
+  // Update the product quantity available on the database
+  let updateProductQuantity = await Product.findById(product)
+  await Product.updateOne({ _id: product }, { 
+    quantity : updateProductQuantity.quantity + order.cart[product].items}).lean()
+  
+  // Delete the product from the order and update the info
+  delete order.cart[product]
+  Order.updateOne({ _id: idOrder }, { 
+    cart: order.cart, 
+    totalProducts: order.totalProducts,
+    totalPrice: order.totalPrice
+  });
+  res.json('Success')
+
+}
+
+// Update the order information
+const updateOrder = async (req, res) => {
+  let id = req.params.id
+  let orderUpdate = await Order.updateOne({_id: id}, {$set: {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    tel: req.body.tel,
+    address: req.body.address,
+    flat: req.body.flat,
+    postalCode: req.body.postalCode,
+    city: req.body.city,
+    province: req.body.province,
+    country: req.body.country,
+  }})
+  let order = await Order.findById({_id: id}).lean()
+  res.render('order', { 
+    order,
+    message: 'Pedido actualizado con éxito',
+    title: 'Admin | Pedido',
+    css: 'orders',
+    src: 'order.js'
+  })
+}
+
 // Save new order as pending
 const saveOrder = async (req, res) => {
   let order = new Order({
@@ -30,22 +120,37 @@ const payment = (req, res) => {
   Order.updateOne({_id: id}, {$set: { state: 'confirmado'}})
     .then(async data => {
       let order = await Order.findById(id).lean()
+      decreaseProductQuantity(order.cart)
       mailer.send(order.email, order, 'Pedido Geeky', 'orderEmail')
-      updateProductQuantity(order.cart)
       res.json(order)
     })
     .catch(err => console.log(err.message))
 
 }
 
-// Update the products quantity on the database
-const updateProductQuantity = (order) => {
+// Decrease the products quantity after creating an order
+const decreaseProductQuantity = (order) => {
   
-  Object.values(order).forEach( item => {
+  Object.values(order).forEach( async item => {
 
     let id = item._id
-    item.quantity = item.quantity - item.items
-    Product.updateOne({_id: id}, {$set: { quantity: item.quantity}})
+    let product = await Product.findById(id)
+    Product.updateOne({_id: id}, {$set: { quantity: product.quantity - item.items}})
+      .then(data => console.log(data))
+      .catch(err => console.log(err.message))
+      
+  })
+
+}
+
+// Increase the products quantity after deleting an order
+const increaseProductQuantity = (order) => {
+  
+  Object.values(order).forEach( async item => {
+
+    let id = item._id
+    let product = await Product.findById(id)
+    Product.updateOne({_id: id}, {$set: { quantity: product.quantity + item.items}})
       .then(data => console.log(data))
       .catch(err => console.log(err.message))
       
@@ -54,6 +159,11 @@ const updateProductQuantity = (order) => {
 }
 
 module.exports = {
+  showOrders,
+  deleteOrders,
+  showOrderDetail,
+  deleteProduct,
+  updateOrder,
   saveOrder,
   payment
 }
