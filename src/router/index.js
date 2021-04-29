@@ -11,7 +11,7 @@ import Confirmation from '../views/Confirmation.vue'
 import NotFound from '../views/NotFound.vue'
 import PasswordForm from '../views/PasswordForm.vue'
 import Category from '../views/Category.vue'
-import ProductCard from '../views/ProductCard2.vue'
+import ProductCard from '../views/ProductCard.vue'
 import Cart from '../views/Cart.vue'
 import Shipping from '../views/Shipping.vue'
 import Payment from '../views/Payment.vue'
@@ -118,8 +118,6 @@ router.beforeEach((to, from, next) => {
     next(false)
   }
 }) 
-
-
 
 export default router
                               

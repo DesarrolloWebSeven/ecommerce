@@ -14,7 +14,10 @@ conexion.once('open',()=>console.log("Conexión mongo OK!!"))
 
 // Template engine settings
 const exphbs = require('express-handlebars')
-app.engine('.hbs', exphbs({extname: '.hbs', partialsDir: 'views/partials/'}));
+app.engine('.hbs', exphbs({extname: '.hbs', 
+  partialsDir: 'views/partials/',
+  helpers: { json: function (context) { return JSON.stringify(context) }} 		
+}));
 app.set('view engine', '.hbs');
 
 // Multer settings
@@ -33,7 +36,6 @@ app.use(express.urlencoded({extended:true, limit: '50mb'}))
 app.use('/productos', require('./router/rtProduct'))
 app.use('/admin', require('./router/rtAdmin'))
 app.use('/usuario', require('./router/rtUser'))
-app.use('/clientes', require('./router/rtClient'))
 
 // Error handler
 app.use((req, res) => res.status(400).render('notfound', { title: 'Admin | 404', css: '404'}))

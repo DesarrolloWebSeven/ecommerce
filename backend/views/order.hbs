@@ -1,0 +1,107 @@
+{{> header}}
+<main>
+  <h1 class="text-center">Pedido</h1>
+  <form action="/admin/pedidos/{{ order._id }}?_method=PUT" class="container form-order" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="PUT">
+    <input type="text" class="form-control hidden" name="cart" value="{{ order.cart }}">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="state">Estado</label>
+          <input type="text" class="form-control" id="state" name="state" minlength="5" maxlength="15" value="{{ order.state }}" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label>ID usuario</label>
+          <input type="text" class="form-control" name="userId" minlength="30" value="{{ order.userId }}" readonly>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="firstName">Nombre</label>
+          <input type="text" class="form-control" id="firstName" name="firstName" minlength="3" maxlength="15" value="{{ order.firstName }}" required >
+        </div>
+        <div class="form-group col-md-6">
+          <label for="lastName">Apellido</label>
+          <input type="text" class="form-control" id="lastName" name="lastName" minlength="3" value="{{ order.lastName }}" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="email">Correo electrónico</label>
+          <input type="email" class="form-control" id="email" name="email" value="{{ order.email }}" required >
+        </div>
+        <div class="form-group col-md-6">
+          <label for="tel">Teléfono</label>
+          <input type="phone" class="form-control" id="tel" name="tel" value="{{ order.tel }}" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="address">Dirección</label>
+          <input type="text" class="form-control" id="address" name="address" value="{{ order.address }}" required >
+        </div>
+        <div class="form-group col-md-6">
+          <label for="flat">Piso, Portal, Puerta</label>
+          <input type="text" class="form-control" id="flat" name="flat" value="{{ order.flat }}" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="postal">Código Postal</label>
+          <input type="text" class="form-control" id="postal" name="postalCode" minlength="5" maxlength="5" value="{{ order.postalCode }}" required >
+        </div>
+        <div class="form-group col-md-6">
+          <label for="city">Ciudad</label>
+          <input type="text" class="form-control" id="city" name="city" value="{{ order.city }}" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="province">Provincia</label>
+          <input type="text" class="form-control" id="province" name="province" minlength="5" maxlength="15" value="{{ order.province }}" required >
+        </div>
+        <div class="form-group col-md-6">
+          <label for="country">País</label>
+          <input type="text" class="form-control" id="country" name="country" value="{{ order.country }}" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="products">Cantidad de Productos</label>
+          <input type="number" class="form-control" id="products" name="totalProducts" value="{{ order.totalProducts }}" readonly >
+        </div>
+        <div class="form-group col-md-6">
+          <label for="price">Precio Total</label>
+          <input type="number" class="form-control" id="price" name="totalPrice" value="{{ order.totalPrice }}" readonly>
+        </div>
+      </div>
+      {{#if order.cart}}
+      <div id="items" data-id="{{ order._id }}">
+        {{#each order.cart}}
+        <div class="order-article">
+          <i data-product="{{ this._id }}" class="fas fa-times-circle"></i>
+          <div class="images">
+            {{#each this.images}}
+            <img src="http://localhost:8080/images/{{ this }}">
+            {{/each}}
+          </div>
+          <p><strong>{{ this.title }} ( {{ this.items }} artículos )</strong></p>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <input type="text" class="form-control" value="Fecha: {{ order.createdAt }}" readonly>
+        </div>
+        <div class="form-group col-md-6">
+          <input type="submit" class="form-control btn" value="Actualizar">
+        </div>
+      </div>
+      {{#if message}}
+      <div class="form-row">
+        <div class="col-md-12 alert alert-success text-center" role="alert">{{ message }}</div>
+      </div>
+      {{/if}}
+  </form>
+
+</main>

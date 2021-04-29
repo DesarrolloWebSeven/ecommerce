@@ -2,8 +2,9 @@
   <div class="team-page">
     <h1>Equipo</h1>
     <div class="container">
-      <div class="row profile_cards d-flex justify-content-center">
-        <div class="col-3 card m-1">
+      <div class="row profile_cards d-flex justify-content-between">
+        <div class="col-12 col-md-6 col-lg-3" >
+          <div class="card">
           <img src="@/assets/ampa.jpeg" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">Amparo Cabezas</h5>
@@ -20,8 +21,10 @@
               ><i class="fab fa-github-square"></i
             ></a>
           </div>
+          </div>
         </div>
-        <div class="col-3 card m-1">
+        <div class="col-3" >
+          <div class="card">
           <img src="@/assets/victor.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">Víctor Bonilla</h5>
@@ -39,8 +42,10 @@
               ><i class="fab fa-github-square"></i
             ></a>
           </div>
+          </div>
         </div>
-        <div class="col-3 card m-1">
+        <div class="col-3">
+          <div class="card">
           <img src="@/assets/nuria.png" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">Nuria Martínez</h5>
@@ -56,8 +61,10 @@
               ><i class="fab fa-github-square"></i
             ></a>
           </div>
+          </div>
         </div>
-        <div class="col-3 card m-1">
+        <div class="col-3" >
+          <div class="card">
           <img src="@/assets/bea.png" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">Beatriz López</h5>
@@ -72,6 +79,7 @@
             <a href="https://github.com/belopmardev" class="btn btn-primary"
               ><i class="fab fa-github-square"></i
             ></a>
+          </div>
           </div>
         </div>
       </div>
@@ -101,37 +109,29 @@ export default {
 
   h1 {
     color: black;
-    margin-bottom: 20px;
+    margin-bottom: 40px
   }
 }
 .container {
-  background-color: rgb(248, 246, 246);
-  padding: 1px 0;
-  border-radius: 15px;
-  box-shadow: 3px 3px 5px rgb(192, 192, 192);
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-section {
-  color: black;
-  margin: 40px 0;
-  padding: 0 50px 0;
-}
-
-h1 {
-  margin-bottom: 40px;
-}
-.card {
+.card {  
   padding: 10px;
-  width: 220px;
-  h5{
-    color:black;
-  }
-  .card-text {
-    min-height: 220px;
-  }
-  img {
-    border-radius: 50%;
-  }
+  margin: 3px;
+
+  .card-text{
+    min-height: 190px;
+    font-size: 0.9rem;
+  } 
+  
+}
+
+img{
+  border-radius: 50%;
+}
 
   a {
     border: none;
@@ -143,5 +143,5 @@ h1 {
   a:hover {
     background-color: #707070;
   }
-}
+
 </style>

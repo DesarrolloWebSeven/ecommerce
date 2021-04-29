@@ -12,13 +12,13 @@
       <div class="order-detail {{ this.state }}">
         <ol class="order-info">
           <li><b>Pedido:</b> {{ this._id }}</li>
-          <li><b>Cliente:</b> {{ this.firstName }} {{ this.lastName }}</li>
+          <li><b>ID Usuario:</b> {{ this.userId }}</li>
           <li><b>Estado:</b> {{ this.state }}</li>
         </ol>
         <div class="order-icons">
-          <div id="orderInfo" class="icon"><i class="fas fa-eye"></i></div>
-          <div id="orderUpdate" class="icon"><i class="fas fa-pen"></i></div>
-          <div id="orderDelete" class="icon"><i class="fas fa-trash-alt"></i></div>
+          <a href="/admin/pedidos/{{ this._id }}" id="orderInfo" class="icon"><i class="fas fa-eye"></i></a>
+          <a href="/admin/pedidos/{{ this._id }}" id="orderUpdate" class="icon"><i class="fas fa-pen"></i></a>
+          <div class="icon orderDelete"><i class="fas fa-trash-alt" data-id="{{ this._id }}"></i></div>
         </div>
       </div>
     {{/each}}

@@ -77,7 +77,12 @@ export default {
 .product-page {
   width: 80%;
   max-width: 900px;
-  margin: 160px auto 130px;
+  margin: 150px auto 130px;
+  background-color: rgb(241, 241, 241);
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgb(194, 194, 194);
+  padding: 50px;
+
 
   .product-card {
     width: 100%;
@@ -88,6 +93,7 @@ export default {
       padding: 15px;
       width: 325px;
       height: 325px;
+      background-color: white;
       border: 1px solid rgb(168, 168, 168);
       border-radius: 5px;
 
@@ -120,9 +126,13 @@ export default {
     }
 
     .product-description {
+      padding: 0 0 0 25px;
       width: 60%;
       color: black;
       text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
       h1 {
         font-size: 2rem;
@@ -130,7 +140,7 @@ export default {
       }
 
       #price {
-        color: rgb(104, 104, 104);
+        color: rgb(80, 79, 79);
         font-size: 1.5rem;
         font-weight: 700;
       }
@@ -141,6 +151,10 @@ export default {
 
       .product-buy {
         display: flex;
+
+      input:focus, button:focus {
+        outline: none;
+      }
 
       input[type=number]::-webkit-inner-spin-button {
         opacity: 1;
@@ -161,13 +175,33 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: gray;
+        background-color: rgb(80, 79, 79);
         color: white;
         border: none;
+      }
+
+      button:hover {
+        background-color: rgb(148, 148, 148);
       }
       }
     
     }
+
   }
+
+  @media (max-width: 900px) {
+    .product-card {
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .product-description {
+      padding: 25px 10px 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+}
 }
 </style>
