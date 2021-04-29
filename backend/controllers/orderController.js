@@ -128,7 +128,7 @@ const payment = (req, res) => {
 
 }
 
-// Decrease the products quantity on the database
+// Decrease the products quantity after creating an order
 const decreaseProductQuantity = (order) => {
   
   Object.values(order).forEach( async item => {
@@ -143,7 +143,7 @@ const decreaseProductQuantity = (order) => {
 
 }
 
-// Increase the products quantity on the database
+// Increase the products quantity after deleting an order
 const increaseProductQuantity = (order) => {
   
   Object.values(order).forEach( async item => {
