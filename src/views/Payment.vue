@@ -67,6 +67,8 @@ export default {
           success.value = 'Tu pedido se ha realizado con éxito'
           width.value = 'width: 100%'
           progress.value = '100%'
+          localStorage.removeItem('cart')
+          localStorage.removeItem('order')
         }
         else error.value = "Ha habido un problema, inténtalo más tarde"
       } catch (err) {
@@ -130,7 +132,7 @@ export default {
   form {
     width: 100%;
     max-width: 700px;
-    margin: 30px auto;
+    margin: 20px auto;
     display: flex;
     flex-direction: column;
     text-align: left;
