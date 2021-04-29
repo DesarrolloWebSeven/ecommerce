@@ -36,7 +36,6 @@ app.use(express.urlencoded({extended:true, limit: '50mb'}))
 app.use('/productos', require('./router/rtProduct'))
 app.use('/admin', require('./router/rtAdmin'))
 app.use('/usuario', require('./router/rtUser'))
-app.use('/clientes', require('./router/rtClient'))
 
 // Error handler
 app.use((req, res) => res.status(400).render('notfound', { title: 'Admin | 404', css: '404'}))
