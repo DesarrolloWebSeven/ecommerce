@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { reactive, ref } from 'vue';
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 export default {

@@ -19,19 +19,16 @@
 </template>
 
 <script>
-import { computed } from "vue";
-import { useStore } from "vuex";
-import CartComponent from "@/components/CartComponent.vue";
-import Total from "@/components/Total.vue";
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+import CartComponent from '@/components/CartComponent.vue'
 
 export default {
   name: "Cart",
   props: {},
   components: {
     CartComponent,
-    Total,
   },
-
   setup() {
     const store = useStore();
     const cart = computed(() => store.state.cart);

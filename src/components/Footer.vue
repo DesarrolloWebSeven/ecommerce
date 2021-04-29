@@ -19,7 +19,7 @@
 
 <script>
 import { useStore } from 'vuex'
-import { ref, reactive, computed } from "vue"; 
+import { computed } from "vue"; 
 export default {
   name: "Footer",
   props: {},

@@ -45,9 +45,9 @@
 
 <script>
 import { useRouter } from 'vue-router'
-import { useStore } from "vuex";
+import { useStore } from "vuex"
 import { computed, ref } from "vue"
-import Lang from "@/components/Lang";
+import Lang from "@/components/Lang"
 
 export default {
   name: "NavBar",

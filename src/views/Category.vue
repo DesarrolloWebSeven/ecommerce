@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import { useStore } from "vuex";
-import Product from "@/components/Product";
+import { useStore } from 'vuex'
+import Product from '@/components/Product'
 import { useRoute } from 'vue-router'
-import { ref, watch, computed } from "vue";
+import { ref, watch, computed } from 'vue'
 export default {
   name: "Category",
   components: {
