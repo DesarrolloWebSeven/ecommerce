@@ -82,14 +82,15 @@ export default {
   border-radius: 5px;
   box-shadow: 3px 3px 5px rgb(194, 194, 194);
   padding: 50px;
-
+}
 
   .product-card {
     width: 100%;
     display: flex;
     justify-content: space-between;
+  }
 
-    .product-photo {
+  .product-photo {
       padding: 15px;
       width: 325px;
       height: 325px;
@@ -135,7 +136,7 @@ export default {
       justify-content: space-between;
 
       h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: 900;
       }
 
@@ -170,38 +171,62 @@ export default {
       }
 
       button {
-        width: 10%;
+        width: 30%;
         border-radius: 5px;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: rgb(80, 79, 79);
+        background-color: #22B573;
         color: white;
         border: none;
       }
 
       button:hover {
-        background-color: rgb(148, 148, 148);
+        opacity: 60%;
       }
       }
-    
-    }
-
-  }
+  } 
 
   @media (max-width: 900px) {
-    .product-card {
-      flex-wrap: wrap;
-      justify-content: center;
+    
+    .product-page {
+      padding: 10px 5px;
+    }
 
-      .product-description {
-      padding: 25px 10px 0;
-      width: 100%;
+    .product-card {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
+    }
+
+      .product-photo, .carousel, .slide {
+        width: 90%;
+        margin: 10px auto;
+        height: auto;
+      }
+
+      .product-description {
+        text-align: center;
+        padding: 20px 5px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        ul {
+          list-style: none;
+          padding: 0;
+        }
+
+        .product-buy {
+          width: 90%;
+
+          input, button {
+            width: 50%;
+          }
+        }
     }
   }
-}
-}
+
 </style>
