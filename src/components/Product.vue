@@ -11,7 +11,7 @@
       <div class="product-icons">
         <div @click="buy(product)" class="icon"><i class="fas fa-shopping-basket"></i></div>
         <router-link :to="'/producto/id/' + product._id" class="icon">
-          <i class="fas fa-search"></i>
+          <i class="fas fa-info"></i>
         </router-link>
       </div>
     </div>

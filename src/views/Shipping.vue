@@ -1,4 +1,15 @@
 <template>
+<main class="order-page">
+    <section class="order-info">
+      <div class="order-titles">
+        <h2>{{ lang['data'] }}</h2>
+        <h2>{{ lang['payment'] }}</h2>
+        <h2>{{ lang['shipping'] }}</h2>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">0%</div>
+      </div>
+    </section>
   <div class="container section">
     <div class="row d-flex justify-content-center">
       <ol id="progress-bar">
@@ -207,6 +218,7 @@
       </form>
     </div>
   </div>
+</main>
 </template>
 
 <script>
@@ -314,6 +326,7 @@ export default {
       } else error.value = "Tu carrito está vacío"
     };
     return {
+      lang: computed(() => useStore().getters.getLang),
       error,
       user,
       cart,
@@ -332,90 +345,28 @@ export default {
 
 
 <style lang="scss" scoped>
-.section {
-  background-color: #10555e1e;
-  max-width: 80%;
-  margin-top: 30px;
+.order-page {
+  width: 80%;
+  max-height: 100vh;
+  margin: 100px auto;
   color: black;
-  .row {
-    max-width: 95%;
+
+  .order-info {
+    width: 100%;
+    max-width: 700px;
     margin: 0 auto;
-    background-color: white;
-    #progress-bar {
-      display: flex;
-      justify-content: center;
+
+    h2 {
+      font-size: 1.5rem;
     }
-  }
-  // Colors
-  $default: #212121;
-  $grey: #efefef;
-  $main-color: #ff0000;
-  // Progress bar
-  #progress-bar {
-    display: table;
-    width: 100%;
-    margin: 0;
-    padding: 15px 15px 0;
-    table-layout: fixed;
-    width: 100%;
-    counter-reset: step;
-    li {
-      list-style-type: none;
-      display: table-cell;
-      width: 20%;
-      float: left;
-      font-size: 16px;
-      position: relative;
-      text-align: center;
-      &:before {
-        width: 50px;
-        height: 50px;
-        color: $default;
-        content: counter(step);
-        counter-increment: step;
-        line-height: 50px;
-        font-size: 18px;
-        border: 1px solid $grey;
-        display: block;
-        text-align: center;
-        margin: 0 auto 10px auto;
-        border-radius: 50%;
-        background-color: #fff;
-      }
-      &:after {
-        width: 100%;
-        height: 10px;
-        content: "";
-        position: absolute;
-        background-color: #fff;
-        top: 25px;
-        left: -50%;
-        z-index: -1;
-      }
-      &:first-child:after {
-        content: none;
-      }
-      &.step-done {
-        color: $main-color;
-        &:before {
-          border-color: $main-color;
-          background-color: $main-color;
-          color: #fff;
-          content: "\f00c";
-          font-family: "FontAwesome";
-        }
-        & + li:after {
-          background-color: $main-color;
-        }
-      }
-      &.step-active {
-        color: $main-color;
-        &:before {
-          border-color: $main-color;
-          color: $main-color;
-          font-weight: 700;
-        }
-      }
+
+    .order-titles {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .progress-bar {
+      background-color: #22B573;
     }
   }
 }

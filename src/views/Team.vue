@@ -23,7 +23,7 @@
           </div>
           </div>
         </div>
-        <div class="col-3" >
+        <div class="col-12 col-md-6 col-lg-3" >
           <div class="card">
           <img src="@/assets/victor.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
@@ -44,7 +44,7 @@
           </div>
           </div>
         </div>
-        <div class="col-3">
+        <div class="col-12 col-md-6 col-lg-3">
           <div class="card">
           <img src="@/assets/nuria.png" class="card-img-top" alt="..." />
           <div class="card-body">
@@ -63,7 +63,7 @@
           </div>
           </div>
         </div>
-        <div class="col-3" >
+        <div class="col-12 col-md-6 col-lg-3" >
           <div class="card">
           <img src="@/assets/bea.png" class="card-img-top" alt="..." />
           <div class="card-body">
