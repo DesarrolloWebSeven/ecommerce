@@ -110,9 +110,19 @@ const contactMail = async (req, res) => {
 
 // Show the user profile
 const getInfoUser =(req, res) => {
-  const user = req.body
-  console.log(user)
+  const user = req.params
+  User.findById(req.params.id).lean()
+  .then(user => {
+    res.json(user)
+  })
+  .catch(err =>{
+    console.log(err.message) 
+    res.json(err)
+  })
 }
+
+//Update user profile
+
 
 module.exports = {
   registerUser,

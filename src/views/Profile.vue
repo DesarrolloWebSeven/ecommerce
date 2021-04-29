@@ -1,21 +1,18 @@
 <template>
   <div class="container section">
     <div class="row d-flex justify-content-center">
-      <h1>Perfil</h1>
       <div class="col-md-4">
         <img class="avatar" src="@/assets/avatar.png" alt="" />
-        <p>{{usuario}}</p>
-        <p>nombre</p>
-        <p>direction</p>
-        <p>codigo porstal, ciudad, provincia</p>
-
-        <p><button class="btn btn-warning">Modificar datos</button></p>
-        <p><button class="btn btn-danger">Darme de baja</button></p>
-        <p><button class="btn btn-info">Gestionar pedidos</button></p>
-        <p><button class="btn btn-dark">Cambiar mi Pass</button></p>
-
-
+        <!-- <p>{{user}}</p> -->
+        <p>Bienvenid@!!</p>
+        <!-- <p>{{user.info.firstName}} {{user.info.lastName}}</p> -->
+        <!-- <p>codigo porstal, ciudad, provincia</p> -->
+        <p><button @click="updateData" class="btn btn-outline-warning">Modificar mis datos</button></p>
+        <p><button @click="deleteCount" class="btn btn-outline-danger">Darme de baja</button></p>
+        <p><button @click="showOrders" class="btn btn-outline-info">Mis pedidos</button></p>
+        <p><button @click="editPass" class="btn btn-outline-dark">Cambiar mi Pass</button></p>
       </div>
+
       <div class="col-md-8">
         <div>
           <form class="section row g-3">
@@ -23,7 +20,7 @@
               <label class="form-label">Nombre</label>
               <input
                 type="text"
-                v-model="user.firstName"
+                v-model="user.info.firstName"
                 name="firstName"
                 id="firstName"
                 class="form-control"
@@ -34,7 +31,7 @@
               <label class="form-label">Apellidos</label>
               <input
                 type="text"
-                v-model="user.lastName"
+                v-model="user.info.lastName"
                 name="lastName"
                 id="lastName"
                 class="form-control"
@@ -42,94 +39,17 @@
               />
             </div>
             <div class="col-md-6">
-              <label class="form-label">Direción y número</label>
-              <input
-                type="text"
-                v-model="user.adress"
-                name="adress"
-                id="adress"
-                class="form-control"
-                placeholder="Introduce tu dirección y número"
-              />
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Piso, puerta, escalera</label>
-              <input
-                type="text"
-                v-model="user.flat"
-                name="flat"
-                id="flat"
-                class="form-control"
-                placeholder="Introduce tu piso, puerta, escalera"
-              />
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Código Postal</label>
-              <input
-                type="text"
-                v-model="user.postalCode"
-                name="postalCode"
-                id="postalCode"
-                class="form-control"
-                placeholder="Introduce tu piso, puerta, escalera"
-              />
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Ciudad</label>
-              <input
-                type="text"
-                v-model="user.city"
-                name="city"
-                id="city"
-                class="form-control"
-                placeholder="Introduce tu piso, puerta, escalera"
-              />
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Provincia</label>
-              <input
-                type="text"
-                v-model="user.province"
-                name="province"
-                id="province"
-                class="form-control"
-                placeholder="Introduce tu piso, puerta, escalera"
-              />
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">País</label>
-              <input
-                type="text"
-                v-model="user.country"
-                name="country"
-                id="country"
-                class="form-control"
-                placeholder="Introduce tu piso, puerta, escalera"
-              />
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Teléfono</label>
-              <input
-                type="tel"
-                v-model="user.tel"
-                name="tel"
-                id="tel"
-                class="form-control"
-                placeholder="Introduce tu correo"
-              />
-            </div>
-            <div class="col-md-6">
               <label class="form-label">Email</label>
               <input
                 type="email"
-                v-model="user.email"
+                v-model="user.info.email"
                 name="email"
                 id="email"
                 class="form-control"
                 placeholder="Introduce tu correo"
+                disabled
               />
             </div>
-
             <div class="col-12">
               <router-link to="/carrito/resumen"
                 ><p class="card-text">
@@ -146,7 +66,6 @@
         </div>
       </div>
     </div>
-    <div>{{usuario}}</div>
   </div>
 </template>
 
@@ -159,43 +78,58 @@ export default {
   props: {},
   setup() {
     const atob = require('atob')
-    var jwt = require('jsonwebtoken');
     const store = useStore() 
     const route = useRoute()
-    let user = reactive({});
-    let usuario = computed(()=>{
+    const user = reactive({})
+    let jwt = computed(()=>{
         return store.getters.getToken
     })
-    //jwt.verify(getToken)
-    console.log(usuario)
-    var b64 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'
-    //.eyJpZCI6IjYwNzk2MTNlMzM0YzIyMjUzMDcwY2E5NiIsImlhdCI6MTYxOTUyNTE0OCwiZXhwIjoxNjE5Nzg0MzQ4fQ.DUqEdu9u7lH5N80Hsej5wt-ywa8vlHSI-k8nubS0doA';
-    var bin = atob(b64);
-    console.log(bin); 
-
+    const b64 = jwt.value.split('.')
+    var id = atob(b64[1])
       // watch(()=> route.params,
       // async newParams=> {        
       //   user.arr= await getUser(newParams.id)
        
       // })
-       
-        fetch(`http://localhost:8081/perfil/1`)//${id}`)
-        .then((res) => res.json())
-        .then(user=>(console.log(user)))
-        .catch((err) => console.log(err));   
+
+    fetch(`http://localhost:8081/usuario/perfil/${(JSON.parse(id)).id}`)//${id}`)
+    .then((res) => res.json())
+    .then(data=>{
+      user.info=data
+    })
+    .catch((err) => console.log(err));   
         //.then((data) => data.forEach((item) => user.push(item)))
 
     // onMounted(()=>{ 
     //   getUser(route.params.id)      
     // }) 
     function saveUser(e){
-      let user = localStorage.getItem('jwt')
-      console.log(user)
-      console.log('que hizo: '+ e)
+      let userUpdate={
+        firstname:user.info.firstname,
+        lastname:user.info.lastname
+      }
+      fetch(`http://localhost:8081/`,{
+        method:'PUT',
+        headers:{'Content-type':'Application/json'},
+        body:user.info
+      })
+      console.log(user.info)
     }
-
+    function updateData(){
+      console.log("actualizar datos")
+    }
+    function deleteCount(){
+      console.log("borrar cuenta")
+    }
+    function showOrders(){
+      console.log("mostrar pedidos")
+    }
+    function editPass(){
+      console.log("solicictud de cambio de password")
+    }
     return {
-        user, saveUser, usuario
+        user, 
+        saveUser, editPass, showOrders, deleteCount, updateData
     };
   },
 };

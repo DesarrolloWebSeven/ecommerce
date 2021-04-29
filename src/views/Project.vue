@@ -1,6 +1,5 @@
 <template>
   <main class="project-page">
-    <h1>Proyecto</h1>
     <div v-html='miHtml'></div>
   </main>
 </template>
