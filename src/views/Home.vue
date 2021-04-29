@@ -1,20 +1,20 @@
 <template>
   <main class="home">
     <div class="home-banner">
-      <img src="/logo/banner.png" alt="">
+      <img :src="lang.imgBanner" alt="">
     </div>
     <div class="home-section">
       <div class="links">
-        <router-link to="/productos/camisetas"><img src="/logo/shirts.jpg" alt=""></router-link>
+        <router-link to="/productos/camisetas"><img :src="lang.imgTshirts" alt=""></router-link>
       </div>
       <div class="links">
-        <router-link to="/productos/tazas"><img src="/logo/mugs.jpg" alt=""></router-link>
+        <router-link to="/productos/tazas"><img :src="lang.imgMugs" alt=""></router-link>
       </div>
       <div class="links">
-        <router-link to="/productos/juegos"><img src="/logo/games.jpg" alt=""></router-link>
+        <router-link to="/productos/juegos"><img :src="lang.imgGames" alt=""></router-link>
       </div>
       <div class="links">
-        <router-link to="/productos/accesorios"><img src="/logo/accesories.jpg" alt=""></router-link>
+        <router-link to="/productos/accesorios"><img :src="lang.imgAccessories" alt=""></router-link>
       </div>
     </div>
   </main>
