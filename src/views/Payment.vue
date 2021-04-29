@@ -2,9 +2,9 @@
   <main class="payment-page">
     <section class="payment-info">
       <div class="payment-titles">
-        <h2>Datos</h2>
-        <h2>Pago</h2>
-        <h2>Envío</h2>
+        <h2>{{ lang['data'] }}</h2>
+        <h2>{{ lang['payment'] }}</h2>
+        <h2>{{ lang['shipping'] }}</h2>
       </div>
       <div class="progress">
         <div class="progress-bar" role="progressbar" :style="width" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">{{ progress }}</div>
@@ -17,23 +17,23 @@
         <i class="fab fa-cc-amex"></i>
         <i class="fab fa-cc-paypal"></i>
       </div>
-      <label for="owner">Titular de la cuenta</label>
-      <input type="text" id="owner" placeholder="Introduce el titular de la cuenta" required />
-      <label for="cardNumber">Número de tarjeta</label>
-      <input type="text" id="cardNumber" minlenght="12" maxlenght="12" placeholder="Introduce el número de tarjeta" required />
+      <label for="owner">{{ lang['accountHolder'] }}</label>
+      <input type="text" id="owner" :placeholder="lang['plAccountHolder']" required />
+      <label for="cardNumber">{{ lang['creditCard'] }}</label>
+      <input type="text" id="cardNumber" minlenght="12" maxlenght="12" :placeholder="lang['plCreditCard']" required />
       <div class="cardinfo">
         <div class="card-date">
-          <label for="expiry">Fecha de vencimiento</label>
-          <input type="date" id="expiry" placeholder="Introduce la fecha de vencimiento" required />
+          <label for="expiry">{{ lang['expirationDate'] }}</label>
+          <input type="date" id="expiry" :placeholder="lang['plExpirationDate']" required />
         </div>
         <div class="card-code">
-          <label for="securityCode">Código de seguridad</label>
-          <input type="number" id="securityCode" minlenght="3" maxlenght="3" placeholder="Introduce el código de seguridad" required/>
+          <label for="securityCode">{{ lang['securityCode'] }}</label>
+          <input type="number" id="securityCode" minlenght="3" maxlenght="3" :placeholder="lang['plSecurityCode']" required/>
         </div>
       </div>
       <div v-if="success" class="alert alert-success text-center" role="alert"> {{ success }} </div>
       <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
-      <button type="submit">Realizar pago</button>
+      <button type="submit">{{ lang['buttonPay'] }}</button>
       </form>
   </main>
 </template>
@@ -91,6 +91,7 @@ export default {
     userAuth()
 
     return {
+      lang: computed(() => useStore().getters.getLang),
       width,
       progress,
       cart,

@@ -38,9 +38,24 @@
   "plrRepeatPassSign":"Repite tu contraseña",
   "buttonSave":"Guarda tus datos",
 
+  
 "_confirmation":"CONFIRMATION",
   "success":"Tu cuenta ha sido confirmada con éxito",
   "waitingInfo":"Esperando información",
+
+"_payment":"PAYMENT",
+  "data":"Datos",
+  "shipping":"Envío",
+  "payment":"Pago",
+  "accountHolder":"Titular de la cuenta",
+  "plAccountHolder":"Introduce el titular de la cuenta",
+  "creditCard":"Número de la tarjeta",
+  "plCreditCard":"Introduce el número de tarjeta",
+  "expirationDate":"Fecha de vencimiento",
+  "plExpirationDate":"Introduce la fecha de caducidad",
+  "securityCode":"Código de seguridad",
+  "plSecurityCode":"Introduce el código de seguridad",
+  "buttonPay":"Realizar pago",
 
 
 

@@ -40,6 +40,19 @@
   "plrRepeatPassSign": "Repeat your password",
   "buttonSave": "Save your data",
 
+"_payment":"PAYMENT",
+  "data": "Data",
+  "shipping": "Shipping",
+  "payment": "Payment",
+  "accountHolder": "Account holder",
+  "plAccountHolder": "Enter the account holder",
+  "creditCard": "Card number",
+  "plCreditCard": "Enter the card number",
+  "expirationDate": "Expiration date",
+  "securityCode": "Security code",
+  "plSecurityCode": "Enter the security code",
+  "buttonPay": "Make payment",
+
 
 
 "_contact": "CONTACTUS",
