@@ -1,15 +1,21 @@
 <template>
-  <div class="container section">
-    <div v-if="Object.keys(cart).length" class="row">
-      <CartComponent />
-      <button class="btn btn-danger m-2" @click="emptyCart">Vaciar carrito</button>
-      <router-link to="/carrito/envio"><p class="card-text"><button class="btn btn-success m-2">TRAMITAR PEDIDO</button></p></router-link>
-      <Total />
-      
+  <main class="cart-page">
+    <h1>Carrito</h1>
+    <div class="cart-group">
+      <div v-if="Object.keys(cart).length">
+        <CartComponent />
+        <p class="cart-price">TOTAL: {{(totalPrice).toFixed(2)}} €</p>
+        <div class="cart-buttons">
+        <button class="empty-button" @click="emptyCart">Vaciar carrito</button>
+        <button class="buy-button"><router-link to="/carrito/envio">Tramitar pedido</router-link></button>
+        </div>
+      </div>
+      <div class="empty-cart" v-else>
+        <h2>Tu carrito está vacío</h2>
+        <img src="/logo/emptycart.jpg" />
+      </div>
     </div>
-
-    <div v-else class="row"><h2>Todavia no tienes nada en el carrito</h2></div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -33,9 +39,11 @@ export default {
       store.commit('setEmptyCart')
       localStorage.removeItem('cart')
     }
+    const totalPrice = computed(() => store.getters.totalPrice)     
 
     return { 
       cart,
+      totalPrice,
       emptyCart
     };
   },
@@ -43,18 +51,88 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.section {
-  background-color: #10555e1e;
-  max-width: 80%;  
-  margin-top: 30px;
-  color: black;
+.cart-page {
+  margin: 100px auto 90px;
+  width: 80%;
+  max-width: 700px;
+  color: rgb(99, 98, 98);
 
-  .row {
-    max-width: 95%;    
-    margin: 0 auto;
-    margin-top:20x;
-    
+  @media (max-width: 850px) {
+    .cart-page {
+      width: 90%;
+    }
+  }
 
+  h1 {
+    color: black;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .cart-group {
+
+    .cart-price {
+      width: 100%;
+      text-align: right;
+      padding-top: 10px;
+      border-top: 2px solid black;
+      color: black;
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 25px;
+    }
+
+    .cart-buttons {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        width: 20%;
+        border: none;
+        padding: 5px 0;
+        border-radius: 10px;
+        color: white;
+      }
+
+      @media (max-width: 850px) {
+        
+          button {
+            width: 48%;
+          }
+      }
+
+      button:hover {
+        opacity: 60%;
+      }
+
+      .empty-button {
+        margin-right: 10px;
+        background-color: #FFC61A;
+      }
+
+      .buy-button {
+        background-color: #22B573;
+      }
+
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    }
   }
 }
+
+.empty-cart {
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  img {
+    filter:grayscale(50%);
+  }
+}
+
+
 </style>

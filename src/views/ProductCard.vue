@@ -77,7 +77,7 @@ export default {
 .product-page {
   width: 80%;
   max-width: 900px;
-  margin: 150px auto 130px;
+  margin: 130px auto;
   background-color: rgb(241, 241, 241);
   border-radius: 5px;
   box-shadow: 3px 3px 5px rgb(194, 194, 194);

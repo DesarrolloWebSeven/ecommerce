@@ -70,7 +70,7 @@ export default {
 
       i {
         font-size: 2rem;
-        color: #0f606b;
+        color: #20a76a;
       }
       
       i:hover{
@@ -93,7 +93,7 @@ export default {
 
       i {
         font-size: 3rem;
-        color: #0f606b;
+        color: #20a76a;
       }
 
       i:hover{
