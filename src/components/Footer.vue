@@ -1,12 +1,12 @@
 <template>
   <footer class="footer">
     <div class="footer-links">
-      <router-link to="/contacto" class="links">{{lang["contact"]}}</router-link> 
-      <router-link to="/cookies" class="links">{{lang["cookies"]}}</router-link>      
+      <router-link to="/contacto" class="links">{{lang["contact"]}}</router-link>           
       <router-link to="/equipo" class="links">{{lang["team"]}}</router-link>
-      <router-link to="/" class="links-img"><img src="/logo/name-bn.png" alt="Logotipo Geeky"/></router-link>
       <router-link to="/proyecto" class="links">{{lang["proyect"]}}</router-link>
+      <router-link to="/" class="links-img"><img src="/logo/name-bn.png" alt="Logotipo Geeky"/></router-link>      
       <router-link to="/politicaprivacidad" class="links">{{lang["privacyPolicy"]}}</router-link>
+      <router-link to="/cookies" class="links">{{lang["cookies"]}}</router-link>  
       <a class="links-logo" href="https://github.com/DesarrolloWebSeven/ecommerce"  target="_blank">GitHub</a>
     </div>
     <div class="footer-rights">

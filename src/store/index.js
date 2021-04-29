@@ -4,18 +4,19 @@ import i18next from 'i18next'
 export default createStore({
   state: {
     token: localStorage.getItem('jwt') || null,
-    currentLang: i18next.language,
+    currentLang: i18next.lng,
     lang: {},
     total:0,
     products: [],
     cart: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {}
   },
   getters: {
-    getLang(state){
+    getLang(state){      
       return state.lang
     },
     getCurrentLang(state){
-      return state.currentLang
+      console.log(state.currentLang)
+      return state.currentLang || 'es'
     },
     getToken(state) {
       return state.token

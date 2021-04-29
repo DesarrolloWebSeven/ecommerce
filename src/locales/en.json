@@ -1,22 +1,23 @@
-{   "_navbar": "NAVBAR",
-    "lang-label":"Choose language: ",
-    "tshirts": "Tshirts",
-    "accessories":"Accessories",
-    "cups":"Mugs",
-    "games":"Games",
-    "featured":"Featured",
+{   
+"_navbar": "NAVBAR",
+  "lang-label":"Choose language: ",
+  "tshirts": "Tshirts",
+  "accessories":"Accessories",
+  "cups":"Mugs",
+  "games":"Games",
+  "featured":"Featured",
 
 
 
-    "_footer": "FOOTER",
-    "contact":"Contact",
-    "proyect":"Project",
-    "team":"Team",
-    "privacyPolicy":"Privacy Policy",
-    "cookies":"Cookies Policy",
-    "footerRights": "All Rights Free by",
+"_footer": "FOOTER",
+  "contact":"Contact",
+  "proyect":"Project",
+  "team":"Team",
+  "privacyPolicy":"Privacy",
+  "cookies":"Cookies",
+  "footerRights": "All Rights Free by",
 
-  "_notfound": "NOTFOUND",
+"_notfound": "NOTFOUND",
   "titleNotFound":"This page doesn't exist",
 
 
@@ -41,24 +42,37 @@
 
 
 
-    "_contact": "CONTACTUS",
-    "descriptionContactP1": "Contact",
-    "name":"Name",
-    "plName":"Enter your first name",
-    "lastName":"Last Name",
-    "plLastName":"Enter your last name",
-    "email":"E-mail",
-    "plEmail":"Enter your e-mail",
-    "type":"Type of query",
-    "select1":"General information",
-    "select2":"Sizes",
-    "select3":"Shipping",
-    "select4":"Complaints",
-    "descriptionQuery":"Message",
-    "sendForm":"Send",
+"_contact": "CONTACTUS",
+  "descriptionContactP1": "Contact",
+  "name":"Name",
+  "plName":"Enter your first name",
+  "lastName":"Last Name",
+  "plLastName":"Enter your last name",
+  "email":"E-mail",
+  "plEmail":"Enter your e-mail",
+  "type":"Type of query",
+  "select1":"General information",
+  "select2":"Sizes",
+  "select3":"Shipping",
+  "select4":"Complaints",
+  "descriptionQuery":"Message",
+  "sendForm":"Send",
+
+"_team": "TEAM",
+  "descriptionAmparo": "As a music teacher and sign language interpreter, she has decided to reinvent myself, betting on Web Development. She likes to travel and talk to random people.",
+  "descriptionVictor": "Great analytical character, minimalist style. He is constantly learning something new, he loves animals and computers, in his free time he likes to play video games.",
+  "descriptionNuria": "After a professional career focused on the world of communication and content writing, she decided to change her career and found her true passion: Web Development.",
+  "descriptionBeatriz": "Journalist by training, in her first job as a content manager she discovered her vocation for digital environments and her interest in Web Development was born.",
+
+"_project": "PROYECT",
+"titleProject": "Project",
+"mainProject": "Geeky is the final project of four coders from the second promotion of the FullStack Web Development Bootcamp of Fundación Tomillo y Factoría F5, interested in offering small local businesses and entrepreneurs an e-commerce tool that allows them to sell their products through the Internet and help them manage the stock of the products in their store and the content of the static content pages from the same platform. ",
+"subTitleProject": "What will you find in Geeky?",
+"descriptionProject1": "Geeky is a multi-language online store (Spanish / English) designed for the sale of products related to the world of computing and code: from the classic T-shirts and mugs with techie messages, to computer-themed accessories and games Select a category, add the products you want to the shopping cart and register on the platform so that we can deliver your order! Do you have questions or want more information about a product? Do not worry, you can contact us by WhatsApp or send us a contact form with your request or your query. ",
 
 
-    "_privacy": "PRIVACY",
+
+"_privacy": "PRIVACY",
     "titlePrivacy":"This is our privacy policy",
     "titleA": "Introduction",
     "introLi1": "The privacy of our website visitors is very important and we are committed to protecting it. This policy explains what we will do with your personal information.",
@@ -124,7 +138,7 @@
     "actualP1": "Please inform us if the personal information we have about you needs to be corrected or updated.",
 
     
-    "_cookies": "COOKIES",
+"_cookies": "COOKIES",
   "thisCookies": "These are our Cookies",
   "titleCookies": "Cookies",
   "pCookies": "Our website uses cookies. A cookie is a file containing an identifier (a string of letters and numbers) that is sent from a web server to a web browser and stored in the browser. The identifier is sent back to the server each time the browser requests a page from the server. Cookies can be persistent or session. A persistent cookie will be stored by a web browser and will remain valid until its expiration date, unless the user deletes it before the expiration date. A session cookie will expire at the end of the user's session, when the browser is closed. Cookies typically do not contain any information that personally identifies the user but rather personal information that we store about you that may relate to information stored and obtained from cookies. We only use session and persistent cookies on our website. ",
@@ -135,9 +149,10 @@
   "li5": "Deleting cookies will have a negative impact on the usability of many websites.",
 
 
-
-
-
-
+  "imgBanner":"/logo/bannerEn.png",
+  "imgAccessories":"/logo/accessories-en.png",
+  "imgGames":"/logo/games-en.png",
+  "imgTshirts":"/logo/shirts-en.png",
+  "imgMugs":"/logo/mugs-en.png",
   "flag":"/images/ukFlag.png"
 }

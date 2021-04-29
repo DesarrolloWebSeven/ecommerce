@@ -1,4 +1,5 @@
-{ "_navbar": "NAVBAR",
+{ 
+"_navbar": "NAVBAR",
   "lang-label":"Elige idioma: ",
   "tshirts": "Camisetas",
   "accessories":"Accesorios",
@@ -7,19 +8,18 @@
   "featured":"Destacados",
 
 
-
-  "_footer": "FOOTER",
+"_footer": "FOOTER",
   "contact":"Contacto",
   "proyect":"Proyecto",
   "team":"Equipo",
-  "privacyPolicy":"Política de Privacidad",
-  "cookies":"Política de Cookies",
+  "privacyPolicy":"Privacidad",
+  "cookies":"Cookies",
   "footerRights": "Todos los Derechos Libres por",
 
-  "_notfound": "NOTFOUND",
+"_notfound": "NOTFOUND",
   "titleNotFound":"Esta página no existe",
 
-  "login": "LOG IN",
+"login": "LOG IN",
   "welcome":"Bienvenid@",
   "emailLogin":"Correo",
   "plEmailLogin":"Introduce tu correo",
@@ -28,7 +28,7 @@
   "forgotPassLogin":"¿Has olvidado tu contraseña?",
   "buttonLogin":"Iniciar sesión",
 
-  "signup": "SIGN UP",
+"signup": "SIGN UP",
   "joinus":"Únete a nosotros",
   "emailSign":"Correo",
   "plSignLogin":"Introduce tu correo",
@@ -38,7 +38,7 @@
   "plrRepeatPassSign":"Repite tu contraseña",
   "buttonSave":"Guarda tus datos",
 
-  "_confirmation":"CONFIRMATION",
+"_confirmation":"CONFIRMATION",
   "success":"Tu cuenta ha sido confirmada con éxito",
   "waitingInfo":"Esperando información",
 
@@ -60,6 +60,19 @@
   "descriptionQuery":"Mensaje",
   "sendForm":"Enviar",  
 
+
+  "_team": "TEAM",
+  "descriptionAmparo": "Como maestra de música e intérprete de lengua de signos, ha decidido reinventarme, apostando por el Desarrollo Web. Le gusta viajar y hablar con gente random.",
+  "descriptionVictor": "Gran caracter analítico, estilo minimalista. Está continuamente aprendiendo algo nuevo, le encantan los animales y las computadoras, en su tiempo libre le gusta jugar a videojuegos.",
+  "descriptionNuria": "Tras un recorrido profesional centrado en el mundo de la comunicación y la redacción de contenidos, decidió cambiar de trayectoria y encontró su verdadera pasión: el Desarrollo Web.",
+  "descriptionBeatriz": "Periodista de formación, en su primer trabajo como gestora de contenidos descubrió su vocación por los entornos digitales y nació su interés por el Desarrollo Web.",
+
+  "_project": "PROYECT",
+  "titleProject":"Proyecto",
+  "mainProject":"Geeky es el proyecto final de cuatro coders de la segunda promoción del Bootcamp de Desarrollo Web FullStack de Fundación Tomillo y Factoría F5, interesados en ofrecer a los pequeños comercios locales y emprendedores una herramienta de e-commerce que les permita vender sus productos a través de Internet y les ayude a gestionar el stock de los productos de su tienda y el contenido de las páginas de contenido estático desde la misma plataforma.",
+  "subTitleProject":"¿Qué encontrarás en Geeky?",
+  "descriptionProject1":"Geeky es una tienda online multidioma (español/inglés) diseñada para la venta de productos relacionados con el mundo de la informática y el código: desde las clásicas camisetas y tazas con mensajes techie, a accesorios y juegos de temática informática o tecnológica.¡Selecciona una categoría, añade los productos que desees al carrito de la compra y regístrate en la plataforma para que podamos entregarte tu pedido!¿Tienes dudas o deseas ampliar información sobre algún producto? No te preocupes, puedes ponerte en contacto con nosotros por Whatsapp o enviarnos un formulario de contacto con tu petición o tu consulta.",
+  
 
   "_privacy": "PRIVACY",
     "titlePrivacy":"Esta es nuestra política de privacidad",
@@ -138,6 +151,12 @@
   "li4":"Puedes eliminar las cookies ya almacenadas en tu ordenador.",
   "li5":"Eliminar las cookies tendrá un impacto negativo en la usabilidad de muchos sitios web.",
     
-   
+  "imgBanner":"/logo/banner.png",
+  "imgAccessories":"/logo/accessories.jpg",
+  "imgGames":"/logo/games.jpg",
+  "imgTshirts":"/logo/shirts.jpg",
+  "imgMugs":"/logo/mugs.jpg",
+
+
   "flag":"/images/spainFlag.png"
 }   
