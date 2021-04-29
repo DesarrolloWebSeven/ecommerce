@@ -15,7 +15,7 @@ export default createStore({
       return state.lang
     },
     getCurrentLang(state){
-      console.log(state.currentLang)
+     
       return state.currentLang || 'es'
     },
     getToken(state) {
