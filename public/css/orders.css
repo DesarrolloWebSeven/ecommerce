@@ -50,11 +50,13 @@ a:hover {
 }
 
 header>img {
-  max-width: 10%;
+  width: 10%;
+  min-width: 125px;
 }
 
 .user-menu {
   width: 6%;
+  min-width: 85px;
   display: flex;
   justify-content: space-between;
 }
@@ -114,6 +116,22 @@ header>img {
 
 .mainnav .pedidos {
   background-color: #3CA29A;
+}
+
+@media (max-width: 1050px) {
+  .mainnav p {
+    display: none;
+  }
+
+  .mainnav i {
+    margin: 0;
+  }
+
+  .mainnav a {
+    justify-content: center;
+    align-items: center;
+  }
+
 }
 
 main {
