@@ -61,6 +61,7 @@ const routes = [
     path: '/password/:id',
     name: 'PasswordForm',
     component: PasswordForm,
+    props: true
   },
   {
     path: '/usuario/registro/:id',

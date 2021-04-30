@@ -1,35 +1,19 @@
 <template>
-<div class="container section"> 
-  <form class="section row g-3">
-      <div class="col-12">
-        <label class="form-label">Correo electrónico</label>
-        <input type="text" v-model="email" class="form-control" placeholder="Introduce tu correo electrónico" readonly/>
-      </div>
-      <div class="col-12">
-        <label class="form-label">Contraseña</label>
-        <input type="password" v-model="password" class="form-control" placeholder="Introduce tu contraseña"
-        />
-      </div>
-      <div class="col-12" v-if="errors.password">
-        <p>{{ errors.password }}</p>
-      </div>
-      <div class="col-12">
-        <label class="form-label">Repite la contraseña</label>
-        <input type="password" v-model="repeatPassword" class="form-control" placeholder="Introduce de nuevo tu contraseña"
-        />
-      </div>
-      <div class="col-12" v-if="errors.repeatpassword">
-        <p>{{ errors.repeatpassword }}</p>
-      </div>
-      <div class="col-12" v-if="success">
-        <p>{{ success }}</p>
-      </div>
-      <div class="col-12">
-        <div @click="changePassword" class="btn btn-primary">Cambiar contraseña</div>
-      </div>
-    </form>
-</div>
-  
+  <main class="password-page">
+    <h1>Cambiar contraseña</h1>
+    <form class="password-form" @submit.prevent="changePassword">
+      <label>Correo electrónico</label>
+      <input id="email" type="text" v-model="email" readonly/>
+      <label>Contraseña</label>
+      <input type="password" v-model="password" placeholder="Introduce tu contraseña" />
+      <p class="alert alert-danger" role="alert" v-if="errors.password">{{ errors.password }}</p>
+      <label>Repite la contraseña</label>
+      <input type="password" v-model="repeatPassword" placeholder="Introduce de nuevo tu contraseña" />
+      <p class="alert alert-danger" role="alert" v-if="errors.repeatpassword">{{ errors.repeatpassword }}</p>
+      <p v-if="success" class="alert alert-success" role="alert">{{ success }}</p>
+      <button type="submit">Cambiar contraseña</button>
+    </form> 
+  </main>
 </template>
 
 <script>
@@ -84,10 +68,70 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.section{
-  max-width: 80%;
-  margin: 0 auto;
-  margin-top:20px;
+.password-page {
+  width: 80%;
+  max-width: 700px;
+  margin: 130px auto;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.password-form {
+  padding: 30px 50px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(240, 239, 239);
+  border-radius: 10px;
+  color: black;
+
+  label, input {
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  input {
+    padding: 5px 10px;
+    border: none;
+    border-bottom: 1px solid rgb(189, 189, 189);
+    background-color: rgba(255, 254, 254, 0.692);
+  }
+
+  #email {
+    color: #22B573;
+  }
+}
+
+button {
+  width: 50%;
+  align-self: center;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 0;
+  color: white;
+  background-color: #22B573;
+  margin-top: 10px;
+}
+
+button:hover {
+  opacity: 60%;
+}
+
+button:focus {
+  outline: none;
+}
+
+@media (max-width: 700px) {
+  .password-form {
+    padding: 30px 15px;
+
+    button {
+      width: 80%;
+    }
+  }
 }
 
 </style>
