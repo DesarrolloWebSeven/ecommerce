@@ -50,11 +50,13 @@ a:hover {
 }
 
 header>img {
-  max-width: 10%;
+  width: 10%;
+  min-width: 125px;
 }
 
 .user-menu {
   width: 6%;
+  min-width: 85px;
   display: flex;
   justify-content: space-between;
 }
@@ -112,8 +114,25 @@ header>img {
   padding: 0;
 }
 
+
 .mainnav .pedidos {
   background-color: #3CA29A;
+}
+
+@media (max-width: 1050px) {
+  .mainnav p {
+    display: none;
+  }
+
+  .mainnav i {
+    margin: 0;
+  }
+
+  .mainnav a {
+    justify-content: center;
+    align-items: center;
+  }
+
 }
 
 main {
@@ -193,7 +212,27 @@ main {
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
-  width: 23%
+  width: 23%;
+  min-height: 100px;
+}
+
+@media (max-width: 700px) {
+  .card {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 900px) {
+  .card {
+    width: 46%;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1200px) {
+  .card {
+    width: 30%;
+  }
 }
 
 .card-title {
@@ -204,6 +243,7 @@ main {
 .content-form {
   width: 90%;
 }
+
 
 /*Validacion forms*/
 

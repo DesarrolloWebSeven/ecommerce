@@ -1,230 +1,122 @@
 <template>
-  <div class="container section">
-    <div class="row d-flex justify-content-center">
-      <ol id="progress-bar">
-        <li class="step-active">Envío</li>
-        <li class="step-todo">Pago</li>
-      </ol>
-    </div>
-    <div>
-      <form class="section row g-3" @submit.prevent="saveOrder">
-        <div class="col-md-6">
-          <label class="form-label">Nombre</label>
-          <input
-            type="text"
-            v-model="user.firstName"
-            id="firstName"
-            class="form-control"
-            placeholder="Introduce tu nombre"
-            required
-          />
-          <div class="col-12" v-if="errors.firstName">
-            <p>{{ errors.firstName }}</p>
-          </div>
-        </div>
-        
-        <div class="col-md-6">
-          <label class="form-label">Apellidos</label>
-          <input
-            type="text"
-            v-model="user.lastName"
-            id="lastName"
-            class="form-control"
-            placeholder="Introduce tus apellidos"
-            required
-          />
-          <div class="col-12" v-if="errors.lastName">
-            <p>{{ errors.lastName }}</p>
-          </div>
-        </div>
-        
-        <div class="col-md-6">
-          <label class="form-label">Direción y número</label>
-          <input
-            type="text"
-            v-model="user.address"
-            id="adress"
-            class="form-control"
-            placeholder="Introduce tu dirección y número"
-            required
-          />
-          <div class="col-12" v-if="errors.address">
-              <p>{{ errors.address }}</p>
-          </div>
-        </div>
-        
-        <div class="col-md-6">
-          <label class="form-label">Piso, puerta, escalera</label>
-          <input
-            type="text"
-            v-model="user.flat"
-            id="flat"
-            class="form-control"
-            placeholder="Introduce tu piso, puerta, escalera"
-            required
-          />
-          <div class="col-12" v-if="errors.flat">
-            <p>{{ errors.flat }}</p>
-          </div>
-        </div>
-        
-        <div class="col-md-6">
-          <label class="form-label">Código Postal</label>
-          <input
-            type="text"
-            v-model="user.postalCode"
-            id="postalCode"
-            class="form-control"
-            placeholder="Introduce tu piso, puerta, escalera"
-            required
-          />
-          <div class="col-12" v-if="errors.postalCode">
-            <p>{{ errors.postalCode }}</p>
-          </div>
-        </div>
-        
-        <div class="col-md-6">
-          <label class="form-label">Ciudad</label>
-          <input
-            type="text"
-            v-model="user.city"
-            id="city"
-            class="form-control"
-            placeholder="Introduce tu piso, puerta, escalera"
-            required
-          />
-          <div class="col-12" v-if="errors.city">
-            <p>{{ errors.city }}</p>
-          </div>
-        </div>
-        
-        <div class="col-md-6">
-          <label class="form-label">Provincia</label>
-          <input
-            type="text"
-            v-model="user.province"
-            id="province"
-            class="form-control"
-            placeholder="Introduce tu piso, puerta, escalera"
-            required
-          />
-          <div class="col-12" v-if="errors.province">
-            <p>{{ errors.province }}</p>
-          </div>
-        </div>
-        
-        <div class="col-md-6">
-          <label class="form-label">País</label>
-          <input
-            type="text"
-            v-model="user.country"
-            id="country"
-            class="form-control"
-            placeholder="Introduce tu piso, puerta, escalera"
-            required
-          />
-          <div class="col-12" v-if="errors.country">
-            <p>{{ errors.country }}</p>
-          </div>
-        </div>
-        
-        <div class="col-md-6">
-          <label class="form-label">Teléfono</label>
-          <input
-            type="tel"
-            v-model="user.tel"
-            id="tel"
-            class="form-control"
-            placeholder="Introduce tu correo"
-            required
-          />
-          <div class="col-12" v-if="errors.tel">
-            <p>{{ errors.tel }}</p>
-          </div>
-        </div>
-        
-        <div class="col-md-6">
-          <label class="form-label">Email</label>
-          <input
-            type="email"
-            v-model="user.email"
-            id="email"
-            class="form-control"
-            placeholder="Introduce tu correo"
-            required
-          />
-          <div class="col-12" v-if="errors.email">
-        <p>{{ errors.email }}</p>
+<main class="order-page">
+  <section class="order-info">
+      <div class="order-titles">
+        <h2>{{ lang['data'] }}</h2>
+        <h2>{{ lang['payment'] }}</h2>
+        <h2>{{ lang['shipping'] }}</h2>
       </div>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 5%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">0%</div>
+      </div>
+  </section>
+  <div class="order-summary">
+    <form class="order-form" id="formOrder" @submit.prevent="saveOrder">
+      <div>
+        <label for="firstName">Nombre</label>
+        <input type="text" v-model="user.firstName" id="firstName" placeholder="Introduce tu nombre" required />
+        <div v-if="errors.firstName">
+          <p>{{ errors.firstName }}</p>
         </div>
-        
-        <div class="col-12 col-md-8">
-          <div v-for="(id, i) in Object.keys(cart)" :key="i" class="col-12">
-            <div class="card row">
-              <div class="card-horizontal row justify-content-center">
-                <div
-                  id="carouselExampleIndicators"
-                  class="col-12 col-lg-6 m-4"
-                  data-bs-ride="carousel"
-                >
-                  <div class="carousel-inner">
-                    <div class="">
-                      <img
-                        :src="'/images/' + cart[id].images[0]"
-                        class="d-block w-100"
-                        alt="..."
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card-body col-12 col-lg-6">
-                  <div class="d-flex flex-column align-items-start">
-                    <h4 class="card-title">{{ cart[id].title }}</h4>
-                    <p class="card-text">
-                      <b>Precio unidad: </b> {{ cart[id].price }}
-                    </p>
-                    <p class="card-text">
-                      <b>Cantidad en tu carrito: </b> {{ cart[id].items }}
-                    </p>
-                    <p class="card-text">
-                      <b>Subtotal producto: </b>
-                      {{ (cart[id].items * cart[id].price).toFixed(2) }}
-                    </p>
-                  </div>
-                </div>
-                <Total />
-              </div>
-            </div>
+      </div>
+      <div>
+        <label for="lastName">Apellidos</label>
+        <input type="text" v-model="user.lastName" id="lastName" placeholder="Introduce tus apellidos" required />
+        <div v-if="errors.lastName">
+          <p>{{ errors.lastName }}</p>
+        </div>
+      </div>
+      <div>
+        <label for="address">Direción y número</label>
+        <input type="text" v-model="user.address" id="adress" placeholder="Introduce tu dirección y número" required />
+        <div v-if="errors.address">
+          <p>{{ errors.address }}</p>
+        </div>
+      </div>
+      <div>
+        <label for="flat">Piso, puerta, escalera</label>
+        <input type="text" v-model="user.flat" id="flat" placeholder="Introduce tu piso, puerta, escalera" required />
+        <div v-if="errors.flat">
+          <p>{{ errors.flat }}</p>
+        </div>
+      </div>
+      <div>
+        <label for="postalCode">Código Postal</label>
+        <input type="text" v-model="user.postalCode" id="postalCode" placeholder="Introduce tu código postal" required />
+        <div v-if="errors.postalCode">
+          <p>{{ errors.postalCode }}</p>
+        </div>
+      </div>
+      <div>
+        <label for="city">Ciudad</label>
+        <input type="text" v-model="user.city" id="city" placeholder="Introduce tu ciudad" required />
+        <div v-if="errors.city">
+          <p>{{ errors.city }}</p>
+        </div>
+      </div>
+      <div>
+        <label for="province">Provincia</label>
+        <input type="text" v-model="user.province" id="province" placeholder="Introduce tu provincia" required />
+        <div v-if="errors.province">
+          <p>{{ errors.province }}</p>
+        </div>
+      </div>
+      <div>
+        <label>País</label>
+        <input type="text" v-model="user.country" id="country" placeholder="Introduce tu país" required />
+        <div v-if="errors.country">
+          <p>{{ errors.country }}</p>
+        </div>
+      </div>
+      <div>
+        <label for="tel">Teléfono</label>
+        <input type="tel" v-model="user.tel" id="tel" placeholder="Introduce tu teléfono" required />
+        <div v-if="errors.tel">
+          <p>{{ errors.tel }}</p>
+        </div>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" v-model="user.email" id="email" placeholder="Introduce tu email" required />
+        <div v-if="errors.email">
+          <p>{{ errors.email }}</p>
+        </div>
+      </div>
+    </form>
+    <div class="order-products">
+      <div class="order-list" v-if="Object.keys(cart).length">
+        <div v-for="(id, i) in Object.keys(cart)" :key="i">
+          <div class="item-summary">
+            <img :src="'/images/' + cart[id].images[0]" />
+            <h2>{{ cart[id].title }}</h2>
+            <p>{{ cart[id].items }} ud.</p>
+            <p>{{ (cart[id].items * cart[id].price).toFixed(2) }} €</p>
           </div>
         </div>
-        <div v-if="error"> {{ error }}</div>
-        <div class="col-12">
-          <p class="card-text">
-            <button class="btn btn-success m-2">Continuar al pago</button>
-          </p>
-        </div>
-      </form>
+      </div>
+      <div class="order-total">
+        <p class="order-price">TOTAL: {{(totalPrice).toFixed(2)}} €</p>
+        <button class="order-button" form="formOrder">Continuar al pago</button>
+      </div>
     </div>
+    <div v-if="error"> {{ error }}</div>
   </div>
+</main>
 </template>
 
 <script>
-import Total from "@/components/Total";
-import { ref, reactive, computed } from "vue";
-import { useStore } from "vuex";
+import { ref, reactive, computed } from 'vue'
+import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import axios from "axios";
+import axios from 'axios'
 export default {
   name: "Shipping",
   props: {},
-  components: {
-    Total,
-  },
   setup() {
     const router = useRouter()
-    const store = useStore();
-    const cart = computed(() => store.state.cart);
+    const store = useStore()
+    const cart = computed(() => store.state.cart)
+    const totalPrice = computed(() => store.getters.totalPrice) 
     const userId = ref("")
     const error = ref('')
     let errors = ref({});
@@ -296,24 +188,26 @@ export default {
         localStorage.getItem('cart')
       ) {
       
-      try {
-        const res = await axios.post("productos/pedido", {
-          userId: userId.value,
-          user: user,
-          totalPrice: store.getters.totalPrice,
-          totalProducts: store.getters.totalQuantity,
-          cart: store.state.cart,
-        });
-        if(res.data) {
-          localStorage.setItem('order', JSON.stringify(res.data._id))
-          router.push('/carrito/pago')
+        try {
+          const res = await axios.post("productos/pedido", {
+            userId: userId.value,
+            user: user,
+            totalPrice: store.getters.totalPrice,
+            totalProducts: store.getters.totalQuantity,
+            cart: store.state.cart,
+          });
+          if(res.data) {
+            localStorage.setItem('order', JSON.stringify(res.data._id))
+            router.push('/carrito/pago')
+          }
+        } catch (err) {
+          console.log(err.message);
         }
-      } catch (err) {
-        console.log(err.message);
-      }
       } else error.value = "Tu carrito está vacío"
     };
     return {
+      lang: computed(() => useStore().getters.getLang),
+      totalPrice,
       error,
       user,
       cart,
@@ -332,91 +226,210 @@ export default {
 
 
 <style lang="scss" scoped>
-.section {
-  background-color: #10555e1e;
-  max-width: 80%;
-  margin-top: 30px;
+.order-page {
+  width: 80%;
+  margin: 100px auto;
   color: black;
-  .row {
-    max-width: 95%;
+
+  .order-info {
+    width: 100%;
+    max-width: 700px;
     margin: 0 auto;
-    background-color: white;
-    #progress-bar {
-      display: flex;
-      justify-content: center;
+
+    h2 {
+      font-size: 1.5rem;
     }
-  }
-  // Colors
-  $default: #212121;
-  $grey: #efefef;
-  $main-color: #ff0000;
-  // Progress bar
-  #progress-bar {
-    display: table;
-    width: 100%;
-    margin: 0;
-    padding: 15px 15px 0;
-    table-layout: fixed;
-    width: 100%;
-    counter-reset: step;
-    li {
-      list-style-type: none;
-      display: table-cell;
-      width: 20%;
-      float: left;
-      font-size: 16px;
-      position: relative;
-      text-align: center;
-      &:before {
-        width: 50px;
-        height: 50px;
-        color: $default;
-        content: counter(step);
-        counter-increment: step;
-        line-height: 50px;
-        font-size: 18px;
-        border: 1px solid $grey;
-        display: block;
-        text-align: center;
-        margin: 0 auto 10px auto;
-        border-radius: 50%;
-        background-color: #fff;
-      }
-      &:after {
-        width: 100%;
-        height: 10px;
-        content: "";
-        position: absolute;
-        background-color: #fff;
-        top: 25px;
-        left: -50%;
-        z-index: -1;
-      }
-      &:first-child:after {
-        content: none;
-      }
-      &.step-done {
-        color: $main-color;
-        &:before {
-          border-color: $main-color;
-          background-color: $main-color;
-          color: #fff;
-          content: "\f00c";
-          font-family: "FontAwesome";
-        }
-        & + li:after {
-          background-color: $main-color;
-        }
-      }
-      &.step-active {
-        color: $main-color;
-        &:before {
-          border-color: $main-color;
-          color: $main-color;
-          font-weight: 700;
-        }
-      }
+
+    .order-titles {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .progress-bar {
+      background-color: #22B573;
     }
   }
 }
+
+.order-summary {
+  margin: 40px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+@media (max-width: 1000px) {
+  .order-summary {
+    flex-direction: column;
+  }
+}
+
+.order-form {
+    width: 49%;
+    padding: 20px 15px;
+    background-color: rgb(219, 219, 219);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    >div {
+      width: 49%;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    input {
+      font-size: 0.8rem;
+      border: none;
+      border-radius: 3px;
+    }
+    
+}
+
+  @media (max-width: 1000px) {
+      .order-form {
+        width: 100%;
+
+        >div {
+          width: 100%;
+        }
+      }
+  }
+
+.order-products {
+  width: 50%;
+}
+
+@media (max-width: 1000px) {
+  .order-products {
+    width: 100%;
+  }
+}
+
+.order-list {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid rgb(185, 183, 183);
+  border-radius: 10px;
+  background-color: white;
+}
+
+@media (max-width: 1000px) {
+  .order-list {
+    margin-top: 20px;
+  }
+}
+
+.item-summary {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    border-left: 15px solid #FFC61A;
+    border-bottom: 0.5px solid rgb(204, 203, 203);
+    padding: 5px 10px;
+
+    img {
+      width: 13%;
+    }
+
+    h2 {
+      width: 50%;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-align: left;
+      padding-left: 10px;
+    }
+
+    p {
+      width: 15%;
+      text-align: center;
+      font-size: 0.8rem;
+      margin: 0;
+    }
+
+    p:last-child {
+      text-align: right;
+    }
+}
+
+@media (max-width: 600px) {
+  
+  .item-summary {
+    border-left: 5px solid #FFC61A;
+    padding: 5px;
+
+    img {
+      width: 10%;
+    }
+
+    h2 {
+      width: 50%;
+      font-size: 0.7rem;
+      font-weight: 400;
+    }
+
+    p {
+      width: 15%;
+      font-size: 0.7rem;
+    }
+
+    p:last-child {
+      width: 25%;
+    }
+  }
+
+}
+
+.order-total {
+  width: 100%;
+
+  .order-price {
+    width: 100%;
+    text-align: right;
+    padding-top: 10px;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+
+  .order-button {
+    width: 35%;
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+    display: block;
+    margin-left: auto;
+    background-color: #22B573;
+    color: white;
+  }
+
+  .order-button:hover {
+    opacity: 60%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .order-total {
+
+    .order-price {
+      text-align: center;
+    }
+
+    .order-button {
+      width: 100%;
+    }
+  }
+}
+
 </style>

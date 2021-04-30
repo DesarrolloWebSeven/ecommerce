@@ -1,29 +1,19 @@
 const User = require("../models/User");
 
-const clientsList = (req, res)=>{
-    User.find().then( data => {
-      let clients = []
-      data.forEach(item => {
-        let client = {}
-        client.email = item.email
-        client.firstname = item.firstname
-        client.lastname = item.lastname
-        client.active = item.active
-        client.admin = item.admin
-        client.id = item.id
-        clients.push(client)
-      })
-      res.render('clients', { title: 'Admin | Clientes', src: 'clients.js', css: 'products', clients})
-      })        
+const clientsList = async (req, res)=>{
+    
+  let clients = await User.find({ admin : false }).lean()
+  res.render('clients', { title: 'Admin | Clientes', src: 'clients.js', css: 'products', clients})
+}
+
+const clientsFindById = (req, res) => {
+  User.findById(req.params.id).lean()
+    .then(client => {res.render('client', {client, title: 'Admin | Cliente', css: 'products'})})
+    .catch(err => res.json(err.message))
+    console.log(req.params.id)
   }
 
-  const clientsFindById = (req, res) => {
-    User.findById(req.params.id).lean()
-        .then(client => {res.render('client', {client, title: 'Admin | Cliente', css: 'products'})})
-        .catch(err => res.json(err.message))
-  }
-
-  const clientsUpdate = (req, res) => {
+const clientsUpdate = (req, res) => {
     User.findByIdAndUpdate({_id : req.body.id}, {
      firstname: req.body.firstname,
      lastname: req.body.lastname,
@@ -34,11 +24,10 @@ const clientsList = (req, res)=>{
         css: 'products',
         message: 'Cliente actualizado correctamente'})})
       .catch(err => console.log(err.message))
-      
   }
 
-  module.exports={
-      clientsList,
-      clientsFindById,
-      clientsUpdate,
-  }
+module.exports={
+  clientsList,
+  clientsFindById,
+  clientsUpdate,
+}

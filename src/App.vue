@@ -4,7 +4,7 @@
 <router-view />
 <div class="contact">
   <a href="#top-page"><i class="far fa-arrow-alt-circle-up"></i></a>
-  <a href="https://wa.me/34692856097/?text=Hola%Geeky!!%¿Podemos%20ayudarte?"><i class="fab fa-whatsapp fa-3x"></i></a>
+  <a href="https://wa.me/34692856097/?text=Hola%20Geeky!!%20¿Podemos%20ayudarte?"><i class="fab fa-whatsapp fa-3x"></i></a>
 </div>
 <AlertCookies />
 <Footer/>  
@@ -25,8 +25,10 @@ export default {
     AlertCookies
   },
   setup(){
+    
     return {
       lang: computed(()=>useStore().getters.getLang)
+      
     }
   }
 }
@@ -70,7 +72,7 @@ export default {
 
       i {
         font-size: 2rem;
-        color: #0f606b;
+        color: #20a76a;
       }
       
       i:hover{
@@ -93,7 +95,7 @@ export default {
 
       i {
         font-size: 3rem;
-        color: #0f606b;
+        color: #20a76a;
       }
 
       i:hover{

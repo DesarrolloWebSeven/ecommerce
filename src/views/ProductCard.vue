@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { reactive, ref } from 'vue';
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 export default {
@@ -77,17 +77,24 @@ export default {
 .product-page {
   width: 80%;
   max-width: 900px;
-  margin: 160px auto 130px;
+  margin: 130px auto;
+  background-color: rgb(241, 241, 241);
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgb(194, 194, 194);
+  padding: 50px;
+}
 
   .product-card {
     width: 100%;
     display: flex;
     justify-content: space-between;
+  }
 
-    .product-photo {
+  .product-photo {
       padding: 15px;
       width: 325px;
       height: 325px;
+      background-color: white;
       border: 1px solid rgb(168, 168, 168);
       border-radius: 5px;
 
@@ -120,17 +127,21 @@ export default {
     }
 
     .product-description {
+      padding: 0 0 0 25px;
       width: 60%;
       color: black;
       text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
       h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: 900;
       }
 
       #price {
-        color: rgb(104, 104, 104);
+        color: rgb(80, 79, 79);
         font-size: 1.5rem;
         font-weight: 700;
       }
@@ -141,6 +152,10 @@ export default {
 
       .product-buy {
         display: flex;
+
+      input:focus, button:focus {
+        outline: none;
+      }
 
       input[type=number]::-webkit-inner-spin-button {
         opacity: 1;
@@ -156,18 +171,62 @@ export default {
       }
 
       button {
-        width: 10%;
+        width: 30%;
         border-radius: 5px;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: gray;
+        background-color: #22B573;
         color: white;
         border: none;
       }
+
+      button:hover {
+        opacity: 60%;
       }
+      }
+  } 
+
+  @media (max-width: 900px) {
     
+    .product-page {
+      padding: 10px 5px;
+    }
+
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+      .product-photo, .carousel, .slide {
+        width: 90%;
+        margin: 10px auto;
+        height: auto;
+      }
+
+      .product-description {
+        text-align: center;
+        padding: 20px 5px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        ul {
+          list-style: none;
+          padding: 0;
+        }
+
+        .product-buy {
+          width: 90%;
+
+          input, button {
+            width: 50%;
+          }
+        }
     }
   }
-}
+
 </style>

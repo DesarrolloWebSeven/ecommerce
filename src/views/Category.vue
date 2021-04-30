@@ -1,7 +1,7 @@
 <template>
 <main class="category-page">
   <div class="category-banner">
-    <img :src="'/logo/' + category + '.png'" alt="">
+    <img :src="'/logo/' + category + '-' + lang + '.png'" alt="">
   </div>
   <div class="category-main" v-if="products">
     <div v-for="(product, i) in products" :key="i">
@@ -12,9 +12,10 @@
 </template>
 
 <script>
-import Product from "@/components/Product";
+import { useStore } from 'vuex'
+import Product from '@/components/Product'
 import { useRoute } from 'vue-router'
-import { ref, watch } from "vue";
+import { ref, watch, computed } from 'vue'
 export default {
   name: "Category",
   components: {
@@ -38,11 +39,15 @@ export default {
         .catch(err => console.log(err))
     }
     getProducts(category.value)
+  
+
 
     return {
       products,
-      category
+      category,
+      lang: computed(() => useStore().getters.getCurrentLang)      
     };
+    
   },
 };
 </script>

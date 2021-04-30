@@ -153,7 +153,7 @@
 <script>
 import { useRoute } from 'vue-router'
 import { useStore} from 'vuex'
-import { reactive, watch, onMounted, computed } from 'vue'
+import { reactive, computed } from 'vue'
 export default {
   name: "Profile",
   props: {},
