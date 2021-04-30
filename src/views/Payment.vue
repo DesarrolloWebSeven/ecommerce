@@ -98,7 +98,7 @@ export default {
     const availableOrder = () => {
 
       try {
-        if(!localStorage.getItem('order')) router.push('/')
+        if(!localStorage.getItem('order') && !localStorage.getItem('cart')) router.push('/')
       } catch (err) {
         console.log(err.message) 
       }
@@ -125,6 +125,7 @@ export default {
   max-height: 100vh;
   margin: 100px auto;
   color: black;
+}
 
   .payment-info {
     width: 100%;
@@ -206,5 +207,28 @@ export default {
     }
   }
 
+@media (max-width: 700px) {
+  .payment-page {
+    margin: 100px auto;
+  }
+
+  form {
+    padding: 15px;
+
+    .payment-methods {
+      width: 90%;
+      margin: 0 auto 15px;
+
+      i {
+        margin: 0 5px;
+        font-size: 2rem;
+      }
+    }
+
+    button {
+      border: none;
+      width: 100%;
+    }
+  }
 }
 </style>

@@ -136,7 +136,7 @@ export default {
 
 @media (max-width: 500px) {
   .empty-cart {
-    margin: 200px auto;
+    margin: 50px auto 120px;
   }
 }
 
