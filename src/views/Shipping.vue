@@ -95,11 +95,12 @@
         </div>
       </div>
       <div class="order-total">
+        <div v-if="error" class="alert alert-danger" role="alert"> {{ error }}</div>
+        <div v-else class="alert alert-warning" role="alert"> No tienes productos en tu carrito</div>
         <p class="order-price">TOTAL: {{(totalPrice).toFixed(2)}} €</p>
         <button class="order-button" form="formOrder">Continuar al pago</button>
       </div>
     </div>
-    <div v-if="error"> {{ error }}</div>
   </div>
 </main>
 </template>
@@ -421,6 +422,7 @@ export default {
 
 @media (max-width: 1000px) {
   .order-total {
+    margin-top: 10px;
 
     .order-price {
       text-align: center;
