@@ -19,6 +19,12 @@
 "_notfound": "NOTFOUND",
   "titleNotFound":"Esta página no existe",
 
+  "_carrito":"CARRITO",
+"cart":"Carrito",
+"emptyCart":"Vaciar carrito",
+"process":"Tramitar pedido",
+"yourCartEmpty":"Tu carrito está vacío",
+
 "login": "LOG IN",
   "welcome":"Bienvenid@",
   "emailLogin":"Correo",
