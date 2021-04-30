@@ -320,8 +320,15 @@ export default {
   border: 1px solid rgb(185, 183, 183);
   border-radius: 10px;
   background-color: white;
+}
 
-  .item-summary {
+@media (max-width: 1000px) {
+  .order-list {
+    margin-top: 20px;
+  }
+}
+
+.item-summary {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -353,14 +360,34 @@ export default {
     p:last-child {
       text-align: right;
     }
-  }
-
 }
 
-@media (max-width: 1000px) {
-  .order-list {
-    margin-top: 20px;
+@media (max-width: 600px) {
+  
+  .item-summary {
+    border-left: 5px solid #FFC61A;
+    padding: 5px;
+
+    img {
+      width: 10%;
+    }
+
+    h2 {
+      width: 50%;
+      font-size: 0.7rem;
+      font-weight: 400;
+    }
+
+    p {
+      width: 15%;
+      font-size: 0.7rem;
+    }
+
+    p:last-child {
+      width: 25%;
+    }
   }
+
 }
 
 .order-total {
