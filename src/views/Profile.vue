@@ -5,7 +5,7 @@
         <img class="avatar" src="@/assets/avatar.png" alt="" />
         <!-- <p>{{user}}</p> -->
         <p>Bienvenid@!!</p>
-        <!-- <p>{{user.info.firstName}} {{user.info.lastName}}</p> -->
+        <p>{{user.info.firstname}} {{user.info.lastname}}</p>
         <!-- <p>codigo porstal, ciudad, provincia</p> -->
         <p><button @click="updateData" class="btn btn-outline-warning">Modificar mis datos</button></p>
         <p><button @click="deleteCount" class="btn btn-outline-danger">Darme de baja</button></p>
@@ -20,7 +20,7 @@
               <label class="form-label">Nombre</label>
               <input
                 type="text"
-                v-model="user.info.firstName"
+                v-model="user.firstname"
                 name="firstName"
                 id="firstName"
                 class="form-control"
@@ -31,7 +31,7 @@
               <label class="form-label">Apellidos</label>
               <input
                 type="text"
-                v-model="user.info.lastName"
+                v-model="user.lastname"
                 name="lastName"
                 id="lastName"
                 class="form-control"
@@ -51,7 +51,7 @@
               />
             </div>
             <div class="col-12">
-              <router-link to="/carrito/resumen"
+              <router-link to="/carrito/perfil"
                 ><p class="card-text">
                   <button
                     @click="saveUser"
@@ -73,6 +73,7 @@
 import { useRoute } from 'vue-router'
 import { useStore} from 'vuex'
 import { reactive, watch, onMounted, computed } from 'vue'
+import axios from 'axios';
 export default {
   name: "Profile",
   props: {},
@@ -80,7 +81,7 @@ export default {
     const atob = require('atob')
     const store = useStore() 
     const route = useRoute()
-    const user = reactive({})
+    const user = ref({})
     let jwt = computed(()=>{
         return store.getters.getToken
     })
@@ -92,35 +93,43 @@ export default {
        
       // })
 
-    fetch(`http://localhost:8081/usuario/perfil/${(JSON.parse(id)).id}`)//${id}`)
-    .then((res) => res.json())
-    .then(data=>{
-      user.info=data
-    })
-    .catch((err) => console.log(err));   
+    fetch(`http://localhost:8081/usuario/perfil/${(JSON.parse(id)).id}`)
+      .then((res) => res.json())
+      .then((data) => { user.value=data })
+      .catch((err) => console.log(err))  
+    
+    
         //.then((data) => data.forEach((item) => user.push(item)))
 
     // onMounted(()=>{ 
     //   getUser(route.params.id)      
     // }) 
-    function saveUser(e){
-      let userUpdate={
-        firstname:user.info.firstname,
-        lastname:user.info.lastname
-      }
-      fetch(`http://localhost:8081/`,{
-        method:'PUT',
-        headers:{'Content-type':'Application/json'},
-        body:user.info
-      })
+    const saveUser = async ()=>{
+      const res = await axios.put('usuario/perfil/update', user)
+      console.log(res)
+      // fetch(`http://localhost:8081/admin/cliente/${(JSON.parse(id)).id}`,{
+      //   method:'PUT',
+      //   headers:{'Content-type':'Application/json'},
+      //   body:user
+      // })
       console.log(user.info)
     }
     function updateData(){
       console.log("actualizar datos")
+      
     }
-    function deleteCount(){
+
+    const deleteCount = async ()=>{
       console.log("borrar cuenta")
+      const res = await axios.put('usuario/perfil/deactivate', user)
+      console.log(res)
+      // fetch(`http://localhost:8081/admin/cliente/${(JSON.parse(id)).id}`,{
+      //   method:'PUT',
+      //   headers:{'Content-type':'Application/json'},
+      //   body:user
+      // })
     }
+    
     function showOrders(){
       console.log("mostrar pedidos")
     }

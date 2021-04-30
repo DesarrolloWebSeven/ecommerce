@@ -17,7 +17,6 @@ const clientsFindById = (req, res) => {
 }
 
 const clientsUpdate = (req, res) => {
-
   User.findByIdAndUpdate({_id : req.body.id}, {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
