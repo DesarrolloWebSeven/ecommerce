@@ -98,7 +98,7 @@ export default {
     const availableOrder = () => {
 
       try {
-        if(!localStorage.getItem('order') && !localStorage.getItem('cart')) router.push('/')
+        if(!localStorage.getItem('order') || !localStorage.getItem('cart')) router.push('/')
       } catch (err) {
         console.log(err.message) 
       }
