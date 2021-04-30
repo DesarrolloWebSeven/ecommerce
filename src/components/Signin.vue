@@ -8,7 +8,7 @@
     <p v-if="errors.password">{{ errors.password }}</p>
     <label><input type="checkbox" v-model="forgotPassword"/> {{lang["forgotPassLogin"]}}</label>
     <div v-if="errors" class="alert alert-danger" role="alert">{{ errors }}</div>
-    <p v-if="success">{{ success }}</p>
+    <p v-if="success" class="alert alert-success" role="alert">{{ success }}</p>
     <button>{{lang["buttonLogin"]}}</button>
   </form>
 </template>
