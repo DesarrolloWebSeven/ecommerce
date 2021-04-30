@@ -23,7 +23,7 @@ rtUser.post('/contacto', userController.contactMail)
 // User profile
 rtUser.get('/perfil/:id', userController.getInfoUser)
 rtUser.put('/perfil/update', userController.updateInfoUser)
-rtUser.post('/perfil/desactive', userController.deactivateUser)
+rtUser.put('/perfil/baja', userController.deactivateUser)
 rtUser.put('/perfil/update', userController.updateInfoUser)
 
 

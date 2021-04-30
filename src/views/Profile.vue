@@ -5,22 +5,22 @@
         <img class="avatar" src="@/assets/avatar.png" alt="" />
         <!-- <p>{{user}}</p> -->
         <p>Bienvenid@!!</p>
-        <p>{{user.info.firstname}} {{user.info.lastname}}</p>
+        <p>{{user.info.firstname}}</p>
         <!-- <p>codigo porstal, ciudad, provincia</p> -->
-        <p><button @click="updateData" class="btn btn-outline-warning">Modificar mis datos</button></p>
+        <p><button @click="updateData" class="btn btn-outline-warning">Modificar datos</button></p>
         <p><button @click="deleteCount" class="btn btn-outline-danger">Darme de baja</button></p>
-        <p><button @click="showOrders" class="btn btn-outline-info">Mis pedidos</button></p>
+        <p><button @click="showOrders" class="btn btn-outline-info">Ver mis pedidos</button></p>
         <p><button @click="editPass" class="btn btn-outline-dark">Cambiar mi Pass</button></p>
       </div>
 
       <div class="col-md-8">
-        <div>
+        <div v-if="update">
           <form class="section row g-3">
             <div class="col-md-6">
               <label class="form-label">Nombre</label>
               <input
                 type="text"
-                v-model="user.firstname"
+                v-model="user.info.firstname"
                 name="firstName"
                 id="firstName"
                 class="form-control"
@@ -31,7 +31,7 @@
               <label class="form-label">Apellidos</label>
               <input
                 type="text"
-                v-model="user.lastname"
+                v-model="user.info.lastname"
                 name="lastName"
                 id="lastName"
                 class="form-control"
@@ -51,7 +51,7 @@
               />
             </div>
             <div class="col-12">
-              <router-link to="/carrito/perfil"
+              <router-link to="/perfil"
                 ><p class="card-text">
                   <button
                     @click="saveUser"
@@ -63,7 +63,19 @@
               >
             </div>
           </form>
-        </div>
+          <!-- Confirmacion o error de update -->
+          <div v-if="success" class="alert alert-success text-center" role="alert"> {{ success }} </div>
+          <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
+        </div>  
+        <!-- Mensaje de alerta para eliminar cuenta -->
+        <!-- template for the modal component -->
+
+          <!-- <prueba /> -->
+              <modal name="my-first-modal">
+                  This is my first modal
+              </modal>
+              <v-dialog />
+
       </div>
     </div>
   </div>
@@ -72,16 +84,26 @@
 <script>
 import { useRoute } from 'vue-router'
 import { useStore} from 'vuex'
-import { reactive, watch, onMounted, computed } from 'vue'
+import { reactive, watch, onMounted, computed, ref } from 'vue'
 import axios from 'axios';
+import prueba from '@/components/prueba'
+import VModal from 'vue-js-modal' //aqui quede revisar que es vue.use()
 export default {
   name: "Profile",
+  components:{
+    prueba
+  },
   props: {},
   setup() {
     const atob = require('atob')
-    const store = useStore() 
+    const store = useStore()
+    const success = ref('')
+    const error = ref('')
+    const update = ref('')
+    const confirm = ref('')
+
     const route = useRoute()
-    const user = ref({})
+    const user = reactive({info:'default'})
     let jwt = computed(()=>{
         return store.getters.getToken
     })
@@ -95,7 +117,7 @@ export default {
 
     fetch(`http://localhost:8081/usuario/perfil/${(JSON.parse(id)).id}`)
       .then((res) => res.json())
-      .then((data) => { user.value=data })
+      .then((data) => { user.info=data })
       .catch((err) => console.log(err))  
     
     
@@ -106,23 +128,26 @@ export default {
     // }) 
     const saveUser = async ()=>{
       const res = await axios.put('usuario/perfil/update', user)
-      console.log(res)
-      // fetch(`http://localhost:8081/admin/cliente/${(JSON.parse(id)).id}`,{
-      //   method:'PUT',
-      //   headers:{'Content-type':'Application/json'},
-      //   body:user
-      // })
-      console.log(user.info)
+      if(res){
+        success.value = 'Datos actualizados!!'
+        setTimeout(()=>{
+          success.value=false 
+          update.value=false
+        },3000)
+      }else
+        error.value = 'Ha habido un problema, inténtalo más tarde'
     }
+
     function updateData(){
-      console.log("actualizar datos")
-      
+      update.value=true
     }
 
     const deleteCount = async ()=>{
-      console.log("borrar cuenta")
-      const res = await axios.put('usuario/perfil/deactivate', user)
-      console.log(res)
+          console.log("borrar cuenta")
+          confirm.value=true
+    
+      // const res = await axios.put('usuario/perfil/baja', user)
+      // console.log(res)
       // fetch(`http://localhost:8081/admin/cliente/${(JSON.parse(id)).id}`,{
       //   method:'PUT',
       //   headers:{'Content-type':'Application/json'},
@@ -136,12 +161,27 @@ export default {
     function editPass(){
       console.log("solicictud de cambio de password")
     }
+
+    function show () {
+      this.$modal.show('my-first-modal');
+    }
+    function hide () {
+      this.$modal.hide('my-first-modal');
+    }
+    
+    onMounted (()=>{
+        this.show()
+    })
+
     return {
-        user, 
-        saveUser, editPass, showOrders, deleteCount, updateData
-    };
-  },
-};
+        user, success, error, update, confirm,
+        saveUser, editPass, showOrders, deleteCount, updateData,
+        modalShow: false
+    }
+  }
+}
+
+
 </script>
 
 

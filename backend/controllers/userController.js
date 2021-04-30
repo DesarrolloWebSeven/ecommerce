@@ -123,23 +123,22 @@ const getInfoUser =(req, res) => {
 
 //Update user profile
 const updateInfoUser = (req, res) => {
-  console.log(req.body.info)
   User.findByIdAndUpdate({_id : req.body.info._id}, {
     firstname: req.body.info.firstname,
     lastname: req.body.info.lastname,
     avatar: req.body.info.avatar
   })
     .then(user=>res.json(user))
-    .catch(err=> console.log(err))
+    .catch(err=> res.json(err.message))
 }
-
+//Deactive user
 const deactivateUser=(req,res)=>{
   console.log(req.body.info)
   User.findByIdAndUpdate({_id : req.body.info._id}, {
-    active: false
+    active:false
   })
     .then(user=>res.json(user))
-    .catch(err=> console.log(err))
+    .catch(err=> res.json(null))
 }
 
 
