@@ -1,31 +1,16 @@
 <template>
-  <div class="container section">
-    <form class="section row g-3" @submit.prevent="login">
-      <div class="col-12">
-        <label class="form-label">{{lang["emailLogin"]}}</label>
-        <input type="text" v-model="email" class="form-control" :placeholder="lang['plEmailLogin']" />
-      </div>
-      <div class="col-12" v-if="errors.email">
-        <p>{{ errors.email }}</p>
-      </div>
-      <div class="col-12">
-        <label class="form-label">{{lang["passLogin"]}}</label>
-        <input type="password" v-model="password" class="form-control" :placeholder="lang['plPasslLogin']" />
-      </div>
-      <div class="col-12" v-if="errors.password">
-        <p>{{ errors.password }}</p>
-      </div>
-      <label><input type="checkbox" v-model="forgotPassword"/>
-      {{lang["forgotPassLogin"]}}</label>
-      <div v-if="errors" class="password error">{{ errors }}</div>
-      <div class="col-12" v-if="success">
-        <p>{{ success }}</p>
-      </div>
-      <div class="col-12">
-        <button class="btn btn-primary">{{lang["buttonLogin"]}}</button>
-      </div>
-    </form>
-  </div>
+  <form class="login-form" @submit.prevent="login">
+    <label>{{lang["emailLogin"]}}</label>
+    <input type="text" v-model="email" :placeholder="lang['plEmailLogin']" />
+    <p v-if="errors.email">{{ errors.email }}</p>
+    <label>{{lang["passLogin"]}}</label>
+    <input type="password" v-model="password" :placeholder="lang['plPasslLogin']" />
+    <p v-if="errors.password">{{ errors.password }}</p>
+    <label><input type="checkbox" v-model="forgotPassword"/> {{lang["forgotPassLogin"]}}</label>
+    <div v-if="errors" class="alert alert-danger" role="alert">{{ errors }}</div>
+    <p v-if="success">{{ success }}</p>
+    <button>{{lang["buttonLogin"]}}</button>
+  </form>
 </template>
 
 <script>
@@ -96,10 +81,42 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.section {
+.login-form {
   max-width: 80%;
-  margin: 0 auto;
-  margin-top: 20px;
+  margin: 10px auto;
   color: black;
+  display: flex;
+  flex-direction: column;
+
+  label, input {
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  input {
+    padding: 5px 10px;
+    border: none;
+    border-bottom: 1px solid rgb(189, 189, 189);
+    background-color: rgba(255, 254, 254, 0.692);
+  }
 }
+
+button {
+  width: 50%;
+  align-self: center;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 0;
+  color: white;
+  background-color: #22B573;
+}
+
+button:hover {
+  opacity: 60%;
+}
+
+button:focus {
+  outline: none;
+}
+
 </style>
