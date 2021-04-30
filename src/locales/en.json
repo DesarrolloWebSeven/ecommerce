@@ -20,6 +20,11 @@
 "_notfound": "NOTFOUND",
   "titleNotFound":"This page doesn't exist",
 
+  "_carrito":"CARRITO",
+  "cart":"Cart",
+  "emptyCart":"Empty cart",
+  "process":"Process cart",
+  "yourCartEmpty":"Your cart is empty",
 
   "login": "LOGIN",
   "welcome":"Welcome",
