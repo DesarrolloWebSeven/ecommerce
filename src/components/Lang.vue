@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { ref, reactive, computed, watch } from 'vue'
 import i18next from 'i18next'
 import { useStore } from 'vuex'
 

@@ -20,9 +20,9 @@ const deleteOrders = async (req, res) => {
 
   let id = req.params.id
   const orderInfo = await Order.findById(id)
-  increaseProductQuantity(orderInfo.cart)
-  const order = await Order.deleteOne({ _id: id }).lean()
-  res.json(order)
+  if (Object.keys(orderInfo.cart).length !== 0) increaseProductQuantity(orderInfo.cart)
+  const order = await Order.deleteOne({ _id: id })
+  res.json(order) 
 
 }
 
@@ -54,15 +54,15 @@ const deleteProduct = async (req, res) => {
   // Update the product quantity available on the database
   let updateProductQuantity = await Product.findById(product)
   await Product.updateOne({ _id: product }, { 
-    quantity : updateProductQuantity.quantity + order.cart[product].items}).lean()
+    quantity : updateProductQuantity.quantity + order.cart[product].items})
   
   // Delete the product from the order and update the info
   delete order.cart[product]
-  Order.updateOne({ _id: idOrder }, { 
+  let newOrder = await Order.updateOne({ _id: idOrder }, { $set: {
     cart: order.cart, 
     totalProducts: order.totalProducts,
     totalPrice: order.totalPrice
-  });
+  }});
   res.json('Success')
 
 }
@@ -135,8 +135,9 @@ const decreaseProductQuantity = (order) => {
 
     let id = item._id
     let product = await Product.findById(id)
-    Product.updateOne({_id: id}, {$set: { quantity: product.quantity - item.items}})
-      .then(data => console.log(data))
+    product.quantity = product.quantity - item.items
+    Product.updateOne({_id: id}, {$set: { quantity: product.quantity}})
+      .then(data => console.log('Actualizado con éxito'))
       .catch(err => console.log(err.message))
       
   })
@@ -144,17 +145,13 @@ const decreaseProductQuantity = (order) => {
 }
 
 // Increase the products quantity after deleting an order
-const increaseProductQuantity = (order) => {
-  
-  Object.values(order).forEach( async item => {
+const increaseProductQuantity = async (order) => {
 
-    let id = item._id
+    let id = order._id
     let product = await Product.findById(id)
-    Product.updateOne({_id: id}, {$set: { quantity: product.quantity + item.items}})
+    Product.updateOne({_id: id}, {$set: { quantity: product.quantity + order.items}})
       .then(data => console.log(data))
       .catch(err => console.log(err.message))
-      
-  })
 
 }
 
