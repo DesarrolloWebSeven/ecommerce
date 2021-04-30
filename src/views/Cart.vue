@@ -11,8 +11,8 @@
         </div>
       </div>
       <div class="empty-cart" v-else>
-        <h2>Tu carrito está vacío</h2>
         <img src="/logo/emptycart.jpg" />
+        <h2>Tu carrito está vacío</h2>
       </div>
     </div>
   </main>
@@ -48,6 +48,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .cart-page {
   margin: 100px auto 90px;
   width: 80%;
@@ -127,7 +128,14 @@ export default {
   }
 
   img {
-    filter:grayscale(50%);
+    max-width: 100%;
+  }
+
+}
+
+@media (max-width: 500px) {
+  .empty-cart {
+    margin: 200px auto;
   }
 }
 
