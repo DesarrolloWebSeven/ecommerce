@@ -5,7 +5,7 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="titulo">Título</label>
-          <input type="text" class="form-control" name="title" minlength="5" maxlength="30" required placeholder="Título o nombre del producto">
+          <input type="text" class="form-control" name="title" minlength="5" maxlength="35" required placeholder="Título o nombre del producto">
           {{#if err.title}}
           <p class="error"> {{ err.title }}</p>
           {{/if}}
@@ -40,10 +40,10 @@
           <label for="categoria">Categoría</label> 
           <select class="form-control" name="category" required>
             <option>{{product.category}}</option>
-            <option>Accesorios</option>
-            <option>Camisetas</option>
-            <option>Games</option>
-            <option>Tazas</option>
+            <option>accesorios</option>
+            <option>camisetas</option>
+            <option>games</option>
+            <option>tazas</option>
           </select>
           {{#if err.category}}
           <p class="error"> {{ err.category }} </p>
