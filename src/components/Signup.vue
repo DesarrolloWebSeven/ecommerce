@@ -1,50 +1,17 @@
 <template>
-  <div class="container section">
-    <form class="section row g-3" @submit.prevent="register">
-      <div class="col-12">
-        <label class="form-label">{{ lang['emailSign'] }}</label>
-        <input
-          type="text"
-          v-model="email"
-          class="form-control"
-          :placeholder="lang['plPasslLogin']"
-        />
-      </div>
-      <div class="col-12" v-if="errors.email">
-        <p>{{ errors.email }}</p>
-      </div>
-      <div class="col-12">
-        <label class="form-label">{{ lang['passSign'] }}</label>
-        <input
-          type="password"
-          v-model="password"
-          class="form-control"
-          :placeholder="lang['plPassSign']"
-        />
-      </div>
-      <div class="col-12" v-if="errors.password">
-        <p>{{ errors.password }}</p>
-      </div>
-      <div class="col-12">
-        <label class="form-label">{{ lang['repeatPassSign'] }}</label>
-        <input
-          type="password"
-          v-model="repeat_password"
-          class="form-control"
-          :placeholder="lang['plrRepeatPassSign']"
-        />
-      </div>
-      <div class="col-12" v-if="errors.repeatpassword">
-        <p>{{ errors.repeatpassword }}</p>
-      </div>
-      <div class="col-12" v-if="success">
-        <p>{{ success }}</p>
-      </div>
-      <div class="col-12">
-        <button class="btn btn-primary">{{ lang['buttonSave'] }}</button>
-      </div>
-    </form>
-  </div>
+  <form class="login-form" @submit.prevent="register">
+    <label>{{ lang['emailSign'] }}</label>
+    <input type="text" v-model="email" :placeholder="lang['plPasslLogin']" />
+    <p class="alert alert-danger" role="alert" v-if="errors.email">{{ errors.email }}</p>
+    <label >{{ lang['passSign'] }}</label>
+    <input type="password" v-model="password" :placeholder="lang['plPassSign']" />
+    <p class="alert alert-danger" role="alert" v-if="errors.password">{{ errors.password }}</p>
+    <label >{{ lang['repeatPassSign'] }}</label>
+    <input type="password" v-model="repeat_password" :placeholder="lang['plrRepeatPassSign']" />
+    <p class="alert alert-danger" role="alert" v-if="errors.repeatpassword">{{ errors.repeatpassword }}</p>
+    <p class="alert alert-success" role="alert" v-if="success">{{ success }}</p>
+    <button>{{ lang['buttonSave'] }}</button>
+  </form>
 </template>
 
 <script>
@@ -63,6 +30,7 @@ export default {
     let regExpPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
 
     const register = async () => {
+      errors.value = {}
       if (!regExpEmail.test(email.value))
         errors.value.email = "Debes introducir un email válido";
       if (!regExpPassword.test(password.value))
@@ -106,9 +74,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.section {
+.login-form {
   max-width: 80%;
-  margin: 0 auto;
-  margin-top: 20px;
+  margin: 10px auto;
+  color: black;
+  display: flex;
+  flex-direction: column;
+
+  label, input {
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  input {
+    padding: 5px 10px;
+    border: none;
+    border-bottom: 1px solid rgb(189, 189, 189);
+    background-color: rgba(255, 254, 254, 0.692);
+  }
+}
+
+button {
+  width: 50%;
+  align-self: center;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 0;
+  color: white;
+  background-color: #22B573;
+}
+
+button:hover {
+  opacity: 60%;
+}
+
+button:focus {
+  outline: none;
 }
 </style>
