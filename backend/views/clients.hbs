@@ -8,6 +8,7 @@
     <input type="text" class="search-console" id="search" placeholder="Buscar" autocomplete="off">
   </section>
 
+  <!-- Clients List -->
   {{#if clients}}
   <section class="product-list">
     {{#each clients}}
@@ -22,12 +23,12 @@
             <p class="card-text">{{this.email}}</p>
               {{#if active}}
                 <h5 class="title text-success"><i class="fa fa-check"></i> Activo</h5>
-                <button class="btn btn-primary"><a href="/admin/clientes/{{this.id}}"><i class="fas fa-info"></i></a></button>
+                <button class="btn btn-primary"><a href="/admin/clientes/{{this._id}}"><i class="fas fa-info"></i></a></button>
                 <button class="btn btn-danger"><i class="fas fa-truck"></i></button>
                 <button class="btn btn-warning"><i class="fas fa-archive"></i></button>
               {{else}}
                 <h5 class="title text-danger"><i class="bi bi-x-square"></i><i class="fa fa-times"></i> No activo</h5>
-                <button class="btn btn-primary"><a href="/admin/clientes/{{this.id}}"><i class="fas fa-info"></a></i></button>
+                <button class="btn btn-primary"><a href="/admin/clientes/{{this._id}}"><i class="fas fa-info"></a></i></button>
                 <button class="btn btn-danger" disabled><i class="fas fa-truck"></i></button>
                 <button class="btn btn-warning" disabled><i class="fas fa-archive"></i></button>
               {{/if}}
