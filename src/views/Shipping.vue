@@ -95,8 +95,6 @@
         </div>
       </div>
       <div class="order-total">
-        <div v-if="error" class="alert alert-danger" role="alert"> {{ error }}</div>
-        <div v-else class="alert alert-warning" role="alert"> No tienes productos en tu carrito</div>
         <p class="order-price">TOTAL: {{(totalPrice).toFixed(2)}} €</p>
         <button class="order-button" form="formOrder">Continuar al pago</button>
       </div>
@@ -144,7 +142,8 @@ export default {
         const res = await axios.get("usuario/permiso", {
           headers: { Authorization: "Bearer " + localStorage.getItem("jwt") },
         });
-        if (res.data.message === "fail") router.push("/");
+        if (res.data.message === "fail") router.push('/')
+        if(!localStorage.getItem('cart')) router.push('/')
         userId.value = res.data.decodedToken.id;
       } catch (err) {
         console.log(err);
@@ -152,6 +151,7 @@ export default {
       
     };
     userAuth();
+
     const saveOrder = async () => {
             
         if (!regExpText.test(user.firstName))
@@ -185,9 +185,7 @@ export default {
         regExpText.test(user.city) && 
         regExpEmail.test(user.email) && 
         regExpText.test(user.flat) && 
-        regExpPostalCode.test(user.postalCode) &&
-        localStorage.getItem('cart')
-      ) {
+        regExpPostalCode.test(user.postalCode)) {
       
         try {
           const res = await axios.post("productos/pedido", {
@@ -204,7 +202,8 @@ export default {
         } catch (err) {
           console.log(err.message);
         }
-      } else error.value = "Tu carrito está vacío"
+      } 
+      
     };
     return {
       lang: computed(() => useStore().getters.getLang),
