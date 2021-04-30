@@ -3,7 +3,7 @@ const rtAdmin = express.Router()
 const adminController = require('../controllers/adminController')
 const productController = require('../controllers/productController')
 const pageController = require('../controllers/pageController')
-const clientController=require('../controllers/clientController')
+const clientController = require('../controllers/clientController')
 const { checkUser, requireAuth } = require('../helpers/validation')
 
 
