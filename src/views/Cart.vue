@@ -1,18 +1,18 @@
 <template>
   <main class="cart-page">
-    <h1>Carrito</h1>
+    <h1>{{lang["cart"]}}</h1>
     <div class="cart-group">
       <div v-if="Object.keys(cart).length">
         <CartComponent />
         <p class="cart-price">TOTAL: {{(totalPrice).toFixed(2)}} €</p>
         <div class="cart-buttons">
-        <button class="empty-button" @click="emptyCart">Vaciar carrito</button>
-        <button class="buy-button"><router-link to="/carrito/envio">Tramitar pedido</router-link></button>
+        <button class="empty-button" @click="emptyCart">{{lang["emptyCart"]}}</button>
+        <button class="buy-button"><router-link to="/carrito/envio">{{lang["process"]}}</router-link></button>
         </div>
       </div>
       <div class="empty-cart" v-else>
-        <h2>Tu carrito está vacío</h2>
         <img src="/logo/emptycart.jpg" />
+        <h2>{{lang["yourCartEmpty"]}}</h2>
       </div>
     </div>
   </main>
@@ -39,6 +39,7 @@ export default {
     const totalPrice = computed(() => store.getters.totalPrice)     
 
     return { 
+      lang: computed(()=>useStore().getters.getLang),
       cart,
       totalPrice,
       emptyCart
@@ -48,6 +49,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .cart-page {
   margin: 100px auto 90px;
   width: 80%;
@@ -127,7 +129,14 @@ export default {
   }
 
   img {
-    filter:grayscale(50%);
+    max-width: 100%;
+  }
+
+}
+
+@media (max-width: 500px) {
+  .empty-cart {
+    margin: 50px auto 120px;
   }
 }
 

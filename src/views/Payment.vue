@@ -33,7 +33,7 @@
       </div>
       <div v-if="success" class="alert alert-success text-center" role="alert"> {{ success }} </div>
       <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
-      <button type="submit">{{ lang['buttonPay'] }}</button>
+      <button id="btnPay" type="submit">{{ lang['buttonPay'] }}</button>
       </form>
   </main>
 </template>
@@ -57,22 +57,28 @@ export default {
     
     
     const emptyCart = async () => {
-      store.commit("setEmptyCart");
-      
-      try {
-        const res = await axios.put('/productos/pago', {
-          orderId : JSON.parse(localStorage.getItem('order'))
-        })
-        if(res.data) {
-          success.value = 'Tu pedido se ha realizado con éxito'
-          width.value = 'width: 100%'
-          progress.value = '100%'
-          localStorage.removeItem('cart')
-          localStorage.removeItem('order')
+
+      if(Object.keys(cart).length) {
+        store.commit("setEmptyCart");
+        
+        try {
+          const res = await axios.put('/productos/pago', {
+            orderId : JSON.parse(localStorage.getItem('order'))
+          })
+          if(res.data) {
+            success.value = 'Tu pedido se ha realizado con éxito, revise su correo electrónico'
+            width.value = 'width: 100%'
+            progress.value = '100%'
+            localStorage.removeItem('cart')
+            localStorage.removeItem('order')
+            btnPay.style.display="none"
+          }
+          else error.value = "Ha habido un problema, inténtalo más tarde"
+        } catch (err) {
+          console.log(err.message)
         }
-        else error.value = "Ha habido un problema, inténtalo más tarde"
-      } catch (err) {
-        console.log(err.message)
+      } else {
+        error.value = "No tienes pedidos pendientes de pago"
       }
     }
 
@@ -90,11 +96,21 @@ export default {
     }
     userAuth()
 
+    const availableOrder = () => {
+
+      try {
+        if(!localStorage.getItem('order') || !localStorage.getItem('cart')) router.push('/')
+      } catch (err) {
+        console.log(err.message) 
+      }
+
+    }
+    availableOrder()
+
     return {
       lang: computed(() => useStore().getters.getLang),
       width,
       progress,
-      cart,
       success,
       error,
       emptyCart,
@@ -110,6 +126,7 @@ export default {
   max-height: 100vh;
   margin: 100px auto;
   color: black;
+}
 
   .payment-info {
     width: 100%;
@@ -189,7 +206,33 @@ export default {
     button:hover {
       opacity: 60%;
     }
+    .btnOff{
+      display:none;
+    }
   }
 
+@media (max-width: 700px) {
+  .payment-page {
+    margin: 100px auto;
+  }
+
+  form {
+    padding: 15px;
+
+    .payment-methods {
+      width: 90%;
+      margin: 0 auto 15px;
+
+      i {
+        margin: 0 5px;
+        font-size: 2rem;
+      }
+    }
+
+    button {
+      border: none;
+      width: 100%;
+    }
+  }
 }
 </style>

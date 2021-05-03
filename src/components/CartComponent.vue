@@ -34,7 +34,11 @@ export default {
   setup() {
     const store = useStore();
     const cart = computed(() => store.state.cart);
-    const deleteProduct = (_id) => {store.commit('setDeleteProduct', _id)}
+    const deleteProduct = (_id) => {
+      store.commit('setDeleteProduct', _id)      
+      localStorage.setItem('cart', JSON.stringify(store.state.cart))
+      
+      }
 
     return {
       cart,

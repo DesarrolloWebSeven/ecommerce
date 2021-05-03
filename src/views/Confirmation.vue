@@ -1,13 +1,14 @@
 <template>
-<div class="container section"> 
-  <div v-if="success">
-  <p>{{lang["success"]}}</p>
+<main class="confirmation-page"> 
+  <div class="confirmation-text" v-if="success">
+    <img src="/logo/welcome1.png" alt="Bienvenida a Geeky">
+    <h1>¡Bienvenido a Geeky!</h1>
+    <p>{{lang["success"]}}</p> 
   </div>
-  <div v-else>
+  <div class="confirmation-text" v-else>
     <p>{{lang["waitingInfo"]}}</p>
   </div>
-</div>
-  
+</main>
 </template>
 
 <script>
@@ -38,13 +39,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div {
-  color: gray;
-}
-.section{
-  max-width: 80%;
-  margin: 0 auto;
-  margin-top:20px;
+.confirmation-page {
+  width: 80%;
+  min-height: 300px;
+  max-width: 800px;
+  margin: 120px auto;
+  padding: 30px 50px;
+  background-color: rgb(240, 239, 239);
+  border-radius: 10px;
+  color: rgb(104, 103, 103);
+
+  img {
+    max-width: 100%;
+  }
 }
 
 </style>

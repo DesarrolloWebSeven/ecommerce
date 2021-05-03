@@ -99,7 +99,6 @@
         <button class="order-button" form="formOrder">Continuar al pago</button>
       </div>
     </div>
-    <div v-if="error"> {{ error }}</div>
   </div>
 </main>
 </template>
@@ -143,7 +142,8 @@ export default {
         const res = await axios.get("usuario/permiso", {
           headers: { Authorization: "Bearer " + localStorage.getItem("jwt") },
         });
-        if (res.data.message === "fail") router.push("/");
+        if (res.data.message === "fail") router.push('/')
+        if(!localStorage.getItem('cart')) router.push('/')
         userId.value = res.data.decodedToken.id;
       } catch (err) {
         console.log(err);
@@ -151,6 +151,7 @@ export default {
       
     };
     userAuth();
+
     const saveOrder = async () => {
             
         if (!regExpText.test(user.firstName))
@@ -184,9 +185,7 @@ export default {
         regExpText.test(user.city) && 
         regExpEmail.test(user.email) && 
         regExpText.test(user.flat) && 
-        regExpPostalCode.test(user.postalCode) &&
-        localStorage.getItem('cart')
-      ) {
+        regExpPostalCode.test(user.postalCode)) {
       
         try {
           const res = await axios.post("productos/pedido", {
@@ -203,7 +202,8 @@ export default {
         } catch (err) {
           console.log(err.message);
         }
-      } else error.value = "Tu carrito está vacío"
+      } 
+      
     };
     return {
       lang: computed(() => useStore().getters.getLang),
@@ -421,6 +421,7 @@ export default {
 
 @media (max-width: 1000px) {
   .order-total {
+    margin-top: 10px;
 
     .order-price {
       text-align: center;

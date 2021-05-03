@@ -123,7 +123,7 @@ export default {
   margin: 3px;
 
   .card-text{
-    min-height: 190px;
+    min-height: 170px;
     font-size: 0.9rem;
   } 
   
