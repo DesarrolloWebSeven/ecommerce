@@ -33,7 +33,7 @@
       </div>
       <div v-if="success" class="alert alert-success text-center" role="alert"> {{ success }} </div>
       <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
-      <button type="submit">{{ lang['buttonPay'] }}</button>
+      <button id="btnPay" type="submit">{{ lang['buttonPay'] }}</button>
       </form>
   </main>
 </template>
@@ -66,11 +66,12 @@ export default {
             orderId : JSON.parse(localStorage.getItem('order'))
           })
           if(res.data) {
-            success.value = 'Tu pedido se ha realizado con éxito'
+            success.value = 'Tu pedido se ha realizado con éxito, revise su correo electrónico'
             width.value = 'width: 100%'
             progress.value = '100%'
             localStorage.removeItem('cart')
             localStorage.removeItem('order')
+            btnPay.style.display="none"
           }
           else error.value = "Ha habido un problema, inténtalo más tarde"
         } catch (err) {
@@ -204,6 +205,9 @@ export default {
 
     button:hover {
       opacity: 60%;
+    }
+    .btnOff{
+      display:none;
     }
   }
 
