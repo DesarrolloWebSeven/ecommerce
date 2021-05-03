@@ -141,6 +141,16 @@ const deactivateUser=(req,res)=>{
     .catch(err=> res.json(null))
 }
 
+//Show orders User
+const Order = require('../models/Order')
+const orderUser = (req, res) => {
+  let id = req.params.id
+  Order.find({ userId: id })
+    .then(data => res.json(data))
+    .catch(err => res.json(err))
+}
+
+
 
 module.exports = {
   registerUser,
@@ -153,5 +163,6 @@ module.exports = {
   contactMail,
   getInfoUser,
   updateInfoUser,
-  deactivateUser
+  deactivateUser,
+  orderUser
 }

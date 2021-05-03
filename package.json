@@ -27,7 +27,6 @@
     "nodemailer-express-handlebars": "^4.0.0",
     "validator": "^13.5.2",
     "vue": "^3.0.0",
-    "vue-js-modal": "^2.0.0-rc.6",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },
