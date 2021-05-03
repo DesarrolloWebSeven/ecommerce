@@ -1,5 +1,6 @@
 <template>
-  <main class="cart-page">
+  <main class="cart">
+  <section class="cart-page">
     <h1>{{lang["cart"]}}</h1>
     <div class="cart-group">
       <div v-if="Object.keys(cart).length">
@@ -15,6 +16,7 @@
         <h2>{{lang["yourCartEmpty"]}}</h2>
       </div>
     </div>
+  </section>
   </main>
 </template>
 
@@ -49,9 +51,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.cart {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .cart-page {
-  margin: 100px auto 90px;
+  margin: 0 auto;
   width: 80%;
   max-width: 700px;
   color: rgb(99, 98, 98);

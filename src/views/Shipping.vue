@@ -142,8 +142,11 @@ export default {
         const res = await axios.get("usuario/permiso", {
           headers: { Authorization: "Bearer " + localStorage.getItem("jwt") },
         });
-        if (res.data.message === "fail") router.push('/')
-        if(!localStorage.getItem('cart')) router.push('/')
+        if (res.data.message === "fail") {
+          router.go(-1)
+          alert('Es necesario iniciar sesión para finalizar la compra')
+        }
+        if(!localStorage.getItem('cart')) router.go(-1)
         userId.value = res.data.decodedToken.id;
       } catch (err) {
         console.log(err);
