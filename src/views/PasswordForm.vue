@@ -1,18 +1,20 @@
 <template>
-  <main class="password-page">
-    <h1>Cambiar contraseña</h1>
-    <form class="password-form" @submit.prevent="changePassword">
-      <label>Correo electrónico</label>
-      <input id="email" type="text" v-model="email" readonly/>
-      <label>Contraseña</label>
-      <input type="password" v-model="password" placeholder="Introduce tu contraseña" />
-      <p class="alert alert-danger" role="alert" v-if="errors.password">{{ errors.password }}</p>
-      <label>Repite la contraseña</label>
-      <input type="password" v-model="repeatPassword" placeholder="Introduce de nuevo tu contraseña" />
-      <p class="alert alert-danger" role="alert" v-if="errors.repeatpassword">{{ errors.repeatpassword }}</p>
-      <p v-if="success" class="alert alert-success" role="alert">{{ success }}</p>
-      <button type="submit">Cambiar contraseña</button>
-    </form> 
+  <main class="main-content">
+    <section class="password-page">
+      <h1>Cambiar contraseña</h1>
+      <form class="password-form" @submit.prevent="changePassword">
+        <label>Correo electrónico</label>
+        <input id="email" type="text" v-model="email" readonly/>
+        <label>Contraseña</label>
+        <input type="password" v-model="password" placeholder="Introduce tu contraseña" />
+        <p class="alert alert-danger" role="alert" v-if="errors.password">{{ errors.password }}</p>
+        <label>Repite la contraseña</label>
+        <input type="password" v-model="repeatPassword" placeholder="Introduce de nuevo tu contraseña" />
+        <p class="alert alert-danger" role="alert" v-if="errors.repeatpassword">{{ errors.repeatpassword }}</p>
+        <p v-if="success" class="alert alert-success" role="alert">{{ success }}</p>
+        <button type="submit">Cambiar contraseña</button>
+      </form> 
+    </section>
   </main>
 </template>
 
@@ -68,6 +70,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .password-page {
   width: 80%;
   max-width: 700px;

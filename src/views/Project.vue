@@ -1,7 +1,9 @@
 <template>
-  <main class="project-page">
-    <h1>Proyecto</h1>
-    <div v-html='miHtml'></div>
+  <main class="main-content">
+    <section class="project-page">
+      <h1>Proyecto</h1>
+      <div v-html='miHtml'></div>
+    </section>
   </main>
 </template>
 
@@ -37,6 +39,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .project-page {
   margin: 120px auto 90px;
   width: 80%;

@@ -3,8 +3,8 @@ const fs = require('fs').promises
 const path = require('path')
 
 // Show a list with all the products
-const productsList = (req, res)=>{
-  Product.find().then( data => {
+const productsList = (req, res) => {
+  Product.find().then(data => {
     let products = []
     data.forEach( item => {
       let product = {}
@@ -21,7 +21,7 @@ const productsList = (req, res)=>{
 
 // Create and save a new product
 const productsSave = (req, res) => {
-  let images=[]
+  let images = []
   req.files.forEach( i => images.push(i.filename))
   req.body.images = images
   let product = new Product(req.body)
@@ -44,33 +44,37 @@ const productsSave = (req, res) => {
 // Delete a product on the database
 const productsDelete = async (req, res) => {
 
-  /*  Product.findById(req.params.id).lean()
+  Product.findById(req.params.id).lean()
       .then(product => {
-        product.images.forEach(image => fs.unlink(path.join(__dirname, '../../public/images/', image))
+        product.images.forEach(image => fs.unlink(path.join(__dirname, '../../public/images/', image)))})
       .then(() => console.log('¡Imagen Borrada con exito!'))
       .catch(err => console.error('Problema al eliminar la imagen: ', err))
-            })
-        })
-    const product_delete = await Product.findByIdAndDelete(req.params.id)
-    console.log("Se ha borrado: " + product_delete)
-    res.render('products', {src:'products.js'}) */
+
+  const product_delete = await Product.findByIdAndDelete(req.params.id)
+  console.log("Se ha borrado: " + product_delete)
+  res.render('products', { src:'products.js', css: 'products', title: 'Admin | Productos' })
+
 }
 
 // Show info of a specific product
 const productsFindById = (req, res) => {
+
   Product.findById(req.params.id).lean()
     .then(product => {
       product.image1 = product.images[0]
       product.image2 = product.images[1]
       res.render('product', {product, title: 'Admin | Productos', src:'product.js', css: 'products'})})
     .catch(err => console.log(err.message))
+
 }
 
 // Delete images from the folder
 const imagesDelete = (req, res) => {  
-    fs.unlink(path.join(__dirname, '../../public/images/', req.params.img))
+
+  fs.unlink(path.join(__dirname, '../../public/images/', req.params.img))
     .then(() => console.log('¡Imagen Borrada con exito!'))
     .catch(err => console.error(err.message))
+
 }
 
 // Update the product's info on the database
@@ -101,27 +105,31 @@ const productsUpdate = (req, res) => {
 
 // Show products by category for the User
 const listProduct = (req, res) => {
+
   let category = req.params.category
   Product.find({ category: category })
     .then(data => res.json(data))
     .catch(err => res.json(err))
+
 }
 
 // Show a specific product for the User
 const showDetailProduct = (req, res) => {
-    let idProduct = req.params.id
-    Product.findById(idProduct)
-        .then(data => res.json(data))
-        .catch(err => res.json(err))
-}
+
+  let idProduct = req.params.id
+  Product.findById(idProduct)
+    .then(data => res.json(data))
+    .catch(err => res.json(err))
+
+  }
 
 module.exports = {
-    productsList,
-    productsSave,
-    productsDelete,
-    productsFindById,
-    imagesDelete,
-    productsUpdate,
-    listProduct,
-    showDetailProduct
+  productsList,
+  productsSave,
+  productsDelete,
+  productsFindById,
+  imagesDelete,
+  productsUpdate,
+  listProduct,
+  showDetailProduct
 }
