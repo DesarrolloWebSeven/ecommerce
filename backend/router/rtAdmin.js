@@ -40,5 +40,6 @@ rtAdmin.delete('/pedidos/:id', requireAuth, orderController.deleteOrders)
 rtAdmin.get('/pedidos/:id', requireAuth, orderController.showOrderDetail)
 rtAdmin.delete('/borrado/:id', requireAuth, orderController.deleteProduct)
 rtAdmin.put('/pedidos/:id', orderController.updateOrder)
+/***crear mi ruta para usuario***/
 
 module.exports= rtAdmin

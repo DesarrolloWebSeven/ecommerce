@@ -8,6 +8,4 @@ import './axios'
 import i18next from '@/locales/i18next'
 
 
-
-
 createApp(App).use(i18next).use(store).use(router).mount('#app')
