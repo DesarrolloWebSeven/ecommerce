@@ -1,22 +1,24 @@
 <template>
-<main class="login-page">
-  <div class="login-options">
-    <div @click="login" class="signin" :class="{ activein : activein }">
-      <h2>Login</h2>
-    </div>
-    <div @click="register" class="signup" :class="{ activeup: activeup }">
-      <h2>Sign In</h2>
-    </div>
-  </div>
-  <div class="login-data">
-    <div v-if="user" class="data-sigin">
-      <Signin />
-    </div>
-    <div v-else class="data-signup">
-      <Signup />
-    </div>
-  </div>  
-</main>  
+  <main class="main-content">
+    <section class="login-page">
+      <div class="login-options">
+        <div @click="login" class="signin" :class="{ activein : activein }">
+          <h2>Login</h2>
+        </div>
+        <div @click="register" class="signup" :class="{ activeup: activeup }">
+          <h2>Sign In</h2>
+        </div>
+      </div>
+      <div class="login-data">
+        <div v-if="user" class="data-sigin">
+          <Signin />
+        </div>
+        <div v-else class="data-signup">
+          <Signup />
+        </div>
+      </div>  
+    </section>
+  </main>  
 </template>
 
 <script>
@@ -60,6 +62,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .login-page {
   width: 80%;
   margin: 145px auto;

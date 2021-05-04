@@ -1,106 +1,108 @@
 <template>
-<main class="order-page">
-  <section class="order-info">
-      <div class="order-titles">
-        <h2>{{ lang['data'] }}</h2>
-        <h2>{{ lang['payment'] }}</h2>
-        <h2>{{ lang['shipping'] }}</h2>
-      </div>
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 5%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">0%</div>
-      </div>
-  </section>
-  <div class="order-summary">
-    <form class="order-form" id="formOrder" @submit.prevent="saveOrder">
-      <div>
-        <label for="firstName">Nombre</label>
-        <input type="text" v-model="user.firstName" id="firstName" placeholder="Introduce tu nombre" required />
-        <div v-if="errors.firstName">
-          <p>{{ errors.firstName }}</p>
-        </div>
-      </div>
-      <div>
-        <label for="lastName">Apellidos</label>
-        <input type="text" v-model="user.lastName" id="lastName" placeholder="Introduce tus apellidos" required />
-        <div v-if="errors.lastName">
-          <p>{{ errors.lastName }}</p>
-        </div>
-      </div>
-      <div>
-        <label for="address">Direción y número</label>
-        <input type="text" v-model="user.address" id="adress" placeholder="Introduce tu dirección y número" required />
-        <div v-if="errors.address">
-          <p>{{ errors.address }}</p>
-        </div>
-      </div>
-      <div>
-        <label for="flat">Piso, puerta, escalera</label>
-        <input type="text" v-model="user.flat" id="flat" placeholder="Introduce tu piso, puerta, escalera" required />
-        <div v-if="errors.flat">
-          <p>{{ errors.flat }}</p>
-        </div>
-      </div>
-      <div>
-        <label for="postalCode">Código Postal</label>
-        <input type="text" v-model="user.postalCode" id="postalCode" placeholder="Introduce tu código postal" required />
-        <div v-if="errors.postalCode">
-          <p>{{ errors.postalCode }}</p>
-        </div>
-      </div>
-      <div>
-        <label for="city">Ciudad</label>
-        <input type="text" v-model="user.city" id="city" placeholder="Introduce tu ciudad" required />
-        <div v-if="errors.city">
-          <p>{{ errors.city }}</p>
-        </div>
-      </div>
-      <div>
-        <label for="province">Provincia</label>
-        <input type="text" v-model="user.province" id="province" placeholder="Introduce tu provincia" required />
-        <div v-if="errors.province">
-          <p>{{ errors.province }}</p>
-        </div>
-      </div>
-      <div>
-        <label>País</label>
-        <input type="text" v-model="user.country" id="country" placeholder="Introduce tu país" required />
-        <div v-if="errors.country">
-          <p>{{ errors.country }}</p>
-        </div>
-      </div>
-      <div>
-        <label for="tel">Teléfono</label>
-        <input type="tel" v-model="user.tel" id="tel" placeholder="Introduce tu teléfono" required />
-        <div v-if="errors.tel">
-          <p>{{ errors.tel }}</p>
-        </div>
-      </div>
-      <div>
-        <label for="email">Email</label>
-        <input type="email" v-model="user.email" id="email" placeholder="Introduce tu email" required />
-        <div v-if="errors.email">
-          <p>{{ errors.email }}</p>
-        </div>
-      </div>
-    </form>
-    <div class="order-products">
-      <div class="order-list" v-if="Object.keys(cart).length">
-        <div v-for="(id, i) in Object.keys(cart)" :key="i">
-          <div class="item-summary">
-            <img :src="'/images/' + cart[id].images[0]" />
-            <h2>{{ cart[id].title }}</h2>
-            <p>{{ cart[id].items }} ud.</p>
-            <p>{{ (cart[id].items * cart[id].price).toFixed(2) }} €</p>
+  <main class="main-content">
+    <section class="order-page">
+      <section class="order-info">
+          <div class="order-titles">
+            <h2>{{ lang['data'] }}</h2>
+            <h2>{{ lang['payment'] }}</h2>
+            <h2>{{ lang['shipping'] }}</h2>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 5%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">0%</div>
+          </div>
+      </section>
+      <div class="order-summary">
+        <form class="order-form" id="formOrder" @submit.prevent="saveOrder">
+          <div>
+            <label for="firstName">Nombre</label>
+            <input type="text" v-model="user.firstName" id="firstName" placeholder="Introduce tu nombre" required />
+            <div v-if="errors.firstName">
+              <p>{{ errors.firstName }}</p>
+            </div>
+          </div>
+          <div>
+            <label for="lastName">Apellidos</label>
+            <input type="text" v-model="user.lastName" id="lastName" placeholder="Introduce tus apellidos" required />
+            <div v-if="errors.lastName">
+              <p>{{ errors.lastName }}</p>
+            </div>
+          </div>
+          <div>
+            <label for="address">Direción y número</label>
+            <input type="text" v-model="user.address" id="adress" placeholder="Introduce tu dirección y número" required />
+            <div v-if="errors.address">
+              <p>{{ errors.address }}</p>
+            </div>
+          </div>
+          <div>
+            <label for="flat">Piso, puerta, escalera</label>
+            <input type="text" v-model="user.flat" id="flat" placeholder="Introduce tu piso, puerta, escalera" required />
+            <div v-if="errors.flat">
+              <p>{{ errors.flat }}</p>
+            </div>
+          </div>
+          <div>
+            <label for="postalCode">Código Postal</label>
+            <input type="text" v-model="user.postalCode" id="postalCode" placeholder="Introduce tu código postal" required />
+            <div v-if="errors.postalCode">
+              <p>{{ errors.postalCode }}</p>
+            </div>
+          </div>
+          <div>
+            <label for="city">Ciudad</label>
+            <input type="text" v-model="user.city" id="city" placeholder="Introduce tu ciudad" required />
+            <div v-if="errors.city">
+              <p>{{ errors.city }}</p>
+            </div>
+          </div>
+          <div>
+            <label for="province">Provincia</label>
+            <input type="text" v-model="user.province" id="province" placeholder="Introduce tu provincia" required />
+            <div v-if="errors.province">
+              <p>{{ errors.province }}</p>
+            </div>
+          </div>
+          <div>
+            <label>País</label>
+            <input type="text" v-model="user.country" id="country" placeholder="Introduce tu país" required />
+            <div v-if="errors.country">
+              <p>{{ errors.country }}</p>
+            </div>
+          </div>
+          <div>
+            <label for="tel">Teléfono</label>
+            <input type="tel" v-model="user.tel" id="tel" placeholder="Introduce tu teléfono" required />
+            <div v-if="errors.tel">
+              <p>{{ errors.tel }}</p>
+            </div>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="email" v-model="user.email" id="email" placeholder="Introduce tu email" required />
+            <div v-if="errors.email">
+              <p>{{ errors.email }}</p>
+            </div>
+          </div>
+        </form>
+        <div class="order-products">
+          <div class="order-list" v-if="Object.keys(cart).length">
+            <div v-for="(id, i) in Object.keys(cart)" :key="i">
+              <div class="item-summary">
+                <img :src="'/images/' + cart[id].images[0]" />
+                <h2>{{ cart[id].title }}</h2>
+                <p>{{ cart[id].items }} ud.</p>
+                <p>{{ (cart[id].items * cart[id].price).toFixed(2) }} €</p>
+              </div>
+            </div>
+          </div>
+          <div class="order-total">
+            <p class="order-price">TOTAL: {{(totalPrice).toFixed(2)}} €</p>
+            <button class="order-button" form="formOrder">Continuar al pago</button>
           </div>
         </div>
       </div>
-      <div class="order-total">
-        <p class="order-price">TOTAL: {{(totalPrice).toFixed(2)}} €</p>
-        <button class="order-button" form="formOrder">Continuar al pago</button>
-      </div>
-    </div>
-  </div>
-</main>
+    </section>
+  </main>
 </template>
 
 <script>
@@ -143,8 +145,9 @@ export default {
           headers: { Authorization: "Bearer " + localStorage.getItem("jwt") },
         });
         if (res.data.message === "fail") {
-          router.go(-1)
-          alert('Es necesario iniciar sesión para finalizar la compra')
+          let res = confirm('Es necesario iniciar sesión para finalizar la compra. ¿Desea iniciarla ahora?')
+          if (res) router.push({ name: 'Login'})
+          else router.go(-1)
         }
         if(!localStorage.getItem('cart')) router.go(-1)
         userId.value = res.data.decodedToken.id;
@@ -229,9 +232,16 @@ export default {
 
 
 <style lang="scss" scoped>
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .order-page {
   width: 80%;
-  margin: 100px auto;
+  margin: 110px auto 90px;
   color: black;
 
   .order-info {

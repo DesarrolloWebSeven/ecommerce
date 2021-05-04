@@ -1,22 +1,24 @@
 <template>
-  <main class="home">
-    <div class="home-banner">
-      <img :src="lang.imgBanner" alt="">
-    </div>
-    <div class="home-section">
-      <div class="links">
-        <router-link to="/productos/camisetas"><img :src="lang.imgTshirts" alt=""></router-link>
+  <main class="main-content">
+    <section class="home">
+      <div class="home-banner">
+        <img :src="lang.imgBanner" alt="">
       </div>
-      <div class="links">
-        <router-link to="/productos/tazas"><img :src="lang.imgMugs" alt=""></router-link>
+      <div class="home-section">
+        <div class="links">
+          <router-link to="/productos/camisetas"><img :src="lang.imgTshirts" alt=""></router-link>
+        </div>
+        <div class="links">
+          <router-link to="/productos/tazas"><img :src="lang.imgMugs" alt=""></router-link>
+        </div>
+        <div class="links">
+          <router-link to="/productos/juegos"><img :src="lang.imgGames" alt=""></router-link>
+        </div>
+        <div class="links">
+          <router-link to="/productos/accesorios"><img :src="lang.imgAccessories" alt=""></router-link>
+        </div>
       </div>
-      <div class="links">
-        <router-link to="/productos/juegos"><img :src="lang.imgGames" alt=""></router-link>
-      </div>
-      <div class="links">
-        <router-link to="/productos/accesorios"><img :src="lang.imgAccessories" alt=""></router-link>
-      </div>
-    </div>
+    </section>
   </main>
 </template>
 
@@ -34,6 +36,13 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .home {
   margin: 80px auto 100px;
   width: 80%;

@@ -1,37 +1,39 @@
 <template>
-  <main class="product-page">
-    <div class="product-card" v-if="productDetail">
-      <div id="carousel" class="carousel slide product-photo" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img :src="'/images/' + productDetail.images[0]" class="d-block w-100" />
+  <main class="main-content">
+    <section class="product-page">
+      <div class="product-card" v-if="productDetail">
+        <div id="carousel" class="carousel slide product-photo" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img :src="'/images/' + productDetail.images[0]" class="d-block w-100" />
+            </div>
+            <div class="carousel-item">
+              <img :src="'/images/' + productDetail.images[1]" class="d-block w-100" />
+            </div>
           </div>
-          <div class="carousel-item">
-            <img :src="'/images/' + productDetail.images[1]" class="d-block w-100" />
+          <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev" >
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+        <div class="product-description">
+          <h1>{{ productDetail.title }}</h1>
+          <p id="price">{{ productDetail.price }} €</p>
+          <p>{{ productDetail.description }}</p>
+          <ul>
+            <li>{{ productDetail.features[0] }}</li>
+            <li>{{ productDetail.features[1] }}</li>
+            <li>{{ productDetail.features[2] }}</li>
+          </ul>
+          <div class="product-buy">
+            <input v-model="contador" type="number" min="1" :max=productDetail.quantity >
+            <button @click="addToCart(productDetail)"><i class="fas fa-shopping-basket"></i></button>
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev" >
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-          <i class="fas fa-chevron-right"></i>
-        </button>
       </div>
-      <div class="product-description">
-        <h1>{{ productDetail.title }}</h1>
-        <p id="price">{{ productDetail.price }} €</p>
-        <p>{{ productDetail.description }}</p>
-        <ul>
-          <li>{{ productDetail.features[0] }}</li>
-          <li>{{ productDetail.features[1] }}</li>
-          <li>{{ productDetail.features[2] }}</li>
-        </ul>
-        <div class="product-buy">
-          <input v-model="contador" type="number" min="1" :max=productDetail.quantity >
-          <button @click="addToCart(productDetail)"><i class="fas fa-shopping-basket"></i></button>
-        </div>
-      </div>
-    </div>
+    </section>
   </main>
 </template>
 
@@ -74,6 +76,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .product-page {
   width: 80%;
   max-width: 900px;

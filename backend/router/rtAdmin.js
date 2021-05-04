@@ -8,7 +8,7 @@ const clientController = require('../controllers/clientController')
 const { checkUser, requireAuth } = require('../helpers/validation')
 
 
-// Check User
+// Check user authentication
 rtAdmin.get('*', checkUser)
 
 // Login routes
@@ -18,6 +18,8 @@ rtAdmin.get('/logout', adminController.logout)
 
 // Project info routes
 rtAdmin.get('/proyecto', requireAuth, adminController.project)
+rtAdmin.post('/editor/:title', requireAuth, pageController.pageUpdate)
+rtAdmin.get('/editor/:title', pageController.pageList)
 
 // Client routes
 rtAdmin.get('/clientes', requireAuth, clientController.clientsList)
@@ -38,9 +40,5 @@ rtAdmin.delete('/pedidos/:id', requireAuth, orderController.deleteOrders)
 rtAdmin.get('/pedidos/:id', requireAuth, orderController.showOrderDetail)
 rtAdmin.delete('/borrado/:id', requireAuth, orderController.deleteProduct)
 rtAdmin.put('/pedidos/:id', orderController.updateOrder)
-
-// Content editor
-rtAdmin.post('/editor/:title', requireAuth, pageController.pageUpdate)
-rtAdmin.get('/editor/:title', pageController.pageList)
 
 module.exports= rtAdmin

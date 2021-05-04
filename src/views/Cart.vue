@@ -1,22 +1,22 @@
 <template>
-  <main class="cart">
-  <section class="cart-page">
-    <h1>{{lang["cart"]}}</h1>
-    <div class="cart-group">
-      <div v-if="Object.keys(cart).length">
-        <CartComponent />
-        <p class="cart-price">TOTAL: {{(totalPrice).toFixed(2)}} €</p>
-        <div class="cart-buttons">
-        <button class="empty-button" @click="emptyCart">{{lang["emptyCart"]}}</button>
-        <button class="buy-button"><router-link to="/carrito/envio">{{lang["process"]}}</router-link></button>
+  <main class="main-content">
+    <section class="cart-page">
+      <h1>{{lang["cart"]}}</h1>
+      <div class="cart-group">
+        <div v-if="Object.keys(cart).length">
+          <CartComponent />
+          <p class="cart-price">TOTAL: {{(totalPrice).toFixed(2)}} €</p>
+          <div class="cart-buttons">
+          <button class="empty-button" @click="emptyCart">{{lang["emptyCart"]}}</button>
+          <button class="buy-button"><router-link to="/carrito/envio">{{lang["process"]}}</router-link></button>
+          </div>
+        </div>
+        <div class="empty-cart" v-else>
+          <img src="/logo/emptycart.jpg" />
+          <h2>{{lang["yourCartEmpty"]}}</h2>
         </div>
       </div>
-      <div class="empty-cart" v-else>
-        <img src="/logo/emptycart.jpg" />
-        <h2>{{lang["yourCartEmpty"]}}</h2>
-      </div>
-    </div>
-  </section>
+    </section>
   </main>
 </template>
 
@@ -51,15 +51,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cart {
-  height: 100vh;
+.main-content {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .cart-page {
-  margin: 0 auto;
+  margin: 100px auto;
   width: 80%;
   max-width: 700px;
   color: rgb(99, 98, 98);
