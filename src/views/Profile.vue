@@ -74,7 +74,7 @@
           <div v-for="(order, i) in orders" :key="i">
             <div class="card border-success mb-3">
               <div class="card-header bg-transparent border-success">
-                <label class="strong">Número de Referencia Pedido :</label>
+                <label class="strong profile-verview">Número de Referencia Pedido :</label>
                 <p> {{order._id}} </p>
               </div>
               <div class="card-body text-success">
@@ -82,13 +82,13 @@
                 <div class="body-card-items">
                   <div class="col-12 item">
                     <div class="profile-overview">
-                      <p>ARTICULOS</p>
-                      <h4>{{order.totalProducts}}</h4>
+                      <p class="">ARTICULOS</p>
+                      <h4>{{order.totalProducts}} und.</h4>
                     </div>
                   </div>
                   <div class="col-12 item">
                     <div class="profile-overview">
-                      <p>PRECIO</p>
+                      <p class="">PRECIO</p>
                       <h4>${{order.totalPrice}}</h4>
                     </div>
                   </div>
@@ -217,9 +217,9 @@ export default {
   }
 
   .avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
   }
 }
 
@@ -227,34 +227,34 @@ export default {
   margin: 30px auto;
 }
 
-
 .btn-outline-warning:hover {
-    color: white;
-    background-color: #22B573;
-    border-color: #329e7e;
-    opacity: 60%;
+  color: white;
+  background-color: #22B573;
+  border-color: #329e7e;
+  opacity: 60%;
 }
 
 button {
-    width: 100%;
-    align-self: center;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 0;
-    color: white;
-    background-color: #22B573;
-    margin-top: 10px;
-    text-transform: none;
+  width: 100%;
+  align-self: center;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 0;
+  color: white;
+  background-color: #22B573;
+  margin-top: 10px;
+  text-transform: none;
 }
+
 .btn:focus {
   outline: none;
   box-shadow: none;
 }
 
 .card-container {
-    padding: 100px 0px;
-    -webkit-perspective: 1000;
-    perspective: 1000;
+  padding: 100px 0px;
+  -webkit-perspective: 1000;
+  perspective: 1000;
 }
 
 .strong{
@@ -263,7 +263,7 @@ button {
 }
 
 .border-success {
-    border-color: #22B573 !important;
+  border-color: #22B573 !important;
 }
 .text-success {
     color: #22B573 !important;
@@ -276,12 +276,10 @@ button {
   grid-gap: 10px;
 }
 
-.card {
-    word-wrap: none;
-}
+
 .scroll{
-    overflow-y: auto;
-    height: 400px;
+  overflow-y: auto;
+  height: 400px;
 }
 
 .item{
