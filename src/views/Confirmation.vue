@@ -1,14 +1,16 @@
 <template>
-<main class="confirmation-page"> 
-  <div class="confirmation-text" v-if="success">
-    <img src="/logo/welcome1.png" alt="Bienvenida a Geeky">
-    <h1>¡Bienvenido a Geeky!</h1>
-    <p>{{lang["success"]}}</p> 
-  </div>
-  <div class="confirmation-text" v-else>
-    <p>{{lang["waitingInfo"]}}</p>
-  </div>
-</main>
+  <main class="main-content">
+    <section class="confirmation-page"> 
+      <div class="confirmation-text" v-if="success">
+        <img src="/logo/welcome1.png" alt="Bienvenida a Geeky">
+        <h1>¡Bienvenido a Geeky!</h1>
+        <p>{{lang["success"]}}</p> 
+      </div>
+      <div class="confirmation-text" v-else>
+        <p>{{lang["waitingInfo"]}}</p>
+      </div>
+    </section>
+  </main>
 </template>
 
 <script>
@@ -39,6 +41,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .confirmation-page {
   width: 80%;
   min-height: 300px;

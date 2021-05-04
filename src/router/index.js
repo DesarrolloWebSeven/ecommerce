@@ -67,6 +67,7 @@ const routes = [
     path: '/usuario/registro/:id',
     name: 'Confirmation',
     component: Confirmation,
+    props: true
   },
   {
     path: '/productos/:category',

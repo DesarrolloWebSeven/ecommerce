@@ -1,14 +1,16 @@
 <template>
-<main class="category-page">
-  <div class="category-banner">
-    <img :src="'/logo/' + category + '-' + lang + '.png'" alt="">
-  </div>
-  <div class="category-main" v-if="products">
-    <div v-for="(product, i) in products" :key="i">
-    <Product class="category-product" :product="product" />
-    </div>
-  </div>
-</main>
+  <main class="main-content">
+    <section class="category-page">
+      <div class="category-banner">
+        <img :src="'/logo/' + category + '-' + lang + '.png'" alt="">
+      </div>
+      <div class="category-main" v-if="products">
+        <div v-for="(product, i) in products" :key="i">
+        <Product class="category-product" :product="product" />
+        </div>
+      </div>
+      </section>
+  </main>
 </template>
 
 <script>
@@ -53,10 +55,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .category-page {
   width: 80%;
-  margin: 0 auto;
-  padding-top: 90px;
+  margin: 90px auto 30px;
 
   .category-banner {
     width: 100%;

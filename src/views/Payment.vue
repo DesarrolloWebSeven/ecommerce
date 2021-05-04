@@ -1,40 +1,42 @@
 <template>
-  <main class="payment-page">
-    <section class="payment-info">
-      <div class="payment-titles">
-        <h2>{{ lang['data'] }}</h2>
-        <h2>{{ lang['payment'] }}</h2>
-        <h2>{{ lang['shipping'] }}</h2>
-      </div>
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" :style="width" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">{{ progress }}</div>
-      </div>
+  <main class="main-content">
+    <section class="payment-page">
+      <section class="payment-info">
+        <div class="payment-titles">
+          <h2>{{ lang['data'] }}</h2>
+          <h2>{{ lang['payment'] }}</h2>
+          <h2>{{ lang['shipping'] }}</h2>
+        </div>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" :style="width" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">{{ progress }}</div>
+        </div>
+      </section>
+      <form @submit.prevent="emptyCart">
+        <div class="payment-methods">
+          <i class="fab fa-cc-visa"></i>
+          <i class="fab fa-cc-mastercard"></i>
+          <i class="fab fa-cc-amex"></i>
+          <i class="fab fa-cc-paypal"></i>
+        </div>
+        <label for="owner">{{ lang['accountHolder'] }}</label>
+        <input type="text" id="owner" :placeholder="lang['plAccountHolder']" required />
+        <label for="cardNumber">{{ lang['creditCard'] }}</label>
+        <input type="text" id="cardNumber" minlenght="12" maxlenght="12" :placeholder="lang['plCreditCard']" required />
+        <div class="cardinfo">
+          <div class="card-date">
+            <label for="expiry">{{ lang['expirationDate'] }}</label>
+            <input type="date" id="expiry" :placeholder="lang['plExpirationDate']" required />
+          </div>
+          <div class="card-code">
+            <label for="securityCode">{{ lang['securityCode'] }}</label>
+            <input type="number" id="securityCode" minlenght="3" maxlenght="3" :placeholder="lang['plSecurityCode']" required/>
+          </div>
+        </div>
+        <div v-if="success" class="alert alert-success text-center" role="alert"> {{ success }} </div>
+        <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
+        <button id="btnPay" type="submit">{{ lang['buttonPay'] }}</button>
+        </form>
     </section>
-    <form @submit.prevent="emptyCart">
-      <div class="payment-methods">
-        <i class="fab fa-cc-visa"></i>
-        <i class="fab fa-cc-mastercard"></i>
-        <i class="fab fa-cc-amex"></i>
-        <i class="fab fa-cc-paypal"></i>
-      </div>
-      <label for="owner">{{ lang['accountHolder'] }}</label>
-      <input type="text" id="owner" :placeholder="lang['plAccountHolder']" required />
-      <label for="cardNumber">{{ lang['creditCard'] }}</label>
-      <input type="text" id="cardNumber" minlenght="12" maxlenght="12" :placeholder="lang['plCreditCard']" required />
-      <div class="cardinfo">
-        <div class="card-date">
-          <label for="expiry">{{ lang['expirationDate'] }}</label>
-          <input type="date" id="expiry" :placeholder="lang['plExpirationDate']" required />
-        </div>
-        <div class="card-code">
-          <label for="securityCode">{{ lang['securityCode'] }}</label>
-          <input type="number" id="securityCode" minlenght="3" maxlenght="3" :placeholder="lang['plSecurityCode']" required/>
-        </div>
-      </div>
-      <div v-if="success" class="alert alert-success text-center" role="alert"> {{ success }} </div>
-      <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
-      <button id="btnPay" type="submit">{{ lang['buttonPay'] }}</button>
-      </form>
   </main>
 </template>
 
@@ -99,7 +101,7 @@ export default {
     const availableOrder = () => {
 
       try {
-        if(!localStorage.getItem('order') || !localStorage.getItem('cart')) router.push('/')
+        if(!localStorage.getItem('order') || !localStorage.getItem('cart')) router.go(-1)
       } catch (err) {
         console.log(err.message) 
       }
@@ -121,10 +123,15 @@ export default {
 
 
 <style lang="scss" scoped>
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .payment-page {
   width: 80%;
-  max-height: 100vh;
-  margin: 100px auto;
+  margin: 110px auto 90px;
   color: black;
 }
 

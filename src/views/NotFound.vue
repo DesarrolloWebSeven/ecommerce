@@ -1,9 +1,11 @@
 <template>
-<main class="notfound-page">
-  <img src="/logo/404error.jpg" alt="">
-  <h1>{{lang["titleNotFound"]}}</h1>
-  <button><router-link to="/">Inicio</router-link></button>
-</main>
+  <main class="main-content">
+    <section class="notfound-page">
+      <img src="/logo/404error.jpg" alt="">
+      <h1>{{lang["titleNotFound"]}}</h1>
+      <button><router-link to="/">Inicio</router-link></button>
+    </section>
+  </main>
 </template>
 
 <script>
@@ -22,6 +24,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .notfound-page {
   margin: 60px auto;
   width: 80%;

@@ -1,16 +1,18 @@
 <template>
-<main class="cookies-page">
-  <h1>{{ lang["thisCookies"] }}</h1>
-  <h2>{{ lang["titleCookies"] }}</h2>
-  <p>{{ lang["pCookies"] }}</p>
-  <ol>
-    <li>{{ lang["li1"] }}</li>
-    <li>{{ lang["li2"] }}</li>
-    <li>{{ lang["li3"] }}</li>
-    <li>{{ lang["li4"] }}</li>
-    <li>{{ lang["li5"] }}</li>
-  </ol>
-</main>
+  <main class="main-content">
+    <section class="cookies-page">
+      <h1>{{ lang["thisCookies"] }}</h1>
+      <h2>{{ lang["titleCookies"] }}</h2>
+      <p>{{ lang["pCookies"] }}</p>
+      <ol>
+        <li>{{ lang["li1"] }}</li>
+        <li>{{ lang["li2"] }}</li>
+        <li>{{ lang["li3"] }}</li>
+        <li>{{ lang["li4"] }}</li>
+        <li>{{ lang["li5"] }}</li>
+      </ol>
+    </section>
+  </main>
 </template>
 
 <script>
@@ -29,6 +31,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .cookies-page {
   margin: 120px auto 90px;
   width: 80%;
