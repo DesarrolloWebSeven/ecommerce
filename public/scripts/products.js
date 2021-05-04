@@ -7,8 +7,6 @@ window.onload=()=>{
   let search = document.querySelector('#search')
   search.addEventListener('keyup', searchItem)
 
-  document.querySelector("#producsForm").validate();
-
 }
 
 const deleteProduct = (e) => {

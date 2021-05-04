@@ -49,7 +49,7 @@ const deleteProduct = async (req, res) => {
   // Search for the order and update its info
   let order = await Order.findById(idOrder)
   order.totalProducts = order.totalProducts - order.cart[product].items
-  order.totalPrice = order.totalPrice - order.cart[product].price
+  order.totalPrice = order.totalPrice - (order.cart[product].price * order.cart[product].items)
   
   // Update the product quantity available on the database
   let updateProductQuantity = await Product.findById(product)
