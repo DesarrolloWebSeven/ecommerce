@@ -6,7 +6,6 @@ const pageUpdate = (req, res) => {
   Page.find({ title: req.body.title }).lean()
     .then(data => updateContent(data))
     .catch(err => res.json(err))
-
 }
 
 // Search and update the content
@@ -25,13 +24,11 @@ const updateContent = (data) => {
       res.render('project', ({ title: "Admin | Proyecto", css: 'project', src:'staticPages.js' }))
     })
     .catch(err => console.log(err.message))
-
 }
 
 // Show content in the Front End
 
 const pageList = (req, res) => {
-
   let page = req.params.title
   Page.find({ title: page })
     .then(data => res.json(data))
