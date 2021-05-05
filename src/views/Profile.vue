@@ -82,6 +82,9 @@
                 <div class="body-card-items">
                   <div class="col-12 item">
                     <div class="profile-overview">
+                      <div>
+
+                      </div>
                       <p class="">ARTICULOS</p>
                       <h4>{{order.totalProducts}} und.</h4>
                     </div>
@@ -118,6 +121,7 @@ export default {
     const success = ref('')
     const error = ref('')
     const orders = ref('')
+    const products = reactive([])
     let status = reactive({
       default:true,
       update:false,
@@ -181,7 +185,14 @@ export default {
     const showOrders = async()=>{
       controler('orders')
       const res = await axios.get(`usuario/perfil/orders/${(JSON.parse(id)).id}`)
+      for (const product in res.data[0].cart) {
+        console.log(res.data[0].cart[product])
+        products.push(res.data[0].cart[product])
+        // if (valor == section) status[`${section}`]=true
+        // else status[`${section}`]=false
+      }
       orders.value=res.data
+      console.log(products)
     }
 
     /*****Controlador de vistas***********/
@@ -193,7 +204,7 @@ export default {
     }
 
     return {
-        user, success, error, orders, status,
+        user, success, error, orders, status, products,
         saveUser, editPass, showOrders, deleteCount, updateData, cancel, confirmBaja,
     }
   }
