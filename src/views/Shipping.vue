@@ -149,8 +149,8 @@ export default {
           if (res) router.push({ name: 'Login'})
           else router.go(-1)
         }
-        if(!localStorage.getItem('cart')) router.go(-1)
-        userId.value = res.data.decodedToken.id;
+        if (!localStorage.getItem('cart')) router.go(-1)
+        if (res.data.message === "success")userId.value = res.data.decodedToken.id;
       } catch (err) {
         console.log(err);
       }

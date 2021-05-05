@@ -44,14 +44,12 @@ const productsSave = (req, res) => {
 const productsDelete = async (req, res) => {
 
   Product.findById(req.params.id).lean()
-      .then(product => {
-        product.images.forEach(image => fs.unlink(path.join(__dirname, '../../public/images/', image)))})
-      .then(() => console.log('¡Imagen Borrada con exito!'))
-      .catch(err => console.error('Problema al eliminar la imagen: ', err))
-
-  const product_delete = await Product.findByIdAndDelete(req.params.id)
-  console.log("Se ha borrado: " + product_delete)
-  res.render('products', { src:'products.js', css: 'products', title: 'Admin | Productos' })
+    .then(async product => {
+      if(product.images.length) product.images.forEach(image => fs.unlink(path.join(__dirname, '../../public/images/', image)))
+      Product.findByIdAndDelete(req.params.id)
+    })
+    .then(() => res.render('products', { src:'products.js', css: 'products', title: 'Admin | Productos' }))
+    .catch(err => console.error('Problema al eliminar la imagen: ', err))
 
 }
 
