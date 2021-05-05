@@ -70,28 +70,29 @@
           <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
         </div>
 
-        <div v-if="status.orders">
+        <div v-if="status.orders" class="section row g-3 scroll">
           <div v-for="(order, i) in orders" :key="i">
-            <div class="card border-success mb-3" style="max-width: 18rem;">
+            <div class="card border-success mb-3">
               <div class="card-header bg-transparent border-success">
-                <label class="strong">Número de Referencia Pedido :</label> 
+                <label class="strong profile-verview">Número de Referencia Pedido :</label>
                 <p> {{order._id}} </p>
               </div>
               <div class="card-body text-success">
                 <h5 class="card-title"><label class="strong">Estado:</label> {{order.state}} </h5><hr>
-                <p class="card-text">Soment.</p>
-                  <div class="col-4">
+                <div class="body-card-items">
+                  <div class="col-12 item">
                     <div class="profile-overview">
-                      <p>ARTICULOS</p>
-                      <h4>{{order.totalProducts}}</h4>
+                      <p class="">ARTICULOS</p>
+                      <h4>{{order.totalProducts}} und.</h4>
                     </div>
                   </div>
-                  <div class="col-4">
+                  <div class="col-12 item">
                     <div class="profile-overview">
-                      <p>PRECIO:</p>
+                      <p class="">PRECIO</p>
                       <h4>${{order.totalPrice}}</h4>
                     </div>
                   </div>
+                </div>
               </div>
               <div class="card-footer bg-transparent border-success"><p> Fecha: {{order.createdAt}} </p></div>
             </div>
@@ -216,133 +217,73 @@ export default {
   }
 
   .avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
   }
 }
 
-.section .row[data-v-ced23842] {
+.section .row {
   margin: 30px auto;
-}
-.col-md-4 {
-  margin: auto auto;
 }
 
 .btn-outline-warning:hover {
-    color: white;
-    background-color: #22B573;
-    border-color: #329e7e;
-    opacity: 60%;
+  color: white;
+  background-color: #22B573;
+  border-color: #329e7e;
+  opacity: 60%;
 }
 
-.order{
-  background-color: rgb(121, 139, 133);
-  border-radius: 30px;
-  padding: 5px;
-  p{
-    color: #000;
-  }
-}
 button {
-    width: 100%;
-    align-self: center;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 0;
-    color: white;
-    background-color: #22B573;
-    margin-top: 10px;
-    text-transform: none;
+  width: 100%;
+  align-self: center;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 0;
+  color: white;
+  background-color: #22B573;
+  margin-top: 10px;
+  text-transform: none;
 }
+
 .btn:focus {
   outline: none;
   box-shadow: none;
 }
 
 .card-container {
-    padding: 100px 0px;
-    -webkit-perspective: 1000;
-    perspective: 1000;
+  padding: 100px 0px;
+  -webkit-perspective: 1000;
+  perspective: 1000;
 }
 
-.profile-card-4 {
-    max-width: 300px;
-    background-color: #FFF;
-    border-radius: 5px;
-    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    position: relative;
-    margin: 10px auto;
-    cursor: pointer;
-}
-
-.profile-card-4 img {
-    transition: all 0.25s linear;
-}
-
-.profile-card-4 .profile-content {
-    position: relative;
-    padding: 15px;
-    background-color: #FFF;
-}
-
-.profile-card-4 .profile-name {
-    font-weight: bold;
-    position: absolute;
-    left: 0px;
-    right: 0px;
-    top: -70px;
-    color: #FFF;
-    font-size: 17px;
-}
-
-.profile-card-4 .profile-name p {
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 1.5px;
-}
-
-.profile-card-4 .profile-description {
-    color: #777;
-    font-size: 12px;
-    padding: 10px;
-}
-
-.profile-card-4 .profile-overview {
-    padding: 15px 0px;
-}
-
-.profile-card-4 .profile-overview p {
-    font-size: 10px;
-    font-weight: 600;
-    color: #777;
-}
-
-.profile-card-4 .profile-overview h4 {
-    color: #273751;
-    font-weight: bold;
-}
-
-.profile-card-4 .profile-content::before {
-    content: "";
-    position: absolute;
-    height: 20px;
-    top: -10px;
-    left: 0px;
-    right: 0px;
-    background-color: #FFF;
-    z-index: 0;
-    transform: skewY(3deg);
-}
-
-.profile-card-4:hover img {
-    transform: rotate(5deg) scale(1.1, 1.1);
-    filter: brightness(110%);
-}
 .strong{
   font-size: small;
   font-weight: 600;
+}
+
+.border-success {
+  border-color: #22B573 !important;
+}
+.text-success {
+    color: #22B573 !important;
+}
+.body-card-items{
+  display: grid;
+  justify-items: stretch;
+  align-items: stretch;
+  grid-template-columns: repeat(2, 2fr);
+  grid-gap: 10px;
+}
+
+
+.scroll{
+  overflow-y: auto;
+  height: 400px;
+}
+
+.item{
+  border: 1px solid #22B573;
 }
 
 </style>
