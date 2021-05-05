@@ -27,15 +27,15 @@
           <label for="categoria">Categoría</label>
           <select class="form-control" name="category" value="{{product.category}}">
             <option>{{product.category}}</option>
-            <option>Accesorios</option>
-            <option>Camisetas</option>
-            <option>Games</option>
-            <option>Tazas</option>
+            <option>accesorios</option>
+            <option>camisetas</option>
+            <option>games</option>
+            <option>tazas</option>
           </select>
         </div>
         <div class="form-group col-md-6">
           <label for="unidades">Unidades disponibles</label>
-          <input type="number" class="form-control" name="quantity" value="{{product.quantity}}" placeholder="Cantidad de unidades disponibles">
+          <input type="number" class="form-control" name="quantity" value="{{product.quantity}}" min="0" placeholder="Cantidad de unidades disponibles">
         </div>
       </div>
         <input type="text" class="form-control hidden" name="id" value="{{product._id}}">
