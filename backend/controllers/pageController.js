@@ -5,9 +5,9 @@ const pageUpdate = (req, res) => {
   req.body.title = req.params.title
   Page.find({ title: req.body.title }).lean()
     .then(data => {
-      updateContent(data)
+      updateContent(data, req.body)
         .then(page => {
-          console.log(page)
+          console.log('linea10',page)
           res.render('project', ({ title: "Admin | Proyecto", css: 'project', src:'staticPages.js' }))
         })
         .finally(console.log("Promesa en espera"))
@@ -17,12 +17,13 @@ const pageUpdate = (req, res) => {
 }
 
 // Search and update the content
-const updateContent = (data) => {
+const updateContent = (data, req) => {
+  console.log('linea21 ', req)
   return new Promise((resolved, reject)=>{
     Page.findByIdAndUpdate({_id : data[0]._id}, {
-      title : data[0].title,
-      content : data[0].content,
-      images : data[0].images,
+      title : req.title,
+      content : req.content,
+      images : req.images,
     }).lean()
     .then(data=>{ resolved(data) })
     .catch(error=>reject(error)) })
