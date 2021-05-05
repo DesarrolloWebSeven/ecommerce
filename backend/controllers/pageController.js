@@ -2,7 +2,6 @@ const Page = require('../models/Page')
 
 // Search content to update pages
 const pageUpdate = (req, res) => {
-
   req.body.title = req.params.title
   Page.find({ title: req.body.title }).lean()
     .then(data => updateContent(data))
@@ -12,11 +11,10 @@ const pageUpdate = (req, res) => {
 
 // Search and update the content
 const updateContent = (data) => {
-
   Page.findByIdAndUpdate({_id : data[0]._id}, {
-    title : req.body.title,
-    content : req.body.content,
-    images : req.body.images,
+    title : data[0].title,
+    content : data[0].content,
+    images : data[0].images,
   }).lean()
     .then(page => {
       console.log('Producto actualizado correctamente: ' + page)
