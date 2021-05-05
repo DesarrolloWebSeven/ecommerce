@@ -44,7 +44,7 @@ export default {
 }
 
 .home {
-  margin: 80px auto 100px;
+  margin: 80px auto 50px;
   width: 80%;
   
   .home-banner img {

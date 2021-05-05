@@ -22,5 +22,10 @@ rtUser.post('/contacto', userController.contactMail)
 
 // User profile
 rtUser.get('/perfil/:id', userController.getInfoUser)
+rtUser.put('/perfil/update', userController.updateInfoUser)
+rtUser.put('/perfil/baja', userController.deactivateUser)
+rtUser.put('/perfil/update', userController.updateInfoUser)
+rtUser.get('/perfil/orders/:id', userController.orderUser)
+
 
 module.exports= rtUser
