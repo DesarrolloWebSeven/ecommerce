@@ -18,8 +18,7 @@
                 class="btn btn-primary"
                 ><i class="fab fa-linkedin"></i
               ></a>
-              <a href="https://github.com/Amparcabezas" class="btn btn-primary"
-                ><i class="fab fa-github-square"></i
+              <a href="https://github.com/Amparcabezas" class="btn btn-primary" target="_blank"><i class="fab fa-github-square"></i
               ></a>
             </div>
             </div>
@@ -32,14 +31,11 @@
               <p class="card-text">
                 {{ lang["descriptionVictor"] }}
               </p>
+              <a href="https://www.linkedin.com/in/victor-bonilla-423884119/" class="btn btn-primary" target="_blank"><i class="fab fa-linkedin"></i></a>
               <a
                 href="https://github.com/DesarrolloWebSeven"
                 class="btn btn-primary"
-                ><i class="fab fa-linkedin"></i
-              ></a>
-              <a
-                href="https://www.linkedin.com/in/victor-bonilla-423884119/"
-                class="btn btn-primary"
+                target="_blank"
                 ><i class="fab fa-github-square"></i
               ></a>
             </div>
@@ -56,9 +52,10 @@
               <a
                 href="https://www.linkedin.com/in/nuriamartinezrodrigo/"
                 class="btn btn-primary"
+                target="_blank"
                 ><i class="fab fa-linkedin"></i
               ></a>
-              <a href="https://github.com/nurimartinez" class="btn btn-primary"
+              <a href="https://github.com/nurimartinez" class="btn btn-primary" target="_blank"
                 ><i class="fab fa-github-square"></i
               ></a>
             </div>
@@ -75,9 +72,10 @@
               <a
                 href="https://www.linkedin.com/in/beatriz-lopez-martin/"
                 class="btn btn-primary"
+                target="_blank"
                 ><i class="fab fa-linkedin"></i
               ></a>
-              <a href="https://github.com/belopmardev" class="btn btn-primary"
+              <a href="https://github.com/belopmardev" class="btn btn-primary" target="_blank"
                 ><i class="fab fa-github-square"></i
               ></a>
             </div>
