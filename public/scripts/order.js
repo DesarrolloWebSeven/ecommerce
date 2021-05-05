@@ -7,7 +7,7 @@ window.onload=()=>{
 
     let id = document.querySelector('#items').dataset.id
     let product = e.target.dataset.product
-    let confirmation = confirm('¿Estás seguro de eliminar esta foto?')
+    let confirmation = confirm('¿Estás seguro de eliminar este producto?')
 
     if(confirmation) {
       fetch(`http://localhost:8081/admin/borrado/${id}`, {
