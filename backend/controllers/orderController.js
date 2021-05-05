@@ -19,10 +19,11 @@ const showOrders = async (req, res) => {
 const deleteOrders = async (req, res) => {
 
   let id = req.params.id
-  const orderInfo = await Order.findById(id)
+  const orderInfo = await Order.findOne({ _id: id })
   if (Object.keys(orderInfo.cart).length !== 0) increaseProductQuantity(orderInfo.cart)
-  const order = await Order.deleteOne({ _id: id })
-  res.json(order) 
+  Order.deleteOne({ _id: id })
+    .then(order => res.json(order))
+    .catch(err => console.log(err.message))
 
 }
 
@@ -145,13 +146,20 @@ const decreaseProductQuantity = (order) => {
 }
 
 // Increase the products quantity after deleting an order
-const increaseProductQuantity = async (order) => {
+const increaseProductQuantity = (order) => {
 
-    let id = order._id
-    let product = await Product.findById(id)
-    Product.updateOne({_id: id}, {$set: { quantity: product.quantity + order.items}})
-      .then(data => console.log(data))
-      .catch(err => console.log(err.message))
+  try {
+
+    Object.values(order).forEach(async item => {
+      let id = item._id 
+      let product = await Product.findById(id)
+      await Product.updateOne({_id: id}, {$set: { quantity: product.quantity + item.items}})
+      console.log('¡Cantidad producto sumada con éxito!')
+    })
+
+  } catch (err) {
+    console.log(err.message)
+  }
 
 }
 

@@ -27,7 +27,6 @@ const updateContent = (data) => {
 }
 
 // Show content in the Front End
-
 const pageList = (req, res) => {
 
   let page = req.params.title
