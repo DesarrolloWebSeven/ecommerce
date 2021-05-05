@@ -7,32 +7,28 @@ const pageUpdate = (req, res) => {
     .then(data => {
       updateContent(data)
         .then(page => {
+          console.log(page)
           res.render('project', ({ title: "Admin | Proyecto", css: 'project', src:'staticPages.js' }))
         })
-      .catch(err => console.log(err.message))
+        .finally(console.log("Promesa en espera"))
+        .catch(err => console.log('resolvió con: ' + err.message))
     })
     .catch(err => res.json(err))
 }
 
 // Search and update the content
 const updateContent = (data) => {
-  return new Promise((reject, resolved)=>{
+  return new Promise((resolved, reject)=>{
     Page.findByIdAndUpdate({_id : data[0]._id}, {
       title : data[0].title,
       content : data[0].content,
       images : data[0].images,
-    },
-    function(err, result) {
-        if (err) console.log('No se pudo actualizar: ' + err) 
-        else console.log('Se actualizo: ' + result)
     }).lean()
-    .then(data=>resolved(data))
-    .catch(error=>reject(error))
-  })
+    .then(data=>{ resolved(data) })
+    .catch(error=>reject(error)) })
 }
 
 // Show content in the Front End
-
 const pageList = (req, res) => {
   let page = req.params.title
   Page.find({ title: page })
