@@ -26,8 +26,7 @@ const productsSave = (req, res) => {
   req.body.images = images
   let product = new Product(req.body)
   product.save()
-    .then( data => res.render('products', {
-      src:'products.js', 
+    .then( data => res.render('products', { 
       css: 'products', 
       title: 'Admin | Productos', 
       message:"Producto guardado correctamente"
@@ -97,8 +96,7 @@ const productsUpdate = (req, res) => {
   })
     .then(product => res.render('products', {
       title: 'Admin | Productos', 
-      css: 'products', 
-      src:'product.js',
+      css: 'products',
       message: 'Producto actualizado correctamente'})) 
     .catch(err => console.log(err.message))
 } 
