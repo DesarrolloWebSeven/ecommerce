@@ -15,6 +15,10 @@ const updateContent = (data) => {
     title : data[0].title,
     content : data[0].content,
     images : data[0].images,
+  },
+  function(err, result) {
+      if (err) console.log('No se pudo actualizar: ' + err) 
+      else console.log('Se actualizo: ' + result)
   }).lean()
     .then(page => {
       console.log('Producto actualizado correctamente: ' + page)
