@@ -70,29 +70,25 @@
           <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
         </div>
 
-        <div v-if="status.orders" class="section row g-3 scroll">
+        <div v-if="status.orders" class="section row g-3">
           <div v-for="(order, i) in orders" :key="i">
-            <div class="card border-success mb-3">
-              <div class="card-header bg-transparent border-success">
-                <label class="strong profile-verview">Número de Referencia Pedido :</label>
-                <p class="info-productos"> {{order._id}} </p>
+            <div class="card mb-3">
+              <div class="bg-transparent border-success">
+                <label class="strong">Número de Referencia Pedido: </label>
+                <label class="info-productos"> {{order._id}} </label><br>
+                <label class="info-productos may"> {{order.state}} </label>
               </div>
-              <div class="card-body text-success">
-                <i class="bi bi-credit-card"></i> {{order.state}} <hr>
+              <div class="card-body text-success"><hr>
                 <div class="body-card-items">
-                  <div class="col-12 item">
-                    <div class="profile-overview">
-                      <div v-for="(product, j) in products" :key="j">
-                        <img class="img-product" :src="'/images/' + product.images[0]">
-                        {{product.title}} 
-                        € {{product.price}}
-                        {{product.items}} UND
-                        <hr>
-                      </div>
+                  <div v-for="(product, j) in products" :key="j">
+                    <img class="img-product" :src="'/images/' + product.images[0]">
+                    <label>{{product.title}}</label><br>
+                    <label>€ {{product.price}}</label> x
+                    <label>{{product.items}} UND</label>
+                    <hr>
+                  </div>
                       <p class="">ARTICULOS</p>
                       <h4>{{order.totalProducts}} und.</h4>
-                    </div>
-                  </div>
                   <div class="col-12 item">
                     <div class="profile-overview">
                       <p class="">PRECIO</p>
@@ -189,10 +185,16 @@ export default {
     /*****Mostrar pedidos********/
     const showOrders = async()=>{
       controler('orders')
+      products.splice(0)
       const res = await axios.get(`usuario/perfil/orders/${(JSON.parse(id)).id}`)
-      for (const product in res.data[0].cart) {
-        products.push(res.data[0].cart[product])
-
+      console.log(res.data)
+      console.log(res.data.length)
+      for (let i=0; i<res.data.length; i++){
+        products.splice(0)
+        for (const product in res.data[i].cart) {
+          console.log(res.data[i].cart[product])
+          products.push(res.data[i].cart[product])
+        }        
       }
       orders.value=res.data
     }
@@ -265,7 +267,7 @@ button {
 }
 
 .card-container {
-  padding: 100px 0px;
+  //padding: 100px 0px;
   -webkit-perspective: 1000;
   perspective: 1000;
 }
@@ -285,13 +287,8 @@ button {
   display: grid;
   justify-items: stretch;
   align-items: stretch;
-  grid-template-columns: repeat(2, 2fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: 10px;
-}
-
-.scroll{
-  overflow-y: auto;
-  height: 400px;
 }
 
 .item{
@@ -303,6 +300,9 @@ button {
 .info-productos{
     color: #22B573 !important;
     font-weight: 600;
-    
+}
+
+.may{
+  text-transform: uppercase;
 }
 </style>
