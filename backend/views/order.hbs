@@ -1,6 +1,6 @@
 {{> header}}
 <main>
-  <h1 class="text-center">Pedido</h1>
+  <h1 class="text-center">Información de pedido</h1>
   <form action="/admin/pedidos/{{ order._id }}?_method=PUT" class="container form-order" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="_method" value="PUT">
     <input type="text" class="form-control hidden" name="cart" value="{{ order.cart }}">
