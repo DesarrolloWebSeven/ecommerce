@@ -72,6 +72,7 @@ const deleteProduct = async (req, res) => {
 const updateOrder = async (req, res) => {
   let id = req.params.id
   let orderUpdate = await Order.updateOne({_id: id}, {$set: {
+    state: req.body.state,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,

@@ -26,14 +26,12 @@ const clientsFindById = (req, res) => {
 }
 
 // Update the client's information
-const clientsUpdate = (req, res) => {
+const clientsUpdate = async (req, res) => {
 
-  User.findByIdAndUpdate({_id : req.body.id}, {
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    email: req.body.email,
-    active: req.body.active
-  })
+  const { id, firstname, lastname, email, active } = req.body
+
+  await User.findByIdAndUpdate({_id : id}, { firstname, lastname, email, active })
+  User.findById(id).lean()
     .then(client => res.render('client', { 
         client, 
         title: 'Admin | Clientes',
