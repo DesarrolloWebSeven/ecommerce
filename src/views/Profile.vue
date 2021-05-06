@@ -75,15 +75,19 @@
             <div class="card border-success mb-3">
               <div class="card-header bg-transparent border-success">
                 <label class="strong profile-verview">Número de Referencia Pedido :</label>
-                <p> {{order._id}} </p>
+                <p class="info-productos"> {{order._id}} </p>
               </div>
               <div class="card-body text-success">
-                <h5 class="card-title"><label class="strong">Estado:</label> {{order.state}} </h5><hr>
+                <i class="bi bi-credit-card"></i> {{order.state}} <hr>
                 <div class="body-card-items">
                   <div class="col-12 item">
                     <div class="profile-overview">
-                      <div>
-
+                      <div v-for="(product, j) in products" :key="j">
+                        <img class="img-product" :src="'/images/' + product.images[0]">
+                        {{product.title}} 
+                        € {{product.price}}
+                        {{product.items}} UND
+                        <hr>
                       </div>
                       <p class="">ARTICULOS</p>
                       <h4>{{order.totalProducts}} und.</h4>
@@ -92,7 +96,7 @@
                   <div class="col-12 item">
                     <div class="profile-overview">
                       <p class="">PRECIO</p>
-                      <h4>${{order.totalPrice}}</h4>
+                      <h4>€{{order.totalPrice}}</h4>
                     </div>
                   </div>
                 </div>
@@ -128,6 +132,7 @@ export default {
       inactive:false,
       orders:false,
     })
+
     //Recuperando id de usuario
     const user = reactive({info:'default'})
     let jwt = computed(()=>{
@@ -135,8 +140,8 @@ export default {
     })
     const b64 = jwt.value.split('.')
     var id = atob(b64[1])
+
     //Request inicial
-    //      const res = await axios.put('usuario/perfil/baja', user)
     fetch(`http://localhost:8081/usuario/perfil/${(JSON.parse(id)).id}`)
       .then((res) => res.json())
       .then((data) => { user.info=data })
@@ -186,13 +191,10 @@ export default {
       controler('orders')
       const res = await axios.get(`usuario/perfil/orders/${(JSON.parse(id)).id}`)
       for (const product in res.data[0].cart) {
-        console.log(res.data[0].cart[product])
         products.push(res.data[0].cart[product])
-        // if (valor == section) status[`${section}`]=true
-        // else status[`${section}`]=false
+
       }
       orders.value=res.data
-      console.log(products)
     }
 
     /*****Controlador de vistas***********/
@@ -287,7 +289,6 @@ button {
   grid-gap: 10px;
 }
 
-
 .scroll{
   overflow-y: auto;
   height: 400px;
@@ -296,5 +297,12 @@ button {
 .item{
   border: 1px solid #22B573;
 }
-
+.img-product{
+  width: 50px;
+}
+.info-productos{
+    color: #22B573 !important;
+    font-weight: 600;
+    
+}
 </style>
