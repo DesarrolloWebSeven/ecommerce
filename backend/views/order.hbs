@@ -7,7 +7,12 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="state">Estado</label>
-          <input type="text" class="form-control" id="state" name="state" minlength="5" maxlength="15" value="{{ order.state }}" required>
+          <select class="form-control" name="state" value="{{product.category}}" required>
+            <option>{{ order.state }}</option>
+            <option>pendiente</option>
+            <option>confirmado</option>
+            <option>enviado</option>
+          </select>
         </div>
         <div class="form-group col-md-6">
           <label>ID usuario</label>
