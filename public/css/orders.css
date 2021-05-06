@@ -260,7 +260,7 @@ main {
 
 .order-article {
   position: relative;
-  width: 46%;
+  width: 100%;
   background-color: #ccffe6;
   margin: 0 15px 10px;
   padding: 5px 10px;
@@ -271,20 +271,21 @@ main {
 }
 
 .order-article .images {
-  width: 30%;
+  width: 25%;
   display: flex;
   justify-content: space-between;
 }
 
 .order-article img {
-  width: 45%;
+  width: 40%;
+  margin: 5px;
   border-radius: 5px;
 }
 
 .order-article p {
-  align-self: flex-end;
   width: 70%;
   padding-left: 10px;
+  padding-right: 10px;
   font-size: 1.2rem;
 }
 

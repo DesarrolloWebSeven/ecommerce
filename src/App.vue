@@ -4,7 +4,7 @@
 <router-view />
 <div class="contact">
   <a href="#top-page"><i class="far fa-arrow-alt-circle-up"></i></a>
-  <a href="https://wa.me/34692856097/?text=Hola%20Geeky!!%20¿Podemos%20ayudarte?"><i class="fab fa-whatsapp fa-3x"></i></a>
+  <a href="https://wa.me/34692856097/?text=Hola%20Geeky!!%20¿Podemos%20ayudarte?" target="_blank"><i class="fab fa-whatsapp fa-3x"></i></a>
 </div>
 <AlertCookies />
 <Footer/>  

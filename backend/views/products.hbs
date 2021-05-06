@@ -28,7 +28,7 @@
         </div>
         <div class="form-group col-md-6">
           <label for="precio">Precio</label>
-          <input type="number" step="0.05" class="form-control" minlength="1" maxlength="6" required name="price"
+          <input type="number" step="0.05" min="0" class="form-control" required name="price"
               placeholder="Precio por unidad">
           {{#if err.price}}
           <p class="error"> {{ err.price }} </p>
@@ -51,7 +51,7 @@
         </div>
         <div class="form-group col-md-6">
           <label for="unidades">Unidades disponibles</label> 
-          <input type="number" class="form-control" name="quantity" minlength="1" maxlength="5" required placeholder="Cantidad de unidades disponibles">
+          <input type="number" class="form-control" name="quantity" min="1" required placeholder="Cantidad de unidades disponibles">
           {{#if err.quantity}}
           <p class="error"> {{ err.quantity }} </p>
           {{/if}}

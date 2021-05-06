@@ -56,7 +56,7 @@
             <div class="alert alert-success" role="alert" v-if="success">
               {{ success }}
             </div>
-            <button class="d-flex flex-row btn btn-primary">
+            <button id="sendButton" class="d-flex flex-row btn btn-primary">
               {{ lang["sendForm"] }}
             </button>
           </form>
@@ -98,8 +98,10 @@ export default {
           subject: subject.value,
           message: message.value,
         });
-        if (res.status === 200)
+        if (res.status === 200) {
           success.value = "Su mensaje se ha enviado con éxito";
+          sendButton.classList.add('d-none')
+        }
       } catch (err) {
         console.log(err.message);
       }
