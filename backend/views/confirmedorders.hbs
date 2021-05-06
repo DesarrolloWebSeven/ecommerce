@@ -1,0 +1,28 @@
+{{> header}}
+<main>
+  <h1 class="text-center">Pedidos pendientes de enviar</h1>
+  {{#if orders}}
+    <section id="orders" class="order-list">
+    {{#each orders}}
+    <div class="order-detail {{this.state}}">
+        <ol class="order-info">
+            <li><b>Nº Pedido:</b> {{this._id}}</li>
+            <li><b>Fecha del pedido:</b> {{this.createdAt}}</li>
+            <li><b>ID_usuario:</b> {{this.userId}}</li>
+            <li><b>Pedido a nombre de:</b> {{this.firstName}} {{this.lastName}}</li>
+            <li><b>Estado:</b> {{this.state}}</li>
+            <li><b>Nº productos:</b> {{this.totalProducts}}</li>
+            <li><b>Importe total:</b> {{this.totalPrice}} €</li>
+        </ol>
+        <div class="order-icons">
+          <a href="/admin/pedidos/{{this._id}}" id="orderInfo" class="icon"><i class="fas fa-eye"></i></a>
+        </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="order-detail {{this.state}}">
+        <h4>No existen pedidos pendientes de enviar a este cliente</h4>
+    </div>
+    {{/if}}
+  </section>
+</main>

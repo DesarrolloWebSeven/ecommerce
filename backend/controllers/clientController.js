@@ -1,10 +1,18 @@
 const User = require("../models/User");
+const Order = require('../models/Order');
 
 // Show the clients list
 const clientsList = async (req, res) => {
-    
+
   let clients = await User.find({ admin : false }).lean()
-  res.render('clients', { title: 'Admin | Clientes', src: 'clients.js', css: 'products', clients })
+  let clients1= []
+  clients.forEach(async client=>{
+    let order=await Order.find({userId:client._id})
+    if(order.length){client.orders=order}
+    clients1.push(client)
+  })
+  console.log(clients1)
+  res.render('clients', { title: 'Admin | Clientes', src: 'clients.js', css: 'products', clients})
 
 }
 
@@ -17,7 +25,7 @@ const clientsFindById = (req, res) => {
 
 }
 
-// Update the client's informtion
+// Update the client's information
 const clientsUpdate = async (req, res) => {
 
   const { id, firstname, lastname, email, active } = req.body
@@ -33,8 +41,39 @@ const clientsUpdate = async (req, res) => {
 
 }
 
+// Show the client's confirmed orders
+const clientConfirmedOrders = async (req, res) => {
+
+  let id = req.params.id
+  const orders = await Order.find({userId:id, state:"confirmado"}).lean()
+  res.render('confirmedorders', { 
+    orders,
+    title: 'Admin | Pedidos confirmados',
+    css: 'orders'
+  })
+
+}
+
+// Show the client's orders history
+
+const clientOrders = async (req, res) => {
+
+  let id = req.params.id
+  const orders = await Order.find({userId:id}).lean()
+
+  res.render('clientorders', { 
+    orders,
+    title: 'Admin | Historial de pedidos',
+    css: 'orders',
+    src: 'clientOrders.js'
+  })
+
+}
+
 module.exports = {
   clientsList,
   clientsFindById,
   clientsUpdate,
+  clientOrders,
+  clientConfirmedOrders
 }

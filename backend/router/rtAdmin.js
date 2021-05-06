@@ -25,6 +25,8 @@ rtAdmin.get('/editor/:title', pageController.pageList)
 rtAdmin.get('/clientes', requireAuth, clientController.clientsList)
 rtAdmin.get('/clientes/:id', requireAuth, clientController.clientsFindById)
 rtAdmin.put('/clientes/:id', requireAuth, clientController.clientsUpdate)
+rtAdmin.get('/clientes/pedidos/historial/:id', requireAuth, clientController.clientOrders)
+rtAdmin.get('/clientes/pedidos/confirmados/:id', requireAuth, clientController.clientConfirmedOrders)
 
 // Product routes
 rtAdmin.get('/productos', requireAuth, productController.productsList)

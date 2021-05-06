@@ -14,7 +14,7 @@
     {{#each clients}}
         <div class="card">
         <img class="card-img-top center-block" src="/logo/user.png" alt="Avatar {{this.firstname}} {{this.lastname}}" title="Avatar {{this.firstname}} {{this.lastname}}">
-        <div class="card-body">
+        <div class="card-body text-center">
           {{#if this.firstname}}
             <h5 class="card-title">{{this.firstname}} {{this.lastname}}</h5>
           {{else}}
@@ -24,8 +24,8 @@
               {{#if active}}
                 <h5 class="title text-success"><i class="fa fa-check"></i> Activo</h5>
                 <button class="btn btn-primary"><a href="/admin/clientes/{{this._id}}"><i class="fas fa-info"></i></a></button>
-                <button class="btn btn-danger"><i class="fas fa-truck"></i></button>
-                <button class="btn btn-warning"><i class="fas fa-archive"></i></button>
+                <button class="btn btn-danger"><a href="/admin/clientes/pedidos/confirmados/{{this._id}}"><i class="fas fa-truck"></a></i></button>
+                <button class="btn btn-warning"><a href="/admin/clientes/pedidos/historial/{{this._id}}"><i class="fas fa-archive"></a></i></button>
               {{else}}
                 <h5 class="title text-danger"><i class="bi bi-x-square"></i><i class="fa fa-times"></i> No activo</h5>
                 <button class="btn btn-primary"><a href="/admin/clientes/{{this._id}}"><i class="fas fa-info"></a></i></button>

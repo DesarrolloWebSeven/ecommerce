@@ -1,0 +1,35 @@
+{{> header}}
+<main>
+  <h1 class="text-center">Historial de pedidos del cliente</h1>
+  
+  {{#if orders}}
+  <!-- Search Input -->
+  <section class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" class="search-console" id="search" placeholder="Buscar" autocomplete="off">
+  </section>
+  
+  <!-- Clients's Orders List -->
+    <section id="orders" class="order-list">
+    {{#each orders}}
+    <div class="order-detail {{this.state}}">
+        <ol class="order-info">
+            <li><b>Nº Pedido:</b> {{this._id}}</li>
+            <li><b>ID_usuario:</b> {{this.userId}}</li>
+            <li><b>Pedido a nombre de:</b> {{this.firstName}} {{this.lastName}}</li>
+            <li><b>Estado:</b> {{this.state}}</li>
+            <li><b>Nº productos:</b> {{this.totalProducts}}</li>
+            <li><b>Importe total:</b> {{this.totalPrice}}</li>
+        </ol>
+        <div class="order-icons">
+          <a href="/admin/pedidos/{{this._id}}" id="orderInfo" class="icon"><i class="fas fa-eye"></i></a>
+        </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="order-detail {{this.state}}">
+        <h4>No existen pedidos de este cliente</h4>
+    </div>
+    {{/if}}
+  </section>
+</main>
