@@ -5,13 +5,6 @@ const Order = require('../models/Order');
 const clientsList = async (req, res) => {
 
   let clients = await User.find({ admin : false }).lean()
-  let clients1= []
-  clients.forEach(async client=>{
-    let order=await Order.find({userId:client._id})
-    if(order.length){client.orders=order}
-    clients1.push(client)
-  })
-  console.log(clients1)
   res.render('clients', { title: 'Admin | Clientes', src: 'clients.js', css: 'products', clients})
 
 }
