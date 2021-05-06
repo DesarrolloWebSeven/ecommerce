@@ -84,8 +84,11 @@
                     <img class="img-product" :src="'/images/' + product.images[0]">
                     <label>{{product.title}}</label><br>
                     <label>€ {{product.price}}</label> x
-                    <label>{{product.items}} UND</label>
+                    <label>{{product.items}} UND {{j}}</label>
                     <hr>
+                  </div>
+                  <div v-for="(value, key, index) in list" :key="index">
+                    <ul>{{ index }}. {{ key }}: {{ value.title }}</ul>
                   </div>
                       <p class="">ARTICULOS</p>
                       <h4>{{order.totalProducts}} und.</h4>
@@ -101,6 +104,11 @@
             </div>
           </div>
         </div>
+
+        <div v-if="status.message">
+          <h2>No tienes pedidos con nosotros</h2>
+        </div>
+
       </div>
     </div>
   </div>
@@ -122,11 +130,13 @@ export default {
     const error = ref('')
     const orders = ref('')
     const products = reactive([])
+    const list = reactive({})
     let status = reactive({
       default:true,
       update:false,
       inactive:false,
       orders:false,
+      message:false
     })
 
     //Recuperando id de usuario
@@ -185,17 +195,17 @@ export default {
     /*****Mostrar pedidos********/
     const showOrders = async()=>{
       controler('orders')
-      products.splice(0)
       const res = await axios.get(`usuario/perfil/orders/${(JSON.parse(id)).id}`)
-      console.log(res.data)
-      console.log(res.data.length)
+      if(res.data.length==0) controler('message')
       for (let i=0; i<res.data.length; i++){
         products.splice(0)
         for (const product in res.data[i].cart) {
-          console.log(res.data[i].cart[product])
+          console.log(res.data[i].cart[product].title)
           products.push(res.data[i].cart[product])
         }        
+        list[`${res.data[i]._id}`] = products
       }
+      console.log(list)
       orders.value=res.data
     }
 
@@ -208,7 +218,7 @@ export default {
     }
 
     return {
-        user, success, error, orders, status, products,
+        user, success, error, orders, status, products, list,
         saveUser, editPass, showOrders, deleteCount, updateData, cancel, confirmBaja,
     }
   }
