@@ -130,7 +130,7 @@ export default {
     const error = ref('')
     const orders = ref('')
     const products = reactive([])
-    const productDefault = reactive({value:'Cargando..'})
+    const productDefault = reactive({})
     let status = reactive({
       default:true,
       update:false,
@@ -337,15 +337,14 @@ button {
   }
 
   @media (max-width: 1000px) {
-
     .category-main {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(1, 1fr);
 
-    .category-product {
-      width: 100%;
-    }
+      .category-product {
+        width: 100%;
+      }
     }
   }
 
@@ -356,11 +355,28 @@ button {
     grid-template-columns: 100%;
     grid-template-rows: repeat(1, 1fr);
 
-    .category-product {
-      width: 100%;
-    }
+      .category-product {
+        width: 100%;
+      }
     }
   }
 
+
+@media (max-width: 420px){
+  div.g-3{
+    max-width: 100%;
+  }
+  .section .row{
+    max-width: 100%;
+  }
+  .row {
+    --bs-gutter-x: 0;
+  }
+}
+@media (min-width: 420px){
+  div.g-3 {
+    max-width: 80%;
+  }
+}
 
 </style>
