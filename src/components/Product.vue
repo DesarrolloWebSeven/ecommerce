@@ -1,5 +1,5 @@
 <template>
-  <main class="product-card">
+  <main v-if="product" class="product-card">
     <div class="product-img">
       <img :src="'/images/' + product.images[0]" />
     </div>

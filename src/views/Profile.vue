@@ -7,13 +7,15 @@
         <p>{{user.info.firstname}}</p>
         <p><button @click="updateData" class="btn btn-outline-warning">Modificar datos</button></p>
         <p><button @click="deleteCount" class="btn btn-outline-warning">Darme de baja</button></p>
-        <p><button @click="showOrders" class="btn btn-outline-warning">Ver mis pedidos</button></p>
+        <!-- <p><button @click="showOrders" class="btn btn-outline-warning">Ver mis pedidos</button></p> -->
         <p><button @click="editPass" class="btn btn-outline-warning">Cambiar mi Pass</button></p>
       </div>
 
       <div class="col-md-8">
-        <div v-if="status.default">
-          Por defecto aui va algo
+        <div class="category-main" v-if="status.default">
+          <div v-if="productDefault">
+            <Product class="category-product" :product="productDefault.value" />
+          </div>
         </div>
         <div v-if="status.update">
           <form class="section row g-3">
@@ -70,7 +72,7 @@
           <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
         </div>
 
-        <div v-if="status.orders" class="section row g-3 scroll">
+        <!-- <div v-if="status.orders" class="section row g-3 scroll">
           <div v-for="(order, i) in orders" :key="i">
             <div class="card border-success mb-3">
               <div class="card-header bg-transparent border-success">
@@ -104,13 +106,14 @@
               <div class="card-footer bg-transparent border-success"><p> Fecha: {{order.createdAt}} </p></div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Product from '@/components/Product'
 import { useRouter } from 'vue-router'
 import { useStore} from 'vuex'
 import { reactive, computed, ref } from 'vue'
@@ -118,6 +121,7 @@ import axios from 'axios';
 export default {
   name: "Profile",
   props: {},
+  components:{Product},
   setup() {
     const router = useRouter()
     const atob = require('atob')
@@ -126,6 +130,7 @@ export default {
     const error = ref('')
     const orders = ref('')
     const products = reactive([])
+    const productDefault = reactive({})
     let status = reactive({
       default:true,
       update:false,
@@ -145,7 +150,19 @@ export default {
     fetch(`http://localhost:8081/usuario/perfil/${(JSON.parse(id)).id}`)
       .then((res) => res.json())
       .then((data) => { user.info=data })
-      .catch((err) => console.log(err))  
+      .catch((err) => console.log(err)) 
+    
+    const getOneProduct = () => {     
+        fetch(`http://localhost:8081/productos/perfil/default`)
+        .then(res => res.json())
+        .then(data => {
+          productDefault.value = data
+          console.log(productDefault.value)
+        })
+        .catch(err => console.log(err))
+    }
+    getOneProduct()
+  
 
     const updateData =()=>{controler('update')}    
     const deleteCount =()=>{controler('inactive')}
@@ -192,7 +209,6 @@ export default {
       const res = await axios.get(`usuario/perfil/orders/${(JSON.parse(id)).id}`)
       for (const product in res.data[0].cart) {
         products.push(res.data[0].cart[product])
-
       }
       orders.value=res.data
     }
@@ -206,7 +222,7 @@ export default {
     }
 
     return {
-        user, success, error, orders, status, products,
+        user, success, error, orders, status, products, productDefault,
         saveUser, editPass, showOrders, deleteCount, updateData, cancel, confirmBaja,
     }
   }
@@ -305,4 +321,62 @@ button {
     font-weight: 600;
     
 }
+
+
+  .category-main {
+    margin: 40px 0 80px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-rows: auto;
+    grid-gap: 30px;
+
+    .category-product {
+      width: 100%;
+    }
+
+  }
+
+  @media (max-width: 1000px) {
+    .category-main {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+
+      .category-product {
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 700px) {
+
+    .category-main {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(1, 1fr);
+
+      .category-product {
+        width: 100%;
+      }
+    }
+  }
+
+
+@media (max-width: 420px){
+  div.g-3{
+    max-width: 100%;
+  }
+  .section .row{
+    max-width: 100%;
+  }
+  .row {
+    --bs-gutter-x: 0;
+  }
+}
+@media (min-width: 420px){
+  div.g-3 {
+    max-width: 80%;
+  }
+}
+
 </style>

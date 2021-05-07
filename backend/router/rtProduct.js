@@ -15,4 +15,7 @@ rtProduct.post("/pedido", orderController.saveOrder)
 // Payment and order confirmation
 rtProduct.put("/pago", orderController.payment)
 
+//
+rtProduct.get('/perfil/default',productController.oneProduct)
+
 module.exports= rtProduct
