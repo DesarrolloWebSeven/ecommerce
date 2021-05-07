@@ -44,13 +44,12 @@ const productsSave = (req, res) => {
 const productsDelete = async (req, res) => {
 
   Product.findById(req.params.id).lean()
-    .then(async product => {
+    .then(product => {
       if(product.images.length) product.images.forEach(image => fs.unlink(path.join(__dirname, '../../public/images/', image)))
       Product.findByIdAndDelete(req.params.id)
+      .then(() => res.render('products', { src:'products.js', css: 'products', title: 'Admin | Productos' }))
     })
-    .then(() => res.render('products', { src:'products.js', css: 'products', title: 'Admin | Productos' }))
     .catch(err => console.error('Problema al eliminar la imagen: ', err))
-
 }
 
 // Show info of a specific product
