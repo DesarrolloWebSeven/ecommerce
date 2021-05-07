@@ -1,73 +1,34 @@
 <template>
-  <div class="container section">
-    <div class="row d-flex justify-content-center">
-      <div class="col-md-4">
-        <img class="avatar" src="@/assets/avatar.png" alt="" />
-        <p>Bienvenid@!!</p>
+  <main class="main-content">
+    <section class="profile-page">
+      <div class="profile-menu">
+        <i class="fas fa-user-circle"></i>
+        <h1>¡Bienvenid@!</h1>
         <p>{{user.info.firstname}}</p>
-        <p><button @click="updateData" class="btn btn-outline-warning">Modificar datos</button></p>
-        <p><button @click="deleteCount" class="btn btn-outline-warning">Darme de baja</button></p>
+        <button @click="updateData">Modificar datos</button>
+        <button @click="deleteCount">Darme de baja</button>
         <!-- <p><button @click="showOrders" class="btn btn-outline-warning">Ver mis pedidos</button></p> -->
-        <p><button @click="editPass" class="btn btn-outline-warning">Cambiar mi Pass</button></p>
+        <button @click="editPass">Cambiar mi Pass</button>
       </div>
-
-      <div class="col-md-8">
-        <div class="category-main" v-if="status.default">
-        </div>
-        <div v-if="status.update">
-          <form class="section row g-3">
-            <div class="col-12">
-              <label class="form-label">Nombre</label>
-              <input type="text" v-model="user.info.firstname" name="firstName" class="form-control" placeholder="Introduce tu nombre"/>
-            </div>
-            <div class="col-12">
-              <label class="form-label">Apellidos</label>
-              <input type="text" v-model="user.info.lastname" name="lastName" class="form-control" placeholder="Introduce tus apellidos"/>
-            </div>
-            <div class="col-12">
-              <label class="form-label">Email</label>
-              <input type="email" v-model="user.info.email" name="email" class="form-control" placeholder="Introduce tu correo" disabled/>
-            </div>
-            <div class="col-12">
-              <router-link to="/perfil">
-                <p class="card-text">
-                  <button @click="saveUser" class="btn btn-success btn-lg"> Guardar cambios</button>
-                </p>
-              </router-link>
-            </div>
-          </form>
-          <!-- Confirmacion o error de update -->
-          <div v-if="success" class="alert alert-success text-center" role="alert"> {{ success }} </div>
-          <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
-        </div> 
-
-        <div v-if="status.inactive">
-          <form class="section row g-3">
-            <div class="col-12">
-              <label class="form-label">¿Estas seguro que quieres dar de baja esta cuenta?</label>
-            </div>
-            <div class="col-12">
-              <input type="email" v-model="user.info.email" name="email" class="form-control center" placeholder="Introduce tu correo" disabled/>
-            </div>
-            <div class="col-12">
-              <router-link to="/perfil">
-                <p class="card-text">
-                  <button @click="cancel" class="btn btn-success btn-lg"> Me lo voy a pensar</button>
-                </p>
-              </router-link>
-            </div>
-            <div class="col-12">
-              <router-link to="/">
-                <p class="card-text">
-                  <button @click="confirmBaja" class="btn btn-danger btn-lg"> Si estoy seguro</button>
-                </p>
-              </router-link>
-            </div>
-          </form>
-          <!-- Confirmacion o error de update -->
-          <div v-if="success" class="alert alert-success text-center" role="alert"> {{ success }} </div>
-          <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
-        </div>
+      <form v-if="status.update" class="profile-info" @submit.prevent="saveUser">
+        <label>Nombre</label>
+        <input type="text" v-model="user.info.firstname" name="firstName" placeholder="Introduce tu nombre"/>
+        <label>Apellidos</label>
+        <input type="text" v-model="user.info.lastname" name="lastName" placeholder="Introduce tus apellidos"/>
+        <label>Email</label>
+        <input type="email" v-model="user.info.email" name="email" placeholder="Introduce tu correo" readonly/>
+        <div v-if="success" class="alert alert-success text-center" role="alert"> {{ success }} </div>
+        <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
+        <button type="submit">Guardar cambios</button>
+      </form>
+      <form v-if="status.inactive" class="profile-info">
+        <label>¿Estas seguro que quieres dar de baja esta cuenta?</label>
+        <input type="email" v-model="user.info.email" name="email" placeholder="Introduce tu correo" readonly/>
+        <div v-if="success" class="alert alert-success text-center" role="alert"> {{ success }} </div>
+        <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
+        <button @click="cancel">Me lo voy a pensar</button>
+        <button @click="confirmBaja"> Si estoy seguro</button>
+      </form>
 
         <!-- <div v-if="status.orders" class="section row g-3 scroll">
           <div v-for="(order, i) in orders" :key="i">
@@ -104,9 +65,8 @@
             </div>
           </div>
         </div> -->
-      </div>
-    </div>
-  </div>
+    </section>
+  </main>
 </template>
 
 <script>
@@ -129,8 +89,7 @@ export default {
     const products = reactive([])
     const productDefault = reactive({})
     let status = reactive({
-      default:true,
-      update:false,
+      update:true,
       inactive:false,
       orders:false,
     })
@@ -165,23 +124,22 @@ export default {
     const deleteCount =()=>{controler('inactive')}
     const editPass =()=>{router.push(`/password/${(JSON.parse(id)).id}`)}
 
-    /*****Modificar Datos*******/
+    // Modify User Info
     const saveUser = async()=>{
       const res = await axios.put('usuario/perfil/update', user)
       if(res){
-        success.value = 'Datos actualizados!!'
+        success.value = 'Datos actualizados correctamente'
         setTimeout(()=>{
           success.value=false 
-          status.update=false
-          status.default=true
+          status.update= true
         },2000)
       }else
         error.value = 'Ha habido un problema, inténtalo más tarde'
     }
 
-    /*****Darme de baja*********/
+    // Inactive User account
     function cancel(){
-      success.value = 'Nos alegra que te lo pienses mejor!!'
+      success.value = 'Nos alegra que te lo pienses mejor'
         setTimeout(()=>{
           success.value=false 
           status.inactive=false
@@ -195,12 +153,13 @@ export default {
         localStorage.removeItem('cart')
         store.dispatch('setLogin', null)
         store.commit("setEmptyCart")
+        router.push('/')
       }
       else
-        error.value = 'Ha habido un problema, inténtalo nuevamente más tarde'
+        error.value = 'Ha habido un problema, inténtalo más tarde'
     }
    
-    /*****Mostrar pedidos********/
+    // Show User orders
     const showOrders = async()=>{
       controler('orders')
       const res = await axios.get(`usuario/perfil/orders/${(JSON.parse(id)).id}`)
@@ -210,7 +169,7 @@ export default {
       orders.value=res.data
     }
 
-    /*****Controlador de vistas***********/
+    // View Controller
     function controler(valor){
       for (const section in status) {
         if (valor == section) status[`${section}`]=true
@@ -229,109 +188,97 @@ export default {
 
 
 <style lang="scss" scoped>
-.section {
-  background-color: #10555e1e;
-  max-width: 80%;
-  min-height: 500px;
-  //margin-top: 70px;
-  color: black;
-  border-radius: 30px;
-  margin: 130px auto;
-
-
-  .row {
-    max-width: 95%;
-    margin: 0 auto;
-    padding: 20px;
-  }
-
-  .avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  }
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.section .row {
-  margin: 30px auto;
+.profile-page {
+  margin: 120px auto 90px;
+  width: 80%;
+  max-width: 800px;
+  color: rgb(99, 98, 98);
+  display: flex;
+  justify-content: space-between;
 }
 
-.btn-outline-warning:hover {
+.profile-menu {
+  width: 28%;
+  min-height: 300px;
+  border: 1px solid rgb(189, 189, 189);
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px rgb(197, 197, 197);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 25px 0;
+
+  i {
+    font-size: 4rem;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  button {
+  width: 80%;
+  align-self: center;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 0;
+  margin: 10px 0;
   color: white;
   background-color: #22B573;
-  border-color: #329e7e;
-  opacity: 60%;
+  }
+
+  button:hover {
+    opacity: 60%;
+  }
+
+  button:focus {
+    outline: none;
+  }
 }
 
-button {
-  width: 100%;
+.profile-info {
+  width: 68%;
+  min-height: 300px;
+  padding: 35px;
+  border-radius: 10px;
+  background-color: rgb(240, 239, 239);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+
+  button {
+  width: 80%;
   align-self: center;
   border: none;
   border-radius: 5px;
   padding: 5px 0;
   color: white;
   background-color: #22B573;
-  margin-top: 10px;
-  text-transform: none;
-}
-
-.btn:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-.card-container {
-  padding: 100px 0px;
-  -webkit-perspective: 1000;
-  perspective: 1000;
-}
-
-.strong{
-  font-size: small;
-  font-weight: 600;
-}
-
-.border-success {
-  border-color: #22B573 !important;
-}
-.text-success {
-    color: #22B573 !important;
-}
-.body-card-items{
-  display: grid;
-  justify-items: stretch;
-  align-items: stretch;
-  grid-template-columns: repeat(2, 2fr);
-  grid-gap: 10px;
-}
-
-.item{
-  border: 1px solid #22B573;
-}
-.img-product{
-  width: 50px;
-}
-.info-productos{
-    color: #22B573 !important;
-    font-weight: 600;
-    
-}
-
-@media (max-width: 420px){
-  div.g-3{
-    max-width: 100%;
   }
-  .section .row{
-    max-width: 100%;
+
+  button:hover {
+    opacity: 60%;
   }
-  .row {
-    --bs-gutter-x: 0;
+
+  button:focus {
+    outline: none;
   }
 }
-@media (min-width: 420px){
-  div.g-3 {
-    max-width: 80%;
+
+@media (max-width: 800px) {
+  .profile-menu, .profile-info {
+    width: 100%;
   }
 }
+
 
 </style>
