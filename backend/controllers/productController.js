@@ -119,6 +119,17 @@ const showDetailProduct = (req, res) => {
 
   }
 
+  // Show products by category for the User
+const oneProduct = (req, res) => {
+  Product.find().lean()
+    .then(data => {
+        let n = Math.floor(Math.random()*(data.length+1))
+        res.json(data[n])
+      })
+    .catch(err => res.json(err))
+
+}
+
 module.exports = {
   productsList,
   productsSave,
@@ -127,5 +138,6 @@ module.exports = {
   imagesDelete,
   productsUpdate,
   listProduct,
-  showDetailProduct
+  showDetailProduct,
+  oneProduct
 }
