@@ -13,9 +13,6 @@
 
       <div class="col-md-8">
         <div class="category-main" v-if="status.default">
-          <div v-if="productDefault">
-            <Product class="category-product" :product="productDefault.value" />
-          </div>
         </div>
         <div v-if="status.update">
           <form class="section row g-3">
@@ -235,9 +232,12 @@ export default {
 .section {
   background-color: #10555e1e;
   max-width: 80%;
-  margin-top: 70px;
+  min-height: 500px;
+  //margin-top: 70px;
   color: black;
   border-radius: 30px;
+  margin: 130px auto;
+
 
   .row {
     max-width: 95%;
@@ -305,11 +305,6 @@ button {
   grid-gap: 10px;
 }
 
-.scroll{
-  overflow-y: auto;
-  height: 400px;
-}
-
 .item{
   border: 1px solid #22B573;
 }
@@ -321,46 +316,6 @@ button {
     font-weight: 600;
     
 }
-
-
-  .category-main {
-    margin: 40px 0 80px;
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-auto-rows: auto;
-    grid-gap: 30px;
-
-    .category-product {
-      width: 100%;
-    }
-
-  }
-
-  @media (max-width: 1000px) {
-    .category-main {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(1, 1fr);
-
-      .category-product {
-        width: 100%;
-      }
-    }
-  }
-
-  @media (max-width: 700px) {
-
-    .category-main {
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: repeat(1, 1fr);
-
-      .category-product {
-        width: 100%;
-      }
-    }
-  }
-
 
 @media (max-width: 420px){
   div.g-3{
