@@ -50,6 +50,7 @@ export default {
 .product-card {
   box-sizing: border-box;
   width: 30%;
+  min-height: 330px;
   padding: 5px;
   border-radius: 5px;
   border: 1px solid rgb(235, 232, 232);
