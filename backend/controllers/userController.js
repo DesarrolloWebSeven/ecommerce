@@ -110,18 +110,14 @@ const contactMail = async (req, res) => {
 
 // Show the user profile
 const getInfoUser =(req, res) => {
-  const user = req.params
+
   User.findById(req.params.id).lean()
-  .then(user => {
-    res.json(user)
-  })
-  .catch(err =>{
-    console.log(err.message) 
-    res.json(err)
-  })
+  .then(user => res.json(user))
+  .catch(err => res.json(err))
+
 }
 
-//Update user profile
+// Update user profile
 const updateInfoUser = (req, res) => {
   User.findByIdAndUpdate({_id : req.body.info._id}, {
     firstname: req.body.info.firstname,
@@ -131,25 +127,15 @@ const updateInfoUser = (req, res) => {
     .then(user=>res.json(user))
     .catch(err=> res.json(err.message))
 }
-//Deactive user
-const deactivateUser=(req,res)=>{
-  console.log(req.body.info)
-  User.findByIdAndUpdate({_id : req.body.info._id}, {
-    active:false
-  })
-    .then(user=>res.json(user))
-    .catch(err=> res.json(null))
-}
 
-//Show orders User
-const Order = require('../models/Order')
-const orderUser = (req, res) => {
-  let id = req.params.id
-  Order.find({ userId: id })
-    .then(data => res.json(data))
-    .catch(err => res.json(err))
-}
+// Deactive user
+const deactivateUser = (req, res) => {
 
+  User.findByIdAndUpdate({ _id : req.body.info._id }, { active: false })
+    .then(user => res.json(user))
+    .catch(err => console.log(err.message))
+
+}
 
 
 module.exports = {
@@ -164,5 +150,4 @@ module.exports = {
   getInfoUser,
   updateInfoUser,
   deactivateUser,
-  orderUser
 }

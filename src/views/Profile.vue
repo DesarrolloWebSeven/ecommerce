@@ -20,12 +20,12 @@
         <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
         <button type="submit">Guardar cambios</button>
       </form>
-      <form v-if="status.inactive" class="profile-delete">
+      <form v-if="status.inactive" class="profile-delete" @submit.prevent="cancelAccount">
         <label>¿Estás segur@ que quieres dar de baja esta cuenta?</label>
         <input type="email" v-model="user.info.email" name="email" placeholder="Introduce tu correo" readonly/>
         <div v-if="success" class="alert alert-success text-center" role="alert"> {{ success }} </div>
         <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
-        <button @click="cancelAccount"> Sí, estoy segur@</button>
+        <button type="submit"> Sí, estoy segur@</button>
       </form>
     </section>
   </main>
@@ -34,91 +34,86 @@
 <script>
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import { reactive, ref } from 'vue'
+import { reactive, computed, ref } from 'vue'
 import axios from 'axios';
 export default {
   name: "Profile",
-  props: {},
   setup() {
     const router = useRouter()
+    const atob = require('atob')
     const store = useStore()
     const success = ref('')
     const error = ref('')
-    const user = reactive({})
     let status = reactive({
       update: true,
       inactive: false,
     })
 
-    // Getting UserId
-    const userAuth = async () => {
-      
-      try {
-        const res = await axios.get("usuario/permiso", {
-          headers: { Authorization: "Bearer " + localStorage.getItem("jwt") },
-        });
-        if (res.data.message === "success") {
-          fetch(`http://localhost:8081/usuario/perfil/${res.data.decodedToken.id}`)
-            .then(res => res.json())
-            .then(data => user.info = data )
-            .catch(err => console.log(err))
-        }
-      } catch (err) {
-        console.log(err);
-      }
-      
-    };
-    userAuth();
+    // Getting User ID
+    const user = reactive({info:'default'})
+    let jwt = computed(() => store.getters.getToken)
+    const b64 = jwt.value.split('.')
+    var id = atob(b64[1])
 
-    // Profile Buttons
-    const updateData = () => {
-      status.update = true
-      status.inactive = false
-      success.value = ""
-      error.value = ""
-    }    
-    const deleteAccount = () => {
-      status.inactive = true
-      status.update = false
-      success.value = ""
-      error.value = ""
-    }
+    // Initial Request
+    fetch(`http://localhost:8081/usuario/perfil/${(JSON.parse(id)).id}`)
+      .then(res => res.json())
+      .then(data => user.info = data )
+      .catch(err => console.log(err)) 
+
+    // Buttons
+    const updateData = () => controller('update')    
+    const deleteAccount = () => controller('inactive')
     const editPassword = () => router.push(`/password/${(JSON.parse(id)).id}`)
 
-    // Modify User Info
+    // Modify Data
     const saveUser = async () => {
       const res = await axios.put('usuario/perfil/update', user)
-      if(res) success.value = 'Datos actualizados correctamente' 
+      if(res) success.value = 'Datos actualizados correctamente'
       else error.value = 'Ha habido un problema, inténtalo más tarde'
     }
 
-    // Inactive User account
-    const cancelAccount = async () => {
-      const res = await axios.put('usuario/perfil/baja', user)
-      if(res) {
-        localStorage.removeItem('jwt')
-        localStorage.removeItem('cart') 
-        store.dispatch('setLogin', null)
-        store.commit("setEmptyCart")
-        router.push('/')
+    // Delete Account
+    const cancelAccount = () => {
+
+      axios.put('usuario/perfil/baja', user)
+        .then( () => {
+          localStorage.removeItem('jwt')
+          localStorage.removeItem('cart')
+          store.dispatch('setLogin', null)
+          store.commit("setEmptyCart")
+          success.value = 'Cuenta eliminada correctamente'
+          setTimeout(() => router.push({ name: 'Home' }), 2000)
+        })
+        .catch (err => error.value = 'Ha habido un problema, inténtalo nuevamente más tarde')
+    
+    }
+
+    // View Controller
+    function controller(valor) {
+      for (const section in status) {
+        if (valor == section) {
+          status[`${section}`] = true
+          success.value = ""
+          error.value = ""
+        }
+        else status[`${section}`]=false
       }
-      else error.value = 'Ha habido un problema, inténtalo más tarde'
     }
 
     return {
-      user, 
-      success, 
-      error, 
-      status, 
-      saveUser, 
-      editPassword, 
-      deleteAccount, 
-      updateData, 
-      cancelAccount,
+        user,
+        success, 
+        error, 
+        status, 
+        saveUser, 
+        editPassword,
+        deleteAccount,
+        updateData, 
+        cancelAccount,
     }
   }
 }
-
 </script>
 
 
