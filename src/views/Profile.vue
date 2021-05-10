@@ -4,11 +4,10 @@
       <div class="profile-menu">
         <i class="fas fa-user-circle"></i>
         <h1>¡Bienvenid@!</h1>
-        <p>{{user.info.firstname}}</p>
+        <p v-if="user.info">{{user.info.firstname}}</p>
         <button @click="updateData">Modificar datos</button>
-        <button @click="deleteCount">Darme de baja</button>
-        <!-- <p><button @click="showOrders" class="btn btn-outline-warning">Ver mis pedidos</button></p> -->
-        <button @click="editPass">Cambiar mi Pass</button>
+        <button @click="deleteAccount">Darme de baja</button>
+        <button @click="editPassword">Cambiar contraseña</button>
       </div>
       <form v-if="status.update" class="profile-info" @submit.prevent="saveUser">
         <label>Nombre</label>
@@ -21,165 +20,101 @@
         <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
         <button type="submit">Guardar cambios</button>
       </form>
-      <form v-if="status.inactive" class="profile-info">
-        <label>¿Estas seguro que quieres dar de baja esta cuenta?</label>
+      <form v-if="status.inactive" class="profile-delete">
+        <label>¿Estás segur@ que quieres dar de baja esta cuenta?</label>
         <input type="email" v-model="user.info.email" name="email" placeholder="Introduce tu correo" readonly/>
         <div v-if="success" class="alert alert-success text-center" role="alert"> {{ success }} </div>
         <div v-if="error" class="alert alert-danger text-center" role="alert"> {{ error }} </div>
-        <button @click="cancel">Me lo voy a pensar</button>
-        <button @click="confirmBaja"> Si estoy seguro</button>
+        <button @click="cancelAccount"> Sí, estoy segur@</button>
       </form>
-
-        <!-- <div v-if="status.orders" class="section row g-3 scroll">
-          <div v-for="(order, i) in orders" :key="i">
-            <div class="card border-success mb-3">
-              <div class="card-header bg-transparent border-success">
-                <label class="strong profile-verview">Número de Referencia Pedido :</label>
-                <p class="info-productos"> {{order._id}} </p>
-              </div>
-              <div class="card-body text-success">
-                <i class="bi bi-credit-card"></i> {{order.state}} <hr>
-                <div class="body-card-items">
-                  <div class="col-12 item">
-                    <div class="profile-overview">
-                      <div v-for="(product, j) in products" :key="j">
-                        <img class="img-product" :src="'/images/' + product.images[0]">
-                        {{product.title}} 
-                        € {{product.price}}
-                        {{product.items}} UND
-                        <hr>
-                      </div>
-                      <p class="">ARTICULOS</p>
-                      <h4>{{order.totalProducts}} und.</h4>
-                    </div>
-                  </div>
-                  <div class="col-12 item">
-                    <div class="profile-overview">
-                      <p class="">PRECIO</p>
-                      <h4>€{{order.totalPrice}}</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer bg-transparent border-success"><p> Fecha: {{order.createdAt}} </p></div>
-            </div>
-          </div>
-        </div> -->
     </section>
   </main>
 </template>
 
 <script>
-import Product from '@/components/Product'
 import { useRouter } from 'vue-router'
-import { useStore} from 'vuex'
-import { reactive, computed, ref } from 'vue'
+import { useStore } from 'vuex'
+import { reactive, ref } from 'vue'
 import axios from 'axios';
 export default {
   name: "Profile",
   props: {},
-  components:{Product},
   setup() {
     const router = useRouter()
-    const atob = require('atob')
     const store = useStore()
     const success = ref('')
     const error = ref('')
-    const orders = ref('')
-    const products = reactive([])
-    const productDefault = reactive({})
+    const user = reactive({})
     let status = reactive({
-      update:true,
-      inactive:false,
-      orders:false,
+      update: true,
+      inactive: false,
     })
 
-    //Recuperando id de usuario
-    const user = reactive({info:'default'})
-    let jwt = computed(()=>{
-        return store.getters.getToken
-    })
-    const b64 = jwt.value.split('.')
-    var id = atob(b64[1])
+    // Getting UserId
+    const userAuth = async () => {
+      
+      try {
+        const res = await axios.get("usuario/permiso", {
+          headers: { Authorization: "Bearer " + localStorage.getItem("jwt") },
+        });
+        if (res.data.message === "success") {
+          fetch(`http://localhost:8081/usuario/perfil/${res.data.decodedToken.id}`)
+            .then(res => res.json())
+            .then(data => user.info = data )
+            .catch(err => console.log(err))
+        }
+      } catch (err) {
+        console.log(err);
+      }
+      
+    };
+    userAuth();
 
-    //Request inicial
-    fetch(`http://localhost:8081/usuario/perfil/${(JSON.parse(id)).id}`)
-      .then((res) => res.json())
-      .then((data) => { user.info=data })
-      .catch((err) => console.log(err)) 
-    
-    const getOneProduct = () => {     
-        fetch(`http://localhost:8081/productos/perfil/default`)
-        .then(res => res.json())
-        .then(data => {
-          productDefault.value = data
-          console.log(productDefault.value)
-        })
-        .catch(err => console.log(err))
+    // Profile Buttons
+    const updateData = () => {
+      status.update = true
+      status.inactive = false
+      success.value = ""
+      error.value = ""
+    }    
+    const deleteAccount = () => {
+      status.inactive = true
+      status.update = false
+      success.value = ""
+      error.value = ""
     }
-    getOneProduct()
-  
-
-    const updateData =()=>{controler('update')}    
-    const deleteCount =()=>{controler('inactive')}
-    const editPass =()=>{router.push(`/password/${(JSON.parse(id)).id}`)}
+    const editPassword = () => router.push(`/password/${(JSON.parse(id)).id}`)
 
     // Modify User Info
-    const saveUser = async()=>{
+    const saveUser = async () => {
       const res = await axios.put('usuario/perfil/update', user)
-      if(res){
-        success.value = 'Datos actualizados correctamente'
-        setTimeout(()=>{
-          success.value=false 
-          status.update= true
-        },2000)
-      }else
-        error.value = 'Ha habido un problema, inténtalo más tarde'
+      if(res) success.value = 'Datos actualizados correctamente' 
+      else error.value = 'Ha habido un problema, inténtalo más tarde'
     }
 
     // Inactive User account
-    function cancel(){
-      success.value = 'Nos alegra que te lo pienses mejor'
-        setTimeout(()=>{
-          success.value=false 
-          status.inactive=false
-          status.default=true
-        },3000)
-    }
-    const confirmBaja = async()=>{
+    const cancelAccount = async () => {
       const res = await axios.put('usuario/perfil/baja', user)
-      if(res){
+      if(res) {
         localStorage.removeItem('jwt')
-        localStorage.removeItem('cart')
+        localStorage.removeItem('cart') 
         store.dispatch('setLogin', null)
         store.commit("setEmptyCart")
         router.push('/')
       }
-      else
-        error.value = 'Ha habido un problema, inténtalo más tarde'
-    }
-   
-    // Show User orders
-    const showOrders = async()=>{
-      controler('orders')
-      const res = await axios.get(`usuario/perfil/orders/${(JSON.parse(id)).id}`)
-      for (const product in res.data[0].cart) {
-        products.push(res.data[0].cart[product])
-      }
-      orders.value=res.data
-    }
-
-    // View Controller
-    function controler(valor){
-      for (const section in status) {
-        if (valor == section) status[`${section}`]=true
-        else status[`${section}`]=false
-      }
+      else error.value = 'Ha habido un problema, inténtalo más tarde'
     }
 
     return {
-        user, success, error, orders, status, products, productDefault,
-        saveUser, editPass, showOrders, deleteCount, updateData, cancel, confirmBaja,
+      user, 
+      success, 
+      error, 
+      status, 
+      saveUser, 
+      editPassword, 
+      deleteAccount, 
+      updateData, 
+      cancelAccount,
     }
   }
 }
@@ -244,7 +179,7 @@ export default {
   }
 }
 
-.profile-info {
+.profile-info, .profile-delete {
   width: 68%;
   min-height: 300px;
   padding: 35px;
@@ -274,8 +209,21 @@ export default {
   }
 }
 
+.profile-delete {
+  justify-content: center;
+  text-align: center;
+
+  input, label {
+    margin-bottom: 40px;
+  }
+
+  input {
+    padding-left: 15px;
+  }
+}
+
 @media (max-width: 800px) {
-  .profile-menu, .profile-info {
+  .profile-menu, .profile-info, .profile-delete {
     width: 100%;
   }
 }
