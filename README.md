@@ -1,12 +1,9 @@
-![](http://imgur.com/t3teAxi.png)
+![](https://github.com/DesarrolloWebSeven/ecommerce/blob/master/public/logo/logo-color.png)
 ### Proyecto final del bootcamp de Desarrollo Web Fullstack - Tomillo F5
 
 
  [![GitHub release](https://img.shields.io/github/release/ovflowd/ecommerce.svg)](https://github.com/DesarrolloWebSeven/ecommerce) 
 
-## Deploy
-
-<a href="https://azuredeploy.net/"><img src="http://azuredeploy.net/deploybutton.png" height="32"></a> <a href="https://bluemix.net/deploy?repository=https://github.com/sant0ro/eCommerce"><img src="https://bluemix.net/deploy/button.png" height="32"></a>
 
 ## Características
 
