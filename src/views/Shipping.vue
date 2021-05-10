@@ -16,72 +16,52 @@
           <div>
             <label for="firstName">Nombre</label>
             <input type="text" v-model="user.firstName" id="firstName" placeholder="Introduce tu nombre" required />
-            <div v-if="errors.firstName">
-              <p>{{ errors.firstName }}</p>
-            </div>
+            <p v-if="errors.firstName" class="alert alert-danger" role="alert">{{ errors.firstName }}</p>
           </div>
           <div>
             <label for="lastName">Apellidos</label>
             <input type="text" v-model="user.lastName" id="lastName" placeholder="Introduce tus apellidos" required />
-            <div v-if="errors.lastName">
-              <p>{{ errors.lastName }}</p>
-            </div>
+            <p v-if="errors.lastName" class="alert alert-danger" role="alert">{{ errors.lastName }}</p>
           </div>
           <div>
             <label for="address">Direción y número</label>
             <input type="text" v-model="user.address" id="adress" placeholder="Introduce tu dirección y número" required />
-            <div v-if="errors.address">
-              <p>{{ errors.address }}</p>
-            </div>
+            <p v-if="errors.address" class="alert alert-danger" role="alert">{{ errors.address }}</p>
           </div>
           <div>
             <label for="flat">Piso, puerta, escalera</label>
             <input type="text" v-model="user.flat" id="flat" placeholder="Introduce tu piso, puerta, escalera" required />
-            <div v-if="errors.flat">
-              <p>{{ errors.flat }}</p>
-            </div>
+            <p v-if="errors.flat" class="alert alert-danger" role="alert">{{ errors.flat }}</p>
           </div>
           <div>
             <label for="postalCode">Código Postal</label>
             <input type="text" v-model="user.postalCode" id="postalCode" placeholder="Introduce tu código postal" required />
-            <div v-if="errors.postalCode">
-              <p>{{ errors.postalCode }}</p>
-            </div>
+            <p v-if="errors.postalCode" class="alert alert-danger" role="alert">{{ errors.postalCode }}</p>
           </div>
           <div>
             <label for="city">Ciudad</label>
             <input type="text" v-model="user.city" id="city" placeholder="Introduce tu ciudad" required />
-            <div v-if="errors.city">
-              <p>{{ errors.city }}</p>
-            </div>
+            <p v-if="errors.city" class="alert alert-danger" role="alert">{{ errors.city }}</p>
           </div>
           <div>
             <label for="province">Provincia</label>
             <input type="text" v-model="user.province" id="province" placeholder="Introduce tu provincia" required />
-            <div v-if="errors.province">
-              <p>{{ errors.province }}</p>
-            </div>
+            <p v-if="errors.province" class="alert alert-danger" role="alert">{{ errors.province }}</p>
           </div>
           <div>
             <label>País</label>
             <input type="text" v-model="user.country" id="country" placeholder="Introduce tu país" required />
-            <div v-if="errors.country">
-              <p>{{ errors.country }}</p>
-            </div>
+            <p v-if="errors.country" class="alert alert-danger" role="alert">{{ errors.country }}</p>
           </div>
           <div>
             <label for="tel">Teléfono</label>
             <input type="tel" v-model="user.tel" id="tel" placeholder="Introduce tu teléfono" required />
-            <div v-if="errors.tel">
-              <p>{{ errors.tel }}</p>
-            </div>
+            <p v-if="errors.tel" class="alert alert-danger" role="alert">{{ errors.tel }}</p>
           </div>
           <div>
             <label for="email">Email</label>
             <input type="email" v-model="user.email" id="email" placeholder="Introduce tu email" required />
-            <div v-if="errors.email">
-              <p>{{ errors.email }}</p>
-            </div>
+            <p v-if="errors.email" class="alert alert-danger" role="alert">{{ errors.email }}</p>
           </div>
         </form>
         <div class="order-products">
@@ -161,25 +141,25 @@ export default {
     const saveOrder = async () => {
             
         if (!regExpText.test(user.firstName))
-        errors.value.firstName = "Debes introducir un nombre válido";
+        errors.value.firstName = "Introduce un nombre válido";
         if (!regExpText.test(user.lastName))
-        errors.value.lastName = "Debes introducir apellidos válidos";
+        errors.value.lastName = "Introduce apellidos válidos";
         if (!regExpText.test(user.address))
-        errors.value.address = "Debes introducir una dirección válida";
+        errors.value.address = "Introduce una dirección válida";
         if (!regExpText.test(user.flat))
-        errors.value.flat = "Debes introducir una piso,puerta o escalera válida";
+        errors.value.flat = "Introduce un número válido";
         if (!regExpPostalCode.test(user.postalCode))
-        errors.value.postalCode = "Debes introducir un código postal válido";
+        errors.value.postalCode = "Introduce un código postal válido";
         if (!regExpText.test(user.city))
-        errors.value.city = "Debes introducir una ciudad válida";        
+        errors.value.city = "Introduce una ciudad válida";        
         if (!regExpText.test(user.province))
-        errors.value.province = "Debes introducir una provincia válida";
+        errors.value.province = "Introduce una provincia válida";
         if (!regExpText.test(user.country))
-        errors.value.country = "Debes introducir un país válido";
+        errors.value.country = "Introduce un país válido";
         if (!regExpTel.test(user.tel))
-        errors.value.tel = "Debes introducir un número de teléfono válido";
+        errors.value.tel = "Introduce un número de teléfono válido";
         if (!regExpEmail.test(user.email))
-        errors.value.email = "Debes introducir un email válido";
+        errors.value.email = "Introduce un email válido";
         
       if (
         regExpText.test(user.firstName) && 
@@ -263,6 +243,10 @@ export default {
     }
   }
 }
+
+p.alert {
+  font-size: 0.7rem;
+} 
 
 .order-summary {
   margin: 40px 0;
